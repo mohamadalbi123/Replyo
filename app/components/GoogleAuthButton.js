@@ -2,7 +2,12 @@
 
 import { useEffect, useState } from "react";
 
-export default function GoogleAuthButton({ label, callbackUrl = "/dashboard" }) {
+export default function GoogleAuthButton({
+  label,
+  callbackUrl = "/dashboard",
+  disabled = false,
+  onBeforeSubmit,
+}) {
   const [csrfToken, setCsrfToken] = useState("");
 
   useEffect(() => {
@@ -29,12 +34,29 @@ export default function GoogleAuthButton({ label, callbackUrl = "/dashboard" }) 
   }, []);
 
   return (
-    <form method="post" action="/api/auth/signin/google">
+    <form
+      method="post"
+      action="/api/auth/signin/google"
+      onSubmit={(event) => {
+        if (disabled) {
+          event.preventDefault();
+          return;
+        }
+
+        if (onBeforeSubmit) {
+          const shouldContinue = onBeforeSubmit();
+
+          if (!shouldContinue) {
+            event.preventDefault();
+          }
+        }
+      }}
+    >
       <input type="hidden" name="csrfToken" value={csrfToken} />
       <input type="hidden" name="callbackUrl" value={callbackUrl} />
       <button
         type="submit"
-        disabled={!csrfToken}
+        disabled={!csrfToken || disabled}
         style={{
           width: "100%",
           background: "#f3f4f6",
@@ -43,8 +65,8 @@ export default function GoogleAuthButton({ label, callbackUrl = "/dashboard" }) 
           borderRadius: "12px",
           padding: "14px 18px",
           fontSize: "16px",
-          cursor: csrfToken ? "pointer" : "not-allowed",
-          opacity: csrfToken ? 1 : 0.7,
+          cursor: csrfToken && !disabled ? "pointer" : "not-allowed",
+          opacity: csrfToken && !disabled ? 1 : 0.7,
         }}
       >
         {csrfToken ? label : "Loading Google sign-in..."}

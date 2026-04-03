@@ -174,6 +174,7 @@ export default function WhyReplyoPage() {
             padding: "24px",
             boxShadow: "0 22px 50px rgba(48,63,90,0.1)",
             marginBottom: "24px",
+            perspective: "1400px",
           }}
         >
           <div style={{ maxWidth: "680px", marginBottom: "18px" }}>
@@ -190,18 +191,23 @@ export default function WhyReplyoPage() {
               gap: "16px",
             }}
           >
-            {t.why.reasons.map(([title, text]) => (
+            {t.why.reasons.map(([title, text], index) => (
               <article
                 key={title}
+                className="replyo-why-card"
                 style={{
                   background: "#fff",
                   borderRadius: "24px",
                   border: "1px solid #e4e9f2",
                   padding: "20px",
                   boxShadow: "0 14px 30px rgba(82,95,127,0.08)",
+                  animationDelay: `${index * 140}ms`,
                 }}
               >
-                <h3 style={{ fontSize: "22px", lineHeight: 1.25, marginBottom: "10px" }}>
+                <h3
+                  className="replyo-why-card-title"
+                  style={{ fontSize: "22px", lineHeight: 1.25, marginBottom: "10px" }}
+                >
                   {title}
                 </h3>
                 <p style={{ color: "#5b6474", lineHeight: 1.75, margin: 0 }}>{text}</p>

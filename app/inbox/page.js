@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { SessionProvider, signIn, signOut, useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
+import { useLanguage } from "../components/LanguageProvider";
 import {
   CONNECTION_STORAGE_KEY,
   REVIEWS_STORAGE_KEY,
@@ -14,8 +15,213 @@ import {
   writeStoredValue,
 } from "../lib/demoState";
 
+const inboxCopy = {
+  en: {
+    loading: "Loading inbox...",
+    loginTitle: "You need to log in to access the inbox",
+    loginText: "Return to the login page to continue into your Replyo workspace.",
+    loginButton: "Go to login",
+    back: "Back to dashboard",
+    signOut: "Sign out",
+    badge: "Review inbox",
+    title: "New reviews, draft replies, and posting status in one place.",
+    description:
+      "Replyo can either post directly when you trust the automation or hold the draft for your approval first.",
+    connectedBusiness: "Connected business",
+    replyMode: "Reply mode",
+    pending: "Pending",
+    ready: "Ready",
+    posted: "Posted",
+    autoPost: "Auto-post",
+    approval: "Approval",
+    notConnected: "Not connected",
+    noBusinessTitle: "No connected business yet",
+    noBusinessText:
+      "Connect a business first so Replyo knows which Google Business Profile it should monitor for new reviews.",
+    connectBusiness: "Connect Google Business",
+    stars: "stars",
+    localBusiness: "Local business",
+    review: "Review",
+    draft: "Reply draft",
+    noDraft: "No reply generated yet.",
+    tone: "Tone",
+    generating: "Generating...",
+    generate: "Generate reply",
+    approve: "Approve and post",
+    changeMode: "Change mode",
+    statuses: {
+      "needs-reply": "Needs reply",
+      ready: "Ready",
+      posted: "Posted",
+      error: "Error",
+    },
+  },
+  fr: {
+    loading: "Chargement de la boite...",
+    loginTitle: "Vous devez vous connecter pour acceder a la boite",
+    loginText: "Retournez a la page de connexion pour continuer dans Replyo.",
+    loginButton: "Aller a la connexion",
+    back: "Retour au tableau de bord",
+    signOut: "Se deconnecter",
+    badge: "Boite des avis",
+    title: "Nouveaux avis, brouillons de reponse et statut de publication au meme endroit.",
+    description:
+      "Replyo peut publier directement lorsque vous faites confiance a l'automatisation ou garder le brouillon pour validation.",
+    connectedBusiness: "Business connecte",
+    replyMode: "Mode de reponse",
+    pending: "En attente",
+    ready: "Pret",
+    posted: "Publie",
+    autoPost: "Publication auto",
+    approval: "Validation",
+    notConnected: "Non connecte",
+    noBusinessTitle: "Aucun business connecte",
+    noBusinessText:
+      "Connectez d'abord un business pour que Replyo sache quel profil Google Business surveiller pour les nouveaux avis.",
+    connectBusiness: "Connecter Google Business",
+    stars: "etoiles",
+    localBusiness: "Business local",
+    review: "Avis",
+    draft: "Brouillon de reponse",
+    noDraft: "Aucune reponse generee pour le moment.",
+    tone: "Ton",
+    generating: "Generation...",
+    generate: "Generer la reponse",
+    approve: "Valider et publier",
+    changeMode: "Changer le mode",
+    statuses: {
+      "needs-reply": "A traiter",
+      ready: "Pret",
+      posted: "Publie",
+      error: "Erreur",
+    },
+  },
+  es: {
+    loading: "Cargando inbox...",
+    loginTitle: "Debes iniciar sesion para acceder al inbox",
+    loginText: "Vuelve a la pagina de login para continuar en Replyo.",
+    loginButton: "Ir al login",
+    back: "Volver al panel",
+    signOut: "Cerrar sesion",
+    badge: "Inbox de resenas",
+    title: "Nuevas resenas, borradores de respuesta y estado de publicacion en un solo lugar.",
+    description:
+      "Replyo puede publicar directamente cuando confias en la automatizacion o guardar el borrador para tu aprobacion.",
+    connectedBusiness: "Negocio conectado",
+    replyMode: "Modo de respuesta",
+    pending: "Pendientes",
+    ready: "Listas",
+    posted: "Publicadas",
+    autoPost: "Auto-publicacion",
+    approval: "Aprobacion",
+    notConnected: "No conectado",
+    noBusinessTitle: "Todavia no hay negocio conectado",
+    noBusinessText:
+      "Conecta primero un negocio para que Replyo sepa que perfil de Google Business debe vigilar para nuevas resenas.",
+    connectBusiness: "Conectar Google Business",
+    stars: "estrellas",
+    localBusiness: "Negocio local",
+    review: "Resena",
+    draft: "Borrador de respuesta",
+    noDraft: "Todavia no se ha generado ninguna respuesta.",
+    tone: "Tono",
+    generating: "Generando...",
+    generate: "Generar respuesta",
+    approve: "Aprobar y publicar",
+    changeMode: "Cambiar modo",
+    statuses: {
+      "needs-reply": "Necesita respuesta",
+      ready: "Lista",
+      posted: "Publicada",
+      error: "Error",
+    },
+  },
+  de: {
+    loading: "Inbox wird geladen...",
+    loginTitle: "Sie mussen eingeloggt sein, um die Inbox zu sehen",
+    loginText: "Gehen Sie zur Login-Seite zuruck, um in Replyo weiterzumachen.",
+    loginButton: "Zum Login",
+    back: "Zuruck zum Dashboard",
+    signOut: "Abmelden",
+    badge: "Bewertungs-Inbox",
+    title: "Neue Bewertungen, Antwortentwurfe und Veroffentlichungsstatus an einem Ort.",
+    description:
+      "Replyo kann direkt veroffentlichen, wenn Sie der Automatisierung vertrauen, oder den Entwurf zuerst fur Ihre Freigabe bereithalten.",
+    connectedBusiness: "Verbundenes Unternehmen",
+    replyMode: "Antwortmodus",
+    pending: "Offen",
+    ready: "Bereit",
+    posted: "Veroffentlicht",
+    autoPost: "Auto-Veroffentlichung",
+    approval: "Freigabe",
+    notConnected: "Nicht verbunden",
+    noBusinessTitle: "Noch kein Unternehmen verbunden",
+    noBusinessText:
+      "Verbinden Sie zuerst ein Unternehmen, damit Replyo weiss, welches Google-Business-Profil fur neue Bewertungen beobachtet werden soll.",
+    connectBusiness: "Google Business verbinden",
+    stars: "Sterne",
+    localBusiness: "Lokales Unternehmen",
+    review: "Bewertung",
+    draft: "Antwortentwurf",
+    noDraft: "Es wurde noch keine Antwort erstellt.",
+    tone: "Ton",
+    generating: "Wird erstellt...",
+    generate: "Antwort erstellen",
+    approve: "Freigeben und veroffentlichen",
+    changeMode: "Modus andern",
+    statuses: {
+      "needs-reply": "Antwort fehlt",
+      ready: "Bereit",
+      posted: "Veroffentlicht",
+      error: "Fehler",
+    },
+  },
+  ar: {
+    loading: "جارٍ تحميل الصندوق...",
+    loginTitle: "يجب تسجيل الدخول للوصول الى صندوق التقييمات",
+    loginText: "عد الى صفحة تسجيل الدخول للمتابعة داخل Replyo.",
+    loginButton: "الذهاب الى تسجيل الدخول",
+    back: "العودة الى لوحة التحكم",
+    signOut: "تسجيل الخروج",
+    badge: "صندوق التقييمات",
+    title: "التقييمات الجديدة ومسودات الرد وحالة النشر في مكان واحد.",
+    description:
+      "يمكن لـ Replyo النشر مباشرة عندما تثق بالأتمتة أو الاحتفاظ بالمسودة لمراجعتك اولا.",
+    connectedBusiness: "النشاط المتصل",
+    replyMode: "وضع الرد",
+    pending: "بانتظار الرد",
+    ready: "جاهز",
+    posted: "تم النشر",
+    autoPost: "نشر تلقائي",
+    approval: "موافقة",
+    notConnected: "غير متصل",
+    noBusinessTitle: "لا يوجد نشاط متصل بعد",
+    noBusinessText:
+      "اربط نشاطا اولا حتى يعرف Replyo اي ملف Google Business يجب مراقبته للتقييمات الجديدة.",
+    connectBusiness: "ربط Google Business",
+    stars: "نجوم",
+    localBusiness: "نشاط محلي",
+    review: "التقييم",
+    draft: "مسودة الرد",
+    noDraft: "لم يتم إنشاء رد بعد.",
+    tone: "النبرة",
+    generating: "جارٍ الإنشاء...",
+    generate: "إنشاء الرد",
+    approve: "اعتماد ونشر",
+    changeMode: "تغيير الوضع",
+    statuses: {
+      "needs-reply": "يحتاج ردا",
+      ready: "جاهز",
+      posted: "تم النشر",
+      error: "خطأ",
+    },
+  },
+};
+
 function InboxContent() {
   const { data: session, status } = useSession();
+  const { language } = useLanguage();
+  const copy = inboxCopy[language] || inboxCopy.en;
   const [reviews, setReviews] = useState([]);
   const [settings, setSettings] = useState(defaultSettings);
   const [connection, setConnection] = useState(defaultConnection);
@@ -75,8 +281,8 @@ function InboxContent() {
       });
 
       const data = await response.json();
-
       const nextStatus = settings.replyMode === "auto" ? "posted" : "ready";
+
       const nextReviews = reviews.map((review) =>
         review.id === reviewId
           ? {
@@ -86,10 +292,8 @@ function InboxContent() {
               status: nextStatus,
               detectedSentiment: data.context?.sentiment || review.detectedSentiment,
               detectedTopics: data.context?.detectedTopics || review.detectedTopics,
-              businessType:
-                connection.selectedLocationType || review.businessType,
-              postedAt:
-                settings.replyMode === "auto" ? new Date().toISOString() : "",
+              businessType: connection.selectedLocationType || review.businessType,
+              postedAt: settings.replyMode === "auto" ? new Date().toISOString() : "",
             }
           : review
       );
@@ -128,28 +332,56 @@ function InboxContent() {
   }
 
   if (status === "loading") {
-    return <main style={{ padding: "40px" }}>Loading inbox...</main>;
+    return <main style={{ padding: "40px" }}>{copy.loading}</main>;
   }
 
   if (!session) {
     return (
-      <main style={{ padding: "40px", fontFamily: "Arial, sans-serif" }}>
-        <h2>You must be logged in to access the review inbox</h2>
-        <button
-          onClick={() => signIn("credentials")}
+      <main
+        style={{
+          minHeight: "100vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          padding: "40px",
+          fontFamily: "Arial, sans-serif",
+          background:
+            "radial-gradient(circle at top left, #fff4d8 0%, #f7f4ec 35%, #eef3ff 100%)",
+          direction: language === "ar" ? "rtl" : "ltr",
+        }}
+      >
+        <div
           style={{
-            marginTop: "20px",
-            background: "#111",
-            color: "#fff",
-            border: "none",
-            padding: "14px 22px",
-            borderRadius: "12px",
-            fontSize: "16px",
-            cursor: "pointer",
+            width: "100%",
+            maxWidth: "460px",
+            background: "#fff",
+            borderRadius: "24px",
+            padding: "32px",
+            boxShadow: "0 16px 38px rgba(82,95,127,0.12)",
+            textAlign: "center",
           }}
         >
-          Sign in
-        </button>
+          <h2 style={{ fontSize: "28px", color: "#172033", marginBottom: "12px" }}>
+            {copy.loginTitle}
+          </h2>
+          <p style={{ color: "#5b6473", lineHeight: 1.7, marginBottom: "20px" }}>
+            {copy.loginText}
+          </p>
+          <Link
+            href="/login"
+            style={{
+              display: "inline-block",
+              textDecoration: "none",
+              background: "#172033",
+              color: "#fff",
+              borderRadius: "14px",
+              padding: "14px 18px",
+              fontWeight: "600",
+            }}
+          >
+            {copy.loginButton}
+          </Link>
+        </div>
       </main>
     );
   }
@@ -166,6 +398,7 @@ function InboxContent() {
           "radial-gradient(circle at top left, #fff6df 0%, #f7f4ec 40%, #edf3ff 100%)",
         padding: "48px 20px 80px",
         fontFamily: "Arial, sans-serif",
+        direction: language === "ar" ? "rtl" : "ltr",
       }}
     >
       <div style={{ maxWidth: "1120px", margin: "0 auto" }}>
@@ -179,7 +412,7 @@ function InboxContent() {
           }}
         >
           <Link href="/dashboard" style={{ color: "#4b5563", textDecoration: "none" }}>
-            ← Back to dashboard
+            ← {copy.back}
           </Link>
           <button
             onClick={() => signOut()}
@@ -192,7 +425,7 @@ function InboxContent() {
               cursor: "pointer",
             }}
           >
-            Sign out
+            {copy.signOut}
           </button>
         </div>
 
@@ -215,14 +448,11 @@ function InboxContent() {
               marginBottom: "14px",
             }}
           >
-            Review inbox
+            {copy.badge}
           </div>
-          <h1 style={{ fontSize: "42px", marginBottom: "10px" }}>
-            New reviews, draft replies, and posting status in one place.
-          </h1>
+          <h1 style={{ fontSize: "42px", marginBottom: "10px" }}>{copy.title}</h1>
           <p style={{ color: "rgba(255,248,236,0.8)", lineHeight: 1.7, margin: 0 }}>
-            Replyo can either post directly when you trust the automation or hold the
-            draft for your approval first.
+            {copy.description}
           </p>
         </section>
 
@@ -235,11 +465,11 @@ function InboxContent() {
           }}
         >
           {[
-            ["Connected business", connection.selectedLocationName || "Not connected"],
-            ["Reply mode", settings.replyMode === "auto" ? "Auto-post" : "Approval"],
-            ["Pending", pendingCount],
-            ["Ready", readyCount],
-            ["Posted", postedCount],
+            [copy.connectedBusiness, connection.selectedLocationName || copy.notConnected],
+            [copy.replyMode, settings.replyMode === "auto" ? copy.autoPost : copy.approval],
+            [copy.pending, pendingCount],
+            [copy.ready, readyCount],
+            [copy.posted, postedCount],
           ].map(([label, value]) => (
             <div
               key={label}
@@ -270,11 +500,10 @@ function InboxContent() {
             }}
           >
             <h2 style={{ fontSize: "24px", color: "#172033", marginBottom: "10px" }}>
-              No connected business yet
+              {copy.noBusinessTitle}
             </h2>
             <p style={{ color: "#5b6473", lineHeight: 1.7, marginBottom: "16px" }}>
-              Connect a business first so Replyo knows which Google Business Profile it
-              should monitor for new reviews.
+              {copy.noBusinessText}
             </p>
             <Link
               href="/connect-google"
@@ -288,7 +517,7 @@ function InboxContent() {
                 fontWeight: "600",
               }}
             >
-              Connect Google Business
+              {copy.connectBusiness}
             </Link>
           </section>
         ) : (
@@ -337,7 +566,7 @@ function InboxContent() {
                           fontWeight: "600",
                         }}
                       >
-                        {review.rating}/5 stars
+                        {review.rating}/5 {copy.stars}
                       </span>
                       <span
                         style={{
@@ -351,7 +580,7 @@ function InboxContent() {
                       >
                         {connection.selectedLocationCategory ||
                           review.businessType ||
-                          "Local business"}
+                          copy.localBusiness}
                       </span>
                       {review.detectedSentiment ? (
                         <span
@@ -394,7 +623,7 @@ function InboxContent() {
                       height: "fit-content",
                     }}
                   >
-                    {review.status}
+                    {copy.statuses[review.status] || review.status}
                   </div>
                 </div>
 
@@ -406,30 +635,18 @@ function InboxContent() {
                     marginBottom: "16px",
                   }}
                 >
-                  <div
-                    style={{
-                      background: "#f8fafc",
-                      borderRadius: "18px",
-                      padding: "16px",
-                    }}
-                  >
+                  <div style={{ background: "#f8fafc", borderRadius: "18px", padding: "16px" }}>
                     <div style={{ fontSize: "13px", color: "#6b7280", marginBottom: "8px" }}>
-                      Review
+                      {copy.review}
                     </div>
                     <div style={{ color: "#344054", lineHeight: 1.7 }}>{review.reviewText}</div>
                   </div>
-                  <div
-                    style={{
-                      background: "#f9fbff",
-                      borderRadius: "18px",
-                      padding: "16px",
-                    }}
-                  >
+                  <div style={{ background: "#f9fbff", borderRadius: "18px", padding: "16px" }}>
                     <div style={{ fontSize: "13px", color: "#6b7280", marginBottom: "8px" }}>
-                      Reply draft
+                      {copy.draft}
                     </div>
                     <div style={{ color: "#344054", lineHeight: 1.7 }}>
-                      {review.replyText || "No reply generated yet."}
+                      {review.replyText || copy.noDraft}
                     </div>
                   </div>
                 </div>
@@ -467,7 +684,7 @@ function InboxContent() {
                       fontWeight: "600",
                     }}
                   >
-                    Tone: {settings.tone}
+                    {copy.tone}: {settings.tone}
                   </span>
                 </div>
 
@@ -486,7 +703,7 @@ function InboxContent() {
                       opacity: activeReviewId === review.id ? 0.7 : 1,
                     }}
                   >
-                    {activeReviewId === review.id ? "Generating..." : "Generate reply"}
+                    {activeReviewId === review.id ? copy.generating : copy.generate}
                   </button>
                   {review.status === "ready" ? (
                     <button
@@ -501,7 +718,7 @@ function InboxContent() {
                         cursor: "pointer",
                       }}
                     >
-                      Approve and post
+                      {copy.approve}
                     </button>
                   ) : null}
                   <Link
@@ -514,7 +731,7 @@ function InboxContent() {
                       padding: "12px 14px",
                     }}
                   >
-                    Change mode
+                    {copy.changeMode}
                   </Link>
                 </div>
               </article>
@@ -527,9 +744,5 @@ function InboxContent() {
 }
 
 export default function InboxPage() {
-  return (
-    <SessionProvider>
-      <InboxContent />
-    </SessionProvider>
-  );
+  return <InboxContent />;
 }

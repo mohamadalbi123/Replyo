@@ -12,10 +12,16 @@ export default function SignupPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [hasAgreed, setHasAgreed] = useState(false);
 
   async function handleEmailSignup(e) {
     e.preventDefault();
     setError("");
+
+    if (!hasAgreed) {
+      setError(t.auth.agreeRequired);
+      return;
+    }
 
     if (email !== "mohalbi123@icloud.com" || password !== "France1985") {
       setError(t.auth.useTemp);
@@ -39,6 +45,16 @@ export default function SignupPage() {
     }
 
     window.location.href = "/dashboard";
+  }
+
+  function handleGoogleConsentCheck() {
+    if (!hasAgreed) {
+      setError(t.auth.agreeRequired);
+      return false;
+    }
+
+    setError("");
+    return true;
   }
 
   return (
@@ -118,6 +134,40 @@ export default function SignupPage() {
             }}
           />
 
+          <label
+            style={{
+              display: "flex",
+              alignItems: "flex-start",
+              gap: "10px",
+              color: "#4b5563",
+              fontSize: "14px",
+              lineHeight: 1.6,
+            }}
+          >
+            <input
+              type="checkbox"
+              checked={hasAgreed}
+              onChange={(event) => {
+                setHasAgreed(event.target.checked);
+                if (event.target.checked) {
+                  setError("");
+                }
+              }}
+              style={{ marginTop: "4px" }}
+            />
+            <span>
+              {t.auth.agreePrefix}{" "}
+              <Link href="/terms" style={{ color: "#111827", fontWeight: "600", textDecoration: "none" }}>
+                {t.auth.agreeTerms}
+              </Link>{" "}
+              {t.auth.agreeAnd}{" "}
+              <Link href="/privacy" style={{ color: "#111827", fontWeight: "600", textDecoration: "none" }}>
+                {t.auth.agreePrivacy}
+              </Link>
+              .
+            </span>
+          </label>
+
           <button
             type="submit"
             disabled={isSubmitting}
@@ -149,7 +199,11 @@ export default function SignupPage() {
             gap: "12px",
           }}
         >
-          <GoogleAuthButton label={t.auth.signupGoogle} />
+          <GoogleAuthButton
+            label={t.auth.signupGoogle}
+            disabled={!hasAgreed}
+            onBeforeSubmit={handleGoogleConsentCheck}
+          />
 
           <button
             type="button"

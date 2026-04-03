@@ -3,10 +3,13 @@
 import { useEffect, useState } from "react";
 import { useSession, signOut } from "next-auth/react";
 import Link from "next/link";
+import { useLanguage } from "../components/LanguageProvider";
 import {
+  BILLING_STORAGE_KEY,
   CONNECTION_STORAGE_KEY,
   REVIEWS_STORAGE_KEY,
   SETTINGS_STORAGE_KEY,
+  defaultBilling,
   defaultConnection,
   defaultReviews,
   defaultSettings,
@@ -14,163 +17,375 @@ import {
   writeStoredValue,
 } from "../lib/demoState";
 
-function createReview({ customerName, businessName, rating, reviewText }) {
-  return {
-    id: crypto.randomUUID(),
-    customerName: customerName.trim(),
-    businessName: businessName.trim(),
-    rating,
-    reviewText: reviewText.trim(),
-    replyText: "",
-    source: "",
-    status: "needs-reply",
-    createdAt: new Date().toISOString(),
-  };
-}
-
-function starsForRating(rating) {
-  return "★".repeat(rating) + "☆".repeat(5 - rating);
-}
+const dashboardCopy = {
+  en: {
+    loading: "Loading...",
+    loginTitle: "You need to log in to access the dashboard",
+    loginText: "Use the demo account or return to the login page to continue.",
+    goLogin: "Go to login",
+    demoSignup: "Use demo signup",
+    back: "Back to home",
+    signOut: "Sign out",
+    badge: "Replyo control center",
+    title: "Everything important in one place.",
+    description:
+      "Use the dashboard as your control center: account details, review progress, automation mode, billing, and connected business.",
+    accountTitle: "Account",
+    name: "Name",
+    email: "Email",
+    loginMethod: "Login method",
+    security: "Security",
+    passwordNote: "Manage password and security from your account settings.",
+    openSettings: "Open settings",
+    reviewTitle: "Review activity",
+    reviewText:
+      "See how many replies are done, how many still need confirmation, and what still needs attention.",
+    generated: "Replies done",
+    pending: "Waiting for reply",
+    confirmation: "Waiting for confirmation",
+    posted: "Already posted",
+    openInbox: "Open inbox",
+    inboxTitle: "Inbox",
+    inboxText:
+      "Keep the queue simple. See immediately if any replies are waiting for your confirmation.",
+    automationTitle: "Automation mode",
+    automationText:
+      "Choose whether Replyo should post directly or prepare a draft for your approval first.",
+    trustTitle: "Trust Replyo",
+    trustText: "Reply directly to reviews automatically",
+    confirmTitle: "Review first",
+    confirmText: "Create a draft, then confirm and edit before posting",
+    billingTitle: "Billing",
+    billingText:
+      "Keep your current plan, next billing date, and subscription status visible.",
+    plan: "Plan",
+    amount: "Amount",
+    status: "Status",
+    nextBilling: "Next billing date",
+    managePlan: "Manage plan",
+    active: "Active",
+    inactive: "Inactive",
+    noPlan: "No active plan",
+    notScheduled: "Not scheduled",
+    connectedTitle: "Connected business",
+    connectedText:
+      "This is the Google Business Profile Replyo is currently prepared to monitor for reviews.",
+    provider: "Provider",
+    location: "Location",
+    category: "Category",
+    city: "City",
+    notConnected: "Not connected yet",
+    connectBusiness: "Connect Google Business",
+    choosePlan: "Choose a plan first",
+    googleProvider: "Google Business Profile",
+    credentials: "Email and password",
+    google: "Google",
+  },
+  fr: {
+    loading: "Chargement...",
+    loginTitle: "Vous devez vous connecter pour acceder au tableau de bord",
+    loginText: "Utilisez le compte demo ou revenez a la page de connexion pour continuer.",
+    goLogin: "Aller a la connexion",
+    demoSignup: "Utiliser l'inscription demo",
+    back: "Retour a l'accueil",
+    signOut: "Se deconnecter",
+    badge: "Centre de controle Replyo",
+    title: "Tout l'essentiel au meme endroit.",
+    description:
+      "Utilisez le tableau de bord comme centre de controle: compte, progression des avis, automatisation, facturation et business connecte.",
+    accountTitle: "Compte",
+    name: "Nom",
+    email: "Email",
+    loginMethod: "Methode de connexion",
+    security: "Securite",
+    passwordNote: "Gerez le mot de passe et la securite depuis les parametres du compte.",
+    openSettings: "Ouvrir les parametres",
+    reviewTitle: "Activite des avis",
+    reviewText:
+      "Voyez combien de reponses sont deja faites, combien attendent une validation et ce qui demande encore une action.",
+    generated: "Reponses faites",
+    pending: "En attente de reponse",
+    confirmation: "En attente de validation",
+    posted: "Deja publie",
+    openInbox: "Ouvrir la boite",
+    inboxTitle: "Boite de reception",
+    inboxText:
+      "Gardez la file simple. Voyez tout de suite si des reponses attendent votre validation.",
+    automationTitle: "Mode d'automatisation",
+    automationText:
+      "Choisissez si Replyo doit publier directement ou preparer un brouillon pour votre validation.",
+    trustTitle: "Faire confiance a Replyo",
+    trustText: "Repondre automatiquement aux avis",
+    confirmTitle: "Verifier d'abord",
+    confirmText: "Creer un brouillon puis confirmer et modifier avant publication",
+    billingTitle: "Facturation",
+    billingText:
+      "Gardez votre offre actuelle, la prochaine date de facturation et le statut d'abonnement bien visibles.",
+    plan: "Offre",
+    amount: "Montant",
+    status: "Statut",
+    nextBilling: "Prochaine facturation",
+    managePlan: "Gerer l'offre",
+    active: "Actif",
+    inactive: "Inactif",
+    noPlan: "Aucune offre active",
+    notScheduled: "Non planifie",
+    connectedTitle: "Business connecte",
+    connectedText:
+      "C'est le profil Google Business que Replyo est actuellement pret a surveiller pour les avis.",
+    provider: "Fournisseur",
+    location: "Etablissement",
+    category: "Categorie",
+    city: "Ville",
+    notConnected: "Pas encore connecte",
+    connectBusiness: "Connecter Google Business",
+    choosePlan: "Choisir une offre d'abord",
+    googleProvider: "Google Business Profile",
+    credentials: "Email et mot de passe",
+    google: "Google",
+  },
+  es: {
+    loading: "Cargando...",
+    loginTitle: "Debes iniciar sesion para acceder al panel",
+    loginText: "Usa la cuenta demo o vuelve a la pagina de login para continuar.",
+    goLogin: "Ir al login",
+    demoSignup: "Usar registro demo",
+    back: "Volver al inicio",
+    signOut: "Cerrar sesion",
+    badge: "Centro de control de Replyo",
+    title: "Todo lo importante en un solo lugar.",
+    description:
+      "Usa el panel como centro de control: cuenta, progreso de resenas, automatizacion, facturacion y negocio conectado.",
+    accountTitle: "Cuenta",
+    name: "Nombre",
+    email: "Correo",
+    loginMethod: "Metodo de acceso",
+    security: "Seguridad",
+    passwordNote: "Gestiona la contrasena y la seguridad desde los ajustes de la cuenta.",
+    openSettings: "Abrir ajustes",
+    reviewTitle: "Actividad de resenas",
+    reviewText:
+      "Mira cuantas respuestas ya estan hechas, cuantas esperan confirmacion y que sigue necesitando atencion.",
+    generated: "Respuestas hechas",
+    pending: "Esperando respuesta",
+    confirmation: "Esperando confirmacion",
+    posted: "Ya publicadas",
+    openInbox: "Abrir inbox",
+    inboxTitle: "Inbox",
+    inboxText:
+      "Mantén la cola simple. Mira enseguida si hay respuestas esperando tu confirmacion.",
+    automationTitle: "Modo de automatizacion",
+    automationText:
+      "Elige si Replyo debe publicar directamente o preparar un borrador para tu aprobacion.",
+    trustTitle: "Confiar en Replyo",
+    trustText: "Responder automaticamente a las resenas",
+    confirmTitle: "Revisar primero",
+    confirmText: "Crear un borrador y luego confirmar y editar antes de publicar",
+    billingTitle: "Facturacion",
+    billingText:
+      "Mantén visible tu plan actual, la proxima fecha de cobro y el estado de la suscripcion.",
+    plan: "Plan",
+    amount: "Importe",
+    status: "Estado",
+    nextBilling: "Proxima facturacion",
+    managePlan: "Gestionar plan",
+    active: "Activo",
+    inactive: "Inactivo",
+    noPlan: "Sin plan activo",
+    notScheduled: "No programado",
+    connectedTitle: "Negocio conectado",
+    connectedText:
+      "Este es el perfil de Google Business que Replyo esta preparado para vigilar.",
+    provider: "Proveedor",
+    location: "Ubicacion",
+    category: "Categoria",
+    city: "Ciudad",
+    notConnected: "Todavia no conectado",
+    connectBusiness: "Conectar Google Business",
+    choosePlan: "Elegir un plan primero",
+    googleProvider: "Google Business Profile",
+    credentials: "Email y contrasena",
+    google: "Google",
+  },
+  de: {
+    loading: "Wird geladen...",
+    loginTitle: "Sie mussen eingeloggt sein, um das Dashboard zu sehen",
+    loginText: "Nutzen Sie das Demo-Konto oder gehen Sie zur Login-Seite zuruck.",
+    goLogin: "Zum Login",
+    demoSignup: "Demo-Registrierung nutzen",
+    back: "Zuruck zur Startseite",
+    signOut: "Abmelden",
+    badge: "Replyo Kontrollzentrum",
+    title: "Alles Wichtige an einem Ort.",
+    description:
+      "Nutzen Sie das Dashboard als Kontrollzentrum: Konto, Bewertungsfortschritt, Automatisierung, Abrechnung und verbundenes Unternehmen.",
+    accountTitle: "Konto",
+    name: "Name",
+    email: "E-Mail",
+    loginMethod: "Anmeldemethode",
+    security: "Sicherheit",
+    passwordNote: "Verwalten Sie Passwort und Sicherheit in den Kontoeinstellungen.",
+    openSettings: "Einstellungen offnen",
+    reviewTitle: "Bewertungsaktivitat",
+    reviewText:
+      "Sehen Sie, wie viele Antworten fertig sind, wie viele noch freigegeben werden mussen und was noch Aufmerksamkeit braucht.",
+    generated: "Antworten fertig",
+    pending: "Wartet auf Antwort",
+    confirmation: "Wartet auf Bestatigung",
+    posted: "Bereits veroffentlicht",
+    openInbox: "Inbox offnen",
+    inboxTitle: "Inbox",
+    inboxText:
+      "Halten Sie die Warteschlange einfach. Sehen Sie sofort, ob Antworten auf Ihre Bestatigung warten.",
+    automationTitle: "Automatisierungsmodus",
+    automationText:
+      "Wahlen Sie, ob Replyo direkt veroffentlichen oder zuerst einen Entwurf fur Ihre Freigabe vorbereiten soll.",
+    trustTitle: "Replyo vertrauen",
+    trustText: "Automatisch direkt auf Bewertungen antworten",
+    confirmTitle: "Zuerst prufen",
+    confirmText: "Einen Entwurf erstellen und vor der Veroffentlichung bestaetigen und bearbeiten",
+    billingTitle: "Abrechnung",
+    billingText:
+      "Behalten Sie Ihren aktuellen Tarif, das nachste Abrechnungsdatum und den Abo-Status im Blick.",
+    plan: "Tarif",
+    amount: "Betrag",
+    status: "Status",
+    nextBilling: "Naechste Abrechnung",
+    managePlan: "Tarif verwalten",
+    active: "Aktiv",
+    inactive: "Inaktiv",
+    noPlan: "Kein aktiver Tarif",
+    notScheduled: "Nicht geplant",
+    connectedTitle: "Verbundenes Unternehmen",
+    connectedText:
+      "Dies ist das Google-Business-Profil, das Replyo aktuell fur Bewertungen beobachten soll.",
+    provider: "Anbieter",
+    location: "Standort",
+    category: "Kategorie",
+    city: "Stadt",
+    notConnected: "Noch nicht verbunden",
+    connectBusiness: "Google Business verbinden",
+    choosePlan: "Zuerst einen Tarif wahlen",
+    googleProvider: "Google Business Profile",
+    credentials: "E-Mail und Passwort",
+    google: "Google",
+  },
+  ar: {
+    loading: "جارٍ التحميل...",
+    loginTitle: "يجب تسجيل الدخول للوصول الى لوحة التحكم",
+    loginText: "استخدم الحساب التجريبي او عد الى صفحة تسجيل الدخول للمتابعة.",
+    goLogin: "الذهاب الى تسجيل الدخول",
+    demoSignup: "استخدام التسجيل التجريبي",
+    back: "العودة الى الرئيسية",
+    signOut: "تسجيل الخروج",
+    badge: "مركز تحكم Replyo",
+    title: "كل ما يهم في مكان واحد.",
+    description:
+      "استخدم لوحة التحكم كمركز قيادة: الحساب، تقدم التقييمات، وضع الأتمتة، الفوترة، والنشاط المتصل.",
+    accountTitle: "الحساب",
+    name: "الاسم",
+    email: "البريد الالكتروني",
+    loginMethod: "طريقة تسجيل الدخول",
+    security: "الأمان",
+    passwordNote: "ادِر كلمة المرور والأمان من إعدادات الحساب.",
+    openSettings: "فتح الإعدادات",
+    reviewTitle: "نشاط التقييمات",
+    reviewText:
+      "شاهد كم ردا تم بالفعل، وكم ردا ينتظر التأكيد، وما الذي ما زال يحتاج إلى متابعة.",
+    generated: "الردود المنجزة",
+    pending: "بانتظار الرد",
+    confirmation: "بانتظار التأكيد",
+    posted: "تم نشره",
+    openInbox: "فتح الصندوق",
+    inboxTitle: "صندوق التقييمات",
+    inboxText:
+      "اجعل القائمة بسيطة. شاهد مباشرة إن كانت هناك ردود تنتظر تأكيدك.",
+    automationTitle: "وضع الأتمتة",
+    automationText:
+      "اختر ما اذا كان Replyo يجب أن ينشر مباشرة أو يجهز مسودة لمراجعتك أولا.",
+    trustTitle: "الثقة في Replyo",
+    trustText: "الرد مباشرة على التقييمات تلقائيا",
+    confirmTitle: "راجع أولا",
+    confirmText: "أنشئ مسودة ثم أكد وعدل قبل النشر",
+    billingTitle: "الفوترة",
+    billingText:
+      "احتفظ بالخطة الحالية وتاريخ الفاتورة التالية وحالة الاشتراك بشكل واضح.",
+    plan: "الخطة",
+    amount: "المبلغ",
+    status: "الحالة",
+    nextBilling: "تاريخ الفاتورة التالية",
+    managePlan: "إدارة الخطة",
+    active: "نشط",
+    inactive: "غير نشط",
+    noPlan: "لا توجد خطة نشطة",
+    notScheduled: "غير مجدول",
+    connectedTitle: "النشاط المتصل",
+    connectedText:
+      "هذا هو ملف Google Business الذي تم تجهيز Replyo حاليا لمراقبته من اجل التقييمات.",
+    provider: "المزوّد",
+    location: "النشاط",
+    category: "الفئة",
+    city: "المدينة",
+    notConnected: "غير متصل بعد",
+    connectBusiness: "ربط Google Business",
+    choosePlan: "اختر خطة اولا",
+    googleProvider: "Google Business Profile",
+    credentials: "البريد وكلمة المرور",
+    google: "Google",
+  },
+};
 
 function DashboardContent() {
   const { data: session, status } = useSession();
+  const { language } = useLanguage();
+  const copy = dashboardCopy[language] || dashboardCopy.en;
   const [reviews, setReviews] = useState([]);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [activeReviewId, setActiveReviewId] = useState("");
   const [settings, setSettings] = useState(defaultSettings);
   const [connection, setConnection] = useState(defaultConnection);
-  const [form, setForm] = useState({
-    customerName: "",
-    businessName: "Replyo Demo Location",
-    rating: 5,
-    reviewText: "",
-  });
+  const [billingState, setBillingState] = useState(defaultBilling);
 
   useEffect(() => {
-    try {
-      const storedReviews = readStoredValue(REVIEWS_STORAGE_KEY, defaultReviews);
-      const storedSettings = readStoredValue(SETTINGS_STORAGE_KEY, defaultSettings);
-      const storedConnection = readStoredValue(
-        CONNECTION_STORAGE_KEY,
-        defaultConnection
-      );
+    const storedReviews = readStoredValue(REVIEWS_STORAGE_KEY, defaultReviews);
+    const storedSettings = readStoredValue(SETTINGS_STORAGE_KEY, defaultSettings);
+    const storedConnection = readStoredValue(CONNECTION_STORAGE_KEY, defaultConnection);
+    const storedBilling = readStoredValue(BILLING_STORAGE_KEY, defaultBilling);
 
-      setReviews(storedReviews.length ? storedReviews : defaultReviews);
-      setSettings(storedSettings);
-      setConnection(storedConnection);
-    } catch (error) {
-      console.error("Failed to load dashboard reviews:", error);
-    } finally {
-      setIsLoaded(true);
-    }
+    setReviews(storedReviews.length ? storedReviews : defaultReviews);
+    setSettings(storedSettings);
+    setConnection(storedConnection);
+    setBillingState(storedBilling);
   }, []);
 
-  useEffect(() => {
-    if (!isLoaded) {
-      return;
-    }
+  function updateReplyMode(replyMode) {
+    const nextSettings = {
+      ...settings,
+      replyMode,
+    };
 
-    writeStoredValue(REVIEWS_STORAGE_KEY, reviews);
-  }, [isLoaded, reviews]);
-
-  function handleFormChange(field, value) {
-    setForm((current) => ({
-      ...current,
-      [field]: value,
-    }));
+    setSettings(nextSettings);
+    writeStoredValue(SETTINGS_STORAGE_KEY, nextSettings);
   }
 
-  function handleAddReview(event) {
-    event.preventDefault();
-
-    if (!form.customerName.trim() || !form.reviewText.trim()) {
-      return;
-    }
-
-    const nextReview = createReview(form);
-
-    setReviews((current) => [nextReview, ...current]);
-    setForm({
-      customerName: "",
-      businessName: form.businessName.trim() || "Replyo Demo Location",
-      rating: 5,
-      reviewText: "",
-    });
-  }
-
-  async function handleGenerateReply(reviewId) {
-    const currentReview = reviews.find((review) => review.id === reviewId);
-
-    if (!currentReview) {
-      return;
-    }
-
-    setActiveReviewId(reviewId);
-    setIsSubmitting(true);
-
-    try {
-      const response = await fetch("/api/generate-reply", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ review: currentReview.reviewText }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || "Failed to generate a reply.");
-      }
-
-      setReviews((current) =>
-        current.map((review) =>
-          review.id === reviewId
-            ? {
-                ...review,
-                replyText: data.reply,
-                source: data.source,
-                status: "ready",
-              }
-            : review
-        )
-      );
-    } catch (error) {
-      setReviews((current) =>
-        current.map((review) =>
-          review.id === reviewId
-            ? {
-                ...review,
-                replyText:
-                  error.message || "We could not generate a reply right now.",
-                source: "error",
-                status: "error",
-              }
-            : review
-        )
-      );
-    } finally {
-      setIsSubmitting(false);
-      setActiveReviewId("");
-    }
-  }
-
-  function handleDeleteReview(reviewId) {
-    setReviews((current) => current.filter((review) => review.id !== reviewId));
-  }
-
-  const readyCount = reviews.filter((review) => review.status === "ready").length;
-  const pendingCount = reviews.filter((review) => review.status === "needs-reply").length;
-  const averageRating = reviews.length
-    ? (reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length).toFixed(1)
-    : "0.0";
   const repliesGenerated = reviews.filter((review) => review.replyText).length;
-  const activePlan = "Starter";
+  const pendingCount = reviews.filter((review) => review.status === "needs-reply").length;
+  const readyCount = reviews.filter((review) => review.status === "ready").length;
   const postedCount = reviews.filter((review) => review.status === "posted").length;
+  const authMethod =
+    session?.user?.provider === "google"
+      ? copy.google
+      : session?.user?.provider === "credentials"
+        ? copy.credentials
+        : copy.notConnected;
+
+  const billing = {
+    planName: billingState.planName || copy.noPlan,
+    amount: billingState.amountLabel || copy.choosePlan,
+    status: billingState.status === "active" ? copy.active : copy.inactive,
+    nextBillingDate: billingState.nextBillingDate || copy.notScheduled,
+  };
 
   if (status === "loading") {
-    return <main style={{ padding: "40px" }}>Loading...</main>;
+    return <main style={{ padding: "40px" }}>{copy.loading}</main>;
   }
 
   if (!session) {
@@ -185,6 +400,7 @@ function DashboardContent() {
           fontFamily: "Arial, sans-serif",
           background:
             "radial-gradient(circle at top left, #fff4d8 0%, #f7f4ec 35%, #eef3ff 100%)",
+          direction: language === "ar" ? "rtl" : "ltr",
         }}
       >
         <div
@@ -199,10 +415,10 @@ function DashboardContent() {
           }}
         >
           <h2 style={{ fontSize: "28px", color: "#172033", marginBottom: "12px" }}>
-            You need to log in to access the dashboard
+            {copy.loginTitle}
           </h2>
           <p style={{ color: "#5b6473", lineHeight: 1.7, marginBottom: "20px" }}>
-            Use the demo account or return to the login page to continue.
+            {copy.loginText}
           </p>
           <div style={{ display: "grid", gap: "12px" }}>
             <Link
@@ -216,7 +432,7 @@ function DashboardContent() {
                 fontWeight: "600",
               }}
             >
-              Go to login
+              {copy.goLogin}
             </Link>
             <Link
               href="/signup"
@@ -229,7 +445,7 @@ function DashboardContent() {
                 fontWeight: "600",
               }}
             >
-              Use demo signup
+              {copy.demoSignup}
             </Link>
           </div>
         </div>
@@ -245,6 +461,7 @@ function DashboardContent() {
           "radial-gradient(circle at top left, #fff4d8 0%, #f7f4ec 35%, #eef3ff 100%)",
         fontFamily: "Arial, sans-serif",
         padding: "40px 20px 80px",
+        direction: language === "ar" ? "rtl" : "ltr",
       }}
     >
       <div style={{ maxWidth: "1120px", margin: "0 auto" }}>
@@ -258,7 +475,7 @@ function DashboardContent() {
           }}
         >
           <Link href="/" style={{ textDecoration: "none", color: "#444" }}>
-            ← Back to Home
+            ← {copy.back}
           </Link>
 
           <button
@@ -272,171 +489,156 @@ function DashboardContent() {
               cursor: "pointer",
             }}
           >
-            Sign out
+            {copy.signOut}
           </button>
-        </div>
-
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-            gap: "22px",
-            alignItems: "stretch",
-            marginBottom: "24px",
-          }}
-        >
-          <section
-            style={{
-              background: "#171717",
-              color: "#fff7e8",
-              borderRadius: "24px",
-              padding: "28px",
-              boxShadow: "0 20px 50px rgba(20,20,20,0.15)",
-            }}
-          >
-            <div
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "8px",
-                padding: "8px 12px",
-                borderRadius: "999px",
-                background: "rgba(255,255,255,0.1)",
-                fontSize: "13px",
-                marginBottom: "18px",
-              }}
-            >
-              Live reply workspace
-            </div>
-
-            <h1 style={{ fontSize: "40px", marginBottom: "12px", color: "#ffffff" }}>
-              Welcome back, {session.user?.name || "User"}
-            </h1>
-
-            <p
-              style={{
-                color: "rgba(255,247,232,0.78)",
-                fontSize: "18px",
-                lineHeight: 1.6,
-                maxWidth: "640px",
-              }}
-            >
-              Capture new reviews, generate polished replies, and keep a lightweight
-              queue of what still needs attention.
-            </p>
-          </section>
-
-          <section
-            style={{
-              background: "rgba(255,255,255,0.86)",
-              backdropFilter: "blur(14px)",
-              borderRadius: "24px",
-              padding: "24px",
-              boxShadow: "0 18px 40px rgba(82,95,127,0.12)",
-            }}
-          >
-            <h2 style={{ marginBottom: "8px", fontSize: "22px", color: "#1f2937" }}>
-              Your account
-            </h2>
-            <p style={{ color: "#4b5563", lineHeight: 1.8, marginBottom: "20px" }}>
-              <strong>Name:</strong> {session.user?.name || "Not available"}
-              <br />
-              <strong>Email:</strong> {session.user?.email || "Not available"}
-            </p>
-
-            <div style={{ display: "grid", gap: "12px" }}>
-              <div
-                style={{
-                  background: "#fff8e6",
-                  borderRadius: "16px",
-                  padding: "14px 16px",
-                }}
-              >
-                <div style={{ fontSize: "13px", color: "#8b5e00", marginBottom: "6px" }}>
-                  Average rating tracked
-                </div>
-                <div style={{ fontSize: "28px", color: "#1f2937", fontWeight: "700" }}>
-                  {averageRating}
-                </div>
-              </div>
-              <div
-                style={{
-                  background: "#eef6ff",
-                  borderRadius: "16px",
-                  padding: "14px 16px",
-                }}
-              >
-                <div style={{ fontSize: "13px", color: "#31598e", marginBottom: "6px" }}>
-                  Replies ready to send
-                </div>
-                <div style={{ fontSize: "28px", color: "#1f2937", fontWeight: "700" }}>
-                  {readyCount}
-                </div>
-              </div>
-              <div
-                style={{
-                  background: "#eefbf3",
-                  borderRadius: "16px",
-                  padding: "14px 16px",
-                }}
-              >
-                <div style={{ fontSize: "13px", color: "#1f7a45", marginBottom: "6px" }}>
-                  Active plan
-                </div>
-                <div style={{ fontSize: "28px", color: "#1f2937", fontWeight: "700" }}>
-                  {activePlan}
-                </div>
-              </div>
-            </div>
-          </section>
         </div>
 
         <section
           style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-            gap: "18px",
+            background: "#172033",
+            color: "#fff8ec",
+            borderRadius: "28px",
+            padding: "30px",
             marginBottom: "24px",
+            boxShadow: "0 20px 50px rgba(20,20,20,0.15)",
           }}
         >
-          {[
-            ["Replies generated", repliesGenerated, "#f5f8ff", "#5a6b89"],
-            ["Pending reviews", pendingCount, "#fff6df", "#8b5e00"],
-            [
-              "Connected location",
-              connection.isConnected ? connection.selectedLocationName : "None",
-              "#eefbf3",
-              "#1f7a45",
-            ],
-            ["Billing status", "Active", "#fff4f2", "#9f1c00"],
-          ].map(([label, value, background, color]) => (
+          <div
+            style={{
+              display: "inline-block",
+              padding: "8px 12px",
+              borderRadius: "999px",
+              background: "rgba(255,255,255,0.12)",
+              fontSize: "13px",
+              marginBottom: "14px",
+            }}
+          >
+            {copy.badge}
+          </div>
+          <h1 style={{ fontSize: "42px", marginBottom: "10px" }}>{copy.title}</h1>
+          <p style={{ color: "rgba(255,248,236,0.82)", lineHeight: 1.7, margin: 0 }}>
+            {copy.description}
+          </p>
+        </section>
+
+        <section
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+            gap: "18px",
+            marginBottom: "18px",
+          }}
+        >
+          <article
+            style={{
+              background: "#fff",
+              borderRadius: "24px",
+              padding: "24px",
+              boxShadow: "0 16px 38px rgba(82,95,127,0.12)",
+            }}
+          >
+            <h2 style={{ fontSize: "24px", color: "#172033", marginBottom: "12px" }}>
+              {copy.accountTitle}
+            </h2>
+            <div style={{ display: "grid", gap: "12px", marginBottom: "18px" }}>
+              {[
+                [copy.name, session.user?.name || copy.notConnected],
+                [copy.email, session.user?.email || copy.notConnected],
+                [copy.loginMethod, authMethod],
+              ].map(([label, value]) => (
+                <div
+                  key={label}
+                  style={{ background: "#f8fafc", borderRadius: "16px", padding: "14px 16px" }}
+                >
+                  <div style={{ color: "#6b7280", fontSize: "13px", marginBottom: "6px" }}>
+                    {label}
+                  </div>
+                  <div style={{ color: "#172033", fontWeight: "700" }}>{value}</div>
+                </div>
+              ))}
+            </div>
             <div
-              key={label}
               style={{
-                background: "#ffffff",
-                borderRadius: "22px",
-                padding: "20px",
-                boxShadow: "0 14px 40px rgba(82,95,127,0.12)",
+                background: "#fff6df",
+                color: "#8b5e00",
+                borderRadius: "16px",
+                padding: "14px 16px",
+                lineHeight: 1.65,
+                marginBottom: "16px",
               }}
             >
-              <div
-                style={{
-                  display: "inline-block",
-                  background,
-                  color,
-                  borderRadius: "999px",
-                  padding: "7px 10px",
-                  fontSize: "12px",
-                  marginBottom: "12px",
-                }}
-              >
-                {label}
-              </div>
-              <div style={{ fontSize: "34px", color: "#172033", fontWeight: "700" }}>
-                {value}
-              </div>
+              <strong>{copy.security}:</strong> {copy.passwordNote}
             </div>
-          ))}
+            <Link
+              href="/settings"
+              style={{
+                display: "inline-block",
+                textDecoration: "none",
+                background: "#172033",
+                color: "#fff",
+                borderRadius: "14px",
+                padding: "12px 16px",
+                fontWeight: "600",
+              }}
+            >
+              {copy.openSettings}
+            </Link>
+          </article>
+
+          <article
+            style={{
+              background: "#fff",
+              borderRadius: "24px",
+              padding: "24px",
+              boxShadow: "0 16px 38px rgba(82,95,127,0.12)",
+            }}
+          >
+            <h2 style={{ fontSize: "24px", color: "#172033", marginBottom: "12px" }}>
+              {copy.billingTitle}
+            </h2>
+            <p style={{ color: "#5b6473", lineHeight: 1.7, marginBottom: "18px" }}>
+              {copy.billingText}
+            </p>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+                gap: "12px",
+                marginBottom: "16px",
+              }}
+            >
+              {[
+                [copy.plan, billing.planName],
+                [copy.amount, billing.amount],
+                [copy.status, billing.status],
+                [copy.nextBilling, billing.nextBillingDate],
+              ].map(([label, value]) => (
+                <div
+                  key={label}
+                  style={{ background: "#f8fafc", borderRadius: "16px", padding: "14px 16px" }}
+                >
+                  <div style={{ color: "#6b7280", fontSize: "13px", marginBottom: "6px" }}>
+                    {label}
+                  </div>
+                  <div style={{ color: "#172033", fontWeight: "700" }}>{value}</div>
+                </div>
+              ))}
+            </div>
+            <Link
+              href="/pricing"
+              style={{
+                display: "inline-block",
+                textDecoration: "none",
+                background: "#172033",
+                color: "#fff",
+                borderRadius: "14px",
+                padding: "12px 16px",
+                fontWeight: "600",
+              }}
+            >
+              {copy.managePlan}
+            </Link>
+          </article>
         </section>
 
         <section
@@ -444,465 +646,221 @@ function DashboardContent() {
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
             gap: "18px",
-            marginBottom: "24px",
+            marginBottom: "18px",
           }}
         >
-          <div
+          <article
             style={{
-              background: "#ffffff",
-              borderRadius: "22px",
-              padding: "22px",
-              boxShadow: "0 14px 40px rgba(82,95,127,0.12)",
-            }}
-          >
-            <h2 style={{ fontSize: "22px", color: "#172033", marginBottom: "10px" }}>
-              Workspace
-            </h2>
-            <p style={{ color: "#5b6473", lineHeight: 1.7, marginBottom: "16px" }}>
-              Connect a business, open your inbox, and decide whether Replyo should
-              post directly or wait for approval first.
-            </p>
-            <div style={{ display: "grid", gap: "10px" }}>
-              <Link
-                href="/inbox"
-                style={{
-                  textDecoration: "none",
-                  background: "#172033",
-                  color: "#fff",
-                  borderRadius: "14px",
-                  padding: "12px 14px",
-                  textAlign: "center",
-                  fontWeight: "600",
-                }}
-              >
-                Open review inbox
-              </Link>
-              <Link
-                href="/connect-google"
-                style={{
-                  textDecoration: "none",
-                  background: "#eff3fb",
-                  color: "#172033",
-                  borderRadius: "14px",
-                  padding: "12px 14px",
-                  textAlign: "center",
-                  fontWeight: "600",
-                }}
-              >
-                Connect Google Business
-              </Link>
-            </div>
-          </div>
-
-          <div
-            style={{
-              background: "#ffffff",
-              borderRadius: "22px",
-              padding: "22px",
-              boxShadow: "0 14px 40px rgba(82,95,127,0.12)",
-            }}
-          >
-            <h2 style={{ fontSize: "22px", color: "#172033", marginBottom: "10px" }}>
-              Account controls
-            </h2>
-            <p style={{ color: "#5b6473", lineHeight: 1.7, marginBottom: "16px" }}>
-              Current mode:{" "}
-              <strong>
-                {settings.replyMode === "auto"
-                  ? "Replyo posts automatically"
-                  : "You approve replies before posting"}
-              </strong>
-              .
-            </p>
-            <div style={{ display: "grid", gap: "10px" }}>
-              <Link
-                href="/settings"
-                style={{
-                  textDecoration: "none",
-                  background: "#172033",
-                  color: "#fff",
-                  borderRadius: "14px",
-                  padding: "12px 14px",
-                  textAlign: "center",
-                  fontWeight: "600",
-                }}
-              >
-                Open settings
-              </Link>
-              <Link
-                href="/inbox"
-                style={{
-                  textDecoration: "none",
-                  background: "#effbf3",
-                  color: "#1f7a45",
-                  borderRadius: "14px",
-                  padding: "12px 14px",
-                  textAlign: "center",
-                  fontWeight: "600",
-                }}
-              >
-                Posted replies: {postedCount}
-              </Link>
-              <Link
-                href="/pricing"
-                style={{
-                  textDecoration: "none",
-                  background: "#eff3fb",
-                  color: "#172033",
-                  borderRadius: "14px",
-                  padding: "12px 14px",
-                  textAlign: "center",
-                  fontWeight: "600",
-                }}
-              >
-                Manage plan
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-            gap: "22px",
-          }}
-        >
-          <section
-            style={{
-              background: "#ffffff",
+              background: "#fff",
               borderRadius: "24px",
-              padding: "22px",
-              boxShadow: "0 14px 40px rgba(82,95,127,0.12)",
-              alignSelf: "start",
+              padding: "24px",
+              boxShadow: "0 16px 38px rgba(82,95,127,0.12)",
             }}
           >
-            <h2 style={{ fontSize: "24px", marginBottom: "10px", color: "#111827" }}>
-              Add a review
+            <h2 style={{ fontSize: "24px", color: "#172033", marginBottom: "12px" }}>
+              {copy.reviewTitle}
             </h2>
-            <p style={{ color: "#6b7280", lineHeight: 1.6, marginBottom: "20px" }}>
-              Build your queue manually for now while we shape the product around real
-              customer feedback.
+            <p style={{ color: "#5b6473", lineHeight: 1.7, marginBottom: "18px" }}>
+              {copy.reviewText}
             </p>
-
-            <form onSubmit={handleAddReview} style={{ display: "grid", gap: "14px" }}>
-              <input
-                type="text"
-                value={form.customerName}
-                onChange={(event) => handleFormChange("customerName", event.target.value)}
-                placeholder="Customer name"
-                style={{
-                  padding: "14px 16px",
-                  borderRadius: "14px",
-                  border: "1px solid #d1d5db",
-                  fontSize: "15px",
-                }}
-              />
-
-              <input
-                type="text"
-                value={form.businessName}
-                onChange={(event) => handleFormChange("businessName", event.target.value)}
-                placeholder="Business name"
-                style={{
-                  padding: "14px 16px",
-                  borderRadius: "14px",
-                  border: "1px solid #d1d5db",
-                  fontSize: "15px",
-                }}
-              />
-
-              <label style={{ display: "grid", gap: "8px", color: "#374151", fontSize: "14px" }}>
-                Star rating
-                <select
-                  value={form.rating}
-                  onChange={(event) =>
-                    handleFormChange("rating", Number(event.target.value))
-                  }
+            <div style={{ display: "grid", gap: "12px", marginBottom: "16px" }}>
+              {[
+                [copy.generated, repliesGenerated, "#effbf3", "#1f7a45"],
+                [copy.pending, pendingCount, "#fff6df", "#8b5e00"],
+                [copy.confirmation, readyCount, "#eef6ff", "#31598e"],
+                [copy.posted, postedCount, "#f5f8ff", "#5a6b89"],
+              ].map(([label, value, background, color]) => (
+                <div
+                  key={label}
                   style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    background,
+                    borderRadius: "16px",
                     padding: "14px 16px",
-                    borderRadius: "14px",
-                    border: "1px solid #d1d5db",
-                    fontSize: "15px",
-                    background: "#fff",
                   }}
                 >
-                  <option value={5}>5 stars</option>
-                  <option value={4}>4 stars</option>
-                  <option value={3}>3 stars</option>
-                  <option value={2}>2 stars</option>
-                  <option value={1}>1 star</option>
-                </select>
-              </label>
+                  <span style={{ color }}>{label}</span>
+                  <strong style={{ color: "#172033", fontSize: "22px" }}>{value}</strong>
+                </div>
+              ))}
+            </div>
+          </article>
 
-              <textarea
-                value={form.reviewText}
-                onChange={(event) => handleFormChange("reviewText", event.target.value)}
-                placeholder="Paste the customer review here..."
-                style={{
-                  minHeight: "160px",
-                  padding: "14px 16px",
-                  borderRadius: "16px",
-                  border: "1px solid #d1d5db",
-                  fontSize: "15px",
-                  resize: "vertical",
-                  fontFamily: "Arial, sans-serif",
-                  lineHeight: 1.6,
-                }}
-              />
+          <article
+            style={{
+              background: "#fff",
+              borderRadius: "24px",
+              padding: "24px",
+              boxShadow: "0 16px 38px rgba(82,95,127,0.12)",
+            }}
+          >
+            <h2 style={{ fontSize: "24px", color: "#172033", marginBottom: "12px" }}>
+              {copy.inboxTitle}
+            </h2>
+            <p style={{ color: "#5b6473", lineHeight: 1.7, marginBottom: "18px" }}>
+              {copy.inboxText}
+            </p>
+            <div style={{ display: "grid", gap: "12px", marginBottom: "16px" }}>
+              {[
+                [copy.pending, pendingCount, "#fff6df", "#8b5e00"],
+                [copy.confirmation, readyCount, "#eef6ff", "#31598e"],
+                [copy.posted, postedCount, "#effbf3", "#1f7a45"],
+              ].map(([label, value, background, color]) => (
+                <div
+                  key={label}
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    background,
+                    borderRadius: "16px",
+                    padding: "14px 16px",
+                  }}
+                >
+                  <span style={{ color }}>{label}</span>
+                  <strong style={{ color: "#172033", fontSize: "22px" }}>{value}</strong>
+                </div>
+              ))}
+            </div>
+            <Link
+              href="/inbox"
+              style={{
+                display: "inline-block",
+                textDecoration: "none",
+                background: "#172033",
+                color: "#fff",
+                borderRadius: "14px",
+                padding: "12px 16px",
+                fontWeight: "600",
+              }}
+            >
+              {copy.openInbox}
+            </Link>
+          </article>
 
+          <article
+            style={{
+              background: "#fff",
+              borderRadius: "24px",
+              padding: "24px",
+              boxShadow: "0 16px 38px rgba(82,95,127,0.12)",
+            }}
+          >
+            <h2 style={{ fontSize: "24px", color: "#172033", marginBottom: "12px" }}>
+              {copy.automationTitle}
+            </h2>
+            <p style={{ color: "#5b6473", lineHeight: 1.7, marginBottom: "18px" }}>
+              {copy.automationText}
+            </p>
+            <div style={{ display: "grid", gap: "12px" }}>
               <button
-                type="submit"
+                type="button"
+                onClick={() => updateReplyMode("auto")}
                 style={{
-                  background: "#111827",
-                  color: "#ffffff",
-                  border: "none",
-                  borderRadius: "14px",
-                  padding: "14px 18px",
-                  fontSize: "16px",
+                  textAlign: "left",
+                  background: settings.replyMode === "auto" ? "#eefbf3" : "#f8fafc",
+                  border:
+                    settings.replyMode === "auto"
+                      ? "1px solid #b8e3c6"
+                      : "1px solid #e4e9f2",
+                  borderRadius: "18px",
+                  padding: "16px",
                   cursor: "pointer",
                 }}
               >
-                Save review to queue
+                <div style={{ color: "#172033", fontWeight: "700", marginBottom: "6px" }}>
+                  {copy.trustTitle}
+                </div>
+                <div style={{ color: "#5b6473", lineHeight: 1.6 }}>{copy.trustText}</div>
               </button>
-            </form>
 
-            <div style={{ display: "grid", gap: "12px", marginTop: "18px" }}>
-              <div
+              <button
+                type="button"
+                onClick={() => updateReplyMode("approval")}
                 style={{
-                  background: "#fff6df",
-                  borderRadius: "16px",
-                  padding: "14px 16px",
+                  textAlign: "left",
+                  background: settings.replyMode === "approval" ? "#eef6ff" : "#f8fafc",
+                  border:
+                    settings.replyMode === "approval"
+                      ? "1px solid #cfe0ff"
+                      : "1px solid #e4e9f2",
+                  borderRadius: "18px",
+                  padding: "16px",
+                  cursor: "pointer",
                 }}
               >
-                <div style={{ fontSize: "13px", color: "#8b5e00", marginBottom: "6px" }}>
-                  Needs reply
+                <div style={{ color: "#172033", fontWeight: "700", marginBottom: "6px" }}>
+                  {copy.confirmTitle}
                 </div>
-                <div style={{ fontSize: "26px", fontWeight: "700", color: "#1f2937" }}>
-                  {pendingCount}
-                </div>
-              </div>
-              <div
-                style={{
-                  background: "#eefbf3",
-                  borderRadius: "16px",
-                  padding: "14px 16px",
-                }}
-              >
-                <div style={{ fontSize: "13px", color: "#1f7a45", marginBottom: "6px" }}>
-                  Reviews saved
-                </div>
-                <div style={{ fontSize: "26px", fontWeight: "700", color: "#1f2937" }}>
-                  {reviews.length}
-                </div>
-              </div>
+                <div style={{ color: "#5b6473", lineHeight: 1.6 }}>{copy.confirmText}</div>
+              </button>
             </div>
-          </section>
+          </article>
+        </section>
 
-          <section
+        <section style={{ display: "grid", gridTemplateColumns: "minmax(0, 1fr)" }}>
+          <article
             style={{
-              display: "grid",
-              gap: "18px",
+              background: "#fff",
+              borderRadius: "24px",
+              padding: "24px",
+              boxShadow: "0 16px 38px rgba(82,95,127,0.12)",
             }}
           >
-            {!isLoaded ? (
-              <div
-                style={{
-                  background: "#ffffff",
-                  borderRadius: "24px",
-                  padding: "24px",
-                  boxShadow: "0 14px 40px rgba(82,95,127,0.12)",
-                  color: "#4b5563",
-                }}
-              >
-                Loading your review queue...
-              </div>
-            ) : reviews.length === 0 ? (
-              <div
-                style={{
-                  background: "#ffffff",
-                  borderRadius: "24px",
-                  padding: "28px",
-                  boxShadow: "0 14px 40px rgba(82,95,127,0.12)",
-                }}
-              >
-                <h2 style={{ fontSize: "26px", marginBottom: "10px", color: "#111827" }}>
-                  Your queue is empty
-                </h2>
-                <p style={{ color: "#6b7280", lineHeight: 1.7, maxWidth: "640px" }}>
-                  Add a review on the left, then generate a draft reply. Everything is
-                  stored locally in this browser so you can keep iterating on the MVP
-                  without setting up a database yet.
-                </p>
-              </div>
-            ) : (
-              reviews.map((review) => {
-                const isGenerating = isSubmitting && activeReviewId === review.id;
-                const statusLabel =
-                  review.status === "ready"
-                    ? "Reply ready"
-                    : review.status === "error"
-                      ? "Needs retry"
-                      : "Waiting for reply";
-
-                return (
-                  <article
-                    key={review.id}
-                    style={{
-                      background: "#ffffff",
-                      borderRadius: "24px",
-                      padding: "22px",
-                      boxShadow: "0 14px 40px rgba(82,95,127,0.12)",
-                    }}
-                  >
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        gap: "16px",
-                        flexWrap: "wrap",
-                        marginBottom: "18px",
-                      }}
-                    >
-                      <div>
-                        <div style={{ fontSize: "13px", color: "#6b7280", marginBottom: "6px" }}>
-                          {review.businessName}
-                        </div>
-                        <h3 style={{ fontSize: "24px", color: "#111827", marginBottom: "8px" }}>
-                          {review.customerName}
-                        </h3>
-                        <div style={{ color: "#d97706", fontSize: "18px", letterSpacing: "1px" }}>
-                          {starsForRating(review.rating)}
-                        </div>
-                      </div>
-
-                      <div
-                        style={{
-                          display: "inline-flex",
-                          alignItems: "center",
-                          height: "fit-content",
-                          padding: "8px 12px",
-                          borderRadius: "999px",
-                          background:
-                            review.status === "ready"
-                              ? "#e9f9ef"
-                              : review.status === "error"
-                                ? "#fff1f0"
-                                : "#fff8e6",
-                          color:
-                            review.status === "ready"
-                              ? "#1f7a45"
-                              : review.status === "error"
-                                ? "#b42318"
-                                : "#8b5e00",
-                          fontSize: "13px",
-                          fontWeight: "600",
-                        }}
-                      >
-                        {statusLabel}
-                      </div>
-                    </div>
-
-                    <div
-                      style={{
-                        display: "grid",
-                        gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-                        gap: "18px",
-                        marginBottom: "18px",
-                      }}
-                    >
-                      <div
-                        style={{
-                          borderRadius: "20px",
-                          background: "#f8fafc",
-                          padding: "18px",
-                        }}
-                      >
-                        <div style={{ fontSize: "13px", color: "#64748b", marginBottom: "10px" }}>
-                          Customer review
-                        </div>
-                        <p style={{ margin: 0, color: "#334155", lineHeight: 1.7 }}>
-                          {review.reviewText}
-                        </p>
-                      </div>
-
-                      <div
-                        style={{
-                          borderRadius: "20px",
-                          background:
-                            review.status === "error" ? "#fff6f5" : "#f7f9ff",
-                          padding: "18px",
-                        }}
-                      >
-                        <div style={{ fontSize: "13px", color: "#64748b", marginBottom: "10px" }}>
-                          Draft reply
-                        </div>
-                        <p style={{ margin: 0, color: "#334155", lineHeight: 1.7 }}>
-                          {review.replyText || "Generate a reply to see your draft here."}
-                        </p>
-                      </div>
-                    </div>
-
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        gap: "12px",
-                        alignItems: "center",
-                        flexWrap: "wrap",
-                      }}
-                    >
-                      <div style={{ color: "#6b7280", fontSize: "14px" }}>
-                        {review.source
-                          ? `Source: ${review.source}`
-                          : "Source will appear after generation"}
-                      </div>
-
-                      <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
-                        <button
-                          type="button"
-                          onClick={() => handleGenerateReply(review.id)}
-                          disabled={isGenerating}
-                          style={{
-                            background: "#111827",
-                            color: "#ffffff",
-                            border: "none",
-                            borderRadius: "14px",
-                            padding: "12px 16px",
-                            fontSize: "15px",
-                            cursor: isGenerating ? "wait" : "pointer",
-                            opacity: isGenerating ? 0.7 : 1,
-                          }}
-                        >
-                          {isGenerating ? "Generating..." : "Generate reply"}
-                        </button>
-
-                        <button
-                          type="button"
-                          onClick={() => handleDeleteReview(review.id)}
-                          style={{
-                            background: "#f3f4f6",
-                            color: "#111827",
-                            border: "1px solid #d1d5db",
-                            borderRadius: "14px",
-                            padding: "12px 16px",
-                            fontSize: "15px",
-                            cursor: "pointer",
-                          }}
-                        >
-                          Delete
-                        </button>
-                      </div>
-                    </div>
-                  </article>
-                );
-              })
-            )}
-          </section>
-        </div>
+            <h2 style={{ fontSize: "24px", color: "#172033", marginBottom: "12px" }}>
+              {copy.connectedTitle}
+            </h2>
+            <p style={{ color: "#5b6473", lineHeight: 1.7, marginBottom: "18px" }}>
+              {copy.connectedText}
+            </p>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
+                gap: "12px",
+                marginBottom: "16px",
+              }}
+            >
+              {[
+                [copy.provider, connection.provider || copy.googleProvider],
+                [copy.location, connection.selectedLocationName || copy.notConnected],
+                [copy.category, connection.selectedLocationCategory || copy.notConnected],
+                [copy.city, connection.selectedLocationCity || copy.notConnected],
+              ].map(([label, value]) => (
+                <div
+                  key={label}
+                  style={{ background: "#f8fafc", borderRadius: "16px", padding: "14px 16px" }}
+                >
+                  <div style={{ color: "#6b7280", fontSize: "13px", marginBottom: "6px" }}>
+                    {label}
+                  </div>
+                  <div style={{ color: "#172033", fontWeight: "700" }}>{value}</div>
+                </div>
+              ))}
+            </div>
+            <Link
+              href={billingState.status === "active" ? "/connect-google" : "/pricing"}
+              style={{
+                display: "inline-block",
+                textDecoration: "none",
+                background: "#172033",
+                color: "#fff",
+                borderRadius: "14px",
+                padding: "12px 16px",
+                fontWeight: "600",
+              }}
+            >
+              {billingState.status === "active" ? copy.connectBusiness : copy.choosePlan}
+            </Link>
+          </article>
+        </section>
       </div>
     </main>
   );
 }
 
-export default DashboardContent;
+export default function DashboardPage() {
+  return <DashboardContent />;
+}

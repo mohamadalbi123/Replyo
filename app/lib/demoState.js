@@ -1,6 +1,7 @@
 export const REVIEWS_STORAGE_KEY = "replyo-dashboard-reviews";
 export const SETTINGS_STORAGE_KEY = "replyo-settings";
 export const CONNECTION_STORAGE_KEY = "replyo-google-connection";
+export const BILLING_STORAGE_KEY = "replyo-billing";
 
 export const demoLocations = [
   {
@@ -45,6 +46,17 @@ export const defaultConnection = {
   selectedLocationCategory: "",
   selectedLocationCity: "",
   syncedAt: "",
+};
+
+export const defaultBilling = {
+  status: "inactive",
+  planId: "",
+  planName: "",
+  amountLabel: "",
+  cadence: "",
+  nextBillingDate: "",
+  selectedAt: "",
+  locationLimit: 0,
 };
 
 export const defaultReviews = [

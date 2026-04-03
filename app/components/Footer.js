@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 import { availableLanguages, useLanguage } from "./LanguageProvider";
 
 const footerLinks = [
@@ -12,6 +13,23 @@ const footerLinks = [
 
 export default function Footer() {
   const { language, setLanguage, t } = useLanguage();
+  const [isLanguageOpen, setIsLanguageOpen] = useState(false);
+  const languageMenuRef = useRef(null);
+  const activeLanguage =
+    availableLanguages.find((item) => item.code === language) || availableLanguages[0];
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (languageMenuRef.current && !languageMenuRef.current.contains(event.target)) {
+        setIsLanguageOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <footer
@@ -26,8 +44,9 @@ export default function Footer() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-            gap: "22px",
+            gridTemplateColumns: "minmax(260px, 1.35fr) minmax(180px, 0.85fr) minmax(220px, 1fr)",
+            alignItems: "start",
+            gap: "28px",
             marginBottom: "24px",
           }}
         >
@@ -66,7 +85,9 @@ export default function Footer() {
                       ? t.header.how
                       : link.href === "/pricing"
                         ? t.header.pricing
-                        : t.livePreview.test}
+                        : link.href === "/contact"
+                          ? t.footer.contact
+                          : t.livePreview.test}
                 </Link>
               ))}
             </div>
@@ -84,38 +105,35 @@ export default function Footer() {
                 lineHeight: 1.7,
               }}
             >
-              <div>{t.footer.privacy}</div>
+              <Link
+                href="/privacy"
+                style={{
+                  color: "rgba(255,248,236,0.82)",
+                  textDecoration: "none",
+                }}
+              >
+                {t.footer.privacy}
+              </Link>
               <div>{t.footer.googleNote}</div>
-              <div>{t.footer.terms}</div>
+              <Link
+                href="/terms"
+                style={{
+                  color: "rgba(255,248,236,0.82)",
+                  textDecoration: "none",
+                }}
+              >
+                {t.footer.terms}
+              </Link>
+              <Link
+                href="/contact"
+                style={{
+                  color: "rgba(255,248,236,0.82)",
+                  textDecoration: "none",
+                }}
+              >
+                {t.footer.contact}
+              </Link>
             </div>
-          </section>
-
-          <section>
-            <div style={{ fontSize: "15px", fontWeight: "700", marginBottom: "12px" }}>
-              {t.footer.contact}
-            </div>
-            <div
-              style={{
-                color: "rgba(255,248,236,0.78)",
-                lineHeight: 1.7,
-                marginBottom: "14px",
-              }}
-            >
-              {t.footer.contactText}
-            </div>
-            <a
-              href="mailto:hello@replyo.app"
-              style={{
-                display: "inline-block",
-                color: "#fff",
-                textDecoration: "none",
-                background: "rgba(255,255,255,0.1)",
-                padding: "10px 14px",
-                borderRadius: "12px",
-              }}
-            >
-              hello@replyo.app
-            </a>
           </section>
         </div>
 
@@ -136,52 +154,87 @@ export default function Footer() {
 
           <div
             style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "10px",
+              position: "relative",
               color: "rgba(255,248,236,0.82)",
               fontSize: "14px",
             }}
+            ref={languageMenuRef}
           >
-            <span>{t.footer.language}</span>
-            <div
+            <button
+              type="button"
+              onClick={() => setIsLanguageOpen((current) => !current)}
               style={{
                 display: "flex",
-                gap: "8px",
-                flexWrap: "wrap",
+                alignItems: "center",
+                gap: "10px",
+                background: "rgba(255,255,255,0.08)",
+                color: "#fff8ec",
+                border: "1px solid rgba(255,255,255,0.12)",
+                borderRadius: "999px",
+                padding: "10px 14px",
+                cursor: "pointer",
+                fontSize: "14px",
               }}
             >
-              {availableLanguages.map((item) => (
-                <button
-                  key={item.code}
-                  type="button"
-                  onClick={() => setLanguage(item.code)}
-                  title={item.label}
-                  aria-label={item.label}
-                  style={{
-                    background:
-                      language === item.code
-                        ? "rgba(255,255,255,0.18)"
-                        : "rgba(255,255,255,0.08)",
-                    color: "#fff",
-                    border:
-                      language === item.code
-                        ? "1px solid rgba(255,255,255,0.34)"
-                        : "1px solid rgba(255,255,255,0.12)",
-                    borderRadius: "999px",
-                    width: "38px",
-                    height: "38px",
-                    display: "inline-flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    cursor: "pointer",
-                    fontSize: "18px",
-                  }}
-                >
-                  {item.flag}
-                </button>
-              ))}
-            </div>
+              <span>{t.footer.language}</span>
+              <span style={{ fontSize: "18px", lineHeight: 1 }}>{activeLanguage.flag}</span>
+              <span style={{ opacity: 0.78 }}>{activeLanguage.label}</span>
+              <span style={{ opacity: 0.72 }}>{isLanguageOpen ? "▴" : "▾"}</span>
+            </button>
+
+            {isLanguageOpen ? (
+              <div
+                style={{
+                  position: "absolute",
+                  right: 0,
+                  bottom: "calc(100% + 10px)",
+                  minWidth: "220px",
+                  background: "#111827",
+                  border: "1px solid rgba(255,255,255,0.1)",
+                  borderRadius: "18px",
+                  padding: "8px",
+                  boxShadow: "0 18px 40px rgba(0,0,0,0.22)",
+                  display: "grid",
+                  gap: "6px",
+                  zIndex: 20,
+                }}
+              >
+                {availableLanguages.map((item) => (
+                  <button
+                    key={item.code}
+                    type="button"
+                    onClick={() => {
+                      setLanguage(item.code);
+                      setIsLanguageOpen(false);
+                    }}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      gap: "12px",
+                      width: "100%",
+                      background:
+                        language === item.code ? "rgba(255,255,255,0.1)" : "transparent",
+                      color: "#fff8ec",
+                      border:
+                        language === item.code
+                          ? "1px solid rgba(255,255,255,0.12)"
+                          : "1px solid transparent",
+                      borderRadius: "14px",
+                      padding: "10px 12px",
+                      cursor: "pointer",
+                      textAlign: "left",
+                    }}
+                  >
+                    <span style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                      <span style={{ fontSize: "18px", lineHeight: 1 }}>{item.flag}</span>
+                      <span>{item.label}</span>
+                    </span>
+                    {language === item.code ? <span>✓</span> : null}
+                  </button>
+                ))}
+              </div>
+            ) : null}
           </div>
         </div>
       </div>

@@ -2,8 +2,124 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useLanguage } from "../components/LanguageProvider";
+
+const testCopy = {
+  en: {
+    back: "Back to home",
+    title: "Test Replyo",
+    description:
+      "See how Replyo turns a customer review into a professional business reply.",
+    preview: "Google Review Preview",
+    customer: "Marie Client",
+    guide: "Local Guide • 12 reviews",
+    placeholder: "Write or paste a customer review here...",
+    empty: "Please enter a review first.",
+    wrong: "Something went wrong.",
+    failed: "Failed to generate reply.",
+    generate: "Generate Reply",
+    generating: "Generating...",
+    replyTitle: "Business Reply",
+    owner: "Reply from the owner",
+    ai: "Generated with AI",
+    fallback: "Fallback reply",
+    error: "Error",
+    writing: "Replyo is writing a professional response...",
+    waiting: "Your AI-generated reply will appear here.",
+  },
+  fr: {
+    back: "Retour a l'accueil",
+    title: "Tester Replyo",
+    description:
+      "Voyez comment Replyo transforme un avis client en reponse professionnelle.",
+    preview: "Apercu de l'avis Google",
+    customer: "Marie Cliente",
+    guide: "Guide locale • 12 avis",
+    placeholder: "Ecrivez ou collez un avis client ici...",
+    empty: "Veuillez d'abord saisir un avis.",
+    wrong: "Une erreur est survenue.",
+    failed: "Impossible de generer la reponse.",
+    generate: "Generer la reponse",
+    generating: "Generation...",
+    replyTitle: "Reponse de l'etablissement",
+    owner: "Reponse du proprietaire",
+    ai: "Genere avec l'IA",
+    fallback: "Reponse de secours",
+    error: "Erreur",
+    writing: "Replyo redige une reponse professionnelle...",
+    waiting: "Votre reponse generee par l'IA apparaitra ici.",
+  },
+  es: {
+    back: "Volver al inicio",
+    title: "Probar Replyo",
+    description:
+      "Descubre como Replyo convierte una resena en una respuesta profesional.",
+    preview: "Vista previa de la resena de Google",
+    customer: "Maria Cliente",
+    guide: "Guia local • 12 resenas",
+    placeholder: "Escribe o pega aqui una resena del cliente...",
+    empty: "Primero escribe una resena.",
+    wrong: "Algo salio mal.",
+    failed: "No se pudo generar la respuesta.",
+    generate: "Generar respuesta",
+    generating: "Generando...",
+    replyTitle: "Respuesta del negocio",
+    owner: "Respuesta del propietario",
+    ai: "Generado con IA",
+    fallback: "Respuesta alternativa",
+    error: "Error",
+    writing: "Replyo esta redactando una respuesta profesional...",
+    waiting: "Tu respuesta generada por IA aparecera aqui.",
+  },
+  ar: {
+    back: "العودة الى الرئيسية",
+    title: "جرّب Replyo",
+    description:
+      "شاهد كيف يحول Replyo تقييم العميل الى رد مهني من النشاط التجاري.",
+    preview: "معاينة تقييم Google",
+    customer: "ماري العميلة",
+    guide: "مرشدة محلية • 12 تقييم",
+    placeholder: "اكتب او الصق تقييم العميل هنا...",
+    empty: "يرجى كتابة تقييم اولا.",
+    wrong: "حدث خطأ ما.",
+    failed: "تعذر إنشاء الرد.",
+    generate: "إنشاء الرد",
+    generating: "جارٍ الإنشاء...",
+    replyTitle: "رد النشاط التجاري",
+    owner: "رد من المالك",
+    ai: "تم إنشاؤه بالذكاء الاصطناعي",
+    fallback: "رد احتياطي",
+    error: "خطأ",
+    writing: "يقوم Replyo بكتابة رد مهني...",
+    waiting: "سيظهر الرد الذي أنشأه Replyo هنا.",
+  },
+  de: {
+    back: "Zur Startseite",
+    title: "Replyo testen",
+    description:
+      "Sehen Sie, wie Replyo eine Kundenbewertung in eine professionelle Antwort verwandelt.",
+    preview: "Google-Bewertung Vorschau",
+    customer: "Marie Kundin",
+    guide: "Local Guide • 12 Bewertungen",
+    placeholder: "Schreiben oder fugen Sie hier eine Kundenbewertung ein...",
+    empty: "Bitte geben Sie zuerst eine Bewertung ein.",
+    wrong: "Etwas ist schiefgelaufen.",
+    failed: "Die Antwort konnte nicht erstellt werden.",
+    generate: "Antwort erstellen",
+    generating: "Wird erstellt...",
+    replyTitle: "Antwort des Unternehmens",
+    owner: "Antwort des Inhabers",
+    ai: "Mit KI erstellt",
+    fallback: "Ersatzantwort",
+    error: "Fehler",
+    writing: "Replyo schreibt eine professionelle Antwort...",
+    waiting: "Ihre KI-generierte Antwort erscheint hier.",
+  },
+};
 
 export default function TestReplyoPage() {
+  const { language } = useLanguage();
+  const copy = testCopy[language] || testCopy.en;
   const [review, setReview] = useState("");
   const [reply, setReply] = useState("");
   const [source, setSource] = useState("");
@@ -11,7 +127,7 @@ export default function TestReplyoPage() {
 
   async function generateReply() {
     if (!review.trim()) {
-      setReply("Please enter a review first.");
+      setReply(copy.empty);
       setSource("error");
       return;
     }
@@ -32,7 +148,7 @@ export default function TestReplyoPage() {
       const data = await res.json();
 
       if (!res.ok) {
-        setReply(data.error || "Something went wrong.");
+        setReply(data.error || copy.wrong);
         setSource("error");
         return;
       }
@@ -40,7 +156,7 @@ export default function TestReplyoPage() {
       setReply(data.reply);
       setSource(data.source || "");
     } catch (error) {
-      setReply("Failed to generate reply.");
+      setReply(copy.failed);
       setSource("error");
     } finally {
       setIsLoading(false);
@@ -54,22 +170,21 @@ export default function TestReplyoPage() {
         background: "#f5f7fb",
         fontFamily: "Arial, sans-serif",
         padding: "40px 20px",
+        direction: language === "ar" ? "rtl" : "ltr",
       }}
     >
       <div style={{ maxWidth: "900px", margin: "0 auto" }}>
         <div style={{ marginBottom: "20px" }}>
           <Link href="/" style={{ textDecoration: "none", color: "#444" }}>
-            ← Back to Home
+            ← {copy.back}
           </Link>
         </div>
 
         <h1 style={{ fontSize: "38px", marginBottom: "10px", color: "#222" }}>
-          Test Replyo
+          {copy.title}
         </h1>
 
-        <p style={{ color: "#666", marginBottom: "30px" }}>
-          See how Replyo turns a customer review into a professional business reply.
-        </p>
+        <p style={{ color: "#666", marginBottom: "30px" }}>{copy.description}</p>
 
         <div
           style={{
@@ -80,9 +195,7 @@ export default function TestReplyoPage() {
             marginBottom: "24px",
           }}
         >
-          <h2 style={{ fontSize: "22px", marginBottom: "18px" }}>
-            Google Review Preview
-          </h2>
+          <h2 style={{ fontSize: "22px", marginBottom: "18px" }}>{copy.preview}</h2>
 
           <div
             style={{
@@ -117,12 +230,8 @@ export default function TestReplyoPage() {
               </div>
 
               <div>
-                <div style={{ fontWeight: "bold", color: "#222" }}>
-                  Marie Client
-                </div>
-                <div style={{ fontSize: "14px", color: "#777" }}>
-                  Local Guide • 12 reviews
-                </div>
+                <div style={{ fontWeight: "bold", color: "#222" }}>{copy.customer}</div>
+                <div style={{ fontSize: "14px", color: "#777" }}>{copy.guide}</div>
               </div>
             </div>
 
@@ -139,7 +248,7 @@ export default function TestReplyoPage() {
             <textarea
               value={review}
               onChange={(e) => setReview(e.target.value)}
-              placeholder="Write or paste a customer review here..."
+              placeholder={copy.placeholder}
               style={{
                 width: "100%",
                 minHeight: "120px",
@@ -150,6 +259,7 @@ export default function TestReplyoPage() {
                 color: "#333",
                 fontFamily: "Arial, sans-serif",
                 lineHeight: 1.6,
+                background: "transparent",
               }}
             />
           </div>
@@ -169,7 +279,7 @@ export default function TestReplyoPage() {
               opacity: isLoading ? 0.7 : 1,
             }}
           >
-            {isLoading ? "Generating..." : "Generate Reply"}
+            {isLoading ? copy.generating : copy.generate}
           </button>
         </div>
 
@@ -181,9 +291,7 @@ export default function TestReplyoPage() {
             boxShadow: "0 10px 30px rgba(0,0,0,0.06)",
           }}
         >
-          <h2 style={{ fontSize: "22px", marginBottom: "18px" }}>
-            Business Reply
-          </h2>
+          <h2 style={{ fontSize: "22px", marginBottom: "18px" }}>{copy.replyTitle}</h2>
 
           <div
             style={{
@@ -206,7 +314,7 @@ export default function TestReplyoPage() {
                 flexWrap: "wrap",
               }}
             >
-              <div style={{ fontWeight: "bold" }}>Reply from the owner</div>
+              <div style={{ fontWeight: "bold" }}>{copy.owner}</div>
               {source ? (
                 <div
                   style={{
@@ -218,18 +326,16 @@ export default function TestReplyoPage() {
                     borderRadius: "999px",
                   }}
                 >
-                  {source === "openai" ? "Generated with AI" : source === "fallback" ? "Fallback reply" : "Error"}
+                  {source === "openai"
+                    ? copy.ai
+                    : source === "fallback"
+                      ? copy.fallback
+                      : copy.error}
                 </div>
               ) : null}
             </div>
-            <div
-              style={{
-                color: reply ? "#333" : "#667085",
-              }}
-            >
-              {isLoading
-                ? "Replyo is writing a professional response..."
-                : reply || "Your AI-generated reply will appear here."}
+            <div style={{ color: reply ? "#333" : "#667085" }}>
+              {isLoading ? copy.writing : reply || copy.waiting}
             </div>
           </div>
         </div>

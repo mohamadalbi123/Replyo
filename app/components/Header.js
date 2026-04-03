@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
@@ -35,24 +34,87 @@ export default function Header() {
         flexWrap: "wrap",
       }}
     >
-      <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-        <Image
-          src="/logo.png"
-          alt="Replyo"
-          width={40}
-          height={40}
-          style={{ width: "40px", height: "40px" }}
-          priority
-        />
-        <span
+      <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+        <div
+          aria-label="Replyo"
           style={{
-            fontSize: "18px",
-            fontWeight: "600",
-            color: "#111827",
+            width: "44px",
+            height: "44px",
+            borderRadius: "15px",
+            background: "linear-gradient(145deg, #172033 0%, #31598e 100%)",
+            position: "relative",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            boxShadow: "0 12px 22px rgba(23,32,51,0.14)",
+            flexShrink: 0,
           }}
         >
-          Replyo
-        </span>
+          <span
+            style={{
+              color: "#f8f3e7",
+              fontSize: "22px",
+              fontWeight: "800",
+              letterSpacing: "-0.05em",
+              lineHeight: 1,
+              transform: "translateY(-0.5px)",
+            }}
+          >
+            R
+          </span>
+          <span
+            aria-hidden="true"
+            style={{
+              position: "absolute",
+              right: "-2px",
+              top: "-2px",
+              width: "12px",
+              height: "12px",
+              borderRadius: "999px",
+              background: "#d7a94b",
+              boxShadow: "0 0 0 3px rgba(255,255,255,0.9)",
+            }}
+          />
+          <span
+            aria-hidden="true"
+            style={{
+              position: "absolute",
+              left: "9px",
+              bottom: "-4px",
+              width: "12px",
+              height: "12px",
+              borderRadius: "4px",
+              background: "#31598e",
+              transform: "rotate(45deg)",
+            }}
+          />
+        </div>
+        <div style={{ display: "flex", flexDirection: "column", lineHeight: 1 }}>
+          <span
+            style={{
+              fontSize: "23px",
+              fontWeight: "800",
+              letterSpacing: "-0.055em",
+              color: "#111827",
+            }}
+          >
+            Repl
+            <span style={{ color: "#31598e" }}>y</span>
+            <span style={{ color: "#d7a94b" }}>o</span>
+          </span>
+          <span
+            style={{
+              fontSize: "10px",
+              fontWeight: "600",
+              letterSpacing: "0.18em",
+              textTransform: "uppercase",
+              color: "rgba(23,32,51,0.56)",
+              marginTop: "4px",
+            }}
+          >
+            Review Replies
+          </span>
+        </div>
       </div>
 
       <nav style={{ display: "flex", gap: "18px", alignItems: "center", flexWrap: "wrap" }}>
@@ -88,20 +150,6 @@ export default function Header() {
               style={{ textDecoration: "none", color: "#111827" }}
             >
               {t.header.dashboard}
-            </Link>
-
-            <Link
-              href="/inbox"
-              style={{ textDecoration: "none", color: "#111827" }}
-            >
-              {t.header.inbox}
-            </Link>
-
-            <Link
-              href="/connect-google"
-              style={{ textDecoration: "none", color: "#111827" }}
-            >
-              {t.header.connect}
             </Link>
           </>
         ) : (
