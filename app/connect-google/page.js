@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
-import GoogleAuthButton from "../components/GoogleAuthButton";
 import { useLanguage } from "../components/LanguageProvider";
 import {
   BILLING_STORAGE_KEY,
@@ -40,14 +39,14 @@ const connectCopy = {
     choosePlan: "Choose a plan",
     step1: "Step 1: Connect Google Business",
     step1Text:
-      "This is the first thing a new client should see. Once connected, Replyo can fetch the businesses available in the Google Business account.",
+      "Use the Google account that actually owns or manages the Business Profile. Once connected, Replyo can fetch the businesses available in that business account.",
     consentBox:
-      "In the live product, clicking this button opens Google consent, then Replyo detects the businesses owned by that account.",
+      "Your Replyo login can be personal. This separate step must be completed with the Google account that manages the Business Profile you want to connect.",
     connectedGoogle:
-      "Google account connected. Replyo can now try to load your Business Profiles.",
+      "Google Business account connected. Replyo can now try to load your Business Profiles.",
     loadBusinesses: "Load my Google businesses",
     loadingBusinesses: "Loading businesses...",
-    connectButton: "Connect Google Business",
+    connectButton: "Connect Google Business account",
     step2: "Step 2: Choose your business",
     step2Text:
       "These are the businesses Replyo detected in the connected account. Choose the one you want Replyo to monitor for reviews.",
@@ -92,14 +91,14 @@ const connectCopy = {
     choosePlan: "Choisir une offre",
     step1: "Etape 1 : Connecter Google Business",
     step1Text:
-      "C'est la premiere etape pour un nouveau client. Une fois connecte, Replyo peut charger les businesses disponibles dans le compte Google Business.",
+      "Utilisez le compte Google qui possede ou gere vraiment la fiche Business. Une fois connecte, Replyo peut charger les businesses disponibles dans ce compte.",
     consentBox:
-      "Dans le produit final, ce bouton ouvre l'ecran de consentement Google, puis Replyo detecte les businesses du compte.",
+      "Votre connexion Replyo peut etre personnelle. Cette etape se fait separement avec le compte Google qui gere la fiche Business a connecter.",
     connectedGoogle:
-      "Compte Google connecte. Replyo peut maintenant essayer de charger vos profils Business.",
+      "Compte Google Business connecte. Replyo peut maintenant essayer de charger vos profils Business.",
     loadBusinesses: "Charger mes businesses Google",
     loadingBusinesses: "Chargement des businesses...",
-    connectButton: "Connecter Google Business",
+    connectButton: "Connecter le compte Google Business",
     step2: "Etape 2 : Choisissez votre business",
     step2Text:
       "Voici les businesses detectes dans le compte connecte. Choisissez celui que Replyo doit surveiller pour les avis.",
@@ -144,14 +143,14 @@ const connectCopy = {
     choosePlan: "Elegir plan",
     step1: "Paso 1: Conectar Google Business",
     step1Text:
-      "Esto es lo primero que debe ver un cliente nuevo. Una vez conectado, Replyo puede cargar los negocios disponibles en la cuenta.",
+      "Usa la cuenta de Google que realmente posee o gestiona el Business Profile. Una vez conectada, Replyo puede cargar los negocios disponibles en esa cuenta.",
     consentBox:
-      "En el producto real, este boton abre el consentimiento de Google y luego Replyo detecta los negocios disponibles.",
+      "Tu acceso a Replyo puede ser personal. Este paso separado debe hacerse con la cuenta de Google que gestiona el Business Profile que quieres conectar.",
     connectedGoogle:
-      "Cuenta de Google conectada. Replyo ya puede intentar cargar tus perfiles Business.",
+      "Cuenta de Google Business conectada. Replyo ya puede intentar cargar tus perfiles Business.",
     loadBusinesses: "Cargar mis negocios de Google",
     loadingBusinesses: "Cargando negocios...",
-    connectButton: "Conectar Google Business",
+    connectButton: "Conectar cuenta de Google Business",
     step2: "Paso 2: Elige tu negocio",
     step2Text:
       "Estos son los negocios detectados en la cuenta conectada. Elige cual debe supervisar Replyo para las resenas.",
@@ -196,14 +195,14 @@ const connectCopy = {
     choosePlan: "اختيار الخطة",
     step1: "الخطوة 1: ربط Google Business",
     step1Text:
-      "هذا هو اول ما يجب ان يراه العميل الجديد. بعد الربط، يستطيع Replyo جلب الأنشطة المتاحة في الحساب.",
+      "استخدم حساب Google الذي يملك او يدير فعليا ملف النشاط التجاري. بعد الربط، يستطيع Replyo جلب الانشطة المتاحة في ذلك الحساب.",
     consentBox:
-      "في المنتج الحقيقي، هذا الزر يفتح موافقة Google ثم يكتشف Replyo الأنشطة الموجودة في الحساب.",
+      "يمكن ان يكون تسجيل دخولك الى Replyo شخصيا. اما هذه الخطوة المنفصلة فيجب تنفيذها باستخدام حساب Google الذي يدير ملف النشاط الذي تريد ربطه.",
     connectedGoogle:
-      "تم ربط حساب Google. يمكن لـ Replyo الآن محاولة تحميل ملفات Business الخاصة بك.",
+      "تم ربط حساب Google Business. يمكن لـ Replyo الآن محاولة تحميل ملفات Business الخاصة بك.",
     loadBusinesses: "تحميل أنشطتي من Google",
     loadingBusinesses: "جارٍ تحميل الأنشطة...",
-    connectButton: "ربط Google Business",
+    connectButton: "ربط حساب Google Business",
     step2: "الخطوة 2: اختر نشاطك",
     step2Text:
       "هذه هي الأنشطة التي اكتشفها Replyo داخل الحساب المتصل. اختر النشاط الذي تريد من Replyo مراقبته للمراجعات.",
@@ -248,14 +247,14 @@ const connectCopy = {
     choosePlan: "Tarif wählen",
     step1: "Schritt 1: Google Business verbinden",
     step1Text:
-      "Das ist der erste Schritt fur neue Kunden. Nach der Verbindung kann Replyo die verfugbaren Unternehmen im Konto laden.",
+      "Nutzen Sie das Google-Konto, das das Business Profile tatsaechlich besitzt oder verwaltet. Danach kann Replyo die verfuegbaren Unternehmen dieses Kontos laden.",
     consentBox:
-      "Im Live-Produkt offnet dieser Button die Google-Einwilligung und Replyo erkennt danach die verfugbaren Unternehmen.",
+      "Ihr Replyo-Login darf persoenlich sein. Dieser getrennte Schritt muss mit dem Google-Konto erfolgen, das das Business Profile verwaltet, das Sie verbinden moechten.",
     connectedGoogle:
-      "Google-Konto verbunden. Replyo kann jetzt versuchen, Ihre Business-Profile zu laden.",
+      "Google-Business-Konto verbunden. Replyo kann jetzt versuchen, Ihre Business-Profile zu laden.",
     loadBusinesses: "Meine Google-Unternehmen laden",
     loadingBusinesses: "Unternehmen werden geladen...",
-    connectButton: "Google Business verbinden",
+    connectButton: "Google-Business-Konto verbinden",
     step2: "Schritt 2: Wahlen Sie Ihr Unternehmen",
     step2Text:
       "Das sind die Unternehmen, die Replyo im verbundenen Konto erkannt hat. Wahlen Sie das Unternehmen aus, das Replyo fur Bewertungen beobachten soll.",
@@ -285,6 +284,7 @@ function ConnectGoogleContent() {
   const { language } = useLanguage();
   const copy = connectCopy[language] || connectCopy.en;
   const router = useRouter();
+  const [hasBusinessToken, setHasBusinessToken] = useState(false);
   const [selectedLocationId, setSelectedLocationId] = useState("");
   const [connection, setConnection] = useState(defaultConnection);
   const [billing, setBilling] = useState(defaultBilling);
@@ -307,6 +307,10 @@ function ConnectGoogleContent() {
     setBilling(storedBilling);
     setSelectedLocationId(storedConnection.selectedLocationId || "");
     setIsSelectingLocation(false);
+    setHasBusinessToken(
+      typeof document !== "undefined" &&
+        document.cookie.includes("replyo_gbp_access_token=")
+    );
   }, []);
 
   useEffect(() => {
@@ -397,7 +401,7 @@ function ConnectGoogleContent() {
       return false;
     }
 
-    if (session.user?.provider === "google") {
+    if (hasBusinessToken) {
       loadLocations();
       return true;
     }
@@ -565,7 +569,7 @@ function ConnectGoogleContent() {
                     {copy.consentBox}
                   </div>
 
-                  {session.user?.provider === "google" ? (
+                  {hasBusinessToken ? (
                     <div
                       style={{
                         background: "#eefbf3",
@@ -579,7 +583,7 @@ function ConnectGoogleContent() {
                     </div>
                   ) : null}
 
-                  {session.user?.provider === "google" ? (
+                  {hasBusinessToken ? (
                     <button
                       type="button"
                       onClick={handleStartConnect}
@@ -603,7 +607,22 @@ function ConnectGoogleContent() {
                       {isLoadingLocations ? copy.loadingBusinesses : copy.loadBusinesses}
                     </button>
                   ) : (
-                    <GoogleAuthButton label={copy.connectButton} callbackUrl="/connect-google" />
+                    <a
+                      href="/api/google-business/connect"
+                      style={{
+                        display: "block",
+                        width: "100%",
+                        textDecoration: "none",
+                        textAlign: "center",
+                        background: "#172033",
+                        color: "#fff",
+                        borderRadius: "14px",
+                        padding: "14px 18px",
+                        fontWeight: "600",
+                      }}
+                    >
+                      {copy.connectButton}
+                    </a>
                   )}
 
                   {locationsError ? (
@@ -794,7 +813,7 @@ function ConnectGoogleContent() {
                   {copy.openInbox}
                 </Link>
                 <Link
-                  href="/settings"
+                  href="/dashboard"
                   style={{
                     textDecoration: "none",
                     background: "#eff3fb",

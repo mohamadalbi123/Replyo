@@ -26,14 +26,14 @@ const inboxCopy = {
     badge: "Review inbox",
     title: "New reviews, draft replies, and posting status in one place.",
     description:
-      "Replyo can either post directly when you trust the automation or hold the draft for your approval first.",
+      "When auto-reply is off, every drafted reply stays here for your approval before posting.",
     connectedBusiness: "Connected business",
     replyMode: "Reply mode",
     pending: "Pending",
     ready: "Ready",
     posted: "Posted",
-    autoPost: "Auto-post",
-    approval: "Approval",
+    autoPost: "Auto-reply on",
+    approval: "Approval in Replyo",
     notConnected: "Not connected",
     noBusinessTitle: "No connected business yet",
     noBusinessText:
@@ -47,7 +47,7 @@ const inboxCopy = {
     tone: "Tone",
     generating: "Generating...",
     generate: "Generate reply",
-    approve: "Approve and post",
+    approve: "Confirm and post",
     changeMode: "Change mode",
     statuses: {
       "needs-reply": "Needs reply",
@@ -66,14 +66,14 @@ const inboxCopy = {
     badge: "Boite des avis",
     title: "Nouveaux avis, brouillons de reponse et statut de publication au meme endroit.",
     description:
-      "Replyo peut publier directement lorsque vous faites confiance a l'automatisation ou garder le brouillon pour validation.",
+      "Quand la reponse auto est desactivee, chaque brouillon reste ici pour votre validation avant publication.",
     connectedBusiness: "Business connecte",
     replyMode: "Mode de reponse",
     pending: "En attente",
     ready: "Pret",
     posted: "Publie",
-    autoPost: "Publication auto",
-    approval: "Validation",
+    autoPost: "Reponse auto activee",
+    approval: "Validation dans Replyo",
     notConnected: "Non connecte",
     noBusinessTitle: "Aucun business connecte",
     noBusinessText:
@@ -87,7 +87,7 @@ const inboxCopy = {
     tone: "Ton",
     generating: "Generation...",
     generate: "Generer la reponse",
-    approve: "Valider et publier",
+    approve: "Confirmer et publier",
     changeMode: "Changer le mode",
     statuses: {
       "needs-reply": "A traiter",
@@ -106,14 +106,14 @@ const inboxCopy = {
     badge: "Inbox de resenas",
     title: "Nuevas resenas, borradores de respuesta y estado de publicacion en un solo lugar.",
     description:
-      "Replyo puede publicar directamente cuando confias en la automatizacion o guardar el borrador para tu aprobacion.",
+      "Cuando la respuesta automatica esta desactivada, cada borrador se queda aqui para tu aprobacion antes de publicar.",
     connectedBusiness: "Negocio conectado",
     replyMode: "Modo de respuesta",
     pending: "Pendientes",
     ready: "Listas",
     posted: "Publicadas",
-    autoPost: "Auto-publicacion",
-    approval: "Aprobacion",
+    autoPost: "Respuesta auto activada",
+    approval: "Aprobacion en Replyo",
     notConnected: "No conectado",
     noBusinessTitle: "Todavia no hay negocio conectado",
     noBusinessText:
@@ -127,7 +127,7 @@ const inboxCopy = {
     tone: "Tono",
     generating: "Generando...",
     generate: "Generar respuesta",
-    approve: "Aprobar y publicar",
+    approve: "Confirmar y publicar",
     changeMode: "Cambiar modo",
     statuses: {
       "needs-reply": "Necesita respuesta",
@@ -146,14 +146,14 @@ const inboxCopy = {
     badge: "Bewertungs-Inbox",
     title: "Neue Bewertungen, Antwortentwurfe und Veroffentlichungsstatus an einem Ort.",
     description:
-      "Replyo kann direkt veroffentlichen, wenn Sie der Automatisierung vertrauen, oder den Entwurf zuerst fur Ihre Freigabe bereithalten.",
+      "Wenn die Auto-Antwort deaktiviert ist, bleibt jeder Entwurf hier fur Ihre Freigabe, bevor er veroffentlicht wird.",
     connectedBusiness: "Verbundenes Unternehmen",
     replyMode: "Antwortmodus",
     pending: "Offen",
     ready: "Bereit",
     posted: "Veroffentlicht",
-    autoPost: "Auto-Veroffentlichung",
-    approval: "Freigabe",
+    autoPost: "Auto-Antwort an",
+    approval: "Freigabe in Replyo",
     notConnected: "Nicht verbunden",
     noBusinessTitle: "Noch kein Unternehmen verbunden",
     noBusinessText:
@@ -167,7 +167,7 @@ const inboxCopy = {
     tone: "Ton",
     generating: "Wird erstellt...",
     generate: "Antwort erstellen",
-    approve: "Freigeben und veroffentlichen",
+    approve: "Bestatigen und veroffentlichen",
     changeMode: "Modus andern",
     statuses: {
       "needs-reply": "Antwort fehlt",
@@ -186,14 +186,14 @@ const inboxCopy = {
     badge: "صندوق التقييمات",
     title: "التقييمات الجديدة ومسودات الرد وحالة النشر في مكان واحد.",
     description:
-      "يمكن لـ Replyo النشر مباشرة عندما تثق بالأتمتة أو الاحتفاظ بالمسودة لمراجعتك اولا.",
+      "عندما يكون الرد التلقائي متوقفا، تبقى كل مسودة هنا بانتظار موافقتك قبل النشر.",
     connectedBusiness: "النشاط المتصل",
     replyMode: "وضع الرد",
     pending: "بانتظار الرد",
     ready: "جاهز",
     posted: "تم النشر",
-    autoPost: "نشر تلقائي",
-    approval: "موافقة",
+    autoPost: "الرد التلقائي مفعّل",
+    approval: "الموافقة داخل Replyo",
     notConnected: "غير متصل",
     noBusinessTitle: "لا يوجد نشاط متصل بعد",
     noBusinessText:
@@ -207,7 +207,7 @@ const inboxCopy = {
     tone: "النبرة",
     generating: "جارٍ الإنشاء...",
     generate: "إنشاء الرد",
-    approve: "اعتماد ونشر",
+    approve: "تأكيد ونشر",
     changeMode: "تغيير الوضع",
     statuses: {
       "needs-reply": "يحتاج ردا",
@@ -722,7 +722,7 @@ function InboxContent() {
                     </button>
                   ) : null}
                   <Link
-                    href="/settings"
+                    href="/dashboard"
                     style={{
                       textDecoration: "none",
                       background: "#eff3fb",

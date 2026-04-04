@@ -10,7 +10,7 @@ const testCopy = {
     title: "Test Replyo",
     description:
       "See how Replyo turns a customer review into a professional business reply.",
-    preview: "Google Review Preview",
+    preview: "Google Customer Review",
     customer: "Marie Client",
     guide: "Local Guide • 12 reviews",
     placeholder: "Write or paste a customer review here...",
@@ -19,10 +19,10 @@ const testCopy = {
     failed: "Failed to generate reply.",
     generate: "Generate Reply",
     generating: "Generating...",
-    replyTitle: "Business Reply",
-    owner: "Reply from the owner",
+    replyTitle: "Your Business Reply",
+    owner: "Business reply",
     ai: "Generated with AI",
-    fallback: "Fallback reply",
+    fallback: "Backup reply",
     error: "Error",
     writing: "Replyo is writing a professional response...",
     waiting: "Your AI-generated reply will appear here.",
@@ -32,7 +32,7 @@ const testCopy = {
     title: "Tester Replyo",
     description:
       "Voyez comment Replyo transforme un avis client en reponse professionnelle.",
-    preview: "Apercu de l'avis Google",
+    preview: "Avis client Google",
     customer: "Marie Cliente",
     guide: "Guide locale • 12 avis",
     placeholder: "Ecrivez ou collez un avis client ici...",
@@ -41,10 +41,10 @@ const testCopy = {
     failed: "Impossible de generer la reponse.",
     generate: "Generer la reponse",
     generating: "Generation...",
-    replyTitle: "Reponse de l'etablissement",
-    owner: "Reponse du proprietaire",
+    replyTitle: "Votre reponse d'etablissement",
+    owner: "Reponse de l'etablissement",
     ai: "Genere avec l'IA",
-    fallback: "Reponse de secours",
+    fallback: "Reponse de reserve",
     error: "Erreur",
     writing: "Replyo redige une reponse professionnelle...",
     waiting: "Votre reponse generee par l'IA apparaitra ici.",
@@ -54,7 +54,7 @@ const testCopy = {
     title: "Probar Replyo",
     description:
       "Descubre como Replyo convierte una resena en una respuesta profesional.",
-    preview: "Vista previa de la resena de Google",
+    preview: "Resena de cliente en Google",
     customer: "Maria Cliente",
     guide: "Guia local • 12 resenas",
     placeholder: "Escribe o pega aqui una resena del cliente...",
@@ -63,10 +63,10 @@ const testCopy = {
     failed: "No se pudo generar la respuesta.",
     generate: "Generar respuesta",
     generating: "Generando...",
-    replyTitle: "Respuesta del negocio",
-    owner: "Respuesta del propietario",
+    replyTitle: "Tu respuesta del negocio",
+    owner: "Respuesta del negocio",
     ai: "Generado con IA",
-    fallback: "Respuesta alternativa",
+    fallback: "Respuesta de respaldo",
     error: "Error",
     writing: "Replyo esta redactando una respuesta profesional...",
     waiting: "Tu respuesta generada por IA aparecera aqui.",
@@ -76,7 +76,7 @@ const testCopy = {
     title: "جرّب Replyo",
     description:
       "شاهد كيف يحول Replyo تقييم العميل الى رد مهني من النشاط التجاري.",
-    preview: "معاينة تقييم Google",
+    preview: "تقييم عميل على Google",
     customer: "ماري العميلة",
     guide: "مرشدة محلية • 12 تقييم",
     placeholder: "اكتب او الصق تقييم العميل هنا...",
@@ -85,10 +85,10 @@ const testCopy = {
     failed: "تعذر إنشاء الرد.",
     generate: "إنشاء الرد",
     generating: "جارٍ الإنشاء...",
-    replyTitle: "رد النشاط التجاري",
-    owner: "رد من المالك",
+    replyTitle: "رد نشاطك التجاري",
+    owner: "رد النشاط التجاري",
     ai: "تم إنشاؤه بالذكاء الاصطناعي",
-    fallback: "رد احتياطي",
+    fallback: "رد بديل",
     error: "خطأ",
     writing: "يقوم Replyo بكتابة رد مهني...",
     waiting: "سيظهر الرد الذي أنشأه Replyo هنا.",
@@ -98,7 +98,7 @@ const testCopy = {
     title: "Replyo testen",
     description:
       "Sehen Sie, wie Replyo eine Kundenbewertung in eine professionelle Antwort verwandelt.",
-    preview: "Google-Bewertung Vorschau",
+    preview: "Google-Kundenbewertung",
     customer: "Marie Kundin",
     guide: "Local Guide • 12 Bewertungen",
     placeholder: "Schreiben oder fugen Sie hier eine Kundenbewertung ein...",
@@ -107,10 +107,10 @@ const testCopy = {
     failed: "Die Antwort konnte nicht erstellt werden.",
     generate: "Antwort erstellen",
     generating: "Wird erstellt...",
-    replyTitle: "Antwort des Unternehmens",
-    owner: "Antwort des Inhabers",
+    replyTitle: "Ihre Unternehmensantwort",
+    owner: "Unternehmensantwort",
     ai: "Mit KI erstellt",
-    fallback: "Ersatzantwort",
+    fallback: "Reserveantwort",
     error: "Fehler",
     writing: "Replyo schreibt eine professionelle Antwort...",
     waiting: "Ihre KI-generierte Antwort erscheint hier.",
@@ -315,22 +315,18 @@ export default function TestReplyoPage() {
               }}
             >
               <div style={{ fontWeight: "bold" }}>{copy.owner}</div>
-              {source ? (
+              {source === "openai" ? (
                 <div
                   style={{
                     fontSize: "12px",
                     fontWeight: "600",
-                    color: source === "openai" ? "#0f6c3b" : "#8a5a00",
-                    background: source === "openai" ? "#e8f7ee" : "#fff4d6",
+                    color: "#0f6c3b",
+                    background: "#e8f7ee",
                     padding: "6px 10px",
                     borderRadius: "999px",
                   }}
                 >
-                  {source === "openai"
-                    ? copy.ai
-                    : source === "fallback"
-                      ? copy.fallback
-                      : copy.error}
+                  {copy.ai}
                 </div>
               ) : null}
             </div>

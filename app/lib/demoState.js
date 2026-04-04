@@ -32,8 +32,9 @@ export const demoLocations = [
 
 export const defaultSettings = {
   replyMode: "approval",
-  tone: "Warm, professional, and concise",
+  tone: "",
   alertsEnabled: true,
+  notificationEmail: "",
   smartPersonalization: true,
 };
 
@@ -71,11 +72,11 @@ export const defaultReviews = [
     replyText:
       "Thank you so much for your lovely review. We are delighted to hear you enjoyed your visit and felt welcomed by the team. We look forward to seeing you again very soon.",
     source: "openai",
-    status: "posted",
+    status: "ready",
     detectedTopics: ["staff friendliness", "cleanliness"],
     detectedSentiment: "positive",
     createdAt: "2026-04-01T10:00:00.000Z",
-    postedAt: "2026-04-01T10:04:00.000Z",
+    postedAt: "",
   },
   {
     id: "review-2",
@@ -102,12 +103,64 @@ export const defaultReviews = [
     rating: 5,
     reviewText:
       "Loved the atmosphere and the haircut. Thank you for making me feel welcome.",
-    replyText: "",
-    source: "",
-    status: "needs-reply",
+    replyText:
+      "Thank you for your kind review. We are so happy you enjoyed the atmosphere and your haircut, and we truly appreciate your warm feedback.",
+    source: "openai",
+    status: "ready",
     detectedTopics: ["results", "atmosphere"],
     detectedSentiment: "positive",
     createdAt: "2026-04-03T08:20:00.000Z",
+    postedAt: "",
+  },
+  {
+    id: "review-4",
+    customerName: "Nadia M.",
+    businessName: "Studio Lumiere",
+    businessType: "Beauty Salon",
+    rating: 4,
+    reviewText:
+      "Very happy with the result. The team was welcoming and the salon felt calm and professional from start to finish.",
+    replyText:
+      "Thank you so much for your kind review. We are delighted you felt welcomed and enjoyed the result of your visit. We truly appreciate your trust and look forward to seeing you again soon.",
+    source: "openai",
+    status: "ready",
+    detectedTopics: ["results", "staff friendliness", "atmosphere"],
+    detectedSentiment: "positive",
+    createdAt: "2026-04-03T11:10:00.000Z",
+    postedAt: "",
+  },
+  {
+    id: "review-5",
+    customerName: "Claire B.",
+    businessName: "Studio Lumiere",
+    businessType: "Beauty Salon",
+    rating: 5,
+    reviewText:
+      "Lovely experience overall. Clean space, friendly staff, and I really appreciated how carefully everything was explained to me.",
+    replyText:
+      "Thank you for your wonderful feedback. We are so pleased you enjoyed the atmosphere and felt well looked after by the team. We appreciate your visit and hope to welcome you back very soon.",
+    source: "openai",
+    status: "ready",
+    detectedTopics: ["cleanliness", "staff friendliness", "service quality"],
+    detectedSentiment: "positive",
+    createdAt: "2026-04-03T14:40:00.000Z",
+    postedAt: "",
+  },
+  {
+    id: "review-6",
+    customerName: "Emma R.",
+    businessName: "Studio Lumiere",
+    businessType: "Beauty Salon",
+    rating: 4,
+    reviewText:
+      "Professional team and a very relaxing atmosphere. I had to wait a few minutes, but the final result was worth it.",
+    replyText:
+      "Thank you for your thoughtful review. We are happy you enjoyed the atmosphere and your final result, and we also appreciate your patience regarding the short wait. We hope to see you again soon.",
+    source: "openai",
+    status: "ready",
+    detectedTopics: ["waiting time", "results", "atmosphere"],
+    detectedSentiment: "positive",
+    createdAt: "2026-04-04T09:15:00.000Z",
     postedAt: "",
   },
 ];
@@ -122,11 +175,11 @@ const sampleReviewsByCategory = {
       replyText:
         "Thank you so much for your lovely review. We are delighted to hear you enjoyed your visit and felt welcomed by the team. We look forward to seeing you again very soon.",
       source: "openai",
-      status: "posted",
+      status: "ready",
       detectedTopics: ["staff friendliness", "cleanliness"],
       detectedSentiment: "positive",
       createdAt: "2026-04-01T10:00:00.000Z",
-      postedAt: "2026-04-01T10:04:00.000Z",
+      postedAt: "",
     },
     {
       customerName: "Karim N.",
@@ -146,9 +199,10 @@ const sampleReviewsByCategory = {
       customerName: "Sofia L.",
       rating: 5,
       reviewText: "Loved the atmosphere and the haircut. Thank you for making me feel welcome.",
-      replyText: "",
-      source: "",
-      status: "needs-reply",
+      replyText:
+        "Thank you for your kind review. We are so happy you enjoyed the atmosphere and your haircut, and we truly appreciate your warm feedback.",
+      source: "openai",
+      status: "ready",
       detectedTopics: ["results", "atmosphere"],
       detectedSentiment: "positive",
       createdAt: "2026-04-03T08:20:00.000Z",
@@ -164,11 +218,11 @@ const sampleReviewsByCategory = {
       replyText:
         "Thank you so much for your kind review. We are delighted you enjoyed the food and service, and we truly appreciate your visit. We hope to welcome you back again soon.",
       source: "openai",
-      status: "posted",
+      status: "ready",
       detectedTopics: ["food quality", "service quality"],
       detectedSentiment: "positive",
       createdAt: "2026-04-01T19:00:00.000Z",
-      postedAt: "2026-04-01T19:04:00.000Z",
+      postedAt: "",
     },
     {
       customerName: "Leila B.",
@@ -188,9 +242,10 @@ const sampleReviewsByCategory = {
       customerName: "Nadia M.",
       rating: 2,
       reviewText: "Staff were polite but the food arrived late and was cold.",
-      replyText: "",
-      source: "",
-      status: "needs-reply",
+      replyText:
+        "Thank you for your feedback. We appreciate your kind words about the staff and are sorry the food arrived late and cold. We are reviewing this with the team to improve the experience.",
+      source: "openai",
+      status: "ready",
       detectedTopics: ["service quality", "waiting time", "food quality"],
       detectedSentiment: "negative",
       createdAt: "2026-04-03T12:05:00.000Z",
@@ -206,11 +261,11 @@ const sampleReviewsByCategory = {
       replyText:
         "Thank you so much for your review. We are delighted you found what you needed and enjoyed the service from our team. We hope to see you again soon.",
       source: "openai",
-      status: "posted",
+      status: "ready",
       detectedTopics: ["service quality"],
       detectedSentiment: "positive",
       createdAt: "2026-04-01T15:20:00.000Z",
-      postedAt: "2026-04-01T15:25:00.000Z",
+      postedAt: "",
     },
     {
       customerName: "Ethan P.",
@@ -230,9 +285,10 @@ const sampleReviewsByCategory = {
       customerName: "Alicia V.",
       rating: 2,
       reviewText: "The staff was kind, but the product I wanted was out of stock again.",
-      replyText: "",
-      source: "",
-      status: "needs-reply",
+      replyText:
+        "Thank you for your feedback. We appreciate your kind words about the team and understand the frustration around product availability. We are working to improve stock consistency.",
+      source: "openai",
+      status: "ready",
       detectedTopics: ["service quality", "overall experience"],
       detectedSentiment: "negative",
       createdAt: "2026-04-03T09:00:00.000Z",

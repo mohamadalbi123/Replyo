@@ -38,11 +38,8 @@ export const authOptions = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       authorization: {
         params: {
-          scope:
-            "openid email profile https://www.googleapis.com/auth/business.manage",
-          access_type: "offline",
-          prompt: "consent select_account",
-          include_granted_scopes: "false",
+          scope: "openid email profile",
+          prompt: "select_account",
         },
       },
     }),
@@ -63,9 +60,6 @@ export const authOptions = {
 
       if (account) {
         token.provider = account.provider;
-        token.accessToken = account.access_token;
-        token.refreshToken = account.refresh_token || token.refreshToken;
-        token.scope = account.scope;
       }
 
       return token;
@@ -76,9 +70,6 @@ export const authOptions = {
         session.user.email = token.email;
         session.user.provider = token.provider;
       }
-
-      session.accessToken = token.accessToken;
-      session.scope = token.scope;
 
       return session;
     },

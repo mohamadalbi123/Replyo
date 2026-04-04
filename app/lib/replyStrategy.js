@@ -57,6 +57,65 @@ const TOPIC_RULES = [
   { topic: "atmosphere", terms: ["atmosphere", "ambience", "place", "comfortable"] },
 ];
 
+const LANGUAGE_HINTS = {
+  English: [
+    "the",
+    "and",
+    "was",
+    "were",
+    "very",
+    "thank",
+    "service",
+    "food",
+    "staff",
+    "place",
+    "overall",
+  ],
+  French: [
+    "merci",
+    "très",
+    "tres",
+    "équipe",
+    "equipe",
+    "accueil",
+    "propre",
+    "service",
+    "salon",
+    "expérience",
+    "experience",
+  ],
+  German: [
+    "sehr",
+    "danke",
+    "freundlich",
+    "sauber",
+    "essen",
+    "bewertung",
+    "wunderbar",
+    "wirklich",
+    "besuch",
+    "teamarbeit",
+  ],
+  Spanish: [
+    "gracias",
+    "muy",
+    "amable",
+    "equipo",
+    "servicio",
+    "comida",
+    "lugar",
+    "experiencia",
+    "todo",
+    "bueno",
+  ],
+};
+
+function countWordMatches(text, words) {
+  return words.reduce((count, word) => {
+    return count + (text.includes(word) ? 1 : 0);
+  }, 0);
+}
+
 function detectReplyLanguage(review = "") {
   const text = review.trim();
   const lowered = text.toLowerCase();
@@ -69,16 +128,31 @@ function detectReplyLanguage(review = "") {
     return "Chinese";
   }
 
-  if (/[àâçéèêëîïôûùüÿœæ]/i.test(text) || /\b(très|merci|salon|accueil|super|équipe|propre|parfait)\b/i.test(lowered)) {
-    return "French";
+  const scores = {
+    English: countWordMatches(lowered, LANGUAGE_HINTS.English),
+    French: countWordMatches(lowered, LANGUAGE_HINTS.French),
+    German: countWordMatches(lowered, LANGUAGE_HINTS.German),
+    Spanish: countWordMatches(lowered, LANGUAGE_HINTS.Spanish),
+  };
+
+  if (/[àâçéèêëîïôûùüÿœæ]/i.test(text)) {
+    scores.French += 3;
   }
 
-  if (/[äöüß]/i.test(text) || /\b(sehr|danke|freundlich|sauber|team|wunderbar)\b/i.test(lowered)) {
-    return "German";
+  if (/[äöüß]/i.test(text)) {
+    scores.German += 3;
   }
 
-  if (/[ñáéíóúü]/i.test(text) || /\b(muy|gracias|equipo|excelente|amable|limpio)\b/i.test(lowered)) {
-    return "Spanish";
+  if (/[ñáéíóú]/i.test(text)) {
+    scores.Spanish += 3;
+  }
+
+  const rankedScores = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+  const [bestLanguage, bestScore] = rankedScores[0];
+  const secondScore = rankedScores[1]?.[1] || 0;
+
+  if (bestScore >= 2 && bestScore >= secondScore + 1) {
+    return bestLanguage;
   }
 
   return "English";
@@ -154,9 +228,12 @@ export function buildSystemPrompt(promptContext) {
     `Brand tone preference: ${promptContext.tone}.`,
     `Review sentiment: ${promptContext.sentiment}.`,
     `Main topics in the review: ${promptContext.detectedTopics.join(", ")}.`,
-    `Reply language: ${promptContext.replyLanguage}.`,
     "Keep the reply under 80 words, sound human, and avoid exaggerated marketing language.",
-    "Always reply in the same language as the customer's review unless the user explicitly asks for another language.",
+    `Fallback detected language: ${promptContext.replyLanguage}.`,
+    "Determine the dominant language of the full customer review before writing the reply.",
+    "Reply in the dominant language when one language clearly represents most of the review, even if the review contains mixed-language phrases.",
+    "Do not switch the reply language because of a few borrowed words like team, nice, hello, merci, or similar cross-language terms.",
+    "Preserve the full meaning of the review, including important details written in minority-language phrases.",
     "If the review is negative, acknowledge the issue calmly and professionally without sounding defensive.",
   ].join(" ");
 }

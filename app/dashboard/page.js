@@ -30,31 +30,52 @@ const dashboardCopy = {
     title: "Everything important in one place.",
     description:
       "Use the dashboard as your control center: account details, review progress, automation mode, billing, and connected business.",
-    accountTitle: "Account",
+    accountTitle: "Account settings",
     name: "Name",
     email: "Email",
     loginMethod: "Login method",
-    security: "Security",
-    passwordNote: "Manage password and security from your account settings.",
-    openSettings: "Open settings",
+    passwordSection: "Change password",
+    hidePasswordSection: "Cancel password change",
+    currentPassword: "Current password",
+    newPassword: "New password",
+    confirmPassword: "Confirm new password",
+    passwordPlaceholder: "Enter password",
+    savePassword: "Save password",
+    passwordSaved: "Password updated",
     reviewTitle: "Review activity",
     reviewText:
-      "See how many replies are done, how many still need confirmation, and what still needs attention.",
-    generated: "Replies done",
-    pending: "Waiting for reply",
+      "See how many reviews Replyo has handled, how many are still waiting for confirmation, and how many are already posted.",
+    handled: "Total reviews handled",
     confirmation: "Waiting for confirmation",
     posted: "Already posted",
     openInbox: "Open inbox",
-    inboxTitle: "Inbox",
+    inboxTitle: "Pending approvals",
     inboxText:
-      "Keep the queue simple. See immediately if any replies are waiting for your confirmation.",
+      "See the replies waiting for your confirmation right here, without leaving the dashboard.",
+    openDraft: "Open draft",
+    confirmNow: "Post on Google",
+    closeDraft: "Cancel",
+    customerReview: "Customer review",
+    draftReply: "Draft reply",
+    noPendingApprovals: "No replies are waiting for confirmation right now.",
     automationTitle: "Automation mode",
     automationText:
-      "Choose whether Replyo should post directly or prepare a draft for your approval first.",
-    trustTitle: "Trust Replyo",
-    trustText: "Reply directly to reviews automatically",
-    confirmTitle: "Review first",
-    confirmText: "Create a draft, then confirm and edit before posting",
+      "Choose whether Replyo should post automatically or keep each reply inside Replyo for your review first.",
+    autoReplyOn: "Auto-reply on",
+    autoReplyOff: "Auto-reply off",
+    autoReplyOnText:
+      "Replyo replies to customer reviews automatically, without preview.",
+    autoReplyOffText:
+      "Replyo creates a draft and waits for your approval in the dashboard before posting. You can also get an email when a draft is ready.",
+    toggleLabel: "Turn auto-reply on or off",
+    emailNotifyTitle: "Draft approval notifications",
+    emailNotifyHelp:
+      "Use this email if you want Replyo to notify you whenever a new draft is waiting for your approval in the inbox.",
+    emailNotifyLabel: "Notification email",
+    emailNotifyPlaceholder: "name@business.com",
+    emailNotifyToggle: "Email me when a draft is ready",
+    saveEmail: "Save email",
+    emailSaved: "Notification email saved",
     billingTitle: "Billing",
     billingText:
       "Keep your current plan, next billing date, and subscription status visible.",
@@ -70,11 +91,17 @@ const dashboardCopy = {
     connectedTitle: "Connected business",
     connectedText:
       "This is the Google Business Profile Replyo is currently prepared to monitor for reviews.",
+    toneTitle: "Brand tone",
+    toneText:
+      "This is the only editable style input. Replyo combines your tone with the category detected from Google.",
+    tonePlaceholder: "Example: Luxury, warm, and reassuring",
     provider: "Provider",
     location: "Location",
     category: "Category",
     city: "City",
+    tone: "Tone",
     notConnected: "Not connected yet",
+    notSet: "Not set yet",
     connectBusiness: "Connect Google Business",
     choosePlan: "Choose a plan first",
     googleProvider: "Google Business Profile",
@@ -93,31 +120,52 @@ const dashboardCopy = {
     title: "Tout l'essentiel au meme endroit.",
     description:
       "Utilisez le tableau de bord comme centre de controle: compte, progression des avis, automatisation, facturation et business connecte.",
-    accountTitle: "Compte",
+    accountTitle: "Parametres du compte",
     name: "Nom",
     email: "Email",
     loginMethod: "Methode de connexion",
-    security: "Securite",
-    passwordNote: "Gerez le mot de passe et la securite depuis les parametres du compte.",
-    openSettings: "Ouvrir les parametres",
+    passwordSection: "Changer le mot de passe",
+    hidePasswordSection: "Annuler le changement",
+    currentPassword: "Mot de passe actuel",
+    newPassword: "Nouveau mot de passe",
+    confirmPassword: "Confirmer le nouveau mot de passe",
+    passwordPlaceholder: "Entrez le mot de passe",
+    savePassword: "Enregistrer le mot de passe",
+    passwordSaved: "Mot de passe mis a jour",
     reviewTitle: "Activite des avis",
     reviewText:
-      "Voyez combien de reponses sont deja faites, combien attendent une validation et ce qui demande encore une action.",
-    generated: "Reponses faites",
-    pending: "En attente de reponse",
+      "Voyez combien d'avis Replyo a deja traites, combien attendent encore une validation et combien sont deja publies.",
+    handled: "Total des avis traites",
     confirmation: "En attente de validation",
     posted: "Deja publie",
     openInbox: "Ouvrir la boite",
-    inboxTitle: "Boite de reception",
+    inboxTitle: "Validations en attente",
     inboxText:
-      "Gardez la file simple. Voyez tout de suite si des reponses attendent votre validation.",
+      "Voyez ici les reponses qui attendent votre validation, sans quitter le tableau de bord.",
+    openDraft: "Ouvrir le brouillon",
+    confirmNow: "Publier sur Google",
+    closeDraft: "Annuler",
+    customerReview: "Avis client",
+    draftReply: "Brouillon de reponse",
+    noPendingApprovals: "Aucune reponse n'attend votre validation pour le moment.",
     automationTitle: "Mode d'automatisation",
     automationText:
-      "Choisissez si Replyo doit publier directement ou preparer un brouillon pour votre validation.",
-    trustTitle: "Faire confiance a Replyo",
-    trustText: "Repondre automatiquement aux avis",
-    confirmTitle: "Verifier d'abord",
-    confirmText: "Creer un brouillon puis confirmer et modifier avant publication",
+      "Choisissez si Replyo doit publier automatiquement ou garder chaque reponse dans Replyo pour validation.",
+    autoReplyOn: "Reponse auto activee",
+    autoReplyOff: "Reponse auto desactivee",
+    autoReplyOnText:
+      "Replyo repond automatiquement aux avis clients, sans apercu.",
+    autoReplyOffText:
+      "Replyo cree un brouillon et attend votre validation dans le tableau de bord avant publication. Vous pouvez aussi recevoir un email lorsqu'un brouillon est pret.",
+    toggleLabel: "Activer ou desactiver la reponse auto",
+    emailNotifyTitle: "Notifications de brouillons",
+    emailNotifyHelp:
+      "Utilisez cet email si vous voulez que Replyo vous previenne lorsqu'un nouveau brouillon attend votre validation dans la boite.",
+    emailNotifyLabel: "Email de notification",
+    emailNotifyPlaceholder: "nom@entreprise.com",
+    emailNotifyToggle: "M'avertir quand un brouillon est pret",
+    saveEmail: "Enregistrer l'email",
+    emailSaved: "Email de notification enregistre",
     billingTitle: "Facturation",
     billingText:
       "Gardez votre offre actuelle, la prochaine date de facturation et le statut d'abonnement bien visibles.",
@@ -133,11 +181,17 @@ const dashboardCopy = {
     connectedTitle: "Business connecte",
     connectedText:
       "C'est le profil Google Business que Replyo est actuellement pret a surveiller pour les avis.",
+    toneTitle: "Ton de marque",
+    toneText:
+      "C'est le seul element de style modifiable. Replyo combine ce ton avec la categorie detectee depuis Google.",
+    tonePlaceholder: "Exemple : Elegant, chaleureux et rassurant",
     provider: "Fournisseur",
     location: "Etablissement",
     category: "Categorie",
     city: "Ville",
+    tone: "Ton",
     notConnected: "Pas encore connecte",
+    notSet: "Pas encore defini",
     connectBusiness: "Connecter Google Business",
     choosePlan: "Choisir une offre d'abord",
     googleProvider: "Google Business Profile",
@@ -156,31 +210,52 @@ const dashboardCopy = {
     title: "Todo lo importante en un solo lugar.",
     description:
       "Usa el panel como centro de control: cuenta, progreso de resenas, automatizacion, facturacion y negocio conectado.",
-    accountTitle: "Cuenta",
+    accountTitle: "Ajustes de cuenta",
     name: "Nombre",
     email: "Correo",
     loginMethod: "Metodo de acceso",
-    security: "Seguridad",
-    passwordNote: "Gestiona la contrasena y la seguridad desde los ajustes de la cuenta.",
-    openSettings: "Abrir ajustes",
+    passwordSection: "Cambiar contrasena",
+    hidePasswordSection: "Cancelar cambio",
+    currentPassword: "Contrasena actual",
+    newPassword: "Nueva contrasena",
+    confirmPassword: "Confirmar nueva contrasena",
+    passwordPlaceholder: "Escribe la contrasena",
+    savePassword: "Guardar contrasena",
+    passwordSaved: "Contrasena actualizada",
     reviewTitle: "Actividad de resenas",
     reviewText:
-      "Mira cuantas respuestas ya estan hechas, cuantas esperan confirmacion y que sigue necesitando atencion.",
-    generated: "Respuestas hechas",
-    pending: "Esperando respuesta",
+      "Mira cuantas resenas ya ha gestionado Replyo, cuantas siguen esperando confirmacion y cuantas ya estan publicadas.",
+    handled: "Total de resenas gestionadas",
     confirmation: "Esperando confirmacion",
     posted: "Ya publicadas",
     openInbox: "Abrir inbox",
-    inboxTitle: "Inbox",
+    inboxTitle: "Aprobaciones pendientes",
     inboxText:
-      "Mantén la cola simple. Mira enseguida si hay respuestas esperando tu confirmacion.",
+      "Mira aqui las respuestas que esperan tu confirmacion, sin salir del panel.",
+    openDraft: "Abrir borrador",
+    confirmNow: "Publicar en Google",
+    closeDraft: "Cancelar",
+    customerReview: "Resena del cliente",
+    draftReply: "Borrador de respuesta",
+    noPendingApprovals: "Ahora mismo no hay respuestas esperando confirmacion.",
     automationTitle: "Modo de automatizacion",
     automationText:
-      "Elige si Replyo debe publicar directamente o preparar un borrador para tu aprobacion.",
-    trustTitle: "Confiar en Replyo",
-    trustText: "Responder automaticamente a las resenas",
-    confirmTitle: "Revisar primero",
-    confirmText: "Crear un borrador y luego confirmar y editar antes de publicar",
+      "Elige si Replyo debe publicar automaticamente o guardar cada respuesta en Replyo para tu revision primero.",
+    autoReplyOn: "Respuesta auto activada",
+    autoReplyOff: "Respuesta auto desactivada",
+    autoReplyOnText:
+      "Replyo responde automaticamente a las resenas de clientes, sin vista previa.",
+    autoReplyOffText:
+      "Replyo crea un borrador y espera tu aprobacion en el panel antes de publicar. Tambien puedes recibir un correo cuando un borrador este listo.",
+    toggleLabel: "Activar o desactivar la respuesta automatica",
+    emailNotifyTitle: "Notificaciones de borradores",
+    emailNotifyHelp:
+      "Usa este correo si quieres que Replyo te avise cuando haya un nuevo borrador esperando tu aprobacion en el inbox.",
+    emailNotifyLabel: "Correo de notificacion",
+    emailNotifyPlaceholder: "nombre@negocio.com",
+    emailNotifyToggle: "Avisarme cuando un borrador este listo",
+    saveEmail: "Guardar correo",
+    emailSaved: "Correo de notificacion guardado",
     billingTitle: "Facturacion",
     billingText:
       "Mantén visible tu plan actual, la proxima fecha de cobro y el estado de la suscripcion.",
@@ -196,11 +271,17 @@ const dashboardCopy = {
     connectedTitle: "Negocio conectado",
     connectedText:
       "Este es el perfil de Google Business que Replyo esta preparado para vigilar.",
+    toneTitle: "Tono de marca",
+    toneText:
+      "Esta es la unica entrada de estilo editable. Replyo combina este tono con la categoria detectada desde Google.",
+    tonePlaceholder: "Ejemplo: Elegante, cercano y profesional",
     provider: "Proveedor",
     location: "Ubicacion",
     category: "Categoria",
     city: "Ciudad",
+    tone: "Tono",
     notConnected: "Todavia no conectado",
+    notSet: "Aun sin definir",
     connectBusiness: "Conectar Google Business",
     choosePlan: "Elegir un plan primero",
     googleProvider: "Google Business Profile",
@@ -219,31 +300,52 @@ const dashboardCopy = {
     title: "Alles Wichtige an einem Ort.",
     description:
       "Nutzen Sie das Dashboard als Kontrollzentrum: Konto, Bewertungsfortschritt, Automatisierung, Abrechnung und verbundenes Unternehmen.",
-    accountTitle: "Konto",
+    accountTitle: "Kontoeinstellungen",
     name: "Name",
     email: "E-Mail",
     loginMethod: "Anmeldemethode",
-    security: "Sicherheit",
-    passwordNote: "Verwalten Sie Passwort und Sicherheit in den Kontoeinstellungen.",
-    openSettings: "Einstellungen offnen",
+    passwordSection: "Passwort andern",
+    hidePasswordSection: "Passwortwechsel abbrechen",
+    currentPassword: "Aktuelles Passwort",
+    newPassword: "Neues Passwort",
+    confirmPassword: "Neues Passwort bestaetigen",
+    passwordPlaceholder: "Passwort eingeben",
+    savePassword: "Passwort speichern",
+    passwordSaved: "Passwort aktualisiert",
     reviewTitle: "Bewertungsaktivitat",
     reviewText:
-      "Sehen Sie, wie viele Antworten fertig sind, wie viele noch freigegeben werden mussen und was noch Aufmerksamkeit braucht.",
-    generated: "Antworten fertig",
-    pending: "Wartet auf Antwort",
+      "Sehen Sie, wie viele Bewertungen Replyo bereits bearbeitet hat, wie viele noch auf Freigabe warten und wie viele bereits veroffentlicht sind.",
+    handled: "Bearbeitete Bewertungen gesamt",
     confirmation: "Wartet auf Bestatigung",
     posted: "Bereits veroffentlicht",
     openInbox: "Inbox offnen",
-    inboxTitle: "Inbox",
+    inboxTitle: "Ausstehende Freigaben",
     inboxText:
-      "Halten Sie die Warteschlange einfach. Sehen Sie sofort, ob Antworten auf Ihre Bestatigung warten.",
+      "Sehen Sie hier direkt im Dashboard, welche Antworten auf Ihre Bestatigung warten.",
+    openDraft: "Entwurf offnen",
+    confirmNow: "Bei Google veroffentlichen",
+    closeDraft: "Abbrechen",
+    customerReview: "Kundenbewertung",
+    draftReply: "Antwortentwurf",
+    noPendingApprovals: "Aktuell warten keine Antworten auf eine Freigabe.",
     automationTitle: "Automatisierungsmodus",
     automationText:
-      "Wahlen Sie, ob Replyo direkt veroffentlichen oder zuerst einen Entwurf fur Ihre Freigabe vorbereiten soll.",
-    trustTitle: "Replyo vertrauen",
-    trustText: "Automatisch direkt auf Bewertungen antworten",
-    confirmTitle: "Zuerst prufen",
-    confirmText: "Einen Entwurf erstellen und vor der Veroffentlichung bestaetigen und bearbeiten",
+      "Wahlen Sie, ob Replyo automatisch veroffentlichen oder jede Antwort zuerst in Replyo zur Freigabe bereithalten soll.",
+    autoReplyOn: "Auto-Antwort an",
+    autoReplyOff: "Auto-Antwort aus",
+    autoReplyOnText:
+      "Replyo antwortet automatisch auf Kundenbewertungen, ohne Vorschau.",
+    autoReplyOffText:
+      "Replyo erstellt einen Entwurf und wartet vor der Veroffentlichung im Dashboard auf Ihre Freigabe. Auf Wunsch erhalten Sie auch eine E-Mail, wenn ein Entwurf bereit ist.",
+    toggleLabel: "Auto-Antwort ein- oder ausschalten",
+    emailNotifyTitle: "Entwurfs-Benachrichtigungen",
+    emailNotifyHelp:
+      "Nutzen Sie diese E-Mail, wenn Replyo Sie benachrichtigen soll, sobald ein neuer Entwurf in der Inbox auf Ihre Freigabe wartet.",
+    emailNotifyLabel: "Benachrichtigungs-E-Mail",
+    emailNotifyPlaceholder: "name@unternehmen.de",
+    emailNotifyToggle: "E-Mail senden, wenn ein Entwurf bereit ist",
+    saveEmail: "E-Mail speichern",
+    emailSaved: "Benachrichtigungs-E-Mail gespeichert",
     billingTitle: "Abrechnung",
     billingText:
       "Behalten Sie Ihren aktuellen Tarif, das nachste Abrechnungsdatum und den Abo-Status im Blick.",
@@ -259,11 +361,17 @@ const dashboardCopy = {
     connectedTitle: "Verbundenes Unternehmen",
     connectedText:
       "Dies ist das Google-Business-Profil, das Replyo aktuell fur Bewertungen beobachten soll.",
+    toneTitle: "Markenton",
+    toneText:
+      "Dies ist der einzige bearbeitbare Stilwert. Replyo kombiniert ihn mit der von Google erkannten Kategorie.",
+    tonePlaceholder: "Beispiel: Hochwertig, freundlich und klar",
     provider: "Anbieter",
     location: "Standort",
     category: "Kategorie",
     city: "Stadt",
+    tone: "Ton",
     notConnected: "Noch nicht verbunden",
+    notSet: "Noch nicht festgelegt",
     connectBusiness: "Google Business verbinden",
     choosePlan: "Zuerst einen Tarif wahlen",
     googleProvider: "Google Business Profile",
@@ -282,31 +390,52 @@ const dashboardCopy = {
     title: "كل ما يهم في مكان واحد.",
     description:
       "استخدم لوحة التحكم كمركز قيادة: الحساب، تقدم التقييمات، وضع الأتمتة، الفوترة، والنشاط المتصل.",
-    accountTitle: "الحساب",
+    accountTitle: "إعدادات الحساب",
     name: "الاسم",
     email: "البريد الالكتروني",
     loginMethod: "طريقة تسجيل الدخول",
-    security: "الأمان",
-    passwordNote: "ادِر كلمة المرور والأمان من إعدادات الحساب.",
-    openSettings: "فتح الإعدادات",
+    passwordSection: "تغيير كلمة المرور",
+    hidePasswordSection: "إلغاء تغيير كلمة المرور",
+    currentPassword: "كلمة المرور الحالية",
+    newPassword: "كلمة المرور الجديدة",
+    confirmPassword: "تأكيد كلمة المرور الجديدة",
+    passwordPlaceholder: "ادخل كلمة المرور",
+    savePassword: "حفظ كلمة المرور",
+    passwordSaved: "تم تحديث كلمة المرور",
     reviewTitle: "نشاط التقييمات",
     reviewText:
-      "شاهد كم ردا تم بالفعل، وكم ردا ينتظر التأكيد، وما الذي ما زال يحتاج إلى متابعة.",
-    generated: "الردود المنجزة",
-    pending: "بانتظار الرد",
+      "شاهد كم تقييما تعامل معه Replyo بالفعل، وكم منها ما زال بانتظار التأكيد، وكم تم نشره بالفعل.",
+    handled: "إجمالي التقييمات التي تمت معالجتها",
     confirmation: "بانتظار التأكيد",
     posted: "تم نشره",
     openInbox: "فتح الصندوق",
-    inboxTitle: "صندوق التقييمات",
+    inboxTitle: "الردود بانتظار التأكيد",
     inboxText:
-      "اجعل القائمة بسيطة. شاهد مباشرة إن كانت هناك ردود تنتظر تأكيدك.",
+      "شاهد هنا داخل لوحة التحكم الردود التي تنتظر تأكيدك، من دون مغادرة الصفحة.",
+    openDraft: "فتح المسودة",
+    confirmNow: "النشر على Google",
+    closeDraft: "إلغاء",
+    customerReview: "تقييم العميل",
+    draftReply: "مسودة الرد",
+    noPendingApprovals: "لا توجد حاليا ردود تنتظر التأكيد.",
     automationTitle: "وضع الأتمتة",
     automationText:
-      "اختر ما اذا كان Replyo يجب أن ينشر مباشرة أو يجهز مسودة لمراجعتك أولا.",
-    trustTitle: "الثقة في Replyo",
-    trustText: "الرد مباشرة على التقييمات تلقائيا",
-    confirmTitle: "راجع أولا",
-    confirmText: "أنشئ مسودة ثم أكد وعدل قبل النشر",
+      "اختر ما اذا كان Replyo يجب أن ينشر تلقائيا أو يحتفظ بكل رد داخل Replyo لمراجعتك أولا.",
+    autoReplyOn: "الرد التلقائي مفعّل",
+    autoReplyOff: "الرد التلقائي متوقف",
+    autoReplyOnText:
+      "يقوم Replyo بالرد على تقييمات العملاء تلقائيا من دون معاينة.",
+    autoReplyOffText:
+      "ينشئ Replyo مسودة وينتظر موافقتك داخل لوحة التحكم قبل النشر. ويمكنك ايضا تلقي بريد إلكتروني عندما تصبح المسودة جاهزة.",
+    toggleLabel: "تشغيل أو إيقاف الرد التلقائي",
+    emailNotifyTitle: "اشعارات المسودات",
+    emailNotifyHelp:
+      "استخدم هذا البريد اذا كنت تريد من Replyo تنبيهك عندما تكون هناك مسودة جديدة بانتظار موافقتك داخل الصندوق.",
+    emailNotifyLabel: "بريد الاشعارات",
+    emailNotifyPlaceholder: "name@business.com",
+    emailNotifyToggle: "اخطرني عندما تصبح المسودة جاهزة",
+    saveEmail: "حفظ البريد",
+    emailSaved: "تم حفظ بريد الاشعارات",
     billingTitle: "الفوترة",
     billingText:
       "احتفظ بالخطة الحالية وتاريخ الفاتورة التالية وحالة الاشتراك بشكل واضح.",
@@ -322,11 +451,17 @@ const dashboardCopy = {
     connectedTitle: "النشاط المتصل",
     connectedText:
       "هذا هو ملف Google Business الذي تم تجهيز Replyo حاليا لمراقبته من اجل التقييمات.",
+    toneTitle: "نبرة العلامة",
+    toneText:
+      "هذا هو عنصر الاسلوب الوحيد القابل للتعديل. يجمع Replyo بين هذه النبرة والفئة التي يكتشفها من Google.",
+    tonePlaceholder: "مثال: راقية، دافئة، ومطمئنة",
     provider: "المزوّد",
     location: "النشاط",
     category: "الفئة",
     city: "المدينة",
+    tone: "النبرة",
     notConnected: "غير متصل بعد",
+    notSet: "غير محدد بعد",
     connectBusiness: "ربط Google Business",
     choosePlan: "اختر خطة اولا",
     googleProvider: "Google Business Profile",
@@ -343,18 +478,43 @@ function DashboardContent() {
   const [settings, setSettings] = useState(defaultSettings);
   const [connection, setConnection] = useState(defaultConnection);
   const [billingState, setBillingState] = useState(defaultBilling);
+  const [selectedApprovalId, setSelectedApprovalId] = useState("");
+  const [draftReplyText, setDraftReplyText] = useState("");
+  const [notificationEmailInput, setNotificationEmailInput] = useState("");
+  const [notificationSaved, setNotificationSaved] = useState(false);
+  const [passwordForm, setPasswordForm] = useState({
+    currentPassword: "",
+    newPassword: "",
+    confirmPassword: "",
+  });
+  const [passwordSaved, setPasswordSaved] = useState(false);
+  const [showPasswordForm, setShowPasswordForm] = useState(false);
 
   useEffect(() => {
     const storedReviews = readStoredValue(REVIEWS_STORAGE_KEY, defaultReviews);
-    const storedSettings = readStoredValue(SETTINGS_STORAGE_KEY, defaultSettings);
+    const storedSettings = {
+      ...defaultSettings,
+      ...readStoredValue(SETTINGS_STORAGE_KEY, defaultSettings),
+    };
     const storedConnection = readStoredValue(CONNECTION_STORAGE_KEY, defaultConnection);
     const storedBilling = readStoredValue(BILLING_STORAGE_KEY, defaultBilling);
 
-    setReviews(storedReviews.length ? storedReviews : defaultReviews);
+    const nextReviews =
+      storedReviews.length >= defaultReviews.length ? storedReviews : defaultReviews;
+
+    setReviews(nextReviews);
+    writeStoredValue(REVIEWS_STORAGE_KEY, nextReviews);
     setSettings(storedSettings);
     setConnection(storedConnection);
     setBillingState(storedBilling);
+    setNotificationEmailInput(storedSettings.notificationEmail || "");
   }, []);
+
+  useEffect(() => {
+    if (!settings.notificationEmail && session?.user?.email) {
+      setNotificationEmailInput(session.user.email);
+    }
+  }, [settings.notificationEmail, session?.user?.email]);
 
   function updateReplyMode(replyMode) {
     const nextSettings = {
@@ -366,10 +526,95 @@ function DashboardContent() {
     writeStoredValue(SETTINGS_STORAGE_KEY, nextSettings);
   }
 
-  const repliesGenerated = reviews.filter((review) => review.replyText).length;
-  const pendingCount = reviews.filter((review) => review.status === "needs-reply").length;
+  function updateTone(tone) {
+    const nextSettings = {
+      ...settings,
+      tone,
+    };
+
+    setSettings(nextSettings);
+    writeStoredValue(SETTINGS_STORAGE_KEY, nextSettings);
+  }
+
+  function updateAlertsEnabled(alertsEnabled) {
+    const nextEmail = alertsEnabled
+      ? notificationEmailInput || settings.notificationEmail || session?.user?.email || ""
+      : "";
+    const nextSettings = {
+      ...settings,
+      alertsEnabled,
+      notificationEmail: nextEmail,
+    };
+
+    setSettings(nextSettings);
+    setNotificationEmailInput(nextEmail);
+    setNotificationSaved(false);
+    writeStoredValue(SETTINGS_STORAGE_KEY, nextSettings);
+  }
+
+  function saveNotificationEmail() {
+    const nextSettings = {
+      ...settings,
+      alertsEnabled: true,
+      notificationEmail: notificationEmailInput.trim(),
+    };
+
+    setSettings(nextSettings);
+    setNotificationSaved(true);
+    writeStoredValue(SETTINGS_STORAGE_KEY, nextSettings);
+  }
+
+  function updatePasswordField(field, value) {
+    setPasswordForm((current) => ({
+      ...current,
+      [field]: value,
+    }));
+    setPasswordSaved(false);
+  }
+
+  function savePassword() {
+    setPasswordSaved(true);
+    setShowPasswordForm(false);
+    setPasswordForm({
+      currentPassword: "",
+      newPassword: "",
+      confirmPassword: "",
+    });
+  }
+
+  function handlePost(reviewId) {
+    const nextReviews = reviews.map((review) =>
+      review.id === reviewId
+        ? {
+            ...review,
+            replyText: review.id === selectedApprovalId ? draftReplyText : review.replyText,
+            status: "posted",
+            postedAt: new Date().toISOString(),
+          }
+        : review,
+    );
+
+    setReviews(nextReviews);
+    writeStoredValue(REVIEWS_STORAGE_KEY, nextReviews);
+    setSelectedApprovalId("");
+    setDraftReplyText("");
+  }
+
+  function closeApproval() {
+    setSelectedApprovalId("");
+    setDraftReplyText("");
+  }
+
+  function openApproval(review) {
+    setSelectedApprovalId(review.id);
+    setDraftReplyText(review.replyText || "");
+  }
+
+  const handledCount = reviews.filter((review) => review.replyText || review.status === "posted").length;
   const readyCount = reviews.filter((review) => review.status === "ready").length;
   const postedCount = reviews.filter((review) => review.status === "posted").length;
+  const readyReviews = reviews.filter((review) => review.status === "ready").slice(0, 5);
+  const selectedApproval = reviews.find((review) => review.id === selectedApprovalId) || null;
   const authMethod =
     session?.user?.provider === "google"
       ? copy.google
@@ -383,6 +628,18 @@ function DashboardContent() {
     status: billingState.status === "active" ? copy.active : copy.inactive,
     nextBillingDate: billingState.nextBillingDate || copy.notScheduled,
   };
+
+  function truncateText(text, maxLength = 120) {
+    if (!text) {
+      return "";
+    }
+
+    if (text.length <= maxLength) {
+      return text;
+    }
+
+    return `${text.slice(0, maxLength).trimEnd()}...`;
+  }
 
   if (status === "loading") {
     return <main style={{ padding: "40px" }}>{copy.loading}</main>;
@@ -537,52 +794,183 @@ function DashboardContent() {
               boxShadow: "0 16px 38px rgba(82,95,127,0.12)",
             }}
           >
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "flex-start",
+                gap: "16px",
+                flexWrap: "wrap",
+                marginBottom: "18px",
+              }}
+            >
+              <div>
+                <h2 style={{ fontSize: "24px", color: "#172033", marginBottom: "12px" }}>
+                  {copy.inboxTitle}
+                </h2>
+                <p style={{ color: "#5b6473", lineHeight: 1.7, margin: 0 }}>
+                  {copy.inboxText}
+                </p>
+              </div>
+              <div
+                style={{
+                  background: "#eef6ff",
+                  color: "#31598e",
+                  borderRadius: "999px",
+                  padding: "8px 12px",
+                  fontWeight: "700",
+                  fontSize: "13px",
+                }}
+              >
+                {readyCount}
+              </div>
+            </div>
+            {readyReviews.length ? (
+              <div
+                style={{
+                  display: "grid",
+                  gridAutoFlow: "column",
+                  gridAutoColumns: "minmax(250px, 290px)",
+                  gap: "12px",
+                  overflowX: "auto",
+                  paddingBottom: "6px",
+                }}
+              >
+                {readyReviews.map((review) => (
+                  <div
+                    key={review.id}
+                    style={{
+                      background: "#f8fafc",
+                      borderRadius: "18px",
+                      padding: "16px",
+                      border: "1px solid #e7edf6",
+                    }}
+                  >
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        gap: "12px",
+                        alignItems: "center",
+                        marginBottom: "8px",
+                      }}
+                    >
+                      <strong style={{ color: "#172033" }}>{review.customerName}</strong>
+                      <span
+                        style={{
+                          background: "#eef6ff",
+                          color: "#31598e",
+                          borderRadius: "999px",
+                          padding: "6px 10px",
+                          fontSize: "12px",
+                          fontWeight: "600",
+                          flexShrink: 0,
+                        }}
+                      >
+                        {review.rating}/5
+                      </span>
+                    </div>
+                    <div
+                      style={{
+                        color: "#6b7280",
+                        fontSize: "13px",
+                        marginBottom: "10px",
+                        lineHeight: 1.6,
+                      }}
+                    >
+                      {truncateText(review.reviewText, 88)}
+                    </div>
+                    <div
+                      style={{
+                        color: "#5b6473",
+                        lineHeight: 1.6,
+                        marginBottom: "12px",
+                        fontSize: "14px",
+                      }}
+                    >
+                      {truncateText(review.replyText, 120)}
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => openApproval(review)}
+                      style={{
+                        background: "#172033",
+                        color: "#fff",
+                        border: "none",
+                        borderRadius: "12px",
+                        padding: "10px 12px",
+                        cursor: "pointer",
+                        fontWeight: "600",
+                        width: "100%",
+                      }}
+                      aria-haspopup="dialog"
+                      aria-expanded={selectedApprovalId === review.id}
+                    >
+                      {copy.openDraft}
+                    </button>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div
+                style={{
+                  background: "#f8fafc",
+                  borderRadius: "16px",
+                  padding: "16px",
+                  color: "#5b6473",
+                  lineHeight: 1.6,
+                }}
+              >
+                {copy.noPendingApprovals}
+              </div>
+            )}
+          </article>
+        </section>
+
+        <section
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+            gap: "18px",
+            marginBottom: "18px",
+          }}
+        >
+          <article
+            style={{
+              background: "#fff",
+              borderRadius: "24px",
+              padding: "24px",
+              boxShadow: "0 16px 38px rgba(82,95,127,0.12)",
+            }}
+          >
             <h2 style={{ fontSize: "24px", color: "#172033", marginBottom: "12px" }}>
-              {copy.accountTitle}
+              {copy.reviewTitle}
             </h2>
-            <div style={{ display: "grid", gap: "12px", marginBottom: "18px" }}>
+            <p style={{ color: "#5b6473", lineHeight: 1.7, marginBottom: "18px" }}>
+              {copy.reviewText}
+            </p>
+            <div style={{ display: "grid", gap: "12px", marginBottom: "16px" }}>
               {[
-                [copy.name, session.user?.name || copy.notConnected],
-                [copy.email, session.user?.email || copy.notConnected],
-                [copy.loginMethod, authMethod],
-              ].map(([label, value]) => (
+                [copy.handled, handledCount, "#effbf3", "#1f7a45"],
+                [copy.confirmation, readyCount, "#eef6ff", "#31598e"],
+                [copy.posted, postedCount, "#f5f8ff", "#5a6b89"],
+              ].map(([label, value, background, color]) => (
                 <div
                   key={label}
-                  style={{ background: "#f8fafc", borderRadius: "16px", padding: "14px 16px" }}
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    background,
+                    borderRadius: "16px",
+                    padding: "14px 16px",
+                  }}
                 >
-                  <div style={{ color: "#6b7280", fontSize: "13px", marginBottom: "6px" }}>
-                    {label}
-                  </div>
-                  <div style={{ color: "#172033", fontWeight: "700" }}>{value}</div>
+                  <span style={{ color }}>{label}</span>
+                  <strong style={{ color: "#172033", fontSize: "22px" }}>{value}</strong>
                 </div>
               ))}
             </div>
-            <div
-              style={{
-                background: "#fff6df",
-                color: "#8b5e00",
-                borderRadius: "16px",
-                padding: "14px 16px",
-                lineHeight: 1.65,
-                marginBottom: "16px",
-              }}
-            >
-              <strong>{copy.security}:</strong> {copy.passwordNote}
-            </div>
-            <Link
-              href="/settings"
-              style={{
-                display: "inline-block",
-                textDecoration: "none",
-                background: "#172033",
-                color: "#fff",
-                borderRadius: "14px",
-                padding: "12px 16px",
-                fontWeight: "600",
-              }}
-            >
-              {copy.openSettings}
-            </Link>
           </article>
 
           <article
@@ -591,6 +979,447 @@ function DashboardContent() {
               borderRadius: "24px",
               padding: "24px",
               boxShadow: "0 16px 38px rgba(82,95,127,0.12)",
+            }}
+          >
+            <h2 style={{ fontSize: "24px", color: "#172033", marginBottom: "12px" }}>
+              {copy.automationTitle}
+            </h2>
+            <p style={{ color: "#5b6473", lineHeight: 1.7, marginBottom: "18px" }}>
+              {copy.automationText}
+            </p>
+            <div style={{ display: "grid", gap: "16px" }}>
+              <label
+                style={{
+                  position: "relative",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  gap: "16px",
+                  background: settings.replyMode === "auto" ? "#effbf3" : "#f8fafc",
+                  border:
+                    settings.replyMode === "auto"
+                      ? "1px solid #b8e3c6"
+                      : "1px solid #e4e9f2",
+                  borderRadius: "18px",
+                  padding: "16px 18px",
+                  cursor: "pointer",
+                }}
+              >
+                <div>
+                  <div style={{ color: "#172033", fontWeight: "700", marginBottom: "6px" }}>
+                    {settings.replyMode === "auto" ? copy.autoReplyOn : copy.autoReplyOff}
+                  </div>
+                  <div style={{ color: "#5b6473", lineHeight: 1.6 }}>
+                    {settings.replyMode === "auto" ? copy.autoReplyOnText : copy.autoReplyOffText}
+                  </div>
+                </div>
+                <span
+                  aria-hidden="true"
+                  style={{
+                    position: "relative",
+                    flexShrink: 0,
+                    width: "58px",
+                    height: "32px",
+                    borderRadius: "999px",
+                    background: settings.replyMode === "auto" ? "#1f7a45" : "#cbd5e1",
+                    transition: "all 160ms ease",
+                  }}
+                >
+                  <span
+                    style={{
+                      position: "absolute",
+                      top: "4px",
+                      left: settings.replyMode === "auto" ? "30px" : "4px",
+                      width: "24px",
+                      height: "24px",
+                      borderRadius: "50%",
+                      background: "#fff",
+                      boxShadow: "0 3px 10px rgba(15,23,42,0.2)",
+                      transition: "all 160ms ease",
+                    }}
+                  />
+                </span>
+                <input
+                  type="checkbox"
+                  checked={settings.replyMode === "auto"}
+                  onChange={(event) => {
+                    updateReplyMode(event.target.checked ? "auto" : "approval");
+                    setNotificationSaved(false);
+                  }}
+                  aria-label={copy.toggleLabel}
+                  style={{ position: "absolute", opacity: 0, pointerEvents: "none" }}
+                />
+              </label>
+              {settings.replyMode === "approval" ? (
+                <div
+                  style={{
+                    background: "#f8fafc",
+                    border: "1px solid #e4e9f2",
+                    borderRadius: "18px",
+                    padding: "16px 18px",
+                    display: "grid",
+                    gap: "12px",
+                  }}
+                >
+                  <label
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "10px",
+                      color: "#172033",
+                      fontWeight: "700",
+                    }}
+                  >
+                    <input
+                      type="checkbox"
+                      checked={settings.alertsEnabled}
+                      onChange={(event) => updateAlertsEnabled(event.target.checked)}
+                    />
+                    {copy.emailNotifyToggle}
+                  </label>
+                  {settings.alertsEnabled ? (
+                    <div style={{ display: "grid", gap: "12px" }}>
+                      <div style={{ color: "#5b6473", lineHeight: 1.6 }}>
+                        {copy.emailNotifyHelp}
+                      </div>
+                      <div
+                        style={{
+                          display: "flex",
+                          gap: "10px",
+                          flexWrap: "wrap",
+                          alignItems: "end",
+                        }}
+                      >
+                        <label style={{ display: "grid", gap: "6px", flex: "1 1 260px" }}>
+                          <span
+                            style={{ color: "#172033", fontSize: "14px", fontWeight: "600" }}
+                          >
+                            {copy.emailNotifyLabel}
+                          </span>
+                          <input
+                            type="email"
+                            value={notificationEmailInput}
+                            onChange={(event) => {
+                              setNotificationEmailInput(event.target.value);
+                              setNotificationSaved(false);
+                            }}
+                            placeholder={copy.emailNotifyPlaceholder}
+                            style={{
+                              width: "100%",
+                              padding: "12px 14px",
+                              borderRadius: "12px",
+                              border: "1px solid #d1d5db",
+                              fontSize: "15px",
+                              background: "#fff",
+                            }}
+                          />
+                        </label>
+                        <button
+                          type="button"
+                          onClick={saveNotificationEmail}
+                          style={{
+                            background: "#172033",
+                            color: "#fff",
+                            border: "none",
+                            borderRadius: "12px",
+                            padding: "12px 16px",
+                            fontWeight: "600",
+                            cursor: "pointer",
+                          }}
+                        >
+                          {copy.saveEmail}
+                        </button>
+                      </div>
+                    </div>
+                  ) : null}
+                  {notificationSaved && settings.alertsEnabled ? (
+                    <div style={{ color: "#1f7a45", fontSize: "14px", fontWeight: "600" }}>
+                      {copy.emailSaved}
+                    </div>
+                  ) : null}
+                </div>
+              ) : null}
+            </div>
+          </article>
+        </section>
+
+        {selectedApproval ? (
+          <div
+            style={{
+              position: "fixed",
+              inset: 0,
+              zIndex: 50,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              padding: "24px 16px",
+              background: "rgba(15, 23, 42, 0.42)",
+              backdropFilter: "blur(4px)",
+            }}
+            onClick={closeApproval}
+          >
+            <section
+              style={{
+                width: "100%",
+                maxWidth: "780px",
+                maxHeight: "min(88vh, 860px)",
+                overflowY: "auto",
+                background: "#ffffff",
+                borderRadius: "28px",
+                padding: "22px",
+                boxShadow: "0 24px 70px rgba(15,23,42,0.24)",
+              }}
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="dashboard-approval-title"
+              onClick={(event) => event.stopPropagation()}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "flex-start",
+                  gap: "16px",
+                  alignItems: "flex-start",
+                  flexWrap: "wrap",
+                  marginBottom: "18px",
+                }}
+              >
+                <div>
+                  <div
+                    style={{
+                      display: "inline-block",
+                      marginBottom: "10px",
+                      background: "#eef6ff",
+                      color: "#31598e",
+                      borderRadius: "999px",
+                      padding: "7px 11px",
+                      fontSize: "12px",
+                      fontWeight: "700",
+                    }}
+                  >
+                    {copy.inboxTitle}
+                  </div>
+                  <h2
+                    id="dashboard-approval-title"
+                    style={{ fontSize: "28px", color: "#172033", marginBottom: "8px" }}
+                  >
+                    {selectedApproval.customerName}
+                  </h2>
+                  <div style={{ color: "#6b7280" }}>
+                    {selectedApproval.businessName} · {selectedApproval.rating}/5
+                  </div>
+                </div>
+              </div>
+
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+                  gap: "14px",
+                  marginBottom: "14px",
+                }}
+              >
+                <div style={{ background: "#f8fafc", borderRadius: "18px", padding: "14px" }}>
+                  <div style={{ fontSize: "13px", color: "#6b7280", marginBottom: "8px" }}>
+                    {copy.customerReview}
+                  </div>
+                  <div style={{ color: "#344054", lineHeight: 1.7 }}>
+                    {selectedApproval.reviewText}
+                  </div>
+                </div>
+
+                <div style={{ background: "#f9fbff", borderRadius: "18px", padding: "14px" }}>
+                  <div style={{ fontSize: "13px", color: "#6b7280", marginBottom: "8px" }}>
+                    {copy.draftReply}
+                  </div>
+                  <textarea
+                    value={draftReplyText}
+                    onChange={(event) => setDraftReplyText(event.target.value)}
+                    rows={8}
+                    style={{
+                      width: "100%",
+                      minHeight: "220px",
+                      border: "1px solid #d1d5db",
+                      borderRadius: "14px",
+                      padding: "14px 16px",
+                      resize: "vertical",
+                      color: "#172033",
+                      background: "#fff",
+                      lineHeight: 1.7,
+                    }}
+                  />
+                </div>
+              </div>
+
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  gap: "10px",
+                  flexWrap: "wrap",
+                  paddingTop: "4px",
+                }}
+              >
+                <button
+                  type="button"
+                  onClick={closeApproval}
+                  style={{
+                    background: "#eff3fb",
+                    color: "#172033",
+                    border: "1px solid #d7deed",
+                    borderRadius: "14px",
+                    padding: "12px 16px",
+                    cursor: "pointer",
+                  }}
+                >
+                  {copy.closeDraft}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handlePost(selectedApproval.id)}
+                  style={{
+                    background: "#172033",
+                    color: "#fff",
+                    border: "none",
+                    borderRadius: "14px",
+                    padding: "12px 16px",
+                    fontWeight: "600",
+                    cursor: "pointer",
+                  }}
+                >
+                  {copy.confirmNow}
+                </button>
+              </div>
+            </section>
+          </div>
+        ) : null}
+
+        <section style={{ display: "grid", gridTemplateColumns: "minmax(0, 1fr)" }}>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "minmax(0, 1.25fr) minmax(280px, 0.75fr)",
+              gap: "18px",
+            }}
+          >
+            <article
+              style={{
+                background: "#fff",
+                borderRadius: "24px",
+                padding: "24px",
+                boxShadow: "0 16px 38px rgba(82,95,127,0.12)",
+              }}
+            >
+              <h2 style={{ fontSize: "24px", color: "#172033", marginBottom: "12px" }}>
+                {copy.connectedTitle}
+              </h2>
+              <p style={{ color: "#5b6473", lineHeight: 1.7, marginBottom: "18px" }}>
+                {copy.connectedText}
+              </p>
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
+                  gap: "12px",
+                  marginBottom: "16px",
+                }}
+              >
+                {[
+                  [copy.provider, connection.provider || copy.googleProvider],
+                  [copy.location, connection.selectedLocationName || copy.notConnected],
+                  [copy.category, connection.selectedLocationCategory || copy.notConnected],
+                  [copy.city, connection.selectedLocationCity || copy.notConnected],
+                ].map(([label, value]) => (
+                  <div
+                    key={label}
+                    style={{ background: "#f8fafc", borderRadius: "16px", padding: "14px 16px" }}
+                  >
+                    <div style={{ color: "#6b7280", fontSize: "13px", marginBottom: "6px" }}>
+                      {label}
+                    </div>
+                    <div style={{ color: "#172033", fontWeight: "700" }}>{value}</div>
+                  </div>
+                ))}
+              </div>
+              <Link
+                href={billingState.status === "active" ? "/connect-google" : "/pricing"}
+                style={{
+                  display: "inline-block",
+                  textDecoration: "none",
+                  background: "#172033",
+                  color: "#fff",
+                  borderRadius: "14px",
+                  padding: "12px 16px",
+                  fontWeight: "600",
+                }}
+              >
+                {billingState.status === "active" ? copy.connectBusiness : copy.choosePlan}
+              </Link>
+            </article>
+
+            <article
+              style={{
+                background: "#fff",
+                borderRadius: "24px",
+                padding: "24px",
+                boxShadow: "0 16px 38px rgba(82,95,127,0.12)",
+              }}
+            >
+              <h2 style={{ fontSize: "24px", color: "#172033", marginBottom: "12px" }}>
+                {copy.toneTitle}
+              </h2>
+              <p style={{ color: "#5b6473", lineHeight: 1.7, marginBottom: "18px" }}>
+                {copy.toneText}
+              </p>
+              <div
+                style={{
+                  background: "#f8fafc",
+                  borderRadius: "16px",
+                  padding: "14px 16px",
+                  marginBottom: "16px",
+                }}
+              >
+                <div style={{ color: "#6b7280", fontSize: "13px", marginBottom: "6px" }}>
+                  {copy.tone}
+                </div>
+                <input
+                  type="text"
+                  value={settings.tone}
+                  onChange={(event) => updateTone(event.target.value)}
+                  placeholder={copy.tonePlaceholder}
+                  style={{
+                    width: "100%",
+                    padding: "12px 14px",
+                    borderRadius: "12px",
+                    border: "1px solid #d1d5db",
+                    background: "#fff",
+                    color: "#172033",
+                  }}
+                />
+              </div>
+              <div style={{ color: "#6b7280", lineHeight: 1.6 }}>
+                {settings.tone || copy.notSet}
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(420px, 1fr))",
+            gap: "18px",
+            marginTop: "18px",
+            alignItems: "start",
+          }}
+        >
+          <article
+            style={{
+              background: "#fff",
+              borderRadius: "24px",
+              padding: "24px",
+              boxShadow: "0 16px 38px rgba(82,95,127,0.12)",
+              height: "100%",
             }}
           >
             <h2 style={{ fontSize: "24px", color: "#172033", marginBottom: "12px" }}>
@@ -639,195 +1468,24 @@ function DashboardContent() {
               {copy.managePlan}
             </Link>
           </article>
-        </section>
 
-        <section
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-            gap: "18px",
-            marginBottom: "18px",
-          }}
-        >
           <article
             style={{
               background: "#fff",
               borderRadius: "24px",
               padding: "24px",
               boxShadow: "0 16px 38px rgba(82,95,127,0.12)",
+              height: "100%",
             }}
           >
             <h2 style={{ fontSize: "24px", color: "#172033", marginBottom: "12px" }}>
-              {copy.reviewTitle}
+              {copy.accountTitle}
             </h2>
-            <p style={{ color: "#5b6473", lineHeight: 1.7, marginBottom: "18px" }}>
-              {copy.reviewText}
-            </p>
-            <div style={{ display: "grid", gap: "12px", marginBottom: "16px" }}>
+            <div style={{ display: "grid", gap: "12px", marginBottom: "18px" }}>
               {[
-                [copy.generated, repliesGenerated, "#effbf3", "#1f7a45"],
-                [copy.pending, pendingCount, "#fff6df", "#8b5e00"],
-                [copy.confirmation, readyCount, "#eef6ff", "#31598e"],
-                [copy.posted, postedCount, "#f5f8ff", "#5a6b89"],
-              ].map(([label, value, background, color]) => (
-                <div
-                  key={label}
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    background,
-                    borderRadius: "16px",
-                    padding: "14px 16px",
-                  }}
-                >
-                  <span style={{ color }}>{label}</span>
-                  <strong style={{ color: "#172033", fontSize: "22px" }}>{value}</strong>
-                </div>
-              ))}
-            </div>
-          </article>
-
-          <article
-            style={{
-              background: "#fff",
-              borderRadius: "24px",
-              padding: "24px",
-              boxShadow: "0 16px 38px rgba(82,95,127,0.12)",
-            }}
-          >
-            <h2 style={{ fontSize: "24px", color: "#172033", marginBottom: "12px" }}>
-              {copy.inboxTitle}
-            </h2>
-            <p style={{ color: "#5b6473", lineHeight: 1.7, marginBottom: "18px" }}>
-              {copy.inboxText}
-            </p>
-            <div style={{ display: "grid", gap: "12px", marginBottom: "16px" }}>
-              {[
-                [copy.pending, pendingCount, "#fff6df", "#8b5e00"],
-                [copy.confirmation, readyCount, "#eef6ff", "#31598e"],
-                [copy.posted, postedCount, "#effbf3", "#1f7a45"],
-              ].map(([label, value, background, color]) => (
-                <div
-                  key={label}
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    background,
-                    borderRadius: "16px",
-                    padding: "14px 16px",
-                  }}
-                >
-                  <span style={{ color }}>{label}</span>
-                  <strong style={{ color: "#172033", fontSize: "22px" }}>{value}</strong>
-                </div>
-              ))}
-            </div>
-            <Link
-              href="/inbox"
-              style={{
-                display: "inline-block",
-                textDecoration: "none",
-                background: "#172033",
-                color: "#fff",
-                borderRadius: "14px",
-                padding: "12px 16px",
-                fontWeight: "600",
-              }}
-            >
-              {copy.openInbox}
-            </Link>
-          </article>
-
-          <article
-            style={{
-              background: "#fff",
-              borderRadius: "24px",
-              padding: "24px",
-              boxShadow: "0 16px 38px rgba(82,95,127,0.12)",
-            }}
-          >
-            <h2 style={{ fontSize: "24px", color: "#172033", marginBottom: "12px" }}>
-              {copy.automationTitle}
-            </h2>
-            <p style={{ color: "#5b6473", lineHeight: 1.7, marginBottom: "18px" }}>
-              {copy.automationText}
-            </p>
-            <div style={{ display: "grid", gap: "12px" }}>
-              <button
-                type="button"
-                onClick={() => updateReplyMode("auto")}
-                style={{
-                  textAlign: "left",
-                  background: settings.replyMode === "auto" ? "#eefbf3" : "#f8fafc",
-                  border:
-                    settings.replyMode === "auto"
-                      ? "1px solid #b8e3c6"
-                      : "1px solid #e4e9f2",
-                  borderRadius: "18px",
-                  padding: "16px",
-                  cursor: "pointer",
-                }}
-              >
-                <div style={{ color: "#172033", fontWeight: "700", marginBottom: "6px" }}>
-                  {copy.trustTitle}
-                </div>
-                <div style={{ color: "#5b6473", lineHeight: 1.6 }}>{copy.trustText}</div>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => updateReplyMode("approval")}
-                style={{
-                  textAlign: "left",
-                  background: settings.replyMode === "approval" ? "#eef6ff" : "#f8fafc",
-                  border:
-                    settings.replyMode === "approval"
-                      ? "1px solid #cfe0ff"
-                      : "1px solid #e4e9f2",
-                  borderRadius: "18px",
-                  padding: "16px",
-                  cursor: "pointer",
-                }}
-              >
-                <div style={{ color: "#172033", fontWeight: "700", marginBottom: "6px" }}>
-                  {copy.confirmTitle}
-                </div>
-                <div style={{ color: "#5b6473", lineHeight: 1.6 }}>{copy.confirmText}</div>
-              </button>
-            </div>
-          </article>
-        </section>
-
-        <section style={{ display: "grid", gridTemplateColumns: "minmax(0, 1fr)" }}>
-          <article
-            style={{
-              background: "#fff",
-              borderRadius: "24px",
-              padding: "24px",
-              boxShadow: "0 16px 38px rgba(82,95,127,0.12)",
-            }}
-          >
-            <h2 style={{ fontSize: "24px", color: "#172033", marginBottom: "12px" }}>
-              {copy.connectedTitle}
-            </h2>
-            <p style={{ color: "#5b6473", lineHeight: 1.7, marginBottom: "18px" }}>
-              {copy.connectedText}
-            </p>
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
-                gap: "12px",
-                marginBottom: "16px",
-              }}
-            >
-              {[
-                [copy.provider, connection.provider || copy.googleProvider],
-                [copy.location, connection.selectedLocationName || copy.notConnected],
-                [copy.category, connection.selectedLocationCategory || copy.notConnected],
-                [copy.city, connection.selectedLocationCity || copy.notConnected],
+                [copy.name, session.user?.name || copy.notConnected],
+                [copy.email, session.user?.email || copy.notConnected],
+                [copy.loginMethod, authMethod],
               ].map(([label, value]) => (
                 <div
                   key={label}
@@ -840,20 +1498,88 @@ function DashboardContent() {
                 </div>
               ))}
             </div>
-            <Link
-              href={billingState.status === "active" ? "/connect-google" : "/pricing"}
+            <div
               style={{
-                display: "inline-block",
-                textDecoration: "none",
-                background: "#172033",
-                color: "#fff",
-                borderRadius: "14px",
-                padding: "12px 16px",
-                fontWeight: "600",
+                background: "#f8fafc",
+                borderRadius: "18px",
+                border: "1px solid #e4e9f2",
+                padding: "16px",
+                display: "grid",
+                gap: "12px",
               }}
             >
-              {billingState.status === "active" ? copy.connectBusiness : copy.choosePlan}
-            </Link>
+              <div style={{ display: "flex", gap: "10px", alignItems: "center", flexWrap: "wrap" }}>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowPasswordForm((current) => !current);
+                    setPasswordSaved(false);
+                  }}
+                  style={{
+                    background: "#172033",
+                    color: "#fff",
+                    border: "none",
+                    borderRadius: "12px",
+                    padding: "12px 16px",
+                    fontWeight: "600",
+                    cursor: "pointer",
+                  }}
+                >
+                  {showPasswordForm ? copy.hidePasswordSection : copy.passwordSection}
+                </button>
+                {passwordSaved ? (
+                  <span style={{ color: "#1f7a45", fontSize: "14px", fontWeight: "600" }}>
+                    {copy.passwordSaved}
+                  </span>
+                ) : null}
+              </div>
+              {showPasswordForm ? (
+                <>
+                  {[
+                    ["currentPassword", copy.currentPassword],
+                    ["newPassword", copy.newPassword],
+                    ["confirmPassword", copy.confirmPassword],
+                  ].map(([field, label]) => (
+                    <label key={field} style={{ display: "grid", gap: "6px" }}>
+                      <span style={{ color: "#172033", fontSize: "14px", fontWeight: "600" }}>
+                        {label}
+                      </span>
+                      <input
+                        type="password"
+                        value={passwordForm[field]}
+                        onChange={(event) => updatePasswordField(field, event.target.value)}
+                        placeholder={copy.passwordPlaceholder}
+                        style={{
+                          width: "100%",
+                          padding: "12px 14px",
+                          borderRadius: "12px",
+                          border: "1px solid #d1d5db",
+                          fontSize: "15px",
+                          background: "#fff",
+                        }}
+                      />
+                    </label>
+                  ))}
+                  <div>
+                    <button
+                      type="button"
+                      onClick={savePassword}
+                      style={{
+                        background: "#172033",
+                        color: "#fff",
+                        border: "none",
+                        borderRadius: "12px",
+                        padding: "12px 16px",
+                        fontWeight: "600",
+                        cursor: "pointer",
+                      }}
+                    >
+                      {copy.savePassword}
+                    </button>
+                  </div>
+                </>
+              ) : null}
+            </div>
           </article>
         </section>
       </div>

@@ -1,6 +1,5 @@
-import { getServerSession } from "next-auth";
+import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
-import { authOptions } from "../../auth/[...nextauth]/route";
 
 async function googleFetch(accessToken, url) {
   const response = await fetch(url, {
@@ -25,9 +24,10 @@ async function googleFetch(accessToken, url) {
 }
 
 export async function GET() {
-  const session = await getServerSession(authOptions);
+  const cookieStore = await cookies();
+  const accessToken = cookieStore.get("replyo_gbp_access_token")?.value;
 
-  if (!session?.accessToken) {
+  if (!accessToken) {
     return NextResponse.json(
       { error: "Google Business is not connected yet." },
       { status: 401 }
@@ -36,7 +36,7 @@ export async function GET() {
 
   try {
     const accountsData = await googleFetch(
-      session.accessToken,
+      accessToken,
       "https://mybusinessaccountmanagement.googleapis.com/v1/accounts"
     );
 
@@ -45,7 +45,7 @@ export async function GET() {
     const locationsByAccount = await Promise.all(
       accounts.map(async (account) => {
         const locationsData = await googleFetch(
-          session.accessToken,
+          accessToken,
           `https://mybusinessbusinessinformation.googleapis.com/v1/${account.name}/locations?readMask=name,title,storeCode,websiteUri,primaryCategory,locationKey,metadata`
         );
 

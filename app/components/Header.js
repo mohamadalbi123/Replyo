@@ -34,9 +34,19 @@ export default function Header() {
         flexWrap: "wrap",
       }}
     >
-      <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+      <Link
+        href="/"
+        aria-label="Go to Replyo home"
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "14px",
+          textDecoration: "none",
+          color: "inherit",
+        }}
+      >
         <div
-          aria-label="Replyo"
+          aria-hidden="true"
           style={{
             width: "44px",
             height: "44px",
@@ -115,7 +125,7 @@ export default function Header() {
             Review Replies
           </span>
         </div>
-      </div>
+      </Link>
 
       <nav style={{ display: "flex", gap: "18px", alignItems: "center", flexWrap: "wrap" }}>
         <Link href="/" style={{ textDecoration: "none", color: "#111827" }}>

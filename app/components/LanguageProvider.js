@@ -14,8 +14,7 @@ const baseTranslations = {
     connect: "Connect",
   },
   footer: {
-    brand:
-      "AI-powered Google review replies for restaurants, salons, shops, and local businesses that want to stay responsive without extra hassle.",
+    brand: "AI-powered Google review replies",
     explore: "Explore",
     trust: "Trust",
     privacy: "Privacy Policy",
