@@ -45,9 +45,13 @@ const POSITIVE_TERMS = [
   "رائعة",
   "ممتاز",
   "ممتازة",
+  "لذيذ",
+  "لذيذة",
   "جميل",
   "جميلة",
   "ودود",
+  "لطيف",
+  "لطيفة",
   "نظيف",
 ];
 
@@ -105,14 +109,70 @@ const NEGATION_PATTERNS = [
 ];
 
 const TOPIC_RULES = [
-  { topic: "staff friendliness", terms: ["friendly", "kind", "staff", "team", "welcomed"] },
-  { topic: "cleanliness", terms: ["clean", "spotless", "hygiene", "tidy"] },
-  { topic: "waiting time", terms: ["wait", "waiting", "late", "delay"] },
-  { topic: "service quality", terms: ["service", "experience", "professional", "helpful"] },
-  { topic: "food quality", terms: ["food", "dish", "meal", "delicious", "taste"] },
-  { topic: "results", terms: ["haircut", "nails", "color", "result", "look"] },
-  { topic: "atmosphere", terms: ["atmosphere", "ambience", "place", "comfortable"] },
+  {
+    topic: "staff friendliness",
+    terms: ["friendly", "kind", "staff", "team", "welcomed", "فريق", "الفريق", "طاقم", "لطيف", "لطيفة", "ودود"],
+  },
+  { topic: "cleanliness", terms: ["clean", "spotless", "hygiene", "tidy", "نظيف", "نظيفة", "نظيفا", "نظيفة جدا"] },
+  { topic: "waiting time", terms: ["wait", "waiting", "late", "delay", "انتظار", "تأخير", "متأخر", "بطيء"] },
+  { topic: "service quality", terms: ["service", "experience", "professional", "helpful", "خدمة", "الخدمة", "تجربة", "مساعدة"] },
+  { topic: "food quality", terms: ["food", "dish", "meal", "delicious", "taste", "طعام", "الطعام", "أكل", "اكل", "وجبة", "لذيذ", "لذيذة"] },
+  { topic: "results", terms: ["haircut", "nails", "color", "result", "look", "نتيجة", "النتيجة", "لون", "قصة"] },
+  { topic: "atmosphere", terms: ["atmosphere", "ambience", "place", "comfortable", "مكان", "المكان", "أجواء", "اجواء", "مريح"] },
 ];
+
+const TOPIC_LABELS = {
+  English: {
+    "staff friendliness": "staff friendliness",
+    cleanliness: "cleanliness",
+    "waiting time": "waiting time",
+    "service quality": "service quality",
+    "food quality": "food quality",
+    results: "results",
+    atmosphere: "atmosphere",
+    "overall experience": "overall experience",
+  },
+  French: {
+    "staff friendliness": "l'accueil de l'equipe",
+    cleanliness: "la proprete",
+    "waiting time": "le temps d'attente",
+    "service quality": "la qualite du service",
+    "food quality": "la qualite de la cuisine",
+    results: "le resultat",
+    atmosphere: "l'ambiance",
+    "overall experience": "l'experience globale",
+  },
+  Arabic: {
+    "staff friendliness": "لطف الفريق",
+    cleanliness: "النظافة",
+    "waiting time": "وقت الانتظار",
+    "service quality": "جودة الخدمة",
+    "food quality": "جودة الطعام",
+    results: "النتيجة",
+    atmosphere: "الأجواء",
+    "overall experience": "التجربة العامة",
+  },
+  Spanish: {
+    "staff friendliness": "la amabilidad del equipo",
+    cleanliness: "la limpieza",
+    "waiting time": "el tiempo de espera",
+    "service quality": "la calidad del servicio",
+    "food quality": "la calidad de la comida",
+    results: "el resultado",
+    atmosphere: "el ambiente",
+    "overall experience": "la experiencia general",
+  },
+  German: {
+    "staff friendliness": "die Freundlichkeit des Teams",
+    cleanliness: "die Sauberkeit",
+    "waiting time": "die Wartezeit",
+    "service quality": "die Servicequalitaet",
+    "food quality": "die Qualitaet des Essens",
+    results: "das Ergebnis",
+    atmosphere: "die Atmosphaere",
+    "overall experience": "das Gesamterlebnis",
+  },
+};
 
 const LANGUAGE_HINTS = {
   English: [
@@ -357,7 +417,18 @@ export function buildFallbackReply({
   });
 
   const name = businessName || "our team";
-  const topics = context.detectedTopics.join(" and ");
+  const localizedTopicLabels =
+    TOPIC_LABELS[context.replyLanguage] || TOPIC_LABELS.English;
+  const topicJoiners = {
+    Arabic: " و",
+    French: " et ",
+    Spanish: " y ",
+    German: " und ",
+    English: " and ",
+  };
+  const topics = context.detectedTopics
+    .map((topic) => localizedTopicLabels[topic] || topic)
+    .join(topicJoiners[context.replyLanguage] || topicJoiners.English);
 
   if (context.replyLanguage === "French") {
     if (context.sentiment === "negative") {
