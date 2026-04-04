@@ -25,6 +25,7 @@ const POSITIVE_TERMS = [
   "amazing",
   "great",
   "excellent",
+  "good",
   "friendly",
   "clean",
   "helpful",
@@ -32,6 +33,22 @@ const POSITIVE_TERMS = [
   "loved",
   "perfect",
   "wonderful",
+  "bien",
+  "tres bien",
+  "genial",
+  "bueno",
+  "muy bueno",
+  "gut",
+  "toll",
+  "super",
+  "رائع",
+  "رائعة",
+  "ممتاز",
+  "ممتازة",
+  "جميل",
+  "جميلة",
+  "ودود",
+  "نظيف",
 ];
 
 const NEGATIVE_TERMS = [
@@ -45,6 +62,46 @@ const NEGATIVE_TERMS = [
   "cold",
   "disappointed",
   "awful",
+  "poor",
+  "mauvais",
+  "lent",
+  "sale",
+  "impoli",
+  "malo",
+  "lento",
+  "sucio",
+  "grosero",
+  "schlecht",
+  "langsam",
+  "kalt",
+  "unfreundlich",
+  "سيء",
+  "سيئة",
+  "بارد",
+  "بطيء",
+  "وقح",
+  "قذر",
+];
+
+const NEGATION_PATTERNS = [
+  "not",
+  "never",
+  "no",
+  "isn't",
+  "wasn't",
+  "weren't",
+  "don't",
+  "didn't",
+  "can't",
+  "pas",
+  "ne",
+  "nicht",
+  "kein",
+  "keine",
+  "لا",
+  "ليس",
+  "مو",
+  "مش",
 ];
 
 const TOPIC_RULES = [
@@ -110,9 +167,29 @@ const LANGUAGE_HINTS = {
   ],
 };
 
-function countWordMatches(text, words) {
-  return words.reduce((count, word) => {
-    return count + (text.includes(word) ? 1 : 0);
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function hasStandaloneTerm(text, term) {
+  return new RegExp(
+    `(^|[^\\p{L}])${escapeRegExp(term)}(?=$|[^\\p{L}])`,
+    "iu"
+  ).test(text);
+}
+
+function hasNegatedTerm(text, term) {
+  return NEGATION_PATTERNS.some((negation) =>
+    new RegExp(
+      `(^|[^\\p{L}])${escapeRegExp(negation)}\\s+${escapeRegExp(term)}(?=$|[^\\p{L}])`,
+      "iu"
+    ).test(text)
+  );
+}
+
+function countTermMatches(text, terms) {
+  return terms.reduce((count, term) => {
+    return count + (hasStandaloneTerm(text, term) ? 1 : 0);
   }, 0);
 }
 
@@ -129,10 +206,10 @@ function detectReplyLanguage(review = "") {
   }
 
   const scores = {
-    English: countWordMatches(lowered, LANGUAGE_HINTS.English),
-    French: countWordMatches(lowered, LANGUAGE_HINTS.French),
-    German: countWordMatches(lowered, LANGUAGE_HINTS.German),
-    Spanish: countWordMatches(lowered, LANGUAGE_HINTS.Spanish),
+    English: countTermMatches(lowered, LANGUAGE_HINTS.English),
+    French: countTermMatches(lowered, LANGUAGE_HINTS.French),
+    German: countTermMatches(lowered, LANGUAGE_HINTS.German),
+    Spanish: countTermMatches(lowered, LANGUAGE_HINTS.Spanish),
   };
 
   if (/[àâçéèêëîïôûùüÿœæ]/i.test(text)) {
@@ -171,11 +248,24 @@ export function inferReviewContext({ review, rating, businessType }) {
   const text = (review || "").toLowerCase();
   const hasNumericRating = typeof rating === "number" && Number.isFinite(rating);
   const detectedTopics = TOPIC_RULES.filter(({ terms }) =>
-    terms.some((term) => text.includes(term))
+    terms.some((term) => hasStandaloneTerm(text, term))
   ).map(({ topic }) => topic);
 
-  const positiveHits = POSITIVE_TERMS.filter((term) => text.includes(term)).length;
-  const negativeHits = NEGATIVE_TERMS.filter((term) => text.includes(term)).length;
+  const positiveHits =
+    POSITIVE_TERMS.reduce((count, term) => {
+      return count + (hasStandaloneTerm(text, term) && !hasNegatedTerm(text, term) ? 1 : 0);
+    }, 0) +
+    NEGATIVE_TERMS.reduce((count, term) => {
+      return count + (hasNegatedTerm(text, term) ? 1 : 0);
+    }, 0);
+
+  const negativeHits =
+    NEGATIVE_TERMS.reduce((count, term) => {
+      return count + (hasStandaloneTerm(text, term) && !hasNegatedTerm(text, term) ? 1 : 0);
+    }, 0) +
+    POSITIVE_TERMS.reduce((count, term) => {
+      return count + (hasNegatedTerm(text, term) ? 1 : 0);
+    }, 0);
 
   let sentiment = "neutral";
 
