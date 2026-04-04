@@ -26,6 +26,7 @@ const POSITIVE_TERMS = [
   "great",
   "excellent",
   "good",
+  "best",
   "friendly",
   "clean",
   "helpful",
@@ -416,7 +417,8 @@ export function buildFallbackReply({
     businessName,
   });
 
-  const name = businessName || "our team";
+  const hasBusinessName = Boolean(businessName && businessName.trim());
+  const name = hasBusinessName ? businessName.trim() : "";
   const localizedTopicLabels =
     TOPIC_LABELS[context.replyLanguage] || TOPIC_LABELS.English;
   const topicJoiners = {
@@ -432,7 +434,9 @@ export function buildFallbackReply({
 
   if (context.replyLanguage === "French") {
     if (context.sentiment === "negative") {
-      return `Merci pour votre retour. Nous sommes desoles que votre experience avec ${name} n'ait pas ete a la hauteur. Vos remarques sur ${topics} sont importantes et nous aideront a nous ameliorer.`;
+      return hasBusinessName
+        ? `Merci pour votre retour. Nous sommes desoles que votre experience avec ${name} n'ait pas ete a la hauteur. Vos remarques sur ${topics} sont importantes et nous aideront a nous ameliorer.`
+        : `Merci pour votre retour. Nous sommes desoles que votre experience n'ait pas ete a la hauteur. Vos remarques sur ${topics} sont importantes et nous aideront a nous ameliorer.`;
     }
 
     if (context.sentiment === "positive") {
@@ -444,7 +448,9 @@ export function buildFallbackReply({
 
   if (context.replyLanguage === "Arabic") {
     if (context.sentiment === "negative") {
-      return `شكرا على ملاحظاتك. نأسف لان تجربتك مع ${name} لم تكن كما يجب. ملاحظاتك حول ${topics} مهمة لنا وستساعدنا على التحسن.`;
+      return hasBusinessName
+        ? `شكرا على ملاحظاتك. نأسف لان تجربتك مع ${name} لم تكن كما يجب. ملاحظاتك حول ${topics} مهمة لنا وستساعدنا على التحسن.`
+        : `شكرا على ملاحظاتك. نأسف لان تجربتك لم تكن كما يجب. ملاحظاتك حول ${topics} مهمة لنا وستساعدنا على التحسن.`;
     }
 
     if (context.sentiment === "positive") {
@@ -456,7 +462,9 @@ export function buildFallbackReply({
 
   if (context.replyLanguage === "Spanish") {
     if (context.sentiment === "negative") {
-      return `Gracias por tu comentario. Lamentamos que tu experiencia con ${name} no haya cumplido tus expectativas. Tus observaciones sobre ${topics} son importantes y nos ayudaran a mejorar.`;
+      return hasBusinessName
+        ? `Gracias por tu comentario. Lamentamos que tu experiencia con ${name} no haya cumplido tus expectativas. Tus observaciones sobre ${topics} son importantes y nos ayudaran a mejorar.`
+        : `Gracias por tu comentario. Lamentamos que tu experiencia no haya cumplido tus expectativas. Tus observaciones sobre ${topics} son importantes y nos ayudaran a mejorar.`;
     }
 
     if (context.sentiment === "positive") {
@@ -468,7 +476,9 @@ export function buildFallbackReply({
 
   if (context.replyLanguage === "German") {
     if (context.sentiment === "negative") {
-      return `Vielen Dank fuer Ihr Feedback. Es tut uns leid, dass Ihre Erfahrung mit ${name} nicht Ihren Erwartungen entsprochen hat. Ihre Hinweise zu ${topics} sind wichtig fuer uns und helfen uns, besser zu werden.`;
+      return hasBusinessName
+        ? `Vielen Dank fuer Ihr Feedback. Es tut uns leid, dass Ihre Erfahrung mit ${name} nicht Ihren Erwartungen entsprochen hat. Ihre Hinweise zu ${topics} sind wichtig fuer uns und helfen uns, besser zu werden.`
+        : `Vielen Dank fuer Ihr Feedback. Es tut uns leid, dass Ihre Erfahrung nicht Ihren Erwartungen entsprochen hat. Ihre Hinweise zu ${topics} sind wichtig fuer uns und helfen uns, besser zu werden.`;
     }
 
     if (context.sentiment === "positive") {
@@ -479,12 +489,16 @@ export function buildFallbackReply({
   }
 
   if (context.sentiment === "negative") {
-    return `Thank you for your feedback. We are sorry your experience with ${name} did not fully meet expectations. Your comments about ${topics} are important to us, and we will use them to improve.`;
+    return hasBusinessName
+      ? `Thank you for your feedback. We are sorry your experience with ${name} did not fully meet expectations. Your comments about ${topics} are important to us, and we will use them to improve.`
+      : `Thank you for your feedback. We are sorry your experience did not fully meet expectations. Your comments about ${topics} are important to us, and we will use them to improve.`;
   }
 
   if (context.sentiment === "positive") {
     return `Thank you so much for your kind review. We are delighted to hear you appreciated ${topics}, and we truly appreciate your support. We look forward to welcoming you again soon.`;
   }
 
-  return `Thank you for sharing your feedback. We appreciate your comments about ${topics}, and your review helps ${name} keep improving the experience for every guest.`;
+  return hasBusinessName
+    ? `Thank you for sharing your feedback. We appreciate your comments about ${topics}, and your review helps ${name} keep improving the experience for every client.`
+    : `Thank you for sharing your feedback. We appreciate your comments about ${topics}, and your review helps us keep improving the experience for every client.`;
 }
