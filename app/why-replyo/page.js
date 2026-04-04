@@ -21,7 +21,7 @@ export default function WhyReplyoPage() {
         style={{
           maxWidth: "1180px",
           margin: "0 auto",
-          padding: "72px 28px 96px",
+          padding: "clamp(32px, 8vw, 72px) clamp(18px, 5vw, 28px) clamp(48px, 10vw, 96px)",
         }}
       >
         <div style={{ maxWidth: "760px", marginBottom: "32px" }}>
@@ -42,8 +42,8 @@ export default function WhyReplyoPage() {
 
           <h1
             style={{
-              fontSize: "54px",
-              lineHeight: 1.02,
+              fontSize: "clamp(34px, 9vw, 54px)",
+              lineHeight: 1.05,
               marginBottom: "18px",
             }}
           >
@@ -52,7 +52,7 @@ export default function WhyReplyoPage() {
 
           <p
             style={{
-              fontSize: "19px",
+              fontSize: "clamp(17px, 4.4vw, 19px)",
               lineHeight: 1.75,
               color: "#556070",
               margin: 0,
@@ -66,7 +66,7 @@ export default function WhyReplyoPage() {
         <section
           style={{
             display: "grid",
-            gridTemplateColumns: "minmax(0, 1.05fr) minmax(300px, 0.95fr)",
+            gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 300px), 1fr))",
             gap: "20px",
             marginBottom: "24px",
           }}
@@ -76,7 +76,7 @@ export default function WhyReplyoPage() {
               background: "#172033",
               color: "#fff8ec",
               borderRadius: "30px",
-              padding: "28px",
+              padding: "clamp(20px, 5vw, 28px)",
               boxShadow: "0 24px 50px rgba(23,32,51,0.18)",
             }}
           >
@@ -92,7 +92,7 @@ export default function WhyReplyoPage() {
             >
               {t.why.coreBadge}
             </div>
-            <h2 style={{ fontSize: "34px", lineHeight: 1.1, marginBottom: "14px" }}>
+            <h2 style={{ fontSize: "clamp(28px, 7vw, 34px)", lineHeight: 1.1, marginBottom: "14px" }}>
               {t.why.coreTitle}
             </h2>
             <p
@@ -126,7 +126,7 @@ export default function WhyReplyoPage() {
             style={{
               background: "rgba(255,255,255,0.82)",
               borderRadius: "30px",
-              padding: "24px",
+              padding: "clamp(18px, 4vw, 24px)",
               border: "1px solid rgba(23,32,51,0.08)",
               boxShadow: "0 22px 50px rgba(48,63,90,0.1)",
             }}
@@ -171,14 +171,14 @@ export default function WhyReplyoPage() {
             background: "rgba(255,255,255,0.82)",
             border: "1px solid rgba(23,32,51,0.08)",
             borderRadius: "30px",
-            padding: "24px",
+            padding: "clamp(18px, 4vw, 24px)",
             boxShadow: "0 22px 50px rgba(48,63,90,0.1)",
             marginBottom: "24px",
             perspective: "1400px",
           }}
         >
           <div style={{ maxWidth: "680px", marginBottom: "18px" }}>
-            <h2 style={{ fontSize: "38px", lineHeight: 1.1, marginBottom: "12px" }}>
+            <h2 style={{ fontSize: "clamp(30px, 7vw, 38px)", lineHeight: 1.1, marginBottom: "12px" }}>
               {t.why.reasonsTitle}
             </h2>
             <p style={{ color: "#5b6474", lineHeight: 1.75, margin: 0 }}>{t.why.reasonsText}</p>
@@ -187,7 +187,7 @@ export default function WhyReplyoPage() {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+              gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 240px), 1fr))",
               gap: "16px",
             }}
           >
@@ -206,7 +206,7 @@ export default function WhyReplyoPage() {
               >
                 <h3
                   className="replyo-why-card-title"
-                  style={{ fontSize: "22px", lineHeight: 1.25, marginBottom: "10px" }}
+                  style={{ fontSize: "clamp(21px, 5vw, 22px)", lineHeight: 1.25, marginBottom: "10px" }}
                 >
                   {title}
                 </h3>
@@ -221,7 +221,7 @@ export default function WhyReplyoPage() {
             background: "rgba(255,255,255,0.84)",
             border: "1px solid rgba(23,32,51,0.08)",
             borderRadius: "28px",
-            padding: "28px",
+            padding: "clamp(20px, 5vw, 28px)",
             boxShadow: "0 22px 50px rgba(48,63,90,0.1)",
             display: "flex",
             justifyContent: "space-between",
@@ -231,7 +231,7 @@ export default function WhyReplyoPage() {
           }}
         >
           <div style={{ maxWidth: "660px" }}>
-            <h2 style={{ fontSize: "34px", lineHeight: 1.1, marginBottom: "10px" }}>
+            <h2 style={{ fontSize: "clamp(28px, 7vw, 34px)", lineHeight: 1.1, marginBottom: "10px" }}>
               {t.why.ctaTitle}
             </h2>
             <p style={{ color: "#5b6474", lineHeight: 1.75, margin: 0 }}>{t.why.ctaText}</p>

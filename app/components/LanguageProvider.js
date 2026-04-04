@@ -53,6 +53,7 @@ const baseTranslations = {
   },
   how: {
     badge: "How Replyo works",
+    stepLabel: "Step",
     title: "A simpler way to stay on top of Google reviews.",
     description:
       "Replyo is built for busy local businesses. It connects to your Google Business Profile, detects new reviews, writes thoughtful replies, and lets you choose whether to approve them first or let Replyo post automatically.",
@@ -290,6 +291,7 @@ const overrides = {
     },
     how: {
       badge: "Comment Replyo fonctionne",
+      stepLabel: "Etape",
       title: "Une facon plus simple de gerer les avis Google.",
       description:
         "Replyo se connecte a votre fiche Google Business, detecte les nouveaux avis et vous laisse choisir entre validation manuelle et publication automatique.",
@@ -303,6 +305,30 @@ const overrides = {
         "Que vous vouliez tout controler ou tout automatiser, Replyo vous aide a repondre a plus d avis avec moins d effort.",
       create: "Creer un compte",
       test: "Tester Replyo",
+      steps: [
+        [
+          "Connectez votre fiche Google Business",
+          "Replyo se connecte au compte entreprise que vous gerez deja, puis detecte les etablissements et categories qui y sont lies.",
+        ],
+        [
+          "Replyo detecte les nouveaux avis",
+          "Quand de nouveaux retours arrivent, Replyo les rassemble pour vous eviter de verifier les avis manuellement.",
+        ],
+        [
+          "La reponse s adapte a votre activite",
+          "Replyo utilise la categorie de l entreprise, la note, le texte de l avis et votre ton prefere pour generer une reponse plus naturelle.",
+        ],
+        [
+          "Vous choisissez comment publier les reponses",
+          "Validez et modifiez les reponses vous-meme, ou activez le mode auto pour laisser Replyo repondre directement.",
+        ],
+      ],
+      benefits: [
+        "Repondez plus vite sans interrompre le service",
+        "Gardez des reponses professionnelles et coherentes",
+        "Gerez plusieurs langues plus naturellement",
+        "Restez actif sur Google sans travail administratif en plus",
+      ],
     },
     why: {
       badge: "Pourquoi Replyo",
@@ -322,6 +348,44 @@ const overrides = {
         "Replyo aide restaurants, salons et boutiques a gagner du temps tout en renforcant leur image sur Google.",
       how: "Voir le fonctionnement",
       create: "Creer un compte",
+      extra: [
+        "Repondez plus regulierement sans embaucher d aide administrative en plus",
+        "Gardez un ton professionnel sur les avis positifs, neutres et negatifs",
+        "Montrez aux prospects que votre entreprise ecoute et s interesse aux retours",
+        "Reduisez le risque de laisser de bons avis sans reponse pendant des jours",
+      ],
+      customerItems: [
+        "Cette entreprise repond aux clients",
+        "Cette entreprise parait active et attentive",
+        "Cette entreprise gere les retours avec professionnalisme",
+        "Cette entreprise inspire davantage confiance avant meme la visite",
+      ],
+      reasons: [
+        [
+          "Repondez dans la langue de votre client",
+          "Des touristes et clients internationaux peuvent laisser des avis en anglais, arabe, francais, allemand, chinois et plus encore. Replyo aide a repondre dans la bonne langue pour que chaque client se sente compris.",
+        ],
+        [
+          "Gagnez du temps chaque jour",
+          "Les gerants sont occupes a faire tourner le service, gerer l equipe et servir les clients. Replyo retire la corvee d ecrire chaque reponse une par une.",
+        ],
+        [
+          "Restez actif et visible sur Google",
+          "Une entreprise qui repond regulierement parait plus active, plus attentive et plus professionnelle. Cette presence plus forte aide a se demarquer en ligne.",
+        ],
+        [
+          "Faites bonne impression avant meme la visite",
+          "Beaucoup de personnes lisent les avis avant de reserver ou de venir. Voir des reponses attentionnees a chaque avis inspire confiance avant meme le premier contact.",
+        ],
+        [
+          "Repondez sans attendre",
+          "Replyo est concu pour detecter rapidement les avis, generer une reponse instantanement, puis la garder pour validation ou la publier automatiquement selon vos reglages.",
+        ],
+        [
+          "Adaptez les reponses au type d activite",
+          "Un restaurant ne doit pas sonner comme un salon de beaute, et un salon ne doit pas ressembler a une boutique. Replyo peut ajuster les reponses selon la categorie, le ton et le contenu de l avis.",
+        ],
+      ],
     },
     pricing: {
       back: "Retour a l accueil",
@@ -409,6 +473,7 @@ const overrides = {
     },
     how: {
       badge: "Como funciona Replyo",
+      stepLabel: "Paso",
       title: "Una forma mas simple de gestionar las resenas de Google.",
       description:
         "Replyo se conecta a tu perfil de Google Business, detecta nuevas resenas y te deja elegir entre aprobacion manual o publicacion automatica.",
@@ -421,6 +486,30 @@ const overrides = {
         "Tanto si quieres control total como automatizacion total, Replyo te ayuda a responder mas con menos esfuerzo.",
       create: "Crear cuenta",
       test: "Probar Replyo",
+      steps: [
+        [
+          "Conecta tu perfil de Google Business",
+          "Replyo se conecta a la cuenta del negocio que ya gestionas y detecta las ubicaciones y categorias vinculadas.",
+        ],
+        [
+          "Replyo detecta nuevas resenas",
+          "Cuando llegan nuevas opiniones, Replyo las reune para que no tengas que revisar resenas manualmente.",
+        ],
+        [
+          "La respuesta se adapta a tu negocio",
+          "Replyo usa la categoria del negocio, la puntuacion, el texto de la resena y tu tono preferido para generar una respuesta mas natural.",
+        ],
+        [
+          "Tu eliges como se publican las respuestas",
+          "Aprueba y edita las respuestas tu mismo, o activa el modo automatico para que Replyo responda por ti.",
+        ],
+      ],
+      benefits: [
+        "Responde mas rapido sin interrumpir el servicio",
+        "Mantén las respuestas profesionales y coherentes",
+        "Gestiona varios idiomas de forma mas natural",
+        "Sigue activo en Google sin mas trabajo administrativo",
+      ],
     },
     why: {
       badge: "Por que Replyo",
@@ -439,6 +528,44 @@ const overrides = {
         "Replyo ayuda a restaurantes, salones y tiendas a ahorrar tiempo mientras fortalecen su imagen en Google.",
       how: "Ver como funciona",
       create: "Crear cuenta",
+      extra: [
+        "Responde con mas regularidad sin contratar ayuda administrativa extra",
+        "Mantén un tono profesional en resenas positivas, neutras y negativas",
+        "Muestra a los futuros clientes que tu negocio escucha y se preocupa",
+        "Reduce el riesgo de dejar buenas resenas sin respuesta durante dias",
+      ],
+      customerItems: [
+        "Este negocio responde a la gente",
+        "Este negocio parece activo y atento",
+        "Este negocio gestiona bien los comentarios",
+        "Este negocio transmite mas confianza incluso antes de visitarlo",
+      ],
+      reasons: [
+        [
+          "Responde en el idioma de tu cliente",
+          "Turistas y clientes internacionales pueden dejar resenas en ingles, arabe, frances, aleman, chino y mas. Replyo ayuda a responder en el idioma adecuado para que cada cliente se sienta comprendido.",
+        ],
+        [
+          "Ahorra tiempo cada dia",
+          "Propietarios y gerentes estan ocupados dirigiendo el servicio, gestionando el equipo y atendiendo clientes. Replyo elimina la molestia de redactar cada respuesta manualmente.",
+        ],
+        [
+          "Mantente activo y visible en Google",
+          "Un negocio que responde con constancia parece mas activo, atento y profesional. Esa presencia mas fuerte ayuda a destacar cuando los clientes comparan opciones.",
+        ],
+        [
+          "Da una gran impresion antes de que te visiten",
+          "Muchas personas leen resenas antes de reservar o entrar. Cuando ven respuestas cuidadas en cada opinion, sienten que el negocio se preocupa incluso antes de conocerlo.",
+        ],
+        [
+          "Responde sin demora",
+          "Replyo esta pensado para detectar resenas rapidamente, generar una respuesta al instante y dejarla para aprobacion o publicarla automaticamente segun tu configuracion.",
+        ],
+        [
+          "Adapta las respuestas al tipo de negocio",
+          "Un restaurante no debe sonar como un salon de belleza, y un salon no debe sonar como una tienda. Replyo adapta las respuestas segun la categoria, el tono y el contenido de la resena.",
+        ],
+      ],
     },
     pricing: {
       back: "Volver al inicio",
@@ -484,7 +611,7 @@ const overrides = {
     header: {
       home: "الرئيسية",
       how: "كيف يعمل",
-      why: "لماذا Replyo",
+      why: "لماذا ريبلايو",
       pricing: "الاسعار",
       login: "تسجيل الدخول",
       dashboard: "لوحة التحكم",
@@ -505,7 +632,7 @@ const overrides = {
       title: "رد على تقييمات العملاء خلال ثوان وليس في نهاية اليوم.",
       description:
         "يساعد Replyo المطاعم والصالونات والمتاجر على توليد ردود Google دافئة واحترافية دون اضاعة الوقت.",
-      try: "جرّب Replyo",
+      try: "جرّب ريبلايو",
       create: "انشئ حسابا",
       saveTitle: "وفّر الوقت",
       saveText: "رد بشكل اسرع اثناء الخدمة",
@@ -520,17 +647,18 @@ const overrides = {
       livePreview: "معاينة مباشرة",
       status: "حالة الرد",
       drafting: "جاري الصياغة",
-      draft: "مسودة Replyo",
+      draft: "مسودة ريبلايو",
       reviewFirst: "مراجعة قبل النشر",
-      test: "جرّب Replyo",
+      test: "جرّب ريبلايو",
       helper: "يقوم Replyo بتحويل التقييمات الجديدة الى ردود جاهزة خلال ثوان.",
     },
     how: {
-      badge: "كيف يعمل Replyo",
+      badge: "كيف يعمل ريبلايو",
+      stepLabel: "الخطوة",
       title: "طريقة ابسط للتعامل مع تقييمات Google.",
       description:
         "يتصل Replyo بملف Google Business الخاص بك، يكتشف التقييمات الجديدة، ويترك لك الخيار بين المراجعة المسبقة او النشر التلقائي.",
-      whyBadge: "لماذا تستخدم الشركات Replyo",
+      whyBadge: "لماذا تستخدم الشركات ريبلايو",
       whyTitle: "وفّر الوقت دون ان تبدو الردود عامة.",
       whyText: "يساعد Replyo الاعمال على الرد باستمرار والحفاظ على حضور نشط على Google.",
       localBadge: "مصمم للاعمال المحلية",
@@ -538,10 +666,34 @@ const overrides = {
       ctaText:
         "سواء كنت تريد تحكما كاملا او اتمتة كاملة، صمم Replyo لمساعدتك على الرد على عدد اكبر من التقييمات بجهد اقل.",
       create: "انشئ حسابا",
-      test: "جرّب Replyo",
+      test: "جرّب ريبلايو",
+      steps: [
+        [
+          "اربط ملف Google Business الخاص بك",
+          "يتصل Replyo بحساب النشاط الذي تديره بالفعل، ثم يكتشف المواقع والفئات المرتبطة به.",
+        ],
+        [
+          "يكتشف Replyo التقييمات الجديدة",
+          "عندما تصل ملاحظات جديدة من العملاء، يجمعها Replyo لك حتى لا تضطر لمراجعة التقييمات يدويا.",
+        ],
+        [
+          "يتكيف الرد مع نشاطك",
+          "يستخدم Replyo فئة النشاط والتقييم ونص المراجعة والنبرة التي تفضلها لتوليد رد اكثر طبيعية.",
+        ],
+        [
+          "انت تختار كيف يتم نشر الردود",
+          "راجع الردود وعدلها بنفسك، او فعّل الوضع التلقائي ليقوم Replyo بالرد مباشرة عنك.",
+        ],
+      ],
+      benefits: [
+        "رد بشكل اسرع من دون تعطيل الخدمة",
+        "حافظ على ردود احترافية ومتسقة",
+        "تعامل مع لغات متعددة بشكل طبيعي اكثر",
+        "ابق نشطا على Google من دون عمل اداري اضافي",
+      ],
     },
     why: {
-      badge: "لماذا Replyo",
+      badge: "لماذا ريبلايو",
       title: "اكثر من مجرد ردود اسرع. صورة اقوى لعملك.",
       description:
         "يساعد Replyo الاعمال المحلية على الرد على التقييمات بسرعة واحترافية واستمرار.",
@@ -557,6 +709,44 @@ const overrides = {
         "يساعد Replyo المطاعم وصالونات التجميل والمتاجر على توفير الوقت وبناء صورة اقوى على Google.",
       how: "شاهد كيف يعمل",
       create: "انشئ حسابا",
+      extra: [
+        "رد باستمرار اكثر من دون توظيف مساعدة ادارية اضافية",
+        "حافظ على نبرة احترافية عبر التقييمات الايجابية والمحايدة والسلبية",
+        "اظهر للعملاء المحتملين ان نشاطك يستمع ويهتم",
+        "قلل احتمال ترك التقييمات الجيدة بلا رد لايام",
+      ],
+      customerItems: [
+        "هذا النشاط يرد على الناس",
+        "هذا النشاط يبدو نشطا ومنتبها",
+        "هذا النشاط يتعامل مع الملاحظات باحترافية",
+        "هذا النشاط يبدو اكثر موثوقية حتى قبل الزيارة",
+      ],
+      reasons: [
+        [
+          "رد بلغة عميلك",
+          "قد يترك السياح والعملاء الدوليون تقييمات بالانجليزية او العربية او الفرنسية او الالمانية او الصينية وغيرها. يساعد Replyo على الرد باللغة المناسبة حتى يشعر كل عميل انه مفهوم.",
+        ],
+        [
+          "وفّر الوقت كل يوم",
+          "المالكون والمديرون مشغولون بادارة الخدمة والموظفين وخدمة العملاء. يزيل Replyo عنك عناء كتابة كل رد يدويا واحدا تلو الآخر.",
+        ],
+        [
+          "ابق نشطا ومرئيا على Google",
+          "النشاط الذي يرد باستمرار يبدو اكثر نشاطا واهتماما واحترافية. وهذا الحضور الاقوى يساعدك على التميز عندما يقارن الناس بين الاعمال عبر الانترنت.",
+        ],
+        [
+          "اترك انطباعا رائعا قبل الزيارة",
+          "كثير من الناس يقرأون التقييمات قبل الحجز او الزيارة. وعندما يرون ردودا مدروسة على كل تقييم، يشعرون ان النشاط يهتم حتى قبل ان يصبحوا عملاء.",
+        ],
+        [
+          "رد من دون تأخير",
+          "تم تصميم Replyo لاكتشاف التقييمات بسرعة، وتوليد رد فوري، ثم الاحتفاظ به للموافقة او نشره تلقائيا حسب اعداداتك.",
+        ],
+        [
+          "كيّف الردود حسب نوع النشاط",
+          "لا يجب ان يبدو المطعم كصالون تجميل، ولا ينبغي ان يبدو الصالون كمتجر. يمكن لـ Replyo تشكيل الردود حسب الفئة والنبرة ومحتوى التقييم.",
+        ],
+      ],
     },
     pricing: {
       back: "العودة للرئيسية",
@@ -645,6 +835,7 @@ const overrides = {
     },
     how: {
       badge: "So funktioniert Replyo",
+      stepLabel: "Schritt",
       title: "Einfacher den Überblick ueber Google-Bewertungen behalten.",
       description:
         "Replyo verbindet sich mit deinem Google-Business-Profil, erkennt neue Bewertungen und laesst dich zwischen Freigabe und Automatik waehlen.",
@@ -657,6 +848,30 @@ const overrides = {
         "Egal ob du volle Kontrolle oder volle Automatisierung willst, Replyo hilft dir, mehr Bewertungen mit weniger Aufwand zu beantworten.",
       create: "Konto erstellen",
       test: "Replyo testen",
+      steps: [
+        [
+          "Verbinde dein Google-Business-Profil",
+          "Replyo verbindet sich mit dem Unternehmenskonto, das du bereits verwaltest, und erkennt die verknuepften Standorte und Kategorien.",
+        ],
+        [
+          "Replyo erkennt neue Bewertungen",
+          "Sobald neues Kundenfeedback eingeht, sammelt Replyo es fuer dich, damit du Bewertungen nicht mehr manuell pruefen musst.",
+        ],
+        [
+          "Die Antwort wird an dein Unternehmen angepasst",
+          "Replyo nutzt Unternehmenskategorie, Bewertung, Wortlaut der Rezension und deinen bevorzugten Ton, um eine natuerlichere Antwort zu erstellen.",
+        ],
+        [
+          "Du entscheidest, wie Antworten veroeffentlicht werden",
+          "Gib Antworten selbst frei und bearbeite sie, oder aktiviere den Automatikmodus, damit Replyo direkt fuer dich antwortet.",
+        ],
+      ],
+      benefits: [
+        "Schneller antworten, ohne den Betrieb zu unterbrechen",
+        "Antworten professionell und konsistent halten",
+        "Mehrere Sprachen natuerlicher abdecken",
+        "Auf Google aktiv bleiben ohne extra Verwaltungsaufwand",
+      ],
     },
     why: {
       badge: "Warum Replyo",
@@ -675,6 +890,44 @@ const overrides = {
         "Replyo hilft Restaurants, Salons und Geschaeften, Zeit zu sparen und ihr Google-Bild zu verbessern.",
       how: "So funktioniert es",
       create: "Konto erstellen",
+      extra: [
+        "Regelmaessiger antworten ohne zusaetzliche Verwaltungshilfe einzustellen",
+        "Einen professionellen Ton bei positiven, neutralen und negativen Bewertungen behalten",
+        "Interessenten zeigen, dass dein Unternehmen zuhoert und sich kuemmert",
+        "Das Risiko senken, gute Bewertungen tagelang unbeantwortet zu lassen",
+      ],
+      customerItems: [
+        "Dieses Unternehmen antwortet auf Menschen",
+        "Dieses Unternehmen wirkt aktiv und aufmerksam",
+        "Dieses Unternehmen geht professionell mit Feedback um",
+        "Dieses Unternehmen wirkt schon vor dem Besuch vertrauenswuerdiger",
+      ],
+      reasons: [
+        [
+          "Antworte in der Sprache deiner Kunden",
+          "Touristen und internationale Kunden koennen Bewertungen auf Englisch, Arabisch, Franzoesisch, Deutsch, Chinesisch und mehr hinterlassen. Replyo hilft dabei, in der passenden Sprache zu antworten, damit sich jeder Kunde verstanden fuehlt.",
+        ],
+        [
+          "Spare jeden Tag Zeit",
+          "Inhaber und Manager sind mit Betrieb, Team und Kunden beschaeftigt. Replyo nimmt dir die Muehe ab, jede Antwort einzeln manuell zu schreiben.",
+        ],
+        [
+          "Bleibe auf Google aktiv und sichtbar",
+          "Ein Unternehmen, das konsequent antwortet, wirkt aktiver, aufmerksamer und professioneller. Diese staerkere Praesenz hilft dir, online mehr aufzufallen.",
+        ],
+        [
+          "Mache einen starken Eindruck noch vor dem Besuch",
+          "Viele Menschen lesen Bewertungen, bevor sie buchen oder vorbeikommen. Wenn sie durchdachte Antworten auf jede Bewertung sehen, entsteht Vertrauen schon vor dem ersten Kontakt.",
+        ],
+        [
+          "Antworte ohne Verzoegerung",
+          "Replyo ist darauf ausgelegt, Bewertungen schnell zu erkennen, sofort eine Antwort zu erstellen und sie je nach Einstellung zur Freigabe bereitzuhalten oder automatisch zu veroeffentlichen.",
+        ],
+        [
+          "Passe Antworten an die Art des Unternehmens an",
+          "Ein Restaurant sollte nicht wie ein Beautysalon klingen, und ein Salon nicht wie ein Laden. Replyo kann Antworten an Kategorie, Ton und Inhalt der Bewertung anpassen.",
+        ],
+      ],
     },
     pricing: {
       back: "Zurueck zur Startseite",

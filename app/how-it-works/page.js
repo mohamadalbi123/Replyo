@@ -21,7 +21,7 @@ export default function HowItWorksPage() {
         style={{
           maxWidth: "1180px",
           margin: "0 auto",
-          padding: "72px 28px 96px",
+          padding: "clamp(32px, 8vw, 72px) clamp(18px, 5vw, 28px) clamp(48px, 10vw, 96px)",
         }}
       >
         <div
@@ -47,8 +47,8 @@ export default function HowItWorksPage() {
 
           <h1
             style={{
-              fontSize: "54px",
-              lineHeight: 1.02,
+              fontSize: "clamp(34px, 9vw, 54px)",
+              lineHeight: 1.05,
               marginBottom: "18px",
               maxWidth: "760px",
             }}
@@ -58,7 +58,7 @@ export default function HowItWorksPage() {
 
           <p
             style={{
-              fontSize: "19px",
+              fontSize: "clamp(17px, 4.4vw, 19px)",
               lineHeight: 1.75,
               color: "#556070",
               maxWidth: "700px",
@@ -74,7 +74,7 @@ export default function HowItWorksPage() {
             background: "rgba(255,255,255,0.84)",
             border: "1px solid rgba(23,32,51,0.08)",
             borderRadius: "30px",
-            padding: "26px",
+            padding: "clamp(18px, 4vw, 26px)",
             boxShadow: "0 22px 50px rgba(48,63,90,0.1)",
             marginBottom: "24px",
             perspective: "1400px",
@@ -83,7 +83,7 @@ export default function HowItWorksPage() {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+              gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 240px), 1fr))",
               gap: "18px",
             }}
           >
@@ -107,12 +107,12 @@ export default function HowItWorksPage() {
                     letterSpacing: "0.08em",
                   }}
                 >
-                  STEP {String(index + 1).padStart(2, "0")}
+                  {t.how.stepLabel} {String(index + 1).padStart(2, "0")}
                 </div>
                 <h2
                   className="replyo-how-step-title"
                   style={{
-                    fontSize: "24px",
+                    fontSize: "clamp(22px, 5vw, 24px)",
                     lineHeight: 1.25,
                     marginBottom: "10px",
                   }}
@@ -138,7 +138,7 @@ export default function HowItWorksPage() {
             background: "#172033",
             color: "#fff8ec",
             borderRadius: "28px",
-            padding: "30px",
+            padding: "clamp(20px, 5vw, 30px)",
             boxShadow: "0 22px 50px rgba(23,32,51,0.18)",
             marginBottom: "24px",
           }}
@@ -155,7 +155,7 @@ export default function HowItWorksPage() {
           >
             {t.how.whyBadge}
           </div>
-          <h2 style={{ fontSize: "34px", lineHeight: 1.1, marginBottom: "14px" }}>
+          <h2 style={{ fontSize: "clamp(28px, 7vw, 34px)", lineHeight: 1.1, marginBottom: "14px" }}>
             {t.how.whyTitle}
           </h2>
           <p
@@ -172,7 +172,7 @@ export default function HowItWorksPage() {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+              gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 220px), 1fr))",
               gap: "12px",
             }}
           >
@@ -197,7 +197,7 @@ export default function HowItWorksPage() {
             background: "rgba(255,255,255,0.84)",
             border: "1px solid rgba(23,32,51,0.08)",
             borderRadius: "28px",
-            padding: "28px",
+            padding: "clamp(20px, 5vw, 28px)",
             boxShadow: "0 22px 50px rgba(48,63,90,0.1)",
             display: "flex",
             justifyContent: "space-between",
@@ -207,7 +207,7 @@ export default function HowItWorksPage() {
           }}
         >
           <div style={{ maxWidth: "650px" }}>
-            <h2 style={{ fontSize: "34px", lineHeight: 1.1, marginBottom: "10px" }}>
+            <h2 style={{ fontSize: "clamp(28px, 7vw, 34px)", lineHeight: 1.1, marginBottom: "10px" }}>
               {t.how.ctaTitle}
             </h2>
             <p style={{ color: "#5b6474", lineHeight: 1.75, margin: 0 }}>{t.how.ctaText}</p>

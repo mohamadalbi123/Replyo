@@ -22,10 +22,10 @@ export default function Home() {
         style={{
           maxWidth: "1180px",
           margin: "0 auto",
-          padding: "72px 30px 92px",
+          padding: "clamp(20px, 6vw, 72px) clamp(18px, 5vw, 30px) clamp(48px, 10vw, 92px)",
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
-          gap: "36px",
+          gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 300px), 1fr))",
+          gap: "clamp(22px, 5vw, 36px)",
           alignItems: "center",
         }}
       >
@@ -47,8 +47,8 @@ export default function Home() {
 
           <h1
             style={{
-              fontSize: "56px",
-              lineHeight: 1.02,
+              fontSize: "clamp(36px, 9vw, 56px)",
+              lineHeight: 1.05,
               marginBottom: "20px",
               maxWidth: "620px",
             }}
@@ -58,7 +58,7 @@ export default function Home() {
 
           <p
             style={{
-              fontSize: "19px",
+              fontSize: "clamp(17px, 4.4vw, 19px)",
               color: "#4a5568",
               marginBottom: "30px",
               maxWidth: "580px",
@@ -110,7 +110,7 @@ export default function Home() {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))",
+              gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 170px), 1fr))",
               gap: "12px",
               maxWidth: "640px",
             }}

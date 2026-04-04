@@ -36,7 +36,7 @@ export default function Footer() {
       style={{
         background: "#172033",
         color: "#fff8ec",
-        padding: "32px 28px 24px",
+        padding: "clamp(24px, 6vw, 32px) clamp(18px, 5vw, 28px) 24px",
         borderTop: "1px solid rgba(255,255,255,0.08)",
       }}
     >
@@ -44,7 +44,7 @@ export default function Footer() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "minmax(260px, 1.35fr) minmax(180px, 0.85fr) minmax(220px, 1fr)",
+            gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 220px), 1fr))",
             alignItems: "start",
             gap: "28px",
             marginBottom: "24px",

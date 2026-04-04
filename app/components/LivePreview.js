@@ -55,6 +55,7 @@ export default function LivePreview() {
   const [activeLanguageIndex, setActiveLanguageIndex] = useState(0);
   const [visibleCharacters, setVisibleCharacters] = useState(0);
   const [pulseStep, setPulseStep] = useState(0);
+  const [isCompact, setIsCompact] = useState(false);
   const activeLanguage = previewLanguages[activeLanguageIndex];
 
   useEffect(() => {
@@ -84,6 +85,19 @@ export default function LivePreview() {
     };
   }, [activeLanguage.reply.length]);
 
+  useEffect(() => {
+    function updateViewportMode() {
+      setIsCompact(window.innerWidth < 640);
+    }
+
+    updateViewportMode();
+    window.addEventListener("resize", updateViewportMode);
+
+    return () => {
+      window.removeEventListener("resize", updateViewportMode);
+    };
+  }, []);
+
   const typedReply = useMemo(
     () => activeLanguage.reply.slice(0, visibleCharacters),
     [activeLanguage.reply, visibleCharacters]
@@ -94,7 +108,7 @@ export default function LivePreview() {
       style={{
         position: "relative",
         borderRadius: "30px",
-        padding: "24px",
+        padding: "clamp(16px, 4vw, 24px)",
         background: "rgba(255,255,255,0.84)",
         border: "1px solid rgba(23,32,51,0.08)",
         boxShadow: "0 24px 60px rgba(40,55,90,0.14)",
@@ -124,7 +138,9 @@ export default function LivePreview() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "minmax(0, 1.1fr) minmax(220px, 0.9fr)",
+            gridTemplateColumns: isCompact
+              ? "minmax(0, 1fr)"
+              : "repeat(auto-fit, minmax(min(100%, 260px), 1fr))",
             gap: "16px",
           }}
         >
@@ -230,7 +246,7 @@ export default function LivePreview() {
                   <div
                     style={{
                       color: "#667085",
-                      fontSize: "14px",
+                      fontSize: isCompact ? "13px" : "14px",
                       lineHeight: 1.7,
                       direction: activeLanguage.direction,
                       textAlign:
@@ -254,7 +270,7 @@ export default function LivePreview() {
               style={{
                 background: "#172033",
                 color: "#fff",
-                padding: "18px",
+                padding: isCompact ? "16px" : "18px",
                 borderRadius: "22px",
                 boxShadow: "0 16px 30px rgba(23,32,51,0.16)",
               }}
@@ -284,7 +300,7 @@ export default function LivePreview() {
                 borderRadius: "22px",
                 border: "1px solid #f1e1a7",
                 boxShadow: "0 16px 30px rgba(23,32,51,0.08)",
-                padding: "18px",
+                padding: isCompact ? "16px" : "18px",
               }}
             >
               <div
@@ -317,8 +333,8 @@ export default function LivePreview() {
                 style={{
                   margin: 0,
                   color: "#172033",
-                  lineHeight: 1.85,
-                  minHeight: "150px",
+                  lineHeight: 1.8,
+                  minHeight: isCompact ? "120px" : "150px",
                   direction: activeLanguage.direction,
                   textAlign:
                     activeLanguage.direction === "rtl" ? "right" : "left",
@@ -334,13 +350,14 @@ export default function LivePreview() {
         <div
           style={{
             display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
+            justifyContent: isCompact ? "flex-start" : "space-between",
+            alignItems: isCompact ? "stretch" : "center",
+            flexDirection: isCompact ? "column" : "row",
             gap: "14px",
             flexWrap: "wrap",
           }}
         >
-          <div style={{ color: "#5b6474", fontSize: "14px" }}>
+          <div style={{ color: "#5b6474", fontSize: "14px", maxWidth: isCompact ? "100%" : "70%" }}>
             {t.livePreview.helper}
           </div>
 
@@ -356,6 +373,7 @@ export default function LivePreview() {
               borderRadius: "14px",
               padding: "14px 16px",
               fontWeight: "600",
+              width: isCompact ? "100%" : "auto",
             }}
           >
             {t.livePreview.test}
