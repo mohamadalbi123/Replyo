@@ -1,19 +1,20 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useSession } from "next-auth/react";
 import { useLanguage } from "./LanguageProvider";
 
 export default function Header() {
-  const { data: session, status } = useSession();
   const { t } = useLanguage();
-  const [isMounted, setIsMounted] = useState(false);
+  const pathname = usePathname();
   const [isCompact, setIsCompact] = useState(false);
+  const isAppArea =
+    pathname === "/dashboard" ||
+    pathname === "/inbox" ||
+    pathname === "/connect-google";
 
   useEffect(() => {
-    setIsMounted(true);
-
     function updateViewportMode() {
       setIsCompact(window.innerWidth < 768);
     }
@@ -25,9 +26,6 @@ export default function Header() {
       window.removeEventListener("resize", updateViewportMode);
     };
   }, []);
-
-  const isLoggedIn =
-    isMounted && status === "authenticated" && Boolean(session?.user?.email);
 
   return (
     <header
@@ -177,15 +175,13 @@ export default function Header() {
           {t.header.pricing}
         </Link>
 
-        {isLoggedIn ? (
-          <>
-            <Link
-              href="/dashboard"
-              style={{ textDecoration: "none", color: "#111827", whiteSpace: "nowrap" }}
-            >
-              {t.header.dashboard}
-            </Link>
-          </>
+        {isAppArea ? (
+          <Link
+            href="/dashboard"
+            style={{ textDecoration: "none", color: "#111827", whiteSpace: "nowrap" }}
+          >
+            {t.header.dashboard}
+          </Link>
         ) : (
           <Link
             href="/login"

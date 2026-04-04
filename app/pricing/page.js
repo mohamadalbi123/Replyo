@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
 import { useLanguage } from "../components/LanguageProvider";
 import {
   BILLING_STORAGE_KEY,
@@ -145,7 +144,6 @@ const pricingCopy = {
 
 export default function PricingPage() {
   const { language } = useLanguage();
-  const { data: session } = useSession();
   const router = useRouter();
   const copy = pricingCopy[language] || pricingCopy.en;
 
@@ -186,7 +184,7 @@ export default function PricingPage() {
       locationLimit: 1,
     });
 
-    router.push(session ? "/connect-google" : "/signup");
+    router.push("/signup");
   }
 
   return (

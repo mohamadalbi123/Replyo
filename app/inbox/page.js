@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { signOut, useSession } from "next-auth/react";
+import AuthSessionProvider from "../components/AuthSessionProvider";
 import { useLanguage } from "../components/LanguageProvider";
 import {
   CONNECTION_STORAGE_KEY,
@@ -743,6 +744,14 @@ function InboxContent() {
   );
 }
 
-export default function InboxPage() {
+function InboxPageContent() {
   return <InboxContent />;
+}
+
+export default function InboxPage() {
+  return (
+    <AuthSessionProvider>
+      <InboxPageContent />
+    </AuthSessionProvider>
+  );
 }

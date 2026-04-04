@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useSession, signOut } from "next-auth/react";
 import Link from "next/link";
+import AuthSessionProvider from "../components/AuthSessionProvider";
 import { useLanguage } from "../components/LanguageProvider";
 import {
   BILLING_STORAGE_KEY,
@@ -1587,6 +1588,14 @@ function DashboardContent() {
   );
 }
 
-export default function DashboardPage() {
+function DashboardPageContent() {
   return <DashboardContent />;
+}
+
+export default function DashboardPage() {
+  return (
+    <AuthSessionProvider>
+      <DashboardPageContent />
+    </AuthSessionProvider>
+  );
 }

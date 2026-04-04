@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
+import AuthSessionProvider from "../components/AuthSessionProvider";
 import { useLanguage } from "../components/LanguageProvider";
 import {
   BILLING_STORAGE_KEY,
@@ -835,6 +836,14 @@ function ConnectGoogleContent() {
   );
 }
 
-export default function ConnectGooglePage() {
+function ConnectGooglePageContent() {
   return <ConnectGoogleContent />;
+}
+
+export default function ConnectGooglePage() {
+  return (
+    <AuthSessionProvider>
+      <ConnectGooglePageContent />
+    </AuthSessionProvider>
+  );
 }
