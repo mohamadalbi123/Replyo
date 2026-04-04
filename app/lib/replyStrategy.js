@@ -169,6 +169,7 @@ export function getBusinessTypeGuidance(businessType) {
 
 export function inferReviewContext({ review, rating, businessType }) {
   const text = (review || "").toLowerCase();
+  const hasNumericRating = typeof rating === "number" && Number.isFinite(rating);
   const detectedTopics = TOPIC_RULES.filter(({ terms }) =>
     terms.some((term) => text.includes(term))
   ).map(({ topic }) => topic);
@@ -178,15 +179,15 @@ export function inferReviewContext({ review, rating, businessType }) {
 
   let sentiment = "neutral";
 
-  if ((rating || 0) >= 4 || positiveHits > negativeHits) {
+  if ((hasNumericRating && rating >= 4) || positiveHits > negativeHits) {
     sentiment = "positive";
   }
 
-  if ((rating || 0) <= 2 || negativeHits > positiveHits) {
+  if ((hasNumericRating && rating <= 2) || negativeHits > positiveHits) {
     sentiment = "negative";
   }
 
-  if ((rating || 0) === 3 && positiveHits === negativeHits) {
+  if (hasNumericRating && rating === 3 && positiveHits === negativeHits) {
     sentiment = "mixed";
   }
 
