@@ -1,11 +1,74 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import LivePreview from "./components/LivePreview";
 import { useLanguage } from "./components/LanguageProvider";
 
 export default function Home() {
   const { t, language } = useLanguage();
+  const [isMobile, setIsMobile] = useState(false);
+  const [hasMounted, setHasMounted] = useState(false);
+
+  useEffect(() => {
+    setHasMounted(true);
+
+    function updateViewport() {
+      setIsMobile(window.innerWidth < 768);
+    }
+
+    updateViewport();
+    window.addEventListener("resize", updateViewport);
+
+    return () => {
+      window.removeEventListener("resize", updateViewport);
+    };
+  }, []);
+
+  const ctaButtons = (
+    <div
+      style={{
+        display: "flex",
+        gap: "14px",
+        flexWrap: "wrap",
+        marginBottom: isMobile ? 0 : "26px",
+      }}
+    >
+      <Link
+        href="/test-replyo"
+        style={{
+          background: "#172033",
+          color: "#fff",
+          padding: "15px 24px",
+          borderRadius: "14px",
+          textDecoration: "none",
+          fontWeight: "600",
+          boxShadow: "0 16px 30px rgba(23,32,51,0.18)",
+          width: isMobile ? "100%" : "auto",
+          textAlign: "center",
+        }}
+      >
+        {t.home.try}
+      </Link>
+
+      <Link
+        href="/signup"
+        style={{
+          background: "rgba(255,255,255,0.72)",
+          color: "#172033",
+          padding: "15px 24px",
+          borderRadius: "14px",
+          textDecoration: "none",
+          fontWeight: "600",
+          border: "1px solid rgba(23,32,51,0.12)",
+          width: isMobile ? "100%" : "auto",
+          textAlign: "center",
+        }}
+      >
+        {t.home.create}
+      </Link>
+    </div>
+  );
 
   return (
     <main
@@ -68,44 +131,7 @@ export default function Home() {
             {t.home.description}
           </p>
 
-          <div
-            style={{
-              display: "flex",
-              gap: "14px",
-              flexWrap: "wrap",
-              marginBottom: "26px",
-            }}
-          >
-            <Link
-              href="/test-replyo"
-              style={{
-                background: "#172033",
-                color: "#fff",
-                padding: "15px 24px",
-                borderRadius: "14px",
-                textDecoration: "none",
-                fontWeight: "600",
-                boxShadow: "0 16px 30px rgba(23,32,51,0.18)",
-              }}
-            >
-              {t.home.try}
-            </Link>
-
-            <Link
-              href="/signup"
-              style={{
-                background: "rgba(255,255,255,0.72)",
-                color: "#172033",
-                padding: "15px 24px",
-                borderRadius: "14px",
-                textDecoration: "none",
-                fontWeight: "600",
-                border: "1px solid rgba(23,32,51,0.12)",
-              }}
-            >
-              {t.home.create}
-            </Link>
-          </div>
+          {hasMounted && !isMobile ? ctaButtons : null}
 
           <div
             style={{
@@ -152,7 +178,12 @@ export default function Home() {
           </div>
         </div>
 
-        <LivePreview />
+        <div>
+          <LivePreview showFooterAction={hasMounted ? !isMobile : false} />
+          {hasMounted && isMobile ? (
+            <div style={{ marginTop: "18px" }}>{ctaButtons}</div>
+          ) : null}
+        </div>
       </section>
     </main>
   );

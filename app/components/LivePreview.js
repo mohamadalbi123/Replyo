@@ -50,7 +50,7 @@ const previewLanguages = [
   },
 ];
 
-export default function LivePreview() {
+export default function LivePreview({ showFooterAction = true }) {
   const { t } = useLanguage();
   const [activeLanguageIndex, setActiveLanguageIndex] = useState(0);
   const [visibleCharacters, setVisibleCharacters] = useState(0);
@@ -350,34 +350,40 @@ export default function LivePreview() {
         <div
           style={{
             display: "flex",
-            justifyContent: isCompact ? "flex-start" : "space-between",
+            justifyContent: showFooterAction
+              ? isCompact
+                ? "flex-start"
+                : "space-between"
+              : "flex-start",
             alignItems: isCompact ? "stretch" : "center",
             flexDirection: isCompact ? "column" : "row",
             gap: "14px",
             flexWrap: "wrap",
           }}
         >
-          <div style={{ color: "#5b6474", fontSize: "14px", maxWidth: isCompact ? "100%" : "70%" }}>
+          <div style={{ color: "#5b6474", fontSize: "14px", maxWidth: showFooterAction && !isCompact ? "70%" : "100%" }}>
             {t.livePreview.helper}
           </div>
 
-          <Link
-            href="/test-replyo"
-            style={{
-              textDecoration: "none",
-              display: "inline-flex",
-              alignItems: "center",
-              justifyContent: "center",
-              background: "#172033",
-              color: "#fff",
-              borderRadius: "14px",
-              padding: "14px 16px",
-              fontWeight: "600",
-              width: isCompact ? "100%" : "auto",
-            }}
-          >
-            {t.livePreview.test}
-          </Link>
+          {showFooterAction ? (
+            <Link
+              href="/test-replyo"
+              style={{
+                textDecoration: "none",
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                background: "#172033",
+                color: "#fff",
+                borderRadius: "14px",
+                padding: "14px 16px",
+                fontWeight: "600",
+                width: isCompact ? "100%" : "auto",
+              }}
+            >
+              {t.livePreview.test}
+            </Link>
+          ) : null}
         </div>
       </div>
     </div>
