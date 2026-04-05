@@ -1,31 +1,19 @@
-import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
-
-async function googleFetch(accessToken, url) {
-  const response = await fetch(url, {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-    cache: "no-store",
-  });
-
-  const data = await response.json().catch(() => ({}));
-
-  if (!response.ok) {
-    const message =
-      data?.error?.message ||
-      data?.error?.status ||
-      "Google Business request failed.";
-
-    throw new Error(message);
-  }
-
-  return data;
-}
+import {
+  getAllowedLocationSelection,
+  getGoogleBusinessAccessToken,
+  listGoogleBusinessLocations,
+  requireReplyoSession,
+} from "../../../lib/googleBusinessServer";
 
 export async function GET() {
-  const cookieStore = await cookies();
-  const accessToken = cookieStore.get("replyo_gbp_access_token")?.value;
+  const session = await requireReplyoSession();
+
+  if (!session) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  const accessToken = await getGoogleBusinessAccessToken();
 
   if (!accessToken) {
     return NextResponse.json(
@@ -35,46 +23,22 @@ export async function GET() {
   }
 
   try {
-    const accountsData = await googleFetch(
-      accessToken,
-      "https://mybusinessaccountmanagement.googleapis.com/v1/accounts"
-    );
-
-    const accounts = accountsData.accounts || [];
-
-    const locationsByAccount = await Promise.all(
-      accounts.map(async (account) => {
-        const locationsData = await googleFetch(
-          accessToken,
-          `https://mybusinessbusinessinformation.googleapis.com/v1/${account.name}/locations?readMask=name,title,storeCode,websiteUri,primaryCategory,locationKey,metadata`
-        );
-
-        return (locationsData.locations || []).map((location) => ({
-          id: location.name,
-          accountName: account.accountName || account.name,
-          name:
-            location.title ||
-            location.locationKey?.placeId ||
-            location.name,
-          type:
-            location.primaryCategory?.displayName ||
-            location.primaryCategory?.name ||
-            "Business",
-          primaryCategory:
-            location.primaryCategory?.displayName ||
-            location.primaryCategory?.name ||
-            "Business",
-          placeId: location.locationKey?.placeId || "",
-        }));
-      })
-    );
+    const allLocations = await listGoogleBusinessLocations(accessToken);
+    const allowedSelection = await getAllowedLocationSelection(session);
+    const locations = allowedSelection
+      ? allLocations.filter((location) => location.id === allowedSelection.locationId)
+      : allLocations;
 
     return NextResponse.json({
-      locations: locationsByAccount.flat(),
+      locations,
+      lockedToLocation: Boolean(allowedSelection),
+      allowedLocationId: allowedSelection?.locationId || "",
     });
   } catch (error) {
     const message =
-      error instanceof Error ? error.message : "Failed to load Google Business locations.";
+      error instanceof Error
+        ? error.message
+        : "Failed to load Google Business locations.";
 
     return NextResponse.json(
       {

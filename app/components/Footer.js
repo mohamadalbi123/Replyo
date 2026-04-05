@@ -114,6 +114,15 @@ export default function Footer() {
               >
                 {t.footer.privacy}
               </Link>
+              <Link
+                href="/cookies"
+                style={{
+                  color: "rgba(255,248,236,0.82)",
+                  textDecoration: "none",
+                }}
+              >
+                {t.footer.cookies}
+              </Link>
               <div>{t.footer.googleNote}</div>
               <Link
                 href="/terms"

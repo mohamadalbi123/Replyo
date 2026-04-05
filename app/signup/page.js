@@ -195,8 +195,6 @@ export default function SignupPage() {
         <div
           style={{
             marginTop: "24px",
-            display: "grid",
-            gap: "12px",
           }}
         >
           <GoogleAuthButton
@@ -204,23 +202,6 @@ export default function SignupPage() {
             disabled={!hasAgreed}
             onBeforeSubmit={handleGoogleConsentCheck}
           />
-
-          <button
-            type="button"
-            onClick={() => alert("Apple signup will be added later.")}
-            style={{
-              width: "100%",
-              background: "#f3f4f6",
-              color: "#111827",
-              border: "1px solid #d1d5db",
-              borderRadius: "12px",
-              padding: "14px 18px",
-              fontSize: "16px",
-              cursor: "pointer",
-            }}
-          >
-            {t.auth.signupApple}
-          </button>
         </div>
 
         <div style={{ marginTop: "20px", textAlign: "center" }}>

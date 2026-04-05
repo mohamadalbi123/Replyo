@@ -1,6 +1,4 @@
 "use client";
-
-import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { useLanguage } from "./LanguageProvider";
 
@@ -16,7 +14,7 @@ const previewLanguages = [
   },
   {
     id: "ar",
-    customerName: "مريم",
+    customerName: "مريم خالد",
     review: "خدمة رائعة جدا، فريق ودود جدا، والمكان كان نظيفا للغاية.",
     reply:
       "شكرا جزيلا على تقييمك. سعدنا جدا لأنك استمتعت بزيارتك وشعرت بالترحيب من الفريق. نقدر دعمك ونتطلع لاستقبالك مرة أخرى قريبا.",
@@ -50,7 +48,7 @@ const previewLanguages = [
   },
 ];
 
-export default function LivePreview({ showFooterAction = true }) {
+export default function LivePreview() {
   const { t } = useLanguage();
   const [activeLanguageIndex, setActiveLanguageIndex] = useState(0);
   const [visibleCharacters, setVisibleCharacters] = useState(0);
@@ -350,40 +348,16 @@ export default function LivePreview({ showFooterAction = true }) {
         <div
           style={{
             display: "flex",
-            justifyContent: showFooterAction
-              ? isCompact
-                ? "flex-start"
-                : "space-between"
-              : "flex-start",
+            justifyContent: "flex-start",
             alignItems: isCompact ? "stretch" : "center",
             flexDirection: isCompact ? "column" : "row",
             gap: "14px",
             flexWrap: "wrap",
           }}
         >
-          <div style={{ color: "#5b6474", fontSize: "14px", maxWidth: showFooterAction && !isCompact ? "70%" : "100%" }}>
+          <div style={{ color: "#5b6474", fontSize: "14px", maxWidth: "100%" }}>
             {t.livePreview.helper}
           </div>
-
-          {showFooterAction ? (
-            <Link
-              href="/test-replyo"
-              style={{
-                textDecoration: "none",
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-                background: "#172033",
-                color: "#fff",
-                borderRadius: "14px",
-                padding: "14px 16px",
-                fontWeight: "600",
-                width: isCompact ? "100%" : "auto",
-              }}
-            >
-              {t.livePreview.test}
-            </Link>
-          ) : null}
         </div>
       </div>
     </div>

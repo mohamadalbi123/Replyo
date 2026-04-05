@@ -8,11 +8,60 @@ import { useLanguage } from "./components/LanguageProvider";
 export default function Home() {
   const { t, language } = useLanguage();
   const [isMobile, setIsMobile] = useState(false);
-  const [hasMounted, setHasMounted] = useState(false);
+  const [featuresLifted, setFeaturesLifted] = useState(false);
+
+  const featureCards = [
+    {
+      title: t.home.saveTitle,
+      text: t.home.saveText,
+      icon: "✓",
+      accent: "#23a26d",
+      background: "linear-gradient(180deg, rgba(255,248,224,0.96) 0%, rgba(255,255,255,0.84) 100%)",
+      featured: true,
+    },
+    {
+      title: t.home.proTitle,
+      text: t.home.proText,
+      icon: "✓",
+      accent: "#23a26d",
+      background: "rgba(255,255,255,0.78)",
+      featured: false,
+    },
+    {
+      title: t.home.missTitle,
+      text: t.home.missText,
+      icon: "✓",
+      accent: "#23a26d",
+      background: "rgba(255,255,255,0.78)",
+      featured: false,
+    },
+    {
+      title: t.home.easyTitle,
+      text: t.home.easyText,
+      icon: "✓",
+      accent: "#23a26d",
+      background: "rgba(255,255,255,0.78)",
+      featured: false,
+    },
+    {
+      title: t.home.languageTitle,
+      text: t.home.languageText,
+      icon: "✓",
+      accent: "#23a26d",
+      background: "rgba(255,255,255,0.78)",
+      featured: false,
+    },
+    {
+      title: t.home.approvalTitle,
+      text: t.home.approvalText,
+      icon: "✓",
+      accent: "#23a26d",
+      background: "rgba(255,255,255,0.78)",
+      featured: false,
+    },
+  ];
 
   useEffect(() => {
-    setHasMounted(true);
-
     function updateViewport() {
       setIsMobile(window.innerWidth < 768);
     }
@@ -22,6 +71,16 @@ export default function Home() {
 
     return () => {
       window.removeEventListener("resize", updateViewport);
+    };
+  }, []);
+
+  useEffect(() => {
+    const intervalId = window.setInterval(() => {
+      setFeaturesLifted((current) => !current);
+    }, 1300);
+
+    return () => {
+      window.clearInterval(intervalId);
     };
   }, []);
 
@@ -93,30 +152,28 @@ export default function Home() {
         }}
       >
         <div>
-          <p
-            style={{
-              display: "inline-block",
-              background: "#fff0c2",
-              color: "#7a5600",
-              padding: "8px 14px",
-              borderRadius: "999px",
-              fontSize: "14px",
-              marginBottom: "22px",
-              fontWeight: "600",
-            }}
-          >
-            {t.home.badge}
-          </p>
-
           <h1
             style={{
               fontSize: "clamp(36px, 9vw, 56px)",
               lineHeight: 1.05,
               marginBottom: "20px",
               maxWidth: "620px",
+              letterSpacing: "-0.03em",
+              textWrap: "balance",
             }}
           >
-            {t.home.title}
+            <span
+              style={{
+                display: "inline",
+                background:
+                  "linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 62%, rgba(255,225,132,0.55) 62%, rgba(255,225,132,0.55) 100%)",
+                boxDecorationBreak: "clone",
+                WebkitBoxDecorationBreak: "clone",
+                padding: "0 0.08em",
+              }}
+            >
+              {t.home.title}
+            </span>
           </h1>
 
           <p
@@ -131,35 +188,69 @@ export default function Home() {
             {t.home.description}
           </p>
 
-          {hasMounted && !isMobile ? ctaButtons : null}
-
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 170px), 1fr))",
+              gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 180px), 1fr))",
               gap: "12px",
-              maxWidth: "640px",
+              maxWidth: "760px",
             }}
           >
-            {[
-              [t.home.saveTitle, t.home.saveText],
-              [t.home.proTitle, t.home.proText],
-              [t.home.missTitle, t.home.missText],
-            ].map(([title, text]) => (
+            {featureCards.map(({ title, text, icon, accent, background, featured }, index) => (
               <div
                 key={title}
                 style={{
-                  background: "rgba(255,255,255,0.74)",
+                  background,
                   borderRadius: "18px",
                   padding: "16px",
-                  border: "1px solid rgba(23,32,51,0.08)",
+                  border: featured
+                    ? "1px solid rgba(244,180,0,0.28)"
+                    : "1px solid rgba(23,32,51,0.08)",
+                  minHeight: "124px",
+                  boxShadow:
+                    featuresLifted
+                      ? "0 18px 34px rgba(23,32,51,0.14)"
+                      : featured
+                        ? "0 16px 30px rgba(244,180,0,0.12)"
+                        : "0 10px 24px rgba(23,32,51,0.06)",
+                  transform:
+                    featuresLifted
+                      ? "translateY(-6px) scale(1.035)"
+                      : featured
+                        ? "translateY(-2px)"
+                        : "translateY(0)",
+                  filter: featuresLifted ? "saturate(1.06)" : "saturate(1)",
+                  transition:
+                    "transform 520ms ease, box-shadow 520ms ease, filter 520ms ease, background 520ms ease",
                 }}
               >
+                <div
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    width: "30px",
+                    height: "30px",
+                    borderRadius: "999px",
+                    marginBottom: "10px",
+                    background: `${accent}18`,
+                    color: accent,
+                    fontSize: "15px",
+                    fontWeight: "700",
+                    transform: featuresLifted ? "scale(1.14)" : "scale(1)",
+                    background:
+                      featuresLifted ? `${accent}2e` : `${accent}18`,
+                    transition: "transform 520ms ease, background 520ms ease",
+                  }}
+                >
+                  {icon}
+                </div>
                 <div
                   style={{
                     fontSize: "14px",
                     fontWeight: "700",
                     marginBottom: "6px",
+                    color: "#172033",
                   }}
                 >
                   {title}
@@ -176,15 +267,15 @@ export default function Home() {
               </div>
             ))}
           </div>
+
+          <div style={{ marginTop: "24px" }}>{ctaButtons}</div>
         </div>
 
         <div>
-          <LivePreview showFooterAction={hasMounted ? !isMobile : false} />
-          {hasMounted && isMobile ? (
-            <div style={{ marginTop: "18px" }}>{ctaButtons}</div>
-          ) : null}
+          <LivePreview />
         </div>
       </section>
+
     </main>
   );
 }

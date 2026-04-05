@@ -315,6 +315,40 @@ function ConnectGoogleContent() {
   }, []);
 
   useEffect(() => {
+    async function loadSavedSelection() {
+      try {
+        const response = await fetch("/api/google-business/selection");
+        const data = await response.json();
+
+        if (!response.ok || !data.selection) {
+          return;
+        }
+
+        const nextConnection = {
+          isConnected: true,
+          provider: "Google Business Profile",
+          selectedLocationId: data.selection.locationId,
+          selectedLocationName: data.selection.locationName,
+          selectedLocationType: data.selection.locationType,
+          selectedLocationCategory: data.selection.locationCategory,
+          selectedLocationCity: data.selection.locationCity,
+          syncedAt: new Date().toISOString(),
+        };
+
+        writeStoredValue(CONNECTION_STORAGE_KEY, nextConnection);
+        setConnection(nextConnection);
+        setSelectedLocationId(data.selection.locationId);
+      } catch {
+        // Keep demo local state if the server selection is unavailable.
+      }
+    }
+
+    if (status === "authenticated") {
+      loadSavedSelection();
+    }
+  }, [status]);
+
+  useEffect(() => {
     if (status === "unauthenticated") {
       router.replace("/login");
     }
@@ -341,7 +375,9 @@ function ConnectGoogleContent() {
       }
 
       setAvailableLocations(data.locations || []);
-      setSelectedLocationId((currentId) => currentId || data.locations?.[0]?.id || "");
+      setSelectedLocationId(
+        data.allowedLocationId || data.locations?.[0]?.id || ""
+      );
       setIsSelectingLocation(true);
     } catch (error) {
       setLocationsError(
@@ -354,12 +390,37 @@ function ConnectGoogleContent() {
     }
   }
 
-  function handleConnect() {
+  async function handleConnect() {
     const selectedLocation = availableLocations.find(
       (location) => location.id === selectedLocationId
     );
 
     if (!selectedLocation) {
+      return;
+    }
+
+    try {
+      const response = await fetch("/api/google-business/selection", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ locationId: selectedLocation.id }),
+      });
+
+      const data = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        throw new Error(
+          data.error || "Could not save the selected Google Business location."
+        );
+      }
+    } catch (error) {
+      setLocationsError(
+        error instanceof Error
+          ? error.message
+          : "Could not save the selected Google Business location."
+      );
       return;
     }
 
@@ -389,7 +450,15 @@ function ConnectGoogleContent() {
     setIsSelectingLocation(true);
   }
 
-  function handleDisconnect() {
+  async function handleDisconnect() {
+    try {
+      await fetch("/api/google-business/selection", {
+        method: "DELETE",
+      });
+    } catch {
+      // Clear local state even if the server cookie is already gone.
+    }
+
     writeStoredValue(CONNECTION_STORAGE_KEY, defaultConnection);
     setConnection(defaultConnection);
     setIsSelectingLocation(false);
