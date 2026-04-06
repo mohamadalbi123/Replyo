@@ -58,6 +58,9 @@ export const defaultBilling = {
   nextBillingDate: "",
   selectedAt: "",
   locationLimit: 0,
+  paymentBrand: "",
+  cardLast4: "",
+  cardExpiry: "",
 };
 
 export const defaultReviews = [

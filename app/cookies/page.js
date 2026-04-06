@@ -79,49 +79,51 @@ export default function CookiePage() {
     <main
       style={{
         minHeight: "100vh",
-        background:
-          "radial-gradient(circle at top left, #fff6df 0%, #f7f4ec 40%, #edf3ff 100%)",
-        padding: "56px 20px 90px",
+        background: "#07090d",
+        padding: "40px 20px 90px",
         fontFamily: "Arial, sans-serif",
+        color: "#f8fafc",
         direction: language === "ar" ? "rtl" : "ltr",
       }}
     >
       <div style={{ maxWidth: "960px", margin: "0 auto" }}>
         <div style={{ marginBottom: "18px" }}>
-          <Link href="/" style={{ color: "#4b5563", textDecoration: "none" }}>
+          <Link href="/" style={{ color: "rgba(248,250,252,0.62)", textDecoration: "none" }}>
             ← {cookieCopy.back}
           </Link>
         </div>
 
         <section
           style={{
-            background: "#ffffff",
+            background: "rgba(255,255,255,0.025)",
             borderRadius: "28px",
             padding: "34px",
-            border: "1px solid rgba(23,32,51,0.08)",
-            boxShadow: "0 18px 45px rgba(82,95,127,0.12)",
+            border: "1px solid rgba(255,255,255,0.08)",
           }}
         >
           <div
             style={{
               display: "inline-block",
-              padding: "8px 12px",
+              padding: "7px 12px",
               borderRadius: "999px",
-              background: "#e8f5ec",
-              color: "#166b45",
-              fontSize: "13px",
+              background: "rgba(255,255,255,0.04)",
+              color: "rgba(248,250,252,0.62)",
+              fontSize: "12px",
               fontWeight: "700",
               marginBottom: "16px",
+              border: "1px solid rgba(255,255,255,0.08)",
+              textTransform: "uppercase",
+              letterSpacing: "0.08em",
             }}
           >
             {cookieCopy.badge}
           </div>
 
-          <h1 style={{ fontSize: "46px", lineHeight: 1.05, marginBottom: "14px", color: "#172033" }}>
+          <h1 style={{ fontSize: "clamp(36px, 7vw, 58px)", lineHeight: 0.96, letterSpacing: "-0.07em", marginBottom: "14px", color: "#ffffff" }}>
             {cookieCopy.title}
           </h1>
 
-          <p style={{ color: "#5b6474", lineHeight: 1.75, marginBottom: "30px" }}>{cookieCopy.intro}</p>
+          <p style={{ color: "rgba(248,250,252,0.64)", lineHeight: 1.75, marginBottom: "30px" }}>{cookieCopy.intro}</p>
 
           <div style={{ display: "grid", gap: "22px" }}>
             {cookieCopy.sections.map(([heading, points]) => (
@@ -130,14 +132,14 @@ export default function CookiePage() {
                 style={{
                   padding: "20px 22px",
                   borderRadius: "22px",
-                  background: "#f9fbff",
-                  border: "1px solid rgba(23,32,51,0.08)",
+                  background: "rgba(255,255,255,0.03)",
+                  border: "1px solid rgba(255,255,255,0.08)",
                 }}
               >
-                <h2 style={{ margin: "0 0 12px", color: "#172033", fontSize: "22px" }}>{heading}</h2>
+                <h2 style={{ margin: "0 0 12px", color: "#ffffff", fontSize: "22px" }}>{heading}</h2>
                 <div style={{ display: "grid", gap: "10px" }}>
                   {points.map((point) => (
-                    <p key={point} style={{ margin: 0, color: "#5b6474", lineHeight: 1.75 }}>
+                    <p key={point} style={{ margin: 0, color: "rgba(248,250,252,0.66)", lineHeight: 1.75 }}>
                       {point}
                     </p>
                   ))}
@@ -146,7 +148,7 @@ export default function CookiePage() {
             ))}
           </div>
 
-          <p style={{ margin: "26px 0 0", color: "#5b6474", fontWeight: "600" }}>{cookieCopy.updated}</p>
+          <p style={{ margin: "26px 0 0", color: "rgba(248,250,252,0.56)", fontWeight: "600" }}>{cookieCopy.updated}</p>
         </section>
       </div>
     </main>

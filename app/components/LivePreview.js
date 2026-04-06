@@ -52,7 +52,6 @@ export default function LivePreview() {
   const { t } = useLanguage();
   const [activeLanguageIndex, setActiveLanguageIndex] = useState(0);
   const [visibleCharacters, setVisibleCharacters] = useState(0);
-  const [pulseStep, setPulseStep] = useState(0);
   const [isCompact, setIsCompact] = useState(false);
   const activeLanguage = previewLanguages[activeLanguageIndex];
 
@@ -67,10 +66,6 @@ export default function LivePreview() {
       });
     }, 60);
 
-    const pulseInterval = window.setInterval(() => {
-      setPulseStep((current) => (current + 1) % 3);
-    }, 700);
-
     const languageInterval = window.setInterval(() => {
       setActiveLanguageIndex((current) => (current + 1) % previewLanguages.length);
       setVisibleCharacters(0);
@@ -78,7 +73,6 @@ export default function LivePreview() {
 
     return () => {
       window.clearInterval(typingInterval);
-      window.clearInterval(pulseInterval);
       window.clearInterval(languageInterval);
     };
   }, [activeLanguage.reply.length]);
@@ -105,27 +99,26 @@ export default function LivePreview() {
     <div
       style={{
         position: "relative",
-        borderRadius: "30px",
-        padding: "clamp(16px, 4vw, 24px)",
-        background: "rgba(255,255,255,0.84)",
-        border: "1px solid rgba(23,32,51,0.08)",
-        boxShadow: "0 24px 60px rgba(40,55,90,0.14)",
+        borderRadius: "28px",
+        padding: "18px",
+        background:
+          "linear-gradient(180deg, rgba(17,17,17,1) 0%, rgba(20,20,22,1) 100%)",
+        border: "1px solid rgba(255,255,255,0.08)",
+        boxShadow: "none",
         overflow: "hidden",
       }}
     >
       <div
         style={{
           position: "absolute",
-          top: "-100px",
-          right: "-60px",
-          width: "240px",
-          height: "240px",
+          inset: "0 auto auto 0",
+          width: "100%",
+          height: "2px",
           background:
-            "radial-gradient(circle, rgba(66,133,244,0.16) 0%, rgba(66,133,244,0) 72%)",
-          pointerEvents: "none",
+            "linear-gradient(90deg, #4285F4 0%, #34A853 33%, #FBBC05 66%, #EA4335 100%)",
+          opacity: 0.95,
         }}
       />
-
       <div
         style={{
           position: "relative",
@@ -144,17 +137,17 @@ export default function LivePreview() {
         >
           <div
             style={{
-              background: "#fff",
-              borderRadius: "24px",
-              border: "1px solid #e2e8f3",
-              boxShadow: "0 16px 30px rgba(23,32,51,0.08)",
+              background: "rgba(255,255,255,0.035)",
+              borderRadius: "22px",
+              border: "1px solid rgba(66,133,244,0.18)",
+              boxShadow: "none",
               overflow: "hidden",
             }}
           >
             <div
               style={{
                 padding: "18px 18px 16px",
-                borderBottom: "1px solid #eef2f7",
+                borderBottom: "1px solid rgba(255,255,255,0.08)",
               }}
             >
               <div
@@ -166,8 +159,14 @@ export default function LivePreview() {
                 }}
               >
                 <div>
-                  <div style={{ fontSize: "24px", fontWeight: "700", color: "#172033" }}>
-                    {t.livePreview.reviewTitle}
+                  <div style={{ fontSize: "24px", fontWeight: "700", color: "#f8fafc" }}>
+                    <span style={{ color: "#4285F4" }}>G</span>
+                    <span style={{ color: "#EA4335" }}>o</span>
+                    <span style={{ color: "#FBBC05" }}>o</span>
+                    <span style={{ color: "#4285F4" }}>g</span>
+                    <span style={{ color: "#34A853" }}>l</span>
+                    <span style={{ color: "#EA4335" }}>e</span>
+                    <span style={{ color: "#f8fafc" }}> review</span>
                   </div>
                   <div
                     style={{
@@ -176,11 +175,11 @@ export default function LivePreview() {
                       alignItems: "center",
                       gap: "8px",
                       flexWrap: "wrap",
-                      color: "#667085",
+                      color: "rgba(248,250,252,0.68)",
                       fontSize: "14px",
                     }}
                   >
-                    <span style={{ color: "#f4b400", letterSpacing: "1px" }}>★★★★★</span>
+                    <span style={{ color: "rgba(255,255,255,0.82)", letterSpacing: "1px" }}>★★★★★</span>
                     <span>{t.livePreview.reviewDetected}</span>
                   </div>
                 </div>
@@ -189,13 +188,14 @@ export default function LivePreview() {
                   style={{
                     padding: "8px 12px",
                     borderRadius: "999px",
-                    background: "#f5f8ff",
-                    color: "#2f64c6",
+                    background:
+                      "linear-gradient(90deg, rgba(66,133,244,0.16) 0%, rgba(52,168,83,0.12) 100%)",
+                    color: "#f3f4f6",
                     fontSize: "12px",
                     fontWeight: "700",
                   }}
                 >
-                  {t.livePreview.livePreview}
+                  Preview
                 </div>
               </div>
             </div>
@@ -214,11 +214,11 @@ export default function LivePreview() {
                     width: "42px",
                     height: "42px",
                     borderRadius: "50%",
-                    background: "#fce7df",
+                    background: "rgba(255,255,255,0.08)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    color: "#9f3a21",
+                    color: "#f8fafc",
                     fontWeight: "700",
                     flexShrink: 0,
                   }}
@@ -230,7 +230,7 @@ export default function LivePreview() {
                   <div
                     style={{
                       fontWeight: "700",
-                      color: "#172033",
+                      color: "#f8fafc",
                       direction: activeLanguage.direction,
                       textAlign:
                         activeLanguage.direction === "rtl" ? "right" : "left",
@@ -238,12 +238,12 @@ export default function LivePreview() {
                   >
                     {activeLanguage.customerName}
                   </div>
-                  <div style={{ color: "#f4b400", letterSpacing: "1px", fontSize: "13px", margin: "4px 0 6px" }}>
+                  <div style={{ color: "rgba(255,255,255,0.82)", letterSpacing: "1px", fontSize: "13px", margin: "4px 0 6px" }}>
                     ★★★★★
                   </div>
                   <div
                     style={{
-                      color: "#667085",
+                      color: "rgba(248,250,252,0.72)",
                       fontSize: isCompact ? "13px" : "14px",
                       lineHeight: 1.7,
                       direction: activeLanguage.direction,
@@ -260,105 +260,57 @@ export default function LivePreview() {
 
           <div
             style={{
-              display: "grid",
-              gap: "16px",
+              background: "rgba(255,255,255,0.03)",
+              borderRadius: "22px",
+              border: "1px solid rgba(234,67,53,0.16)",
+              boxShadow: "none",
+              padding: isCompact ? "16px" : "18px",
             }}
           >
             <div
               style={{
-                background: "#172033",
-                color: "#fff",
-                padding: isCompact ? "16px" : "18px",
-                borderRadius: "22px",
-                boxShadow: "0 16px 30px rgba(23,32,51,0.16)",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                gap: "10px",
+                marginBottom: "12px",
               }}
             >
-              <div style={{ fontSize: "12px", opacity: 0.72, marginBottom: "8px" }}>
-                {t.livePreview.status}
+              <div style={{ fontSize: "13px", color: "rgba(248,250,252,0.68)", fontWeight: "700" }}>
+                Replyo reply
               </div>
-              <div style={{ fontSize: "24px", fontWeight: "700", marginBottom: "10px" }}>
-                {t.livePreview.drafting}
-              </div>
-              <div style={{ display: "flex", gap: "6px" }}>
-                {[0, 1, 2].map((index) => (
-                  <span
-                    key={index}
-                    className="replyo-pulse-dot"
-                    style={{
-                      background: pulseStep === index ? "#7db0ff" : "rgba(125,176,255,0.28)",
-                    }}
-                  />
-                ))}
-              </div>
-            </div>
-
-            <div
-              style={{
-                background: "#fffdf6",
-                borderRadius: "22px",
-                border: "1px solid #f1e1a7",
-                boxShadow: "0 16px 30px rgba(23,32,51,0.08)",
-                padding: isCompact ? "16px" : "18px",
-              }}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  gap: "10px",
-                  marginBottom: "12px",
-                }}
-              >
-                <div style={{ fontSize: "13px", color: "#667085", fontWeight: "700" }}>
-                  {t.livePreview.draft}
-                </div>
                 <div
                   style={{
                     padding: "8px 10px",
                     borderRadius: "999px",
-                    background: "rgba(66,133,244,0.1)",
-                    color: "#2f64c6",
+                    background:
+                      "linear-gradient(90deg, rgba(66,133,244,0.16) 0%, rgba(251,188,5,0.12) 100%)",
+                    color: "#dbe7ff",
                     fontSize: "12px",
                     fontWeight: "700",
                   }}
-                >
-                  {t.livePreview.reviewFirst}
-                </div>
-              </div>
-
-              <p
-                style={{
-                  margin: 0,
-                  color: "#172033",
-                  lineHeight: 1.8,
-                  minHeight: isCompact ? "120px" : "150px",
-                  direction: activeLanguage.direction,
-                  textAlign:
-                    activeLanguage.direction === "rtl" ? "right" : "left",
-                }}
               >
-                {typedReply}
-                <span className="replyo-cursor" />
-              </p>
+                {t.livePreview.reviewFirst}
+              </div>
             </div>
+
+            <p
+              style={{
+                margin: 0,
+                color: "#f8fafc",
+                lineHeight: 1.8,
+                minHeight: isCompact ? "120px" : "150px",
+                direction: activeLanguage.direction,
+                textAlign:
+                  activeLanguage.direction === "rtl" ? "right" : "left",
+              }}
+            >
+              {typedReply}
+              <span className="replyo-cursor" />
+            </p>
           </div>
         </div>
 
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "flex-start",
-            alignItems: isCompact ? "stretch" : "center",
-            flexDirection: isCompact ? "column" : "row",
-            gap: "14px",
-            flexWrap: "wrap",
-          }}
-        >
-          <div style={{ color: "#5b6474", fontSize: "14px", maxWidth: "100%" }}>
-            {t.livePreview.helper}
-          </div>
-        </div>
       </div>
     </div>
   );

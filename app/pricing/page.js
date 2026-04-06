@@ -394,6 +394,9 @@ export default function PricingPage() {
       nextBillingDate,
       selectedAt: new Date().toISOString(),
       locationLimit,
+      paymentBrand: "Visa",
+      cardLast4: "4242",
+      cardExpiry: "08/28",
     });
 
     router.push("/signup");
@@ -403,38 +406,38 @@ export default function PricingPage() {
     <main
       style={{
         minHeight: "100vh",
-        background:
-          "radial-gradient(circle at top left, #fff6df 0%, #f7f4ec 42%, #edf3ff 100%)",
+        background: "#07090d",
         padding: "clamp(28px, 6vw, 56px) 20px 90px",
         fontFamily: "Arial, sans-serif",
         direction: language === "ar" ? "rtl" : "ltr",
       }}
     >
-      <div style={{ maxWidth: "1180px", margin: "0 auto" }}>
+      <div style={{ maxWidth: "1120px", margin: "0 auto" }}>
         <div style={{ marginBottom: "18px" }}>
-          <Link href="/" style={{ color: "#4b5563", textDecoration: "none" }}>
+          <Link href="/" style={{ color: "rgba(248,250,252,0.62)", textDecoration: "none" }}>
             ← {copy.back}
           </Link>
         </div>
 
         <section
           style={{
-            background: "#172033",
-            color: "#fff8ec",
-            borderRadius: "30px",
-            padding: "clamp(24px, 5vw, 40px)",
-            boxShadow: "0 22px 55px rgba(23,32,51,0.18)",
-            marginBottom: "26px",
+            color: "#f8fafc",
+            marginBottom: "28px",
           }}
         >
           <div
             style={{
               display: "inline-block",
-              background: "rgba(255,255,255,0.12)",
+              background: "rgba(255,255,255,0.04)",
+              border: "1px solid rgba(255,255,255,0.08)",
               borderRadius: "999px",
-              padding: "8px 12px",
-              fontSize: "13px",
+              padding: "7px 12px",
+              fontSize: "12px",
               marginBottom: "16px",
+              color: "rgba(248,250,252,0.62)",
+              fontWeight: "700",
+              textTransform: "uppercase",
+              letterSpacing: "0.08em",
             }}
           >
             {copy.badge}
@@ -451,8 +454,9 @@ export default function PricingPage() {
             <div>
               <h1
                 style={{
-                  fontSize: "clamp(34px, 7vw, 52px)",
-                  lineHeight: 1.05,
+                  fontSize: "clamp(38px, 7vw, 64px)",
+                  lineHeight: 0.96,
+                  letterSpacing: "-0.07em",
                   marginBottom: "14px",
                 }}
               >
@@ -460,9 +464,9 @@ export default function PricingPage() {
               </h1>
               <p
                 style={{
-                  maxWidth: "760px",
-                  color: "rgba(255,248,236,0.82)",
-                  fontSize: "clamp(16px, 3.5vw, 18px)",
+                  maxWidth: "620px",
+                  color: "rgba(248,250,252,0.64)",
+                  fontSize: "clamp(16px, 3vw, 18px)",
                   lineHeight: 1.7,
                   margin: 0,
                 }}
@@ -486,8 +490,8 @@ export default function PricingPage() {
                 display: "inline-flex",
                 alignItems: "center",
                 gap: "8px",
-                background: "rgba(23,32,51,0.06)",
-                border: "1px solid rgba(23,32,51,0.1)",
+                background: "rgba(255,255,255,0.04)",
+                border: "1px solid rgba(255,255,255,0.08)",
                 borderRadius: "999px",
                 padding: "6px",
                 width: isMobile ? "100%" : "auto",
@@ -509,9 +513,9 @@ export default function PricingPage() {
                     fontWeight: "700",
                     fontSize: "14px",
                     background:
-                      billingCycle === option.id ? "#172033" : "transparent",
+                      billingCycle === option.id ? "#ffffff" : "transparent",
                     color:
-                      billingCycle === option.id ? "#fff8ec" : "#172033",
+                      billingCycle === option.id ? "#07090d" : "rgba(248,250,252,0.72)",
                     minWidth: isMobile ? "calc(50% - 4px)" : "140px",
                   }}
                 >
@@ -525,8 +529,8 @@ export default function PricingPage() {
                 style={{
                   display: "inline-block",
                   marginTop: "12px",
-                  background: "rgba(215,169,75,0.16)",
-                  color: "#8d6413",
+                  background: "rgba(251,188,5,0.12)",
+                  color: "#f4d36a",
                   borderRadius: "999px",
                   padding: "8px 12px",
                   fontSize: "12px",
@@ -553,15 +557,12 @@ export default function PricingPage() {
             <article
               key={plan.id}
               style={{
-                background: "#ffffff",
-                borderRadius: "28px",
+                background: "rgba(255,255,255,0.025)",
+                borderRadius: "26px",
                 padding: "28px",
                 border: plan.highlight
-                  ? "1px solid rgba(215,169,75,0.55)"
-                  : "1px solid rgba(23,32,51,0.08)",
-                boxShadow: plan.highlight
-                  ? "0 22px 45px rgba(215,169,75,0.14)"
-                  : "0 16px 38px rgba(82,95,127,0.12)",
+                  ? "1px solid rgba(251,188,5,0.42)"
+                  : "1px solid rgba(255,255,255,0.08)",
                 display: "grid",
                 gridTemplateRows: "auto auto auto auto",
                 gap: "18px",
@@ -578,8 +579,8 @@ export default function PricingPage() {
                   width: "100%",
                   height: plan.highlight ? "6px" : "4px",
                   background: plan.highlight
-                    ? "linear-gradient(90deg, #d7a94b 0%, #f2d37b 100%)"
-                    : "linear-gradient(90deg, rgba(23,32,51,0.14) 0%, rgba(23,32,51,0.04) 100%)",
+                    ? "linear-gradient(90deg, #FBBC05 0%, #FDE68A 100%)"
+                    : "linear-gradient(90deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.03) 100%)",
                 }}
               />
 
@@ -587,7 +588,7 @@ export default function PricingPage() {
                 <h2
                   style={{
                     fontSize: "30px",
-                    color: "#172033",
+                    color: "#ffffff",
                     marginBottom: "10px",
                     lineHeight: 1.1,
                   }}
@@ -602,9 +603,9 @@ export default function PricingPage() {
                   }}
                 >
                   <div
-                    style={{
+                  style={{
                       fontSize: "13px",
-                      color: "#667085",
+                      color: "rgba(248,250,252,0.48)",
                       marginBottom: "4px",
                       fontWeight: "700",
                     }}
@@ -612,8 +613,8 @@ export default function PricingPage() {
                     {copy.idealForLabel}
                   </div>
                   <div
-                    style={{
-                      color: "#172033",
+                  style={{
+                      color: "#ffffff",
                       fontWeight: "700",
                       lineHeight: 1.5,
                       fontSize: "14px",
@@ -625,8 +626,8 @@ export default function PricingPage() {
 
                 <p
                   style={{
-                    color: "#5b6473",
-                    lineHeight: 1.7,
+                    color: "rgba(248,250,252,0.6)",
+                    lineHeight: 1.65,
                     margin: 0,
                     fontSize: "15px",
                     maxWidth: "34ch",
@@ -641,7 +642,7 @@ export default function PricingPage() {
                   style={{
                     fontSize: "46px",
                     fontWeight: "800",
-                    color: "#172033",
+                    color: "#ffffff",
                     letterSpacing: "-0.05em",
                     lineHeight: 1,
                     marginBottom: "10px",
@@ -652,7 +653,7 @@ export default function PricingPage() {
 
                 <div
                   style={{
-                    color: "#5b6473",
+                    color: "rgba(248,250,252,0.58)",
                     fontSize: "14px",
                     fontWeight: "700",
                     marginBottom: billingCycle === "yearly" ? "6px" : "14px",
@@ -664,7 +665,7 @@ export default function PricingPage() {
                 {billingCycle === "yearly" ? (
                   <div
                     style={{
-                      color: "#9a6f14",
+                      color: "#f4d36a",
                       fontSize: "13px",
                       fontWeight: "700",
                       marginBottom: "14px",
@@ -680,7 +681,7 @@ export default function PricingPage() {
                   display: "grid",
                   gap: "10px",
                   paddingTop: "14px",
-                  borderTop: "1px solid rgba(23,32,51,0.08)",
+                  borderTop: "1px solid rgba(255,255,255,0.08)",
                 }}
               >
                 {[
@@ -688,7 +689,7 @@ export default function PricingPage() {
                   plan.locations,
                   ...copy.sharedFeatures,
                 ].map((item) => (
-                  <div key={item} style={{ color: "#273244", lineHeight: 1.6 }}>
+                  <div key={item} style={{ color: "rgba(248,250,252,0.76)", lineHeight: 1.6 }}>
                     {`• ${item}`}
                   </div>
                 ))}
@@ -701,12 +702,12 @@ export default function PricingPage() {
                   display: "block",
                   width: "100%",
                   textAlign: "center",
-                  background: plan.highlight ? "#172033" : "#eff3fb",
-                  color: plan.highlight ? "#fff" : "#172033",
+                  background: plan.highlight ? "#ffffff" : "rgba(255,255,255,0.06)",
+                  color: plan.highlight ? "#07090d" : "#ffffff",
                   borderRadius: "14px",
                   padding: "15px 16px",
                   fontWeight: "700",
-                  border: "none",
+                  border: plan.highlight ? "none" : "1px solid rgba(255,255,255,0.08)",
                   cursor: "pointer",
                   fontSize: "15px",
                   marginTop: isMobile ? 0 : "auto",
@@ -720,17 +721,16 @@ export default function PricingPage() {
 
         <section
           style={{
-            background: "rgba(255,255,255,0.72)",
-            border: "1px solid rgba(23,32,51,0.08)",
+            background: "rgba(255,255,255,0.025)",
+            border: "1px solid rgba(255,255,255,0.08)",
             borderRadius: "28px",
             padding: "clamp(22px, 5vw, 30px)",
-            boxShadow: "0 16px 34px rgba(82,95,127,0.08)",
           }}
         >
           <h2
             style={{
               fontSize: "clamp(24px, 5vw, 30px)",
-              color: "#172033",
+              color: "#ffffff",
               marginBottom: "16px",
             }}
           >
@@ -748,11 +748,11 @@ export default function PricingPage() {
               <div
                 key={item}
                 style={{
-                  background: "#fff",
+                  background: "rgba(255,255,255,0.03)",
                   borderRadius: "18px",
                   padding: "16px",
-                  border: "1px solid rgba(23,32,51,0.08)",
-                  color: "#273244",
+                  border: "1px solid rgba(255,255,255,0.08)",
+                  color: "rgba(248,250,252,0.76)",
                   lineHeight: 1.6,
                 }}
               >

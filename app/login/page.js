@@ -42,7 +42,7 @@ export default function LoginPage() {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        background: "#ffffff",
+        background: "#07090d",
         padding: "40px",
       }}
     >
@@ -50,30 +50,29 @@ export default function LoginPage() {
         style={{
           width: "100%",
           maxWidth: "420px",
-          border: "1px solid #e5e7eb",
-          borderRadius: "20px",
+          border: "1px solid rgba(255,255,255,0.08)",
+          borderRadius: "24px",
           padding: "32px",
-          boxShadow: "0 10px 30px rgba(0,0,0,0.06)",
-          background: "#fff",
+          background: "rgba(255,255,255,0.025)",
           direction: language === "ar" ? "rtl" : "ltr",
         }}
       >
-        <h1 style={{ fontSize: "28px", marginBottom: "12px", color: "#111827" }}>
+        <h1 style={{ fontSize: "32px", marginBottom: "12px", color: "#ffffff", letterSpacing: "-0.04em" }}>
           {t.auth.loginTitle}
         </h1>
 
-        <p style={{ color: "#6b7280", marginBottom: "24px" }}>
+        <p style={{ color: "rgba(248,250,252,0.62)", marginBottom: "24px", lineHeight: 1.7 }}>
           {t.auth.loginDesc}
         </p>
 
         <div
           style={{
-            background: "#fff8e6",
-            border: "1px solid #f1df9a",
+            background: "rgba(251,188,5,0.08)",
+            border: "1px solid rgba(251,188,5,0.2)",
             borderRadius: "14px",
             padding: "14px",
             marginBottom: "18px",
-            color: "#6f5200",
+            color: "#f7d676",
             lineHeight: 1.6,
             fontSize: "14px",
           }}
@@ -94,8 +93,10 @@ export default function LoginPage() {
             style={{
               padding: "14px 16px",
               borderRadius: "12px",
-              border: "1px solid #d1d5db",
+              border: "1px solid rgba(255,255,255,0.08)",
               fontSize: "15px",
+              background: "rgba(255,255,255,0.03)",
+              color: "#ffffff",
             }}
           />
 
@@ -107,8 +108,10 @@ export default function LoginPage() {
             style={{
               padding: "14px 16px",
               borderRadius: "12px",
-              border: "1px solid #d1d5db",
+              border: "1px solid rgba(255,255,255,0.08)",
               fontSize: "15px",
+              background: "rgba(255,255,255,0.03)",
+              color: "#ffffff",
             }}
           />
 
@@ -116,8 +119,8 @@ export default function LoginPage() {
             type="submit"
             disabled={isSubmitting}
             style={{
-              background: "#111827",
-              color: "#ffffff",
+              background: "#ffffff",
+              color: "#07090d",
               border: "none",
               borderRadius: "12px",
               padding: "14px 18px",
@@ -131,17 +134,17 @@ export default function LoginPage() {
         </form>
 
         {error ? (
-          <div style={{ marginTop: "12px", color: "#b42318", fontSize: "14px" }}>
+          <div style={{ marginTop: "12px", color: "#ffb4b4", fontSize: "14px" }}>
             {error}
           </div>
         ) : null}
 
         <div style={{ marginTop: "20px", textAlign: "center" }}>
-          <span style={{ color: "#6b7280" }}>{t.auth.noAccount} </span>
+          <span style={{ color: "rgba(248,250,252,0.56)" }}>{t.auth.noAccount} </span>
           <Link
             href="/signup"
             style={{
-              color: "#111827",
+              color: "#ffffff",
               fontWeight: "600",
               textDecoration: "none",
             }}
@@ -154,7 +157,7 @@ export default function LoginPage() {
           style={{
             marginTop: "24px",
             paddingTop: "24px",
-            borderTop: "1px solid #e5e7eb",
+            borderTop: "1px solid rgba(255,255,255,0.08)",
           }}
         >
           <GoogleAuthButton label={t.auth.continueGoogle} />

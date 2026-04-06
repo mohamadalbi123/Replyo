@@ -5,41 +5,53 @@ import { useLanguage } from "../components/LanguageProvider";
 
 export default function HowItWorksPage() {
   const { t, language } = useLanguage();
+  const steps = t.how.steps.slice(0, 4);
+  const benefits = t.how.benefits.slice(0, 3);
 
   return (
     <main
       style={{
         minHeight: "100vh",
-        background:
-          "radial-gradient(circle at top left, #fff6df 0%, #f7f4ec 40%, #edf3ff 100%)",
+        background: "#07090d",
         fontFamily: "Arial, sans-serif",
-        color: "#172033",
+        color: "#f8fafc",
         direction: language === "ar" ? "rtl" : "ltr",
       }}
     >
       <section
         style={{
-          maxWidth: "1180px",
+          maxWidth: "1120px",
           margin: "0 auto",
-          padding: "clamp(32px, 8vw, 72px) clamp(18px, 5vw, 28px) clamp(48px, 10vw, 96px)",
+          padding: "clamp(28px, 7vw, 72px) clamp(18px, 5vw, 32px) 88px",
         }}
       >
-        <div
+        <Link
+          href="/"
           style={{
-            maxWidth: "760px",
-            marginBottom: "34px",
+            display: "inline-flex",
+            color: "rgba(248,250,252,0.62)",
+            textDecoration: "none",
+            marginBottom: "30px",
           }}
         >
+          ← Home
+        </Link>
+
+        <div style={{ maxWidth: "760px", marginBottom: "40px" }}>
           <div
             style={{
-              display: "inline-block",
-              padding: "8px 14px",
+              display: "inline-flex",
+              alignItems: "center",
+              padding: "7px 12px",
               borderRadius: "999px",
-              background: "#fff0c2",
-              color: "#7a5600",
-              fontSize: "14px",
-              fontWeight: "600",
+              background: "rgba(255,255,255,0.04)",
+              border: "1px solid rgba(255,255,255,0.08)",
+              color: "rgba(248,250,252,0.62)",
+              fontSize: "12px",
+              fontWeight: "700",
               marginBottom: "18px",
+              textTransform: "uppercase",
+              letterSpacing: "0.08em",
             }}
           >
             {t.how.badge}
@@ -47,10 +59,10 @@ export default function HowItWorksPage() {
 
           <h1
             style={{
-              fontSize: "clamp(34px, 9vw, 54px)",
-              lineHeight: 1.05,
+              fontSize: "clamp(38px, 7vw, 68px)",
+              lineHeight: 0.96,
+              letterSpacing: "-0.07em",
               marginBottom: "18px",
-              maxWidth: "760px",
             }}
           >
             {t.how.title}
@@ -58,11 +70,11 @@ export default function HowItWorksPage() {
 
           <p
             style={{
-              fontSize: "clamp(17px, 4.4vw, 19px)",
-              lineHeight: 1.75,
-              color: "#556070",
-              maxWidth: "700px",
+              fontSize: "clamp(17px, 2.8vw, 19px)",
+              lineHeight: 1.7,
+              color: "rgba(248,250,252,0.64)",
               margin: 0,
+              maxWidth: "620px",
             }}
           >
             {t.how.description}
@@ -71,118 +83,89 @@ export default function HowItWorksPage() {
 
         <section
           style={{
-            background: "rgba(255,255,255,0.84)",
-            border: "1px solid rgba(23,32,51,0.08)",
-            borderRadius: "30px",
-            padding: "clamp(18px, 4vw, 26px)",
-            boxShadow: "0 22px 50px rgba(48,63,90,0.1)",
-            marginBottom: "24px",
-            perspective: "1400px",
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+            gap: "14px",
+            marginBottom: "44px",
           }}
         >
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 240px), 1fr))",
-              gap: "18px",
-            }}
-          >
-            {t.how.steps.map(([title, text], index) => (
-              <article
-                key={title}
-                className="replyo-how-step-card"
+          {steps.map(([title, text], index) => (
+            <article
+              key={title}
+              style={{
+                background: "rgba(255,255,255,0.025)",
+                borderRadius: "22px",
+                border: "1px solid rgba(255,255,255,0.08)",
+                padding: "20px",
+              }}
+            >
+              <div
                 style={{
-                  borderRadius: "24px",
-                  padding: "22px",
-                  border: "1px solid #e4e9f2",
-                  boxShadow: "0 14px 30px rgba(82,95,127,0.08)",
+                  color: "rgba(248,250,252,0.48)",
+                  fontSize: "12px",
+                  fontWeight: "700",
+                  letterSpacing: "0.08em",
+                  marginBottom: "10px",
+                  textTransform: "uppercase",
                 }}
               >
-                <div
-                  className="replyo-how-step-label"
-                  style={{
-                    fontSize: "13px",
-                    fontWeight: "700",
-                    marginBottom: "10px",
-                    letterSpacing: "0.08em",
-                  }}
-                >
-                  {t.how.stepLabel} {String(index + 1).padStart(2, "0")}
-                </div>
-                <h2
-                  className="replyo-how-step-title"
-                  style={{
-                    fontSize: "clamp(22px, 5vw, 24px)",
-                    lineHeight: 1.25,
-                    marginBottom: "10px",
-                  }}
-                >
-                  {title}
-                </h2>
-                <p
-                  className="replyo-how-step-text"
-                  style={{
-                    lineHeight: 1.75,
-                    margin: 0,
-                  }}
-                >
-                  {text}
-                </p>
-              </article>
-            ))}
-          </div>
+                {t.how.stepLabel} {String(index + 1).padStart(2, "0")}
+              </div>
+              <h2
+                style={{
+                  fontSize: "clamp(21px, 4vw, 24px)",
+                  lineHeight: 1.12,
+                  marginBottom: "8px",
+                  color: "#ffffff",
+                }}
+              >
+                {title}
+              </h2>
+              <p style={{ lineHeight: 1.7, margin: 0, color: "rgba(248,250,252,0.62)" }}>
+                {text}
+              </p>
+            </article>
+          ))}
         </section>
 
         <section
           style={{
-            background: "#172033",
-            color: "#fff8ec",
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+            gap: "20px",
+            alignItems: "start",
+            padding: "26px",
             borderRadius: "28px",
-            padding: "clamp(20px, 5vw, 30px)",
-            boxShadow: "0 22px 50px rgba(23,32,51,0.18)",
-            marginBottom: "24px",
+            background: "rgba(255,255,255,0.025)",
+            border: "1px solid rgba(255,255,255,0.08)",
           }}
         >
-          <div
-            style={{
-              display: "inline-block",
-              padding: "8px 12px",
-              borderRadius: "999px",
-              background: "rgba(255,255,255,0.12)",
-              fontSize: "13px",
-              marginBottom: "14px",
-            }}
-          >
-            {t.how.whyBadge}
+          <div>
+            <h2
+              style={{
+                fontSize: "clamp(28px, 5vw, 38px)",
+                lineHeight: 1.02,
+                letterSpacing: "-0.05em",
+                marginBottom: "12px",
+              }}
+            >
+              {t.how.whyTitle}
+            </h2>
+            <p style={{ color: "rgba(248,250,252,0.66)", lineHeight: 1.8, margin: 0 }}>
+              {t.how.whyText}
+            </p>
           </div>
-          <h2 style={{ fontSize: "clamp(28px, 7vw, 34px)", lineHeight: 1.1, marginBottom: "14px" }}>
-            {t.how.whyTitle}
-          </h2>
-          <p
-            style={{
-              maxWidth: "760px",
-              color: "rgba(255,248,236,0.82)",
-              lineHeight: 1.75,
-              marginBottom: "20px",
-            }}
-          >
-            {t.how.whyText}
-          </p>
 
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 220px), 1fr))",
-              gap: "12px",
-            }}
-          >
-            {t.how.benefits.map((benefit) => (
+          <div style={{ display: "grid", gap: "10px" }}>
+            {benefits.map((benefit) => (
               <div
                 key={benefit}
                 style={{
-                  background: "rgba(255,255,255,0.08)",
+                  background: "rgba(255,255,255,0.035)",
+                  border: "1px solid rgba(255,255,255,0.08)",
                   borderRadius: "18px",
-                  padding: "14px 16px",
+                  padding: "12px 14px",
+                  color: "rgba(248,250,252,0.78)",
                   lineHeight: 1.6,
                 }}
               >
@@ -192,57 +175,35 @@ export default function HowItWorksPage() {
           </div>
         </section>
 
-        <section
-          style={{
-            background: "rgba(255,255,255,0.84)",
-            border: "1px solid rgba(23,32,51,0.08)",
-            borderRadius: "28px",
-            padding: "clamp(20px, 5vw, 28px)",
-            boxShadow: "0 22px 50px rgba(48,63,90,0.1)",
-            display: "flex",
-            justifyContent: "space-between",
-            gap: "18px",
-            alignItems: "center",
-            flexWrap: "wrap",
-          }}
-        >
-          <div style={{ maxWidth: "650px" }}>
-            <h2 style={{ fontSize: "clamp(28px, 7vw, 34px)", lineHeight: 1.1, marginBottom: "10px" }}>
-              {t.how.ctaTitle}
-            </h2>
-            <p style={{ color: "#5b6474", lineHeight: 1.75, margin: 0 }}>{t.how.ctaText}</p>
-          </div>
-
-          <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
-            <Link
-              href="/signup"
-              style={{
-                textDecoration: "none",
-                background: "#172033",
-                color: "#fff",
-                padding: "15px 20px",
-                borderRadius: "14px",
-                fontWeight: "600",
-              }}
-            >
-              {t.how.create}
-            </Link>
-            <Link
-              href="/test-replyo"
-              style={{
-                textDecoration: "none",
-                background: "#fff",
-                color: "#172033",
-                padding: "15px 20px",
-                borderRadius: "14px",
-                border: "1px solid rgba(23,32,51,0.12)",
-                fontWeight: "600",
-              }}
-            >
-              {t.how.test}
-            </Link>
-          </div>
-        </section>
+        <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", marginTop: "26px" }}>
+          <Link
+            href="/signup"
+            style={{
+              textDecoration: "none",
+              background: "#ffffff",
+              color: "#07090d",
+              padding: "15px 20px",
+              borderRadius: "14px",
+              fontWeight: "700",
+            }}
+          >
+            {t.how.create}
+          </Link>
+          <Link
+            href="/test-replyo"
+            style={{
+              textDecoration: "none",
+              background: "transparent",
+              color: "#ffffff",
+              padding: "15px 20px",
+              borderRadius: "14px",
+              border: "1px solid rgba(255,255,255,0.12)",
+              fontWeight: "700",
+            }}
+          >
+            {t.how.test}
+          </Link>
+        </div>
       </section>
     </main>
   );

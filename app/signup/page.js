@@ -64,7 +64,7 @@ export default function SignupPage() {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        background: "#ffffff",
+        background: "#07090d",
         padding: "40px",
       }}
     >
@@ -72,30 +72,29 @@ export default function SignupPage() {
         style={{
           width: "100%",
           maxWidth: "420px",
-          border: "1px solid #e5e7eb",
-          borderRadius: "20px",
+          border: "1px solid rgba(255,255,255,0.08)",
+          borderRadius: "24px",
           padding: "32px",
-          boxShadow: "0 10px 30px rgba(0,0,0,0.06)",
-          background: "#fff",
+          background: "rgba(255,255,255,0.025)",
           direction: language === "ar" ? "rtl" : "ltr",
         }}
       >
-        <h1 style={{ fontSize: "28px", marginBottom: "12px", color: "#111827" }}>
+        <h1 style={{ fontSize: "32px", marginBottom: "12px", color: "#ffffff", letterSpacing: "-0.04em" }}>
           {t.auth.signupTitle}
         </h1>
 
-        <p style={{ color: "#6b7280", marginBottom: "24px" }}>
+        <p style={{ color: "rgba(248,250,252,0.62)", marginBottom: "24px", lineHeight: 1.7 }}>
           {t.auth.signupDesc}
         </p>
 
         <div
           style={{
-            background: "#eef6ff",
-            border: "1px solid #cfe0fb",
+            background: "rgba(66,133,244,0.08)",
+            border: "1px solid rgba(66,133,244,0.2)",
             borderRadius: "14px",
             padding: "14px",
             marginBottom: "18px",
-            color: "#2f527e",
+            color: "#b8d3ff",
             lineHeight: 1.6,
             fontSize: "14px",
           }}
@@ -116,8 +115,10 @@ export default function SignupPage() {
             style={{
               padding: "14px 16px",
               borderRadius: "12px",
-              border: "1px solid #d1d5db",
+              border: "1px solid rgba(255,255,255,0.08)",
               fontSize: "15px",
+              background: "rgba(255,255,255,0.03)",
+              color: "#ffffff",
             }}
           />
 
@@ -129,8 +130,10 @@ export default function SignupPage() {
             style={{
               padding: "14px 16px",
               borderRadius: "12px",
-              border: "1px solid #d1d5db",
+              border: "1px solid rgba(255,255,255,0.08)",
               fontSize: "15px",
+              background: "rgba(255,255,255,0.03)",
+              color: "#ffffff",
             }}
           />
 
@@ -139,7 +142,7 @@ export default function SignupPage() {
               display: "flex",
               alignItems: "flex-start",
               gap: "10px",
-              color: "#4b5563",
+              color: "rgba(248,250,252,0.62)",
               fontSize: "14px",
               lineHeight: 1.6,
             }}
@@ -157,11 +160,11 @@ export default function SignupPage() {
             />
             <span>
               {t.auth.agreePrefix}{" "}
-              <Link href="/terms" style={{ color: "#111827", fontWeight: "600", textDecoration: "none" }}>
+              <Link href="/terms" style={{ color: "#ffffff", fontWeight: "600", textDecoration: "none" }}>
                 {t.auth.agreeTerms}
               </Link>{" "}
               {t.auth.agreeAnd}{" "}
-              <Link href="/privacy" style={{ color: "#111827", fontWeight: "600", textDecoration: "none" }}>
+              <Link href="/privacy" style={{ color: "#ffffff", fontWeight: "600", textDecoration: "none" }}>
                 {t.auth.agreePrivacy}
               </Link>
               .
@@ -172,8 +175,8 @@ export default function SignupPage() {
             type="submit"
             disabled={isSubmitting}
             style={{
-              background: "#111827",
-              color: "#ffffff",
+              background: "#ffffff",
+              color: "#07090d",
               border: "none",
               borderRadius: "12px",
               padding: "14px 18px",
@@ -187,7 +190,7 @@ export default function SignupPage() {
         </form>
 
         {error ? (
-          <div style={{ marginTop: "12px", color: "#b42318", fontSize: "14px" }}>
+          <div style={{ marginTop: "12px", color: "#ffb4b4", fontSize: "14px" }}>
             {error}
           </div>
         ) : null}
@@ -205,11 +208,11 @@ export default function SignupPage() {
         </div>
 
         <div style={{ marginTop: "20px", textAlign: "center" }}>
-          <span style={{ color: "#6b7280" }}>{t.auth.already} </span>
+          <span style={{ color: "rgba(248,250,252,0.56)" }}>{t.auth.already} </span>
           <Link
             href="/login"
             style={{
-              color: "#111827",
+              color: "#ffffff",
               fontWeight: "600",
               textDecoration: "none",
             }}

@@ -135,12 +135,13 @@ const contactCopy = {
 const inputStyle = {
   width: "100%",
   borderRadius: "16px",
-  border: "1px solid rgba(23,32,51,0.12)",
+  border: "1px solid rgba(255,255,255,0.08)",
   padding: "14px 16px",
   fontSize: "15px",
   fontFamily: "Arial, sans-serif",
   outline: "none",
-  background: "#fff",
+  background: "rgba(255,255,255,0.03)",
+  color: "#ffffff",
 };
 
 export default function ContactPage() {
@@ -203,16 +204,16 @@ export default function ContactPage() {
     <main
       style={{
         minHeight: "100vh",
-        background:
-          "radial-gradient(circle at top left, #fff6df 0%, #f7f4ec 40%, #edf3ff 100%)",
-        padding: "56px 20px 90px",
+        background: "#07090d",
+        padding: "40px 20px 90px",
         fontFamily: "Arial, sans-serif",
+        color: "#f8fafc",
         direction: language === "ar" ? "rtl" : "ltr",
       }}
     >
-      <div style={{ maxWidth: "1080px", margin: "0 auto" }}>
+      <div style={{ maxWidth: "1120px", margin: "0 auto" }}>
         <div style={{ marginBottom: "18px" }}>
-          <Link href="/" style={{ color: "#4b5563", textDecoration: "none" }}>
+          <Link href="/" style={{ color: "rgba(248,250,252,0.62)", textDecoration: "none" }}>
             ← {copy.back}
           </Link>
         </div>
@@ -220,37 +221,39 @@ export default function ContactPage() {
         <section
           style={{
             display: "grid",
-            gridTemplateColumns: "minmax(0, 1.05fr) minmax(280px, 0.95fr)",
+            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
             gap: "22px",
           }}
         >
           <div
             style={{
-              background: "#ffffff",
+              background: "rgba(255,255,255,0.025)",
               borderRadius: "28px",
               padding: "30px",
-              border: "1px solid rgba(23,32,51,0.08)",
-              boxShadow: "0 18px 45px rgba(82,95,127,0.12)",
+              border: "1px solid rgba(255,255,255,0.08)",
             }}
           >
             <div
               style={{
                 display: "inline-block",
-                padding: "8px 12px",
+                padding: "7px 12px",
                 borderRadius: "999px",
-                background: "#fff0c2",
-                color: "#7a5600",
-                fontSize: "13px",
+                background: "rgba(255,255,255,0.04)",
+                color: "rgba(248,250,252,0.62)",
+                fontSize: "12px",
                 fontWeight: "700",
                 marginBottom: "16px",
+                textTransform: "uppercase",
+                letterSpacing: "0.08em",
+                border: "1px solid rgba(255,255,255,0.08)",
               }}
             >
               {copy.badge}
             </div>
-            <h1 style={{ fontSize: "46px", lineHeight: 1.05, marginBottom: "14px", color: "#172033" }}>
+            <h1 style={{ fontSize: "clamp(38px, 7vw, 62px)", lineHeight: 0.96, letterSpacing: "-0.07em", marginBottom: "14px", color: "#ffffff" }}>
               {copy.title}
             </h1>
-            <p style={{ color: "#5b6474", lineHeight: 1.75, marginBottom: "26px" }}>
+            <p style={{ color: "rgba(248,250,252,0.64)", lineHeight: 1.7, marginBottom: "26px", maxWidth: "38ch" }}>
               {copy.description}
             </p>
 
@@ -303,8 +306,8 @@ export default function ContactPage() {
                     borderRadius: "14px",
                     padding: "13px 14px",
                     background:
-                      feedback.type === "success" ? "#e8f7ee" : "#fff3f1",
-                    color: feedback.type === "success" ? "#166534" : "#b42318",
+                      feedback.type === "success" ? "rgba(16,185,129,0.12)" : "rgba(239,68,68,0.12)",
+                    color: feedback.type === "success" ? "#9ce9c2" : "#ffb4b4",
                     fontSize: "14px",
                   }}
                 >
@@ -318,8 +321,8 @@ export default function ContactPage() {
                 style={{
                   border: "none",
                   cursor: isSubmitting ? "wait" : "pointer",
-                  background: "#172033",
-                  color: "#fff",
+                  background: "#ffffff",
+                  color: "#07090d",
                   padding: "15px 20px",
                   borderRadius: "16px",
                   fontWeight: "700",
@@ -334,11 +337,11 @@ export default function ContactPage() {
 
           <aside
             style={{
-              background: "#172033",
-              color: "#fff8ec",
+              background: "rgba(255,255,255,0.025)",
+              color: "#f8fafc",
               borderRadius: "28px",
               padding: "28px",
-              boxShadow: "0 18px 45px rgba(23,32,51,0.16)",
+              border: "1px solid rgba(255,255,255,0.08)",
             }}
           >
             <h2 style={{ fontSize: "28px", lineHeight: 1.1, marginBottom: "18px" }}>
@@ -349,10 +352,12 @@ export default function ContactPage() {
                 <div
                   key={item}
                   style={{
-                    background: "rgba(255,255,255,0.08)",
+                    background: "rgba(255,255,255,0.035)",
                     borderRadius: "18px",
+                    border: "1px solid rgba(255,255,255,0.08)",
                     padding: "14px 16px",
                     lineHeight: 1.6,
+                    color: "rgba(248,250,252,0.76)",
                   }}
                 >
                   {item}
@@ -366,13 +371,13 @@ export default function ContactPage() {
                 paddingTop: "18px",
               }}
             >
-              <div style={{ fontSize: "14px", color: "rgba(255,248,236,0.72)", marginBottom: "10px" }}>
+              <div style={{ fontSize: "14px", color: "rgba(248,250,252,0.62)", marginBottom: "10px" }}>
                 {copy.direct}
               </div>
               <a
                 href="mailto:hello@replyo.online"
                 style={{
-                  color: "#fff8ec",
+                  color: "#ffffff",
                   textDecoration: "none",
                   fontSize: "18px",
                   fontWeight: "700",

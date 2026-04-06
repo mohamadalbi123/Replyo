@@ -167,171 +167,180 @@ export default function TestReplyoPage() {
     <main
       style={{
         minHeight: "100vh",
-        background: "#f5f7fb",
+        background: "#07090d",
         fontFamily: "Arial, sans-serif",
-        padding: "40px 20px",
+        padding: "40px 20px 90px",
+        color: "#f8fafc",
         direction: language === "ar" ? "rtl" : "ltr",
       }}
     >
-      <div style={{ maxWidth: "900px", margin: "0 auto" }}>
+      <div style={{ maxWidth: "1120px", margin: "0 auto" }}>
         <div style={{ marginBottom: "20px" }}>
-          <Link href="/" style={{ textDecoration: "none", color: "#444" }}>
+          <Link href="/" style={{ textDecoration: "none", color: "rgba(248,250,252,0.62)" }}>
             ← {copy.back}
           </Link>
         </div>
 
-        <h1 style={{ fontSize: "38px", marginBottom: "10px", color: "#222" }}>
+        <h1 style={{ fontSize: "clamp(38px, 7vw, 62px)", lineHeight: 0.96, letterSpacing: "-0.07em", marginBottom: "12px", color: "#ffffff" }}>
           {copy.title}
         </h1>
 
-        <p style={{ color: "#666", marginBottom: "30px" }}>{copy.description}</p>
+        <p style={{ color: "rgba(248,250,252,0.64)", marginBottom: "30px", maxWidth: "34ch", lineHeight: 1.7 }}>{copy.description}</p>
 
         <div
           style={{
-            background: "#fff",
-            borderRadius: "18px",
-            padding: "24px",
-            boxShadow: "0 10px 30px rgba(0,0,0,0.06)",
-            marginBottom: "24px",
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+            gap: "18px",
           }}
         >
-          <h2 style={{ fontSize: "22px", marginBottom: "18px" }}>{copy.preview}</h2>
-
           <div
             style={{
-              border: "1px solid #e5e7eb",
-              borderRadius: "16px",
-              padding: "18px",
-              background: "#fff",
+              background: "rgba(255,255,255,0.025)",
+              borderRadius: "24px",
+              padding: "24px",
+              border: "1px solid rgba(255,255,255,0.08)",
             }}
           >
+            <h2 style={{ fontSize: "22px", marginBottom: "18px", color: "#ffffff" }}>{copy.preview}</h2>
+
             <div
               style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "12px",
-                marginBottom: "12px",
+                border: "1px solid rgba(255,255,255,0.08)",
+                borderRadius: "20px",
+                padding: "18px",
+                background: "rgba(255,255,255,0.03)",
               }}
             >
               <div
                 style={{
-                  width: "42px",
-                  height: "42px",
-                  borderRadius: "50%",
-                  background: "#e8eefc",
                   display: "flex",
                   alignItems: "center",
-                  justifyContent: "center",
-                  fontWeight: "bold",
-                  color: "#335",
+                  gap: "12px",
+                  marginBottom: "12px",
                 }}
               >
-                M
+                <div
+                  style={{
+                    width: "42px",
+                    height: "42px",
+                    borderRadius: "50%",
+                    background: "rgba(255,255,255,0.06)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontWeight: "bold",
+                    color: "#ffffff",
+                  }}
+                >
+                  M
+                </div>
+
+                <div>
+                  <div style={{ fontWeight: "bold", color: "#ffffff" }}>{copy.customer}</div>
+                  <div style={{ fontSize: "14px", color: "rgba(248,250,252,0.52)" }}>{copy.guide}</div>
+                </div>
               </div>
 
-              <div>
-                <div style={{ fontWeight: "bold", color: "#222" }}>{copy.customer}</div>
-                <div style={{ fontSize: "14px", color: "#777" }}>{copy.guide}</div>
+              <div
+                style={{
+                  marginBottom: "12px",
+                  fontSize: "18px",
+                  color: "#fbbc05",
+                }}
+              >
+                ★★★★★
               </div>
+
+              <textarea
+                value={review}
+                onChange={(e) => setReview(e.target.value)}
+                placeholder={copy.placeholder}
+                style={{
+                  width: "100%",
+                  minHeight: "170px",
+                  border: "none",
+                  outline: "none",
+                  resize: "vertical",
+                  fontSize: "16px",
+                  color: "#ffffff",
+                  fontFamily: "Arial, sans-serif",
+                  lineHeight: 1.7,
+                  background: "transparent",
+                }}
+              />
             </div>
 
-            <div
+            <button
+              onClick={generateReply}
+              disabled={isLoading}
               style={{
-                marginBottom: "12px",
-                fontSize: "18px",
-                color: "#f4b400",
+                marginTop: "18px",
+                background: "#ffffff",
+                color: "#07090d",
+                border: "none",
+                padding: "14px 22px",
+                borderRadius: "14px",
+                fontSize: "16px",
+                fontWeight: "700",
+                cursor: isLoading ? "wait" : "pointer",
+                opacity: isLoading ? 0.7 : 1,
               }}
             >
-              ★★★★★
-            </div>
-
-            <textarea
-              value={review}
-              onChange={(e) => setReview(e.target.value)}
-              placeholder={copy.placeholder}
-              style={{
-                width: "100%",
-                minHeight: "120px",
-                border: "none",
-                outline: "none",
-                resize: "vertical",
-                fontSize: "16px",
-                color: "#333",
-                fontFamily: "Arial, sans-serif",
-                lineHeight: 1.6,
-                background: "transparent",
-              }}
-            />
+              {isLoading ? copy.generating : copy.generate}
+            </button>
           </div>
-
-          <button
-            onClick={generateReply}
-            disabled={isLoading}
-            style={{
-              marginTop: "18px",
-              background: "#111",
-              color: "#fff",
-              border: "none",
-              padding: "14px 22px",
-              borderRadius: "12px",
-              fontSize: "16px",
-              cursor: isLoading ? "wait" : "pointer",
-              opacity: isLoading ? 0.7 : 1,
-            }}
-          >
-            {isLoading ? copy.generating : copy.generate}
-          </button>
-        </div>
-
-        <div
-          style={{
-            background: "#fff",
-            borderRadius: "18px",
-            padding: "24px",
-            boxShadow: "0 10px 30px rgba(0,0,0,0.06)",
-          }}
-        >
-          <h2 style={{ fontSize: "22px", marginBottom: "18px" }}>{copy.replyTitle}</h2>
 
           <div
             style={{
-              borderLeft: "4px solid #4285F4",
-              background: "#f9fbff",
-              borderRadius: "12px",
-              padding: "18px",
-              color: "#333",
-              lineHeight: 1.7,
-              minHeight: "126px",
+              background: "rgba(255,255,255,0.025)",
+              borderRadius: "24px",
+              padding: "24px",
+              border: "1px solid rgba(255,255,255,0.08)",
             }}
           >
+            <h2 style={{ fontSize: "22px", marginBottom: "18px", color: "#ffffff" }}>{copy.replyTitle}</h2>
+
             <div
               style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                gap: "12px",
-                marginBottom: "8px",
-                flexWrap: "wrap",
+                borderLeft: "4px solid #4285F4",
+                background: "rgba(255,255,255,0.03)",
+                borderRadius: "14px",
+                padding: "18px",
+                color: "#ffffff",
+                lineHeight: 1.7,
+                minHeight: "260px",
               }}
             >
-              <div style={{ fontWeight: "bold" }}>{copy.owner}</div>
-              {source === "openai" ? (
-                <div
-                  style={{
-                    fontSize: "12px",
-                    fontWeight: "600",
-                    color: "#0f6c3b",
-                    background: "#e8f7ee",
-                    padding: "6px 10px",
-                    borderRadius: "999px",
-                  }}
-                >
-                  {copy.ai}
-                </div>
-              ) : null}
-            </div>
-            <div style={{ color: reply ? "#333" : "#667085" }}>
-              {isLoading ? copy.writing : reply || copy.waiting}
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  gap: "12px",
+                  marginBottom: "8px",
+                  flexWrap: "wrap",
+                }}
+              >
+                <div style={{ fontWeight: "bold" }}>{copy.owner}</div>
+                {source === "openai" ? (
+                  <div
+                    style={{
+                      fontSize: "12px",
+                      fontWeight: "600",
+                      color: "#9ce9c2",
+                      background: "rgba(16,185,129,0.12)",
+                      padding: "6px 10px",
+                      borderRadius: "999px",
+                    }}
+                  >
+                    {copy.ai}
+                  </div>
+                ) : null}
+              </div>
+              <div style={{ color: reply ? "rgba(255,255,255,0.92)" : "rgba(248,250,252,0.5)" }}>
+                {isLoading ? copy.writing : reply || copy.waiting}
+              </div>
             </div>
           </div>
         </div>

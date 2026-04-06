@@ -34,8 +34,10 @@ export default function Header() {
         justifyContent: isCompact ? "center" : "space-between",
         alignItems: "center",
         padding: isCompact ? "14px 16px" : "18px 28px",
-        borderBottom: "1px solid rgba(23,32,51,0.08)",
-        background: "rgba(255,255,255,0.82)",
+        borderBottom: isAppArea
+          ? "1px solid rgba(23,32,51,0.08)"
+          : "1px solid rgba(255,255,255,0.08)",
+        background: isAppArea ? "rgba(255,255,255,0.82)" : "rgba(7,9,13,0.9)",
         backdropFilter: "blur(14px)",
         position: "sticky",
         top: 0,
@@ -58,56 +60,50 @@ export default function Header() {
         <div
           aria-hidden="true"
           style={{
-            width: "44px",
-            height: "44px",
-            borderRadius: "15px",
-            background: "linear-gradient(145deg, #172033 0%, #31598e 100%)",
+            width: "40px",
+            height: "40px",
+            borderRadius: "14px",
+            background: isAppArea ? "#172033" : "#ffffff",
             position: "relative",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            boxShadow: "0 12px 22px rgba(23,32,51,0.14)",
+            boxShadow: isAppArea
+              ? "0 12px 22px rgba(23,32,51,0.14)"
+              : "0 12px 22px rgba(0,0,0,0.16)",
             flexShrink: 0,
+            border: isAppArea
+              ? "1px solid rgba(255,255,255,0.08)"
+              : "1px solid rgba(17,24,39,0.08)",
           }}
         >
           <span
             style={{
-              color: "#f8f3e7",
-              fontSize: "22px",
+              color: isAppArea ? "#f8f3e7" : "#111111",
+              fontSize: "21px",
               fontWeight: "800",
               letterSpacing: "-0.05em",
               lineHeight: 1,
+              position: "relative",
               transform: "translateY(-0.5px)",
             }}
           >
             R
+            <span
+              aria-hidden="true"
+              style={{
+                position: "absolute",
+                right: "-1px",
+                top: "1px",
+                color: "#FBBC05",
+                fontSize: "9px",
+                lineHeight: 1,
+                opacity: 0.95,
+              }}
+            >
+              ★
+            </span>
           </span>
-          <span
-            aria-hidden="true"
-            style={{
-              position: "absolute",
-              right: "-2px",
-              top: "-2px",
-              width: "12px",
-              height: "12px",
-              borderRadius: "999px",
-              background: "#d7a94b",
-              boxShadow: "0 0 0 3px rgba(255,255,255,0.9)",
-            }}
-          />
-          <span
-            aria-hidden="true"
-            style={{
-              position: "absolute",
-              left: "9px",
-              bottom: "-4px",
-              width: "12px",
-              height: "12px",
-              borderRadius: "4px",
-              background: "#31598e",
-              transform: "rotate(45deg)",
-            }}
-          />
         </div>
         <div style={{ display: "flex", flexDirection: "column", lineHeight: 1 }}>
           <span
@@ -115,24 +111,12 @@ export default function Header() {
               fontSize: "23px",
               fontWeight: "800",
               letterSpacing: "-0.055em",
-              color: "#111827",
+              color: isAppArea ? "#111827" : "#ffffff",
             }}
           >
             Repl
-            <span style={{ color: "#31598e" }}>y</span>
-            <span style={{ color: "#d7a94b" }}>o</span>
-          </span>
-          <span
-            style={{
-              fontSize: "10px",
-              fontWeight: "600",
-              letterSpacing: "0.18em",
-              textTransform: "uppercase",
-              color: "rgba(23,32,51,0.56)",
-              marginTop: "4px",
-            }}
-          >
-            Review Replies
+            <span style={{ color: isAppArea ? "#31598e" : "#ffffff" }}>y</span>
+            <span style={{ color: isAppArea ? "#d7a94b" : "#ffffff" }}>o</span>
           </span>
         </div>
       </Link>
@@ -150,27 +134,42 @@ export default function Header() {
           scrollbarWidth: "none",
         }}
       >
-        <Link href="/" style={{ textDecoration: "none", color: "#111827" }}>
+        <Link
+          href="/"
+          style={{ textDecoration: "none", color: isAppArea ? "#111827" : "rgba(255,255,255,0.88)" }}
+        >
           {t.header.home}
         </Link>
 
         <Link
           href="/how-it-works"
-          style={{ textDecoration: "none", color: "#111827", whiteSpace: "nowrap" }}
+          style={{
+            textDecoration: "none",
+            color: isAppArea ? "#111827" : "rgba(255,255,255,0.88)",
+            whiteSpace: "nowrap",
+          }}
         >
           {t.header.how}
         </Link>
 
         <Link
           href="/why-replyo"
-          style={{ textDecoration: "none", color: "#111827", whiteSpace: "nowrap" }}
+          style={{
+            textDecoration: "none",
+            color: isAppArea ? "#111827" : "rgba(255,255,255,0.88)",
+            whiteSpace: "nowrap",
+          }}
         >
           {t.header.why}
         </Link>
 
         <Link
           href="/pricing"
-          style={{ textDecoration: "none", color: "#111827", whiteSpace: "nowrap" }}
+          style={{
+            textDecoration: "none",
+            color: isAppArea ? "#111827" : "rgba(255,255,255,0.88)",
+            whiteSpace: "nowrap",
+          }}
         >
           {t.header.pricing}
         </Link>
@@ -187,11 +186,11 @@ export default function Header() {
             href="/login"
             style={{
               textDecoration: "none",
-              color: "#ffffff",
-              background: "#172033",
+              color: isAppArea ? "#ffffff" : "#07090d",
+              background: isAppArea ? "#172033" : "#ffffff",
               padding: isCompact ? "9px 14px" : "10px 16px",
               borderRadius: "12px",
-              fontWeight: "500",
+              fontWeight: "600",
               whiteSpace: "nowrap",
             }}
           >

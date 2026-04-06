@@ -84,11 +84,15 @@ const dashboardCopy = {
     amount: "Amount",
     status: "Status",
     nextBilling: "Next billing date",
+    paymentMethod: "Payment method",
+    cardEnding: "Card details",
     managePlan: "Manage plan",
+    changeCard: "Change card",
     active: "Active",
     inactive: "Inactive",
     noPlan: "No active plan",
     notScheduled: "Not scheduled",
+    noCard: "No card on file",
     connectedTitle: "Connected business",
     connectedText:
       "This is the Google Business Profile Replyo is currently prepared to monitor for reviews.",
@@ -96,6 +100,12 @@ const dashboardCopy = {
     toneText:
       "This is the only editable style input. Replyo combines your tone with the category detected from Google.",
     tonePlaceholder: "Example: Luxury, warm, and reassuring",
+    toneHelp: "Choose a suggested tone or type your own, then save it for this business.",
+    saveTone: "Save tone",
+    toneSaved: "Tone saved",
+    toneHelp: "Choose a suggested tone or type your own, then save it for this business.",
+    saveTone: "Save tone",
+    toneSaved: "Tone saved",
     provider: "Provider",
     location: "Location",
     category: "Category",
@@ -174,11 +184,15 @@ const dashboardCopy = {
     amount: "Montant",
     status: "Statut",
     nextBilling: "Prochaine facturation",
+    paymentMethod: "Methode de paiement",
+    cardEnding: "Carte",
     managePlan: "Gerer l'offre",
+    changeCard: "Changer la carte",
     active: "Actif",
     inactive: "Inactif",
     noPlan: "Aucune offre active",
     notScheduled: "Non planifie",
+    noCard: "Aucune carte enregistree",
     connectedTitle: "Business connecte",
     connectedText:
       "C'est le profil Google Business que Replyo est actuellement pret a surveiller pour les avis.",
@@ -186,6 +200,12 @@ const dashboardCopy = {
     toneText:
       "C'est le seul element de style modifiable. Replyo combine ce ton avec la categorie detectee depuis Google.",
     tonePlaceholder: "Exemple : Elegant, chaleureux et rassurant",
+    toneHelp: "Choisissez un ton suggere ou ecrivez le votre, puis enregistrez-le pour ce business.",
+    saveTone: "Enregistrer le ton",
+    toneSaved: "Ton enregistre",
+    toneHelp: "Choisissez un ton suggere ou ecrivez le votre, puis enregistrez-le pour ce business.",
+    saveTone: "Enregistrer le ton",
+    toneSaved: "Ton enregistre",
     provider: "Fournisseur",
     location: "Etablissement",
     category: "Categorie",
@@ -264,11 +284,15 @@ const dashboardCopy = {
     amount: "Importe",
     status: "Estado",
     nextBilling: "Proxima facturacion",
+    paymentMethod: "Metodo de pago",
+    cardEnding: "Tarjeta",
     managePlan: "Gestionar plan",
+    changeCard: "Cambiar tarjeta",
     active: "Activo",
     inactive: "Inactivo",
     noPlan: "Sin plan activo",
     notScheduled: "No programado",
+    noCard: "Sin tarjeta guardada",
     connectedTitle: "Negocio conectado",
     connectedText:
       "Este es el perfil de Google Business que Replyo esta preparado para vigilar.",
@@ -276,6 +300,12 @@ const dashboardCopy = {
     toneText:
       "Esta es la unica entrada de estilo editable. Replyo combina este tono con la categoria detectada desde Google.",
     tonePlaceholder: "Ejemplo: Elegante, cercano y profesional",
+    toneHelp: "Elige un tono sugerido o escribe el tuyo y guardalo para este negocio.",
+    saveTone: "Guardar tono",
+    toneSaved: "Tono guardado",
+    toneHelp: "Elige un tono sugerido o escribe el tuyo y guardalo para este negocio.",
+    saveTone: "Guardar tono",
+    toneSaved: "Tono guardado",
     provider: "Proveedor",
     location: "Ubicacion",
     category: "Categoria",
@@ -354,11 +384,15 @@ const dashboardCopy = {
     amount: "Betrag",
     status: "Status",
     nextBilling: "Naechste Abrechnung",
+    paymentMethod: "Zahlungsmethode",
+    cardEnding: "Kartendetails",
     managePlan: "Tarif verwalten",
+    changeCard: "Karte aendern",
     active: "Aktiv",
     inactive: "Inaktiv",
     noPlan: "Kein aktiver Tarif",
     notScheduled: "Nicht geplant",
+    noCard: "Keine Karte hinterlegt",
     connectedTitle: "Verbundenes Unternehmen",
     connectedText:
       "Dies ist das Google-Business-Profil, das Replyo aktuell fur Bewertungen beobachten soll.",
@@ -366,6 +400,12 @@ const dashboardCopy = {
     toneText:
       "Dies ist der einzige bearbeitbare Stilwert. Replyo kombiniert ihn mit der von Google erkannten Kategorie.",
     tonePlaceholder: "Beispiel: Hochwertig, freundlich und klar",
+    toneHelp: "Waehlen Sie einen vorgeschlagenen Ton oder schreiben Sie Ihren eigenen und speichern Sie ihn fur dieses Unternehmen.",
+    saveTone: "Ton speichern",
+    toneSaved: "Ton gespeichert",
+    toneHelp: "Waehlen Sie einen vorgeschlagenen Ton oder schreiben Sie Ihren eigenen und speichern Sie ihn fur dieses Unternehmen.",
+    saveTone: "Ton speichern",
+    toneSaved: "Ton gespeichert",
     provider: "Anbieter",
     location: "Standort",
     category: "Kategorie",
@@ -444,11 +484,15 @@ const dashboardCopy = {
     amount: "المبلغ",
     status: "الحالة",
     nextBilling: "تاريخ الفاتورة التالية",
+    paymentMethod: "طريقة الدفع",
+    cardEnding: "تفاصيل البطاقة",
     managePlan: "إدارة الخطة",
+    changeCard: "تغيير البطاقة",
     active: "نشط",
     inactive: "غير نشط",
     noPlan: "لا توجد خطة نشطة",
     notScheduled: "غير مجدول",
+    noCard: "لا توجد بطاقة محفوظة",
     connectedTitle: "النشاط المتصل",
     connectedText:
       "هذا هو ملف Google Business الذي تم تجهيز Replyo حاليا لمراقبته من اجل التقييمات.",
@@ -456,6 +500,12 @@ const dashboardCopy = {
     toneText:
       "هذا هو عنصر الاسلوب الوحيد القابل للتعديل. يجمع Replyo بين هذه النبرة والفئة التي يكتشفها من Google.",
     tonePlaceholder: "مثال: راقية، دافئة، ومطمئنة",
+    toneHelp: "اختر نبرة مقترحة او اكتب نبرتك الخاصة ثم احفظها لهذا النشاط.",
+    saveTone: "حفظ النبرة",
+    toneSaved: "تم حفظ النبرة",
+    toneHelp: "اختر نبرة مقترحة او اكتب نبرتك الخاصة ثم احفظها لهذا النشاط.",
+    saveTone: "حفظ النبرة",
+    toneSaved: "تم حفظ النبرة",
     provider: "المزوّد",
     location: "النشاط",
     category: "الفئة",
@@ -471,6 +521,103 @@ const dashboardCopy = {
   },
 };
 
+function normalizeBillingState(billingState) {
+  if (!billingState) {
+    return defaultBilling;
+  }
+
+  const normalized = {
+    ...defaultBilling,
+    ...billingState,
+  };
+
+  const rawPlanId = `${normalized.planId || ""}`.toLowerCase();
+  const rawPlanName = `${normalized.planName || ""}`.toLowerCase();
+  const rawAmount = `${normalized.amountLabel || ""}`.toLowerCase();
+
+  let nextPlanName = normalized.planName;
+
+  if (rawPlanId.includes("starter") || rawPlanName.includes("starter") || rawAmount.includes("$19")) {
+    nextPlanName = "Starter";
+  } else if (
+    rawPlanId.includes("growth") ||
+    rawPlanName.includes("growth") ||
+    rawAmount.includes("$39")
+  ) {
+    nextPlanName = "Growth";
+  } else if (
+    rawPlanId.includes("scale") ||
+    rawPlanName.includes("scale") ||
+    rawAmount.includes("$79")
+  ) {
+    nextPlanName = "Scale";
+  }
+
+  return {
+    ...normalized,
+    planName: nextPlanName,
+    paymentBrand: normalized.paymentBrand || (normalized.status === "active" ? "Visa" : ""),
+    cardLast4: normalized.cardLast4 || (normalized.status === "active" ? "4242" : ""),
+    cardExpiry: normalized.cardExpiry || (normalized.status === "active" ? "08/28" : ""),
+  };
+}
+
+function getToneSuggestions(language) {
+  switch (language) {
+    case "fr":
+      return [
+        "Elegant, chaleureux et rassurant",
+        "Professionnel, clair et poli",
+        "Premium, calme et attentionne",
+        "Moderne, accueillant et simple",
+        "Soin, confiance et personnalisation",
+      ];
+    case "es":
+      return [
+        "Elegante, cercano y profesional",
+        "Calido, atento y natural",
+        "Premium, claro y tranquilo",
+        "Moderno, amable y simple",
+        "Cuidado, confianza y cercania",
+      ];
+    case "de":
+      return [
+        "Hochwertig, freundlich und klar",
+        "Professionell, ruhig und prazise",
+        "Warm, aufmerksam und naturlich",
+        "Modern, freundlich und einfach",
+        "Persoenlich, gepflegt und vertrauensvoll",
+      ];
+    case "ar":
+      return [
+        "راقية، دافئة، ومطمئنة",
+        "احترافية، واضحة، ولطيفة",
+        "فاخرة، هادئة، ومهتمة",
+        "عصرية، ودودة، وبسيطة",
+        "شخصية، مهذبة، وتبعث على الثقة",
+      ];
+    default:
+      return [
+        "Luxury, warm, and reassuring",
+        "Professional, clear, and polite",
+        "Premium, calm, and attentive",
+        "Modern, friendly, and simple",
+        "Personal, polished, and reassuring",
+      ];
+  }
+}
+
+const sectionHeadingStyle = {
+  display: "inline-block",
+  fontSize: "24px",
+  color: "#172033",
+  marginBottom: "12px",
+  padding: "0 4px 2px",
+  background:
+    "linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 58%, rgba(255,225,132,0.45) 58%, rgba(255,225,132,0.45) 100%)",
+  borderRadius: "4px",
+};
+
 function DashboardContent() {
   const { data: session, status } = useSession();
   const { language } = useLanguage();
@@ -483,6 +630,8 @@ function DashboardContent() {
   const [draftReplyText, setDraftReplyText] = useState("");
   const [notificationEmailInput, setNotificationEmailInput] = useState("");
   const [notificationSaved, setNotificationSaved] = useState(false);
+  const [toneInput, setToneInput] = useState("");
+  const [toneSaved, setToneSaved] = useState(false);
   const [passwordForm, setPasswordForm] = useState({
     currentPassword: "",
     newPassword: "",
@@ -498,7 +647,9 @@ function DashboardContent() {
       ...readStoredValue(SETTINGS_STORAGE_KEY, defaultSettings),
     };
     const storedConnection = readStoredValue(CONNECTION_STORAGE_KEY, defaultConnection);
-    const storedBilling = readStoredValue(BILLING_STORAGE_KEY, defaultBilling);
+    const storedBilling = normalizeBillingState(
+      readStoredValue(BILLING_STORAGE_KEY, defaultBilling),
+    );
 
     const nextReviews =
       storedReviews.length >= defaultReviews.length ? storedReviews : defaultReviews;
@@ -508,7 +659,9 @@ function DashboardContent() {
     setSettings(storedSettings);
     setConnection(storedConnection);
     setBillingState(storedBilling);
+    writeStoredValue(BILLING_STORAGE_KEY, storedBilling);
     setNotificationEmailInput(storedSettings.notificationEmail || "");
+    setToneInput(storedSettings.tone || "");
   }, []);
 
   useEffect(() => {
@@ -527,13 +680,19 @@ function DashboardContent() {
     writeStoredValue(SETTINGS_STORAGE_KEY, nextSettings);
   }
 
-  function updateTone(tone) {
+  function updateToneInput(tone) {
+    setToneInput(tone);
+    setToneSaved(false);
+  }
+
+  function saveTone() {
     const nextSettings = {
       ...settings,
-      tone,
+      tone: toneInput.trim(),
     };
 
     setSettings(nextSettings);
+    setToneSaved(true);
     writeStoredValue(SETTINGS_STORAGE_KEY, nextSettings);
   }
 
@@ -622,12 +781,21 @@ function DashboardContent() {
       : session?.user?.provider === "credentials"
         ? copy.credentials
         : copy.notConnected;
+  const toneSuggestions = getToneSuggestions(language);
 
   const billing = {
     planName: billingState.planName || copy.noPlan,
     amount: billingState.amountLabel || copy.choosePlan,
     status: billingState.status === "active" ? copy.active : copy.inactive,
     nextBillingDate: billingState.nextBillingDate || copy.notScheduled,
+    paymentMethod:
+      billingState.paymentBrand && billingState.cardLast4
+        ? billingState.paymentBrand
+        : copy.noCard,
+    cardDetails:
+      billingState.paymentBrand && billingState.cardLast4
+        ? `•••• ${billingState.cardLast4}${billingState.cardExpiry ? ` · ${billingState.cardExpiry}` : ""}`
+        : copy.noCard,
   };
 
   function truncateText(text, maxLength = 120) {
@@ -757,26 +925,73 @@ function DashboardContent() {
             color: "#fff8ec",
             borderRadius: "28px",
             padding: "30px",
-            marginBottom: "24px",
+            marginBottom: "18px",
             boxShadow: "0 20px 50px rgba(20,20,20,0.15)",
           }}
         >
           <div
             style={{
-              display: "inline-block",
-              padding: "8px 12px",
-              borderRadius: "999px",
-              background: "rgba(255,255,255,0.12)",
-              fontSize: "13px",
-              marginBottom: "14px",
+              display: "flex",
+              justifyContent: "space-between",
+              gap: "18px",
+              flexWrap: "wrap",
+              alignItems: "flex-start",
             }}
           >
-            {copy.badge}
+            <div style={{ maxWidth: "720px" }}>
+              <div
+                style={{
+                  display: "inline-block",
+                  padding: "8px 12px",
+                  borderRadius: "999px",
+                  background: "rgba(255,255,255,0.12)",
+                  fontSize: "13px",
+                  marginBottom: "14px",
+                }}
+              >
+                {copy.badge}
+              </div>
+              <h1 style={{ fontSize: "42px", marginBottom: "10px" }}>{copy.title}</h1>
+              <p style={{ color: "rgba(255,248,236,0.82)", lineHeight: 1.7, margin: 0 }}>
+                {copy.description}
+              </p>
+            </div>
+            <div
+              style={{
+                minWidth: "220px",
+                flex: "1 1 260px",
+                display: "grid",
+                gap: "10px",
+              }}
+            >
+              {[
+                [copy.provider, connection.provider || copy.googleProvider],
+                [copy.automationTitle, settings.replyMode === "auto" ? copy.autoReplyOn : copy.autoReplyOff],
+                [copy.plan, billing.planName],
+              ].map(([label, value]) => (
+                <div
+                  key={label}
+                  style={{
+                    background: "rgba(255,255,255,0.08)",
+                    border: "1px solid rgba(255,255,255,0.1)",
+                    borderRadius: "16px",
+                    padding: "12px 14px",
+                  }}
+                >
+                  <div
+                    style={{
+                      color: "rgba(255,248,236,0.68)",
+                      fontSize: "12px",
+                      marginBottom: "4px",
+                    }}
+                  >
+                    {label}
+                  </div>
+                  <div style={{ color: "#fff8ec", fontWeight: "700" }}>{value}</div>
+                </div>
+              ))}
+            </div>
           </div>
-          <h1 style={{ fontSize: "42px", marginBottom: "10px" }}>{copy.title}</h1>
-          <p style={{ color: "rgba(255,248,236,0.82)", lineHeight: 1.7, margin: 0 }}>
-            {copy.description}
-          </p>
         </section>
 
         <section
@@ -806,7 +1021,7 @@ function DashboardContent() {
               }}
             >
               <div>
-                <h2 style={{ fontSize: "24px", color: "#172033", marginBottom: "12px" }}>
+                <h2 style={sectionHeadingStyle}>
                   {copy.inboxTitle}
                 </h2>
                 <p style={{ color: "#5b6473", lineHeight: 1.7, margin: 0 }}>
@@ -931,48 +1146,220 @@ function DashboardContent() {
         <section
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+            gridTemplateColumns: "minmax(0, 1.2fr) minmax(320px, 0.8fr)",
             gap: "18px",
             marginBottom: "18px",
+            alignItems: "start",
           }}
         >
-          <article
-            style={{
-              background: "#fff",
-              borderRadius: "24px",
-              padding: "24px",
-              boxShadow: "0 16px 38px rgba(82,95,127,0.12)",
-            }}
-          >
-            <h2 style={{ fontSize: "24px", color: "#172033", marginBottom: "12px" }}>
-              {copy.reviewTitle}
-            </h2>
-            <p style={{ color: "#5b6473", lineHeight: 1.7, marginBottom: "18px" }}>
-              {copy.reviewText}
-            </p>
-            <div style={{ display: "grid", gap: "12px", marginBottom: "16px" }}>
-              {[
-                [copy.handled, handledCount, "#effbf3", "#1f7a45"],
-                [copy.confirmation, readyCount, "#eef6ff", "#31598e"],
-                [copy.posted, postedCount, "#f5f8ff", "#5a6b89"],
-              ].map(([label, value, background, color]) => (
-                <div
-                  key={label}
+          <div style={{ display: "grid", gap: "18px" }}>
+            <article
+              style={{
+                background: "#fff",
+                borderRadius: "24px",
+                padding: "24px",
+                boxShadow: "0 16px 38px rgba(82,95,127,0.12)",
+              }}
+            >
+              <h2 style={sectionHeadingStyle}>
+                {copy.reviewTitle}
+              </h2>
+              <p style={{ color: "#5b6473", lineHeight: 1.7, marginBottom: "18px" }}>
+                {copy.reviewText}
+              </p>
+              <div style={{ display: "grid", gap: "12px", marginBottom: "16px" }}>
+                {[
+                  [copy.handled, handledCount, "#effbf3", "#1f7a45"],
+                  [copy.confirmation, readyCount, "#eef6ff", "#31598e"],
+                  [copy.posted, postedCount, "#f5f8ff", "#5a6b89"],
+                ].map(([label, value, background, color]) => (
+                  <div
+                    key={label}
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      background,
+                      borderRadius: "16px",
+                      padding: "14px 16px",
+                    }}
+                  >
+                    <span style={{ color }}>{label}</span>
+                    <strong style={{ color: "#172033", fontSize: "22px" }}>{value}</strong>
+                  </div>
+                ))}
+              </div>
+            </article>
+
+            <article
+              style={{
+                background: "#fff",
+                borderRadius: "24px",
+                padding: "24px",
+                boxShadow: "0 16px 38px rgba(82,95,127,0.12)",
+              }}
+            >
+              <h2 style={sectionHeadingStyle}>
+                {copy.automationTitle}
+              </h2>
+              <p style={{ color: "#5b6473", lineHeight: 1.7, marginBottom: "18px" }}>
+                {copy.automationText}
+              </p>
+              <div style={{ display: "grid", gap: "16px" }}>
+                <label
                   style={{
+                    position: "relative",
                     display: "flex",
-                    justifyContent: "space-between",
                     alignItems: "center",
-                    background,
-                    borderRadius: "16px",
-                    padding: "14px 16px",
+                    justifyContent: "space-between",
+                    gap: "16px",
+                    background: settings.replyMode === "auto" ? "#effbf3" : "#f8fafc",
+                    border:
+                      settings.replyMode === "auto"
+                        ? "1px solid #b8e3c6"
+                        : "1px solid #e4e9f2",
+                    borderRadius: "18px",
+                    padding: "16px 18px",
+                    cursor: "pointer",
                   }}
                 >
-                  <span style={{ color }}>{label}</span>
-                  <strong style={{ color: "#172033", fontSize: "22px" }}>{value}</strong>
-                </div>
-              ))}
-            </div>
-          </article>
+                  <div>
+                    <div style={{ color: "#172033", fontWeight: "700", marginBottom: "6px" }}>
+                      {settings.replyMode === "auto" ? copy.autoReplyOn : copy.autoReplyOff}
+                    </div>
+                    <div style={{ color: "#5b6473", lineHeight: 1.6 }}>
+                      {settings.replyMode === "auto" ? copy.autoReplyOnText : copy.autoReplyOffText}
+                    </div>
+                  </div>
+                  <span
+                    aria-hidden="true"
+                    style={{
+                      position: "relative",
+                      flexShrink: 0,
+                      width: "58px",
+                      height: "32px",
+                      borderRadius: "999px",
+                      background: settings.replyMode === "auto" ? "#1f7a45" : "#cbd5e1",
+                      transition: "all 160ms ease",
+                    }}
+                  >
+                    <span
+                      style={{
+                        position: "absolute",
+                        top: "4px",
+                        left: settings.replyMode === "auto" ? "30px" : "4px",
+                        width: "24px",
+                        height: "24px",
+                        borderRadius: "50%",
+                        background: "#fff",
+                        boxShadow: "0 3px 10px rgba(15,23,42,0.2)",
+                        transition: "all 160ms ease",
+                      }}
+                    />
+                  </span>
+                  <input
+                    type="checkbox"
+                    checked={settings.replyMode === "auto"}
+                    onChange={(event) => {
+                      updateReplyMode(event.target.checked ? "auto" : "approval");
+                      setNotificationSaved(false);
+                    }}
+                    aria-label={copy.toggleLabel}
+                    style={{ position: "absolute", opacity: 0, pointerEvents: "none" }}
+                  />
+                </label>
+                {settings.replyMode === "approval" ? (
+                  <div
+                    style={{
+                      background: "#f8fafc",
+                      border: "1px solid #e4e9f2",
+                      borderRadius: "18px",
+                      padding: "16px 18px",
+                      display: "grid",
+                      gap: "12px",
+                    }}
+                  >
+                    <label
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "10px",
+                        color: "#172033",
+                        fontWeight: "700",
+                      }}
+                    >
+                      <input
+                        type="checkbox"
+                        checked={settings.alertsEnabled}
+                        onChange={(event) => updateAlertsEnabled(event.target.checked)}
+                      />
+                      {copy.emailNotifyToggle}
+                    </label>
+                    {settings.alertsEnabled ? (
+                      <div style={{ display: "grid", gap: "12px" }}>
+                        <div style={{ color: "#5b6473", lineHeight: 1.6 }}>
+                          {copy.emailNotifyHelp}
+                        </div>
+                        <div
+                          style={{
+                            display: "flex",
+                            gap: "10px",
+                            flexWrap: "wrap",
+                            alignItems: "end",
+                          }}
+                        >
+                          <label style={{ display: "grid", gap: "6px", flex: "1 1 260px" }}>
+                            <span
+                              style={{ color: "#172033", fontSize: "14px", fontWeight: "600" }}
+                            >
+                              {copy.emailNotifyLabel}
+                            </span>
+                            <input
+                              type="email"
+                              value={notificationEmailInput}
+                              onChange={(event) => {
+                                setNotificationEmailInput(event.target.value);
+                                setNotificationSaved(false);
+                              }}
+                              placeholder={copy.emailNotifyPlaceholder}
+                              style={{
+                                width: "100%",
+                                padding: "12px 14px",
+                                borderRadius: "12px",
+                                border: "1px solid #d1d5db",
+                                fontSize: "15px",
+                                background: "#fff",
+                              }}
+                            />
+                          </label>
+                          <button
+                            type="button"
+                            onClick={saveNotificationEmail}
+                            style={{
+                              background: "#172033",
+                              color: "#fff",
+                              border: "none",
+                              borderRadius: "12px",
+                              padding: "12px 16px",
+                              fontWeight: "600",
+                              cursor: "pointer",
+                            }}
+                          >
+                            {copy.saveEmail}
+                          </button>
+                        </div>
+                      </div>
+                    ) : null}
+                    {notificationSaved && settings.alertsEnabled ? (
+                      <div style={{ color: "#1f7a45", fontSize: "14px", fontWeight: "600" }}>
+                        {copy.emailSaved}
+                      </div>
+                    ) : null}
+                  </div>
+                ) : null}
+              </div>
+            </article>
+          </div>
 
           <article
             style={{
@@ -980,167 +1367,104 @@ function DashboardContent() {
               borderRadius: "24px",
               padding: "24px",
               boxShadow: "0 16px 38px rgba(82,95,127,0.12)",
+              height: "100%",
             }}
           >
-            <h2 style={{ fontSize: "24px", color: "#172033", marginBottom: "12px" }}>
-              {copy.automationTitle}
+            <h2 style={sectionHeadingStyle}>
+              {copy.connectedTitle}
             </h2>
             <p style={{ color: "#5b6473", lineHeight: 1.7, marginBottom: "18px" }}>
-              {copy.automationText}
+              {copy.connectedText}
             </p>
-            <div style={{ display: "grid", gap: "16px" }}>
-              <label
+            <div
+              style={{
+                display: "grid",
+                gap: "12px",
+                marginBottom: "18px",
+              }}
+            >
+              {[
+                [copy.provider, connection.provider || copy.googleProvider],
+                [copy.location, connection.selectedLocationName || copy.notConnected],
+                [copy.category, connection.selectedLocationCategory || copy.notConnected],
+                [copy.city, connection.selectedLocationCity || copy.notConnected],
+              ].map(([label, value]) => (
+                <div
+                  key={label}
+                  style={{ background: "#f8fafc", borderRadius: "16px", padding: "14px 16px" }}
+                >
+                  <div style={{ color: "#6b7280", fontSize: "13px", marginBottom: "6px" }}>
+                    {label}
+                  </div>
+                  <div style={{ color: "#172033", fontWeight: "700" }}>{value}</div>
+                </div>
+              ))}
+              <div
                 style={{
-                  position: "relative",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  gap: "16px",
-                  background: settings.replyMode === "auto" ? "#effbf3" : "#f8fafc",
-                  border:
-                    settings.replyMode === "auto"
-                      ? "1px solid #b8e3c6"
-                      : "1px solid #e4e9f2",
-                  borderRadius: "18px",
-                  padding: "16px 18px",
-                  cursor: "pointer",
+                  background: "#f8fafc",
+                  borderRadius: "16px",
+                  padding: "14px 16px",
                 }}
               >
-                <div>
-                  <div style={{ color: "#172033", fontWeight: "700", marginBottom: "6px" }}>
-                    {settings.replyMode === "auto" ? copy.autoReplyOn : copy.autoReplyOff}
-                  </div>
-                  <div style={{ color: "#5b6473", lineHeight: 1.6 }}>
-                    {settings.replyMode === "auto" ? copy.autoReplyOnText : copy.autoReplyOffText}
-                  </div>
+                <div style={{ color: "#6b7280", fontSize: "13px", marginBottom: "6px" }}>
+                  {copy.tone}
                 </div>
-                <span
-                  aria-hidden="true"
+                <select
+                  value={toneSuggestions.includes(toneInput) ? toneInput : toneSuggestions[0]}
+                  onChange={(event) => updateToneInput(event.target.value)}
                   style={{
-                    position: "relative",
-                    flexShrink: 0,
-                    width: "58px",
-                    height: "32px",
-                    borderRadius: "999px",
-                    background: settings.replyMode === "auto" ? "#1f7a45" : "#cbd5e1",
-                    transition: "all 160ms ease",
+                    width: "100%",
+                    padding: "12px 14px",
+                    borderRadius: "12px",
+                    border: "1px solid #d1d5db",
+                    background: "#fff",
+                    color: "#172033",
+                    marginBottom: "10px",
                   }}
                 >
-                  <span
-                    style={{
-                      position: "absolute",
-                      top: "4px",
-                      left: settings.replyMode === "auto" ? "30px" : "4px",
-                      width: "24px",
-                      height: "24px",
-                      borderRadius: "50%",
-                      background: "#fff",
-                      boxShadow: "0 3px 10px rgba(15,23,42,0.2)",
-                      transition: "all 160ms ease",
-                    }}
-                  />
-                </span>
-                <input
-                  type="checkbox"
-                  checked={settings.replyMode === "auto"}
-                  onChange={(event) => {
-                    updateReplyMode(event.target.checked ? "auto" : "approval");
-                    setNotificationSaved(false);
-                  }}
-                  aria-label={copy.toggleLabel}
-                  style={{ position: "absolute", opacity: 0, pointerEvents: "none" }}
-                />
-              </label>
-              {settings.replyMode === "approval" ? (
-                <div
+                  {toneSuggestions.map((tone) => (
+                    <option key={tone} value={tone}>
+                      {tone}
+                    </option>
+                  ))}
+                </select>
+                <button
+                  type="button"
+                  onClick={saveTone}
                   style={{
-                    background: "#f8fafc",
-                    border: "1px solid #e4e9f2",
-                    borderRadius: "18px",
-                    padding: "16px 18px",
-                    display: "grid",
-                    gap: "12px",
+                    background: "#172033",
+                    color: "#fff",
+                    border: "none",
+                    borderRadius: "12px",
+                    padding: "10px 14px",
+                    fontWeight: "600",
+                    cursor: "pointer",
+                    width: "100%",
                   }}
                 >
-                  <label
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "10px",
-                      color: "#172033",
-                      fontWeight: "700",
-                    }}
-                  >
-                    <input
-                      type="checkbox"
-                      checked={settings.alertsEnabled}
-                      onChange={(event) => updateAlertsEnabled(event.target.checked)}
-                    />
-                    {copy.emailNotifyToggle}
-                  </label>
-                  {settings.alertsEnabled ? (
-                    <div style={{ display: "grid", gap: "12px" }}>
-                      <div style={{ color: "#5b6473", lineHeight: 1.6 }}>
-                        {copy.emailNotifyHelp}
-                      </div>
-                      <div
-                        style={{
-                          display: "flex",
-                          gap: "10px",
-                          flexWrap: "wrap",
-                          alignItems: "end",
-                        }}
-                      >
-                        <label style={{ display: "grid", gap: "6px", flex: "1 1 260px" }}>
-                          <span
-                            style={{ color: "#172033", fontSize: "14px", fontWeight: "600" }}
-                          >
-                            {copy.emailNotifyLabel}
-                          </span>
-                          <input
-                            type="email"
-                            value={notificationEmailInput}
-                            onChange={(event) => {
-                              setNotificationEmailInput(event.target.value);
-                              setNotificationSaved(false);
-                            }}
-                            placeholder={copy.emailNotifyPlaceholder}
-                            style={{
-                              width: "100%",
-                              padding: "12px 14px",
-                              borderRadius: "12px",
-                              border: "1px solid #d1d5db",
-                              fontSize: "15px",
-                              background: "#fff",
-                            }}
-                          />
-                        </label>
-                        <button
-                          type="button"
-                          onClick={saveNotificationEmail}
-                          style={{
-                            background: "#172033",
-                            color: "#fff",
-                            border: "none",
-                            borderRadius: "12px",
-                            padding: "12px 16px",
-                            fontWeight: "600",
-                            cursor: "pointer",
-                          }}
-                        >
-                          {copy.saveEmail}
-                        </button>
-                      </div>
-                    </div>
-                  ) : null}
-                  {notificationSaved && settings.alertsEnabled ? (
-                    <div style={{ color: "#1f7a45", fontSize: "14px", fontWeight: "600" }}>
-                      {copy.emailSaved}
-                    </div>
-                  ) : null}
-                </div>
-              ) : null}
+                  {copy.saveTone}
+                </button>
+                {toneSaved ? (
+                  <div style={{ marginTop: "10px", color: "#166b45", fontSize: "13px", fontWeight: "600" }}>
+                    {copy.toneSaved}
+                  </div>
+                ) : null}
+              </div>
             </div>
+            <Link
+              href={billingState.status === "active" ? "/connect-google" : "/pricing"}
+              style={{
+                display: "inline-block",
+                textDecoration: "none",
+                background: "#172033",
+                color: "#fff",
+                borderRadius: "14px",
+                padding: "12px 16px",
+                fontWeight: "600",
+              }}
+            >
+              {billingState.status === "active" ? copy.connectBusiness : copy.choosePlan}
+            </Link>
           </article>
         </section>
 
@@ -1295,120 +1619,10 @@ function DashboardContent() {
           </div>
         ) : null}
 
-        <section style={{ display: "grid", gridTemplateColumns: "minmax(0, 1fr)" }}>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "minmax(0, 1.25fr) minmax(280px, 0.75fr)",
-              gap: "18px",
-            }}
-          >
-            <article
-              style={{
-                background: "#fff",
-                borderRadius: "24px",
-                padding: "24px",
-                boxShadow: "0 16px 38px rgba(82,95,127,0.12)",
-              }}
-            >
-              <h2 style={{ fontSize: "24px", color: "#172033", marginBottom: "12px" }}>
-                {copy.connectedTitle}
-              </h2>
-              <p style={{ color: "#5b6473", lineHeight: 1.7, marginBottom: "18px" }}>
-                {copy.connectedText}
-              </p>
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
-                  gap: "12px",
-                  marginBottom: "16px",
-                }}
-              >
-                {[
-                  [copy.provider, connection.provider || copy.googleProvider],
-                  [copy.location, connection.selectedLocationName || copy.notConnected],
-                  [copy.category, connection.selectedLocationCategory || copy.notConnected],
-                  [copy.city, connection.selectedLocationCity || copy.notConnected],
-                ].map(([label, value]) => (
-                  <div
-                    key={label}
-                    style={{ background: "#f8fafc", borderRadius: "16px", padding: "14px 16px" }}
-                  >
-                    <div style={{ color: "#6b7280", fontSize: "13px", marginBottom: "6px" }}>
-                      {label}
-                    </div>
-                    <div style={{ color: "#172033", fontWeight: "700" }}>{value}</div>
-                  </div>
-                ))}
-              </div>
-              <Link
-                href={billingState.status === "active" ? "/connect-google" : "/pricing"}
-                style={{
-                  display: "inline-block",
-                  textDecoration: "none",
-                  background: "#172033",
-                  color: "#fff",
-                  borderRadius: "14px",
-                  padding: "12px 16px",
-                  fontWeight: "600",
-                }}
-              >
-                {billingState.status === "active" ? copy.connectBusiness : copy.choosePlan}
-              </Link>
-            </article>
-
-            <article
-              style={{
-                background: "#fff",
-                borderRadius: "24px",
-                padding: "24px",
-                boxShadow: "0 16px 38px rgba(82,95,127,0.12)",
-              }}
-            >
-              <h2 style={{ fontSize: "24px", color: "#172033", marginBottom: "12px" }}>
-                {copy.toneTitle}
-              </h2>
-              <p style={{ color: "#5b6473", lineHeight: 1.7, marginBottom: "18px" }}>
-                {copy.toneText}
-              </p>
-              <div
-                style={{
-                  background: "#f8fafc",
-                  borderRadius: "16px",
-                  padding: "14px 16px",
-                  marginBottom: "16px",
-                }}
-              >
-                <div style={{ color: "#6b7280", fontSize: "13px", marginBottom: "6px" }}>
-                  {copy.tone}
-                </div>
-                <input
-                  type="text"
-                  value={settings.tone}
-                  onChange={(event) => updateTone(event.target.value)}
-                  placeholder={copy.tonePlaceholder}
-                  style={{
-                    width: "100%",
-                    padding: "12px 14px",
-                    borderRadius: "12px",
-                    border: "1px solid #d1d5db",
-                    background: "#fff",
-                    color: "#172033",
-                  }}
-                />
-              </div>
-              <div style={{ color: "#6b7280", lineHeight: 1.6 }}>
-                {settings.tone || copy.notSet}
-              </div>
-            </article>
-          </div>
-        </section>
-
         <section
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(420px, 1fr))",
+            gridTemplateColumns: "minmax(0, 1fr)",
             gap: "18px",
             marginTop: "18px",
             alignItems: "start",
@@ -1423,63 +1637,7 @@ function DashboardContent() {
               height: "100%",
             }}
           >
-            <h2 style={{ fontSize: "24px", color: "#172033", marginBottom: "12px" }}>
-              {copy.billingTitle}
-            </h2>
-            <p style={{ color: "#5b6473", lineHeight: 1.7, marginBottom: "18px" }}>
-              {copy.billingText}
-            </p>
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
-                gap: "12px",
-                marginBottom: "16px",
-              }}
-            >
-              {[
-                [copy.plan, billing.planName],
-                [copy.amount, billing.amount],
-                [copy.status, billing.status],
-                [copy.nextBilling, billing.nextBillingDate],
-              ].map(([label, value]) => (
-                <div
-                  key={label}
-                  style={{ background: "#f8fafc", borderRadius: "16px", padding: "14px 16px" }}
-                >
-                  <div style={{ color: "#6b7280", fontSize: "13px", marginBottom: "6px" }}>
-                    {label}
-                  </div>
-                  <div style={{ color: "#172033", fontWeight: "700" }}>{value}</div>
-                </div>
-              ))}
-            </div>
-            <Link
-              href="/pricing"
-              style={{
-                display: "inline-block",
-                textDecoration: "none",
-                background: "#172033",
-                color: "#fff",
-                borderRadius: "14px",
-                padding: "12px 16px",
-                fontWeight: "600",
-              }}
-            >
-              {copy.managePlan}
-            </Link>
-          </article>
-
-          <article
-            style={{
-              background: "#fff",
-              borderRadius: "24px",
-              padding: "24px",
-              boxShadow: "0 16px 38px rgba(82,95,127,0.12)",
-              height: "100%",
-            }}
-          >
-            <h2 style={{ fontSize: "24px", color: "#172033", marginBottom: "12px" }}>
+            <h2 style={sectionHeadingStyle}>
               {copy.accountTitle}
             </h2>
             <div style={{ display: "grid", gap: "12px", marginBottom: "18px" }}>
@@ -1581,6 +1739,89 @@ function DashboardContent() {
                 </>
               ) : null}
             </div>
+          </article>
+        </section>
+
+        <section
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+            gap: "18px",
+            marginTop: "18px",
+            alignItems: "start",
+          }}
+        >
+          <article
+            style={{
+              background: "#fff",
+              borderRadius: "24px",
+              padding: "24px",
+              boxShadow: "0 16px 38px rgba(82,95,127,0.12)",
+              height: "100%",
+            }}
+          >
+            <h2 style={sectionHeadingStyle}>
+              {copy.billingTitle}
+            </h2>
+            <p style={{ color: "#5b6473", lineHeight: 1.7, marginBottom: "18px" }}>
+              {copy.billingText}
+            </p>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+                gap: "12px",
+                marginBottom: "16px",
+              }}
+            >
+              {[
+                [copy.plan, billing.planName],
+                [copy.amount, billing.amount],
+                [copy.status, billing.status],
+                [copy.nextBilling, billing.nextBillingDate],
+                [copy.paymentMethod, billing.paymentMethod],
+                [copy.cardEnding, billing.cardDetails],
+              ].map(([label, value]) => (
+                <div
+                  key={label}
+                  style={{ background: "#f8fafc", borderRadius: "16px", padding: "14px 16px" }}
+                >
+                  <div style={{ color: "#6b7280", fontSize: "13px", marginBottom: "6px" }}>
+                    {label}
+                  </div>
+                  <div style={{ color: "#172033", fontWeight: "700" }}>{value}</div>
+                </div>
+              ))}
+            </div>
+            <Link
+              href="/pricing"
+              style={{
+                display: "inline-block",
+                textDecoration: "none",
+                background: "#172033",
+                color: "#fff",
+                borderRadius: "14px",
+                padding: "12px 16px",
+                fontWeight: "600",
+              }}
+            >
+              {copy.managePlan}
+            </Link>
+            <button
+              type="button"
+              style={{
+                marginLeft: "12px",
+                background: "#eff3fb",
+                color: "#172033",
+                border: "1px solid #d9e3f2",
+                borderRadius: "14px",
+                padding: "12px 16px",
+                fontWeight: "600",
+                cursor: "pointer",
+              }}
+            >
+              {copy.changeCard}
+            </button>
           </article>
         </section>
       </div>

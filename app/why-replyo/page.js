@@ -5,36 +5,52 @@ import { useLanguage } from "../components/LanguageProvider";
 
 export default function WhyReplyoPage() {
   const { t, language } = useLanguage();
+  const reasons = t.why.reasons.slice(0, 3);
 
   return (
     <main
       style={{
         minHeight: "100vh",
-        background:
-          "radial-gradient(circle at top left, #fff6df 0%, #f7f4ec 40%, #edf3ff 100%)",
+        background: "#07090d",
         fontFamily: "Arial, sans-serif",
-        color: "#172033",
+        color: "#f8fafc",
         direction: language === "ar" ? "rtl" : "ltr",
       }}
     >
       <section
         style={{
-          maxWidth: "1180px",
+          maxWidth: "1120px",
           margin: "0 auto",
-          padding: "clamp(32px, 8vw, 72px) clamp(18px, 5vw, 28px) clamp(48px, 10vw, 96px)",
+          padding: "clamp(28px, 7vw, 72px) clamp(18px, 5vw, 32px) 88px",
         }}
       >
-        <div style={{ maxWidth: "760px", marginBottom: "32px" }}>
+        <Link
+          href="/"
+          style={{
+            display: "inline-flex",
+            color: "rgba(248,250,252,0.62)",
+            textDecoration: "none",
+            marginBottom: "30px",
+          }}
+        >
+          ← Home
+        </Link>
+
+        <div style={{ maxWidth: "760px", marginBottom: "40px" }}>
           <div
             style={{
-              display: "inline-block",
-              padding: "8px 14px",
+              display: "inline-flex",
+              alignItems: "center",
+              padding: "7px 12px",
               borderRadius: "999px",
-              background: "#fff0c2",
-              color: "#7a5600",
-              fontSize: "14px",
-              fontWeight: "600",
+              background: "rgba(255,255,255,0.04)",
+              border: "1px solid rgba(255,255,255,0.08)",
+              color: "rgba(248,250,252,0.62)",
+              fontSize: "12px",
+              fontWeight: "700",
               marginBottom: "18px",
+              textTransform: "uppercase",
+              letterSpacing: "0.08em",
             }}
           >
             {t.why.badge}
@@ -42,8 +58,9 @@ export default function WhyReplyoPage() {
 
           <h1
             style={{
-              fontSize: "clamp(34px, 9vw, 54px)",
-              lineHeight: 1.05,
+              fontSize: "clamp(38px, 7vw, 68px)",
+              lineHeight: 0.95,
+              letterSpacing: "-0.07em",
               marginBottom: "18px",
             }}
           >
@@ -52,11 +69,11 @@ export default function WhyReplyoPage() {
 
           <p
             style={{
-              fontSize: "clamp(17px, 4.4vw, 19px)",
-              lineHeight: 1.75,
-              color: "#556070",
+              fontSize: "clamp(17px, 2.8vw, 19px)",
+              lineHeight: 1.7,
+              color: "rgba(248,250,252,0.64)",
               margin: 0,
-              maxWidth: "700px",
+              maxWidth: "620px",
             }}
           >
             {t.why.description}
@@ -66,53 +83,58 @@ export default function WhyReplyoPage() {
         <section
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 300px), 1fr))",
+            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
             gap: "20px",
             marginBottom: "24px",
           }}
         >
           <div
             style={{
-              background: "#172033",
-              color: "#fff8ec",
+              background: "rgba(255,255,255,0.03)",
               borderRadius: "30px",
-              padding: "clamp(20px, 5vw, 28px)",
-              boxShadow: "0 24px 50px rgba(23,32,51,0.18)",
+              border: "1px solid rgba(255,255,255,0.08)",
+              padding: "24px",
             }}
           >
             <div
               style={{
-                display: "inline-block",
+                display: "inline-flex",
                 padding: "8px 12px",
                 borderRadius: "999px",
-                background: "rgba(255,255,255,0.12)",
-                fontSize: "13px",
+                background: "rgba(255,255,255,0.04)",
+                border: "1px solid rgba(255,255,255,0.08)",
+                color: "rgba(248,250,252,0.64)",
+                fontSize: "12px",
+                fontWeight: "700",
                 marginBottom: "14px",
               }}
             >
               {t.why.coreBadge}
             </div>
-            <h2 style={{ fontSize: "clamp(28px, 7vw, 34px)", lineHeight: 1.1, marginBottom: "14px" }}>
-              {t.why.coreTitle}
-            </h2>
-            <p
+            <h2
               style={{
-                color: "rgba(255,248,236,0.82)",
-                lineHeight: 1.75,
-                marginBottom: "18px",
+                fontSize: "clamp(28px, 5vw, 36px)",
+                lineHeight: 1.04,
+                letterSpacing: "-0.05em",
+                marginBottom: "12px",
               }}
             >
+              {t.why.coreTitle}
+            </h2>
+            <p style={{ color: "rgba(248,250,252,0.68)", lineHeight: 1.8, marginBottom: "16px" }}>
               {t.why.coreText}
             </p>
 
-            <div style={{ display: "grid", gap: "12px" }}>
-              {t.why.extra.map((item) => (
+            <div style={{ display: "grid", gap: "10px" }}>
+              {t.why.extra.slice(0, 3).map((item) => (
                 <div
                   key={item}
                   style={{
-                    background: "rgba(255,255,255,0.08)",
+                    background: "rgba(255,255,255,0.04)",
+                    border: "1px solid rgba(255,255,255,0.08)",
                     borderRadius: "18px",
-                    padding: "14px 16px",
+                    padding: "12px 14px",
+                    color: "rgba(248,250,252,0.8)",
                     lineHeight: 1.6,
                   }}
                 >
@@ -124,38 +146,37 @@ export default function WhyReplyoPage() {
 
           <div
             style={{
-              background: "rgba(255,255,255,0.82)",
+              background: "rgba(255,255,255,0.03)",
               borderRadius: "30px",
-              padding: "clamp(18px, 4vw, 24px)",
-              border: "1px solid rgba(23,32,51,0.08)",
-              boxShadow: "0 22px 50px rgba(48,63,90,0.1)",
+              border: "1px solid rgba(255,255,255,0.08)",
+              padding: "24px",
             }}
           >
             <div
               style={{
-                display: "inline-block",
+                display: "inline-flex",
                 padding: "8px 12px",
                 borderRadius: "999px",
-                background: "#eff3fb",
-                color: "#31598e",
-                fontSize: "13px",
+                background: "rgba(255,255,255,0.04)",
+                border: "1px solid rgba(255,255,255,0.08)",
+                color: "rgba(248,250,252,0.64)",
+                fontSize: "12px",
                 fontWeight: "700",
                 marginBottom: "14px",
               }}
             >
               {t.why.customerBadge}
             </div>
-
-            <div style={{ display: "grid", gap: "14px" }}>
+            <div style={{ display: "grid", gap: "12px" }}>
               {t.why.customerItems.map((item) => (
                 <div
                   key={item}
                   style={{
-                    background: "#fff",
+                    background: "rgba(255,255,255,0.04)",
                     borderRadius: "18px",
-                    border: "1px solid #e4e9f2",
-                    padding: "16px",
-                    color: "#344054",
+                    border: "1px solid rgba(255,255,255,0.08)",
+                    padding: "14px 16px",
+                    color: "rgba(248,250,252,0.74)",
                     lineHeight: 1.65,
                   }}
                 >
@@ -168,105 +189,99 @@ export default function WhyReplyoPage() {
 
         <section
           style={{
-            background: "rgba(255,255,255,0.82)",
-            border: "1px solid rgba(23,32,51,0.08)",
-            borderRadius: "30px",
-            padding: "clamp(18px, 4vw, 24px)",
-            boxShadow: "0 22px 50px rgba(48,63,90,0.1)",
-            marginBottom: "24px",
-            perspective: "1400px",
+            paddingTop: "8px",
+            marginBottom: "28px",
           }}
         >
-          <div style={{ maxWidth: "680px", marginBottom: "18px" }}>
-            <h2 style={{ fontSize: "clamp(30px, 7vw, 38px)", lineHeight: 1.1, marginBottom: "12px" }}>
+          <div style={{ maxWidth: "760px", marginBottom: "18px" }}>
+            <h2
+              style={{
+                fontSize: "clamp(28px, 5vw, 40px)",
+                lineHeight: 1.02,
+                letterSpacing: "-0.05em",
+                marginBottom: "12px",
+              }}
+            >
               {t.why.reasonsTitle}
             </h2>
-            <p style={{ color: "#5b6474", lineHeight: 1.75, margin: 0 }}>{t.why.reasonsText}</p>
+            <p style={{ color: "rgba(248,250,252,0.66)", lineHeight: 1.8, margin: 0 }}>
+              {t.why.reasonsText}
+            </p>
           </div>
 
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 240px), 1fr))",
+              gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
               gap: "16px",
             }}
           >
-            {t.why.reasons.map(([title, text], index) => (
+            {reasons.map(([title, text], index) => (
               <article
                 key={title}
-                className="replyo-why-card"
                 style={{
-                  background: "#fff",
+                  background: "rgba(255,255,255,0.025)",
                   borderRadius: "24px",
-                  border: "1px solid #e4e9f2",
+                  border: "1px solid rgba(255,255,255,0.08)",
                   padding: "20px",
-                  boxShadow: "0 14px 30px rgba(82,95,127,0.08)",
-                  animationDelay: `${index * 140}ms`,
                 }}
               >
-                <h3
-                  className="replyo-why-card-title"
-                  style={{ fontSize: "clamp(21px, 5vw, 22px)", lineHeight: 1.25, marginBottom: "10px" }}
+                <div
+                  style={{
+                    width: "40px",
+                    height: "40px",
+                    borderRadius: "14px",
+                    background: "rgba(255,255,255,0.05)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    color: "#ffffff",
+                    fontWeight: "800",
+                    marginBottom: "14px",
+                  }}
                 >
+                  0{index + 1}
+                </div>
+                <h3 style={{ fontSize: "24px", lineHeight: 1.15, marginBottom: "10px" }}>
                   {title}
                 </h3>
-                <p style={{ color: "#5b6474", lineHeight: 1.75, margin: 0 }}>{text}</p>
+                <p style={{ color: "rgba(248,250,252,0.66)", lineHeight: 1.75, margin: 0 }}>
+                  {text}
+                </p>
               </article>
             ))}
           </div>
         </section>
 
-        <section
-          style={{
-            background: "rgba(255,255,255,0.84)",
-            border: "1px solid rgba(23,32,51,0.08)",
-            borderRadius: "28px",
-            padding: "clamp(20px, 5vw, 28px)",
-            boxShadow: "0 22px 50px rgba(48,63,90,0.1)",
-            display: "flex",
-            justifyContent: "space-between",
-            gap: "18px",
-            alignItems: "center",
-            flexWrap: "wrap",
-          }}
-        >
-          <div style={{ maxWidth: "660px" }}>
-            <h2 style={{ fontSize: "clamp(28px, 7vw, 34px)", lineHeight: 1.1, marginBottom: "10px" }}>
-              {t.why.ctaTitle}
-            </h2>
-            <p style={{ color: "#5b6474", lineHeight: 1.75, margin: 0 }}>{t.why.ctaText}</p>
-          </div>
-
-          <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
-            <Link
-              href="/how-it-works"
-              style={{
-                textDecoration: "none",
-                background: "#fff",
-                color: "#172033",
-                padding: "15px 20px",
-                borderRadius: "14px",
-                border: "1px solid rgba(23,32,51,0.12)",
-                fontWeight: "600",
-              }}
-            >
-              {t.why.how}
-            </Link>
-            <Link
-              href="/signup"
-              style={{
-                textDecoration: "none",
-                background: "#172033",
-                color: "#fff",
-                padding: "15px 20px",
-                borderRadius: "14px",
-                fontWeight: "600",
-              }}
-            >
-              {t.why.create}
-            </Link>
-          </div>
-        </section>
+        <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
+          <Link
+            href="/how-it-works"
+            style={{
+              textDecoration: "none",
+              background: "transparent",
+              color: "#ffffff",
+              padding: "15px 20px",
+              borderRadius: "14px",
+              border: "1px solid rgba(255,255,255,0.12)",
+              fontWeight: "700",
+            }}
+          >
+            {t.why.how}
+          </Link>
+          <Link
+            href="/signup"
+            style={{
+              textDecoration: "none",
+              background: "#ffffff",
+              color: "#07090d",
+              padding: "15px 20px",
+              borderRadius: "14px",
+              fontWeight: "700",
+            }}
+          >
+            {t.why.create}
+          </Link>
+        </div>
       </section>
     </main>
   );
