@@ -19,6 +19,7 @@ const baseTranslations = {
     trust: "Trust",
     privacy: "Privacy Policy",
     cookies: "Cookie Policy",
+    disclosure: "Third-Party Disclosure",
     googleNote: "Google Business API access request in progress",
     terms: "Terms of Service",
     contact: "Contact",

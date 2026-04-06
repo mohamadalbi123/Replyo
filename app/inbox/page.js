@@ -6,12 +6,15 @@ import { signOut, useSession } from "next-auth/react";
 import AuthSessionProvider from "../components/AuthSessionProvider";
 import { useLanguage } from "../components/LanguageProvider";
 import {
+  BILLING_STORAGE_KEY,
   CONNECTION_STORAGE_KEY,
   REVIEWS_STORAGE_KEY,
   SETTINGS_STORAGE_KEY,
+  defaultBilling,
   defaultConnection,
   defaultReviews,
   defaultSettings,
+  normalizeBillingUsageState,
   readStoredValue,
   writeStoredValue,
 } from "../lib/demoState";
@@ -50,6 +53,12 @@ const inboxCopy = {
     generate: "Generate reply",
     approve: "Confirm and post",
     changeMode: "Change mode",
+    billingBlocked:
+      "Reply generation is paused because your subscription is not active. Update billing to continue.",
+    paymentPastDue:
+      "Reply generation is paused because renewal payment failed. Update your card to continue.",
+    replyLimitReached:
+      "Your monthly reply limit has been reached for the current plan. Upgrade the plan to generate more replies this month.",
     statuses: {
       "needs-reply": "Needs reply",
       ready: "Ready",
@@ -90,6 +99,12 @@ const inboxCopy = {
     generate: "Generer la reponse",
     approve: "Confirmer et publier",
     changeMode: "Changer le mode",
+    billingBlocked:
+      "La generation des reponses est en pause car votre abonnement n'est pas actif. Mettez a jour la facturation pour continuer.",
+    paymentPastDue:
+      "La generation des reponses est en pause car le paiement du renouvellement a echoue. Mettez a jour votre carte pour continuer.",
+    replyLimitReached:
+      "La limite mensuelle de reponses de votre offre a ete atteinte. Passez a une offre superieure pour generer plus de reponses ce mois-ci.",
     statuses: {
       "needs-reply": "A traiter",
       ready: "Pret",
@@ -130,6 +145,12 @@ const inboxCopy = {
     generate: "Generar respuesta",
     approve: "Confirmar y publicar",
     changeMode: "Cambiar modo",
+    billingBlocked:
+      "La generacion de respuestas esta en pausa porque tu suscripcion no esta activa. Actualiza la facturacion para continuar.",
+    paymentPastDue:
+      "La generacion de respuestas esta en pausa porque ha fallado el pago de renovacion. Actualiza tu tarjeta para continuar.",
+    replyLimitReached:
+      "Has alcanzado el limite mensual de respuestas de tu plan. Mejora el plan para generar mas respuestas este mes.",
     statuses: {
       "needs-reply": "Necesita respuesta",
       ready: "Lista",
@@ -170,6 +191,12 @@ const inboxCopy = {
     generate: "Antwort erstellen",
     approve: "Bestatigen und veroffentlichen",
     changeMode: "Modus andern",
+    billingBlocked:
+      "Die Antworterstellung ist pausiert, weil Ihr Abonnement nicht aktiv ist. Aktualisieren Sie die Abrechnung, um fortzufahren.",
+    paymentPastDue:
+      "Die Antworterstellung ist pausiert, weil die Verlaengerungszahlung fehlgeschlagen ist. Aktualisieren Sie Ihre Karte, um fortzufahren.",
+    replyLimitReached:
+      "Das monatliche Antwortlimit Ihres Tarifs ist erreicht. Upgraden Sie den Tarif, um in diesem Monat weitere Antworten zu erstellen.",
     statuses: {
       "needs-reply": "Antwort fehlt",
       ready: "Bereit",
@@ -210,6 +237,12 @@ const inboxCopy = {
     generate: "إنشاء الرد",
     approve: "تأكيد ونشر",
     changeMode: "تغيير الوضع",
+    billingBlocked:
+      "تم إيقاف إنشاء الردود مؤقتا لأن اشتراكك غير نشط. حدّث معلومات الفوترة للمتابعة.",
+    paymentPastDue:
+      "تم إيقاف إنشاء الردود مؤقتا لأن دفعة التجديد فشلت. حدّث بطاقتك للمتابعة.",
+    replyLimitReached:
+      "لقد وصلت الى الحد الشهري للردود في خطتك الحالية. قم بالترقية لإنشاء المزيد من الردود هذا الشهر.",
     statuses: {
       "needs-reply": "يحتاج ردا",
       ready: "جاهز",
@@ -226,6 +259,7 @@ function InboxContent() {
   const [reviews, setReviews] = useState([]);
   const [settings, setSettings] = useState(defaultSettings);
   const [connection, setConnection] = useState(defaultConnection);
+  const [billingState, setBillingState] = useState(defaultBilling);
   const [activeReviewId, setActiveReviewId] = useState("");
 
   useEffect(() => {
@@ -238,10 +272,15 @@ function InboxContent() {
       ...defaultConnection,
       ...readStoredValue(CONNECTION_STORAGE_KEY, defaultConnection),
     };
+    const storedBilling = normalizeBillingUsageState(
+      readStoredValue(BILLING_STORAGE_KEY, defaultBilling),
+    );
 
     setReviews(storedReviews.length ? storedReviews : defaultReviews);
     setSettings(storedSettings);
     setConnection(storedConnection);
+    setBillingState(storedBilling);
+    writeStoredValue(BILLING_STORAGE_KEY, storedBilling);
 
     if (!storedReviews.length) {
       writeStoredValue(REVIEWS_STORAGE_KEY, defaultReviews);
@@ -257,6 +296,44 @@ function InboxContent() {
     const currentReview = reviews.find((review) => review.id === reviewId);
 
     if (!currentReview) {
+      return;
+    }
+
+    if (billingState.status !== "active") {
+      const nextReviews = reviews.map((review) =>
+        review.id === reviewId
+          ? {
+              ...review,
+              status: "error",
+              replyText:
+                billingState.status === "past_due"
+                  ? copy.paymentPastDue
+                  : copy.billingBlocked,
+              source: "billing",
+            }
+          : review,
+      );
+
+      updateReviews(nextReviews);
+      return;
+    }
+
+    if (
+      billingState.replyLimit > 0 &&
+      (billingState.repliesUsedThisPeriod || 0) >= billingState.replyLimit
+    ) {
+      const nextReviews = reviews.map((review) =>
+        review.id === reviewId
+          ? {
+              ...review,
+              status: "error",
+              replyText: copy.replyLimitReached,
+              source: "limit",
+            }
+          : review,
+      );
+
+      updateReviews(nextReviews);
       return;
     }
 
@@ -300,6 +377,12 @@ function InboxContent() {
       );
 
       updateReviews(nextReviews);
+      const nextBillingState = normalizeBillingUsageState({
+        ...billingState,
+        repliesUsedThisPeriod: (billingState.repliesUsedThisPeriod || 0) + 1,
+      });
+      setBillingState(nextBillingState);
+      writeStoredValue(BILLING_STORAGE_KEY, nextBillingState);
     } catch (error) {
       const nextReviews = reviews.map((review) =>
         review.id === reviewId
@@ -679,15 +762,20 @@ function InboxContent() {
                   <button
                     type="button"
                     onClick={() => handleGenerate(review.id)}
-                    disabled={activeReviewId === review.id}
+                    disabled={activeReviewId === review.id || billingState.status !== "active"}
                     style={{
                       background: "#ffffff",
                       color: "#07090d",
                       border: "none",
                       borderRadius: "14px",
                       padding: "12px 14px",
-                      cursor: activeReviewId === review.id ? "wait" : "pointer",
-                      opacity: activeReviewId === review.id ? 0.7 : 1,
+                      cursor:
+                        activeReviewId === review.id
+                          ? "wait"
+                          : billingState.status !== "active"
+                            ? "not-allowed"
+                            : "pointer",
+                      opacity: activeReviewId === review.id || billingState.status !== "active" ? 0.7 : 1,
                     }}
                   >
                     {activeReviewId === review.id ? copy.generating : copy.generate}

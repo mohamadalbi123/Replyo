@@ -123,6 +123,15 @@ export default function Footer() {
               >
                 {t.footer.cookies}
               </Link>
+              <Link
+                href="/third-party-disclosure"
+                style={{
+                  color: "rgba(248,250,252,0.8)",
+                  textDecoration: "none",
+                }}
+              >
+                {t.footer.disclosure || "Third-Party Disclosure"}
+              </Link>
               <div>{t.footer.googleNote}</div>
               <Link
                 href="/terms"

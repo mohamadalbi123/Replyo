@@ -14,6 +14,7 @@ import {
   defaultConnection,
   defaultReviews,
   defaultSettings,
+  normalizeBillingUsageState,
   readStoredValue,
   writeStoredValue,
 } from "../lib/demoState";
@@ -84,15 +85,23 @@ const dashboardCopy = {
     amount: "Amount",
     status: "Status",
     nextBilling: "Next billing date",
+    replyUsage: "Reply usage this month",
     paymentMethod: "Payment method",
     cardEnding: "Card details",
     managePlan: "Manage plan",
     changeCard: "Change card",
     active: "Active",
+    pastDue: "Past due",
     inactive: "Inactive",
     noPlan: "No active plan",
     notScheduled: "Not scheduled",
     noCard: "No card on file",
+    noReplyLimit: "No reply limit",
+    billingWarningTitle: "Billing needs attention",
+    billingWarningPastDue:
+      "Your renewal payment failed. Reply generation is paused until the card is updated.",
+    billingWarningInactive:
+      "No active subscription is on file. Reply generation stays paused until a plan is active.",
     connectedTitle: "Connected business",
     connectedText:
       "This is the Google Business Profile Replyo is currently prepared to monitor for reviews.",
@@ -184,15 +193,23 @@ const dashboardCopy = {
     amount: "Montant",
     status: "Statut",
     nextBilling: "Prochaine facturation",
+    replyUsage: "Utilisation des reponses ce mois-ci",
     paymentMethod: "Methode de paiement",
     cardEnding: "Carte",
     managePlan: "Gerer l'offre",
     changeCard: "Changer la carte",
     active: "Actif",
+    pastDue: "Paiement en retard",
     inactive: "Inactif",
     noPlan: "Aucune offre active",
     notScheduled: "Non planifie",
     noCard: "Aucune carte enregistree",
+    noReplyLimit: "Aucune limite de reponses",
+    billingWarningTitle: "La facturation demande votre attention",
+    billingWarningPastDue:
+      "Le paiement de renouvellement a echoue. La generation des reponses est en pause jusqu'a la mise a jour de la carte.",
+    billingWarningInactive:
+      "Aucun abonnement actif n'est enregistre. La generation des reponses reste en pause tant qu'une offre n'est pas active.",
     connectedTitle: "Business connecte",
     connectedText:
       "C'est le profil Google Business que Replyo est actuellement pret a surveiller pour les avis.",
@@ -284,15 +301,23 @@ const dashboardCopy = {
     amount: "Importe",
     status: "Estado",
     nextBilling: "Proxima facturacion",
+    replyUsage: "Uso de respuestas este mes",
     paymentMethod: "Metodo de pago",
     cardEnding: "Tarjeta",
     managePlan: "Gestionar plan",
     changeCard: "Cambiar tarjeta",
     active: "Activo",
+    pastDue: "Pago pendiente",
     inactive: "Inactivo",
     noPlan: "Sin plan activo",
     notScheduled: "No programado",
     noCard: "Sin tarjeta guardada",
+    noReplyLimit: "Sin limite de respuestas",
+    billingWarningTitle: "La facturacion necesita atencion",
+    billingWarningPastDue:
+      "Ha fallado el pago de renovacion. La generacion de respuestas queda en pausa hasta actualizar la tarjeta.",
+    billingWarningInactive:
+      "No hay una suscripcion activa registrada. La generacion de respuestas sigue en pausa hasta activar un plan.",
     connectedTitle: "Negocio conectado",
     connectedText:
       "Este es el perfil de Google Business que Replyo esta preparado para vigilar.",
@@ -384,15 +409,23 @@ const dashboardCopy = {
     amount: "Betrag",
     status: "Status",
     nextBilling: "Naechste Abrechnung",
+    replyUsage: "Antworten in diesem Monat",
     paymentMethod: "Zahlungsmethode",
     cardEnding: "Kartendetails",
     managePlan: "Tarif verwalten",
     changeCard: "Karte aendern",
     active: "Aktiv",
+    pastDue: "Zahlung offen",
     inactive: "Inaktiv",
     noPlan: "Kein aktiver Tarif",
     notScheduled: "Nicht geplant",
     noCard: "Keine Karte hinterlegt",
+    noReplyLimit: "Kein Antwortlimit",
+    billingWarningTitle: "Abrechnung braucht Aufmerksamkeit",
+    billingWarningPastDue:
+      "Die Verlaengerungszahlung ist fehlgeschlagen. Die Antworterstellung ist pausiert, bis die Karte aktualisiert wird.",
+    billingWarningInactive:
+      "Es liegt kein aktives Abonnement vor. Die Antworterstellung bleibt pausiert, bis ein Tarif aktiv ist.",
     connectedTitle: "Verbundenes Unternehmen",
     connectedText:
       "Dies ist das Google-Business-Profil, das Replyo aktuell fur Bewertungen beobachten soll.",
@@ -484,15 +517,23 @@ const dashboardCopy = {
     amount: "المبلغ",
     status: "الحالة",
     nextBilling: "تاريخ الفاتورة التالية",
+    replyUsage: "استخدام الردود هذا الشهر",
     paymentMethod: "طريقة الدفع",
     cardEnding: "تفاصيل البطاقة",
     managePlan: "إدارة الخطة",
     changeCard: "تغيير البطاقة",
     active: "نشط",
+    pastDue: "دفعة متأخرة",
     inactive: "غير نشط",
     noPlan: "لا توجد خطة نشطة",
     notScheduled: "غير مجدول",
     noCard: "لا توجد بطاقة محفوظة",
+    noReplyLimit: "لا يوجد حد للردود",
+    billingWarningTitle: "الفوترة تحتاج انتباها",
+    billingWarningPastDue:
+      "فشلت دفعة التجديد. تم إيقاف إنشاء الردود مؤقتا حتى يتم تحديث البطاقة.",
+    billingWarningInactive:
+      "لا يوجد اشتراك نشط مسجل حاليا. سيبقى إنشاء الردود متوقفا حتى تصبح الخطة نشطة.",
     connectedTitle: "النشاط المتصل",
     connectedText:
       "هذا هو ملف Google Business الذي تم تجهيز Replyo حاليا لمراقبته من اجل التقييمات.",
@@ -526,10 +567,10 @@ function normalizeBillingState(billingState) {
     return defaultBilling;
   }
 
-  const normalized = {
+  const normalized = normalizeBillingUsageState({
     ...defaultBilling,
     ...billingState,
-  };
+  });
 
   const rawPlanId = `${normalized.planId || ""}`.toLowerCase();
   const rawPlanName = `${normalized.planName || ""}`.toLowerCase();
@@ -806,8 +847,17 @@ function DashboardContent() {
   const billing = {
     planName: billingState.planName || copy.noPlan,
     amount: billingState.amountLabel || copy.choosePlan,
-    status: billingState.status === "active" ? copy.active : copy.inactive,
+    status:
+      billingState.status === "active"
+        ? copy.active
+        : billingState.status === "past_due"
+          ? copy.pastDue
+          : copy.inactive,
     nextBillingDate: billingState.nextBillingDate || copy.notScheduled,
+    replyUsage:
+      billingState.replyLimit > 0
+        ? `${billingState.repliesUsedThisPeriod || 0} / ${billingState.replyLimit}`
+        : copy.noReplyLimit,
     paymentMethod:
       billingState.paymentBrand && billingState.cardLast4
         ? billingState.paymentBrand
@@ -817,6 +867,12 @@ function DashboardContent() {
         ? `•••• ${billingState.cardLast4}${billingState.cardExpiry ? ` · ${billingState.cardExpiry}` : ""}`
         : copy.noCard,
   };
+  const billingWarning =
+    billingState.status === "past_due"
+      ? copy.billingWarningPastDue
+      : billingState.status === "inactive"
+        ? copy.billingWarningInactive
+        : "";
 
   function truncateText(text, maxLength = 120) {
     if (!text) {
@@ -1756,6 +1812,21 @@ function DashboardContent() {
             <p style={{ color: "rgba(248,250,252,0.62)", lineHeight: 1.7, marginBottom: "18px" }}>
               {copy.billingText}
             </p>
+            {billingWarning ? (
+              <div
+                style={{
+                  marginBottom: "16px",
+                  background: "rgba(251,188,5,0.12)",
+                  color: "#f4d36a",
+                  borderRadius: "16px",
+                  padding: "14px 16px",
+                  lineHeight: 1.7,
+                  border: "1px solid rgba(251,188,5,0.22)",
+                }}
+              >
+                <strong>{copy.billingWarningTitle}:</strong> {billingWarning}
+              </div>
+            ) : null}
             <div
               style={{
                 display: "grid",
@@ -1769,6 +1840,7 @@ function DashboardContent() {
                 [copy.amount, billing.amount],
                 [copy.status, billing.status],
                 [copy.nextBilling, billing.nextBillingDate],
+                [copy.replyUsage, billing.replyUsage],
                 [copy.paymentMethod, billing.paymentMethod],
                 [copy.cardEnding, billing.cardDetails],
               ].map(([label, value]) => (

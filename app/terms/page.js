@@ -28,6 +28,7 @@ const termsCopy = {
       "Google Business Profile and connected services",
       [
         "Certain Replyo features depend on third-party services such as Google Business Profile and require separate authorization through those services.",
+        "If you use Replyo to respond to reviews on behalf of an end-client, you confirm that you have that client's authorization to do so.",
         "Your use of Google Business Profile and other connected services remains subject to their own terms, permissions, technical limits, and API availability.",
         "Replyo may restrict access to selected locations according to your plan, onboarding choices, or backend authorization rules even if your connected Google account manages additional locations.",
       ],
@@ -37,6 +38,7 @@ const termsCopy = {
       [
         "Replyo may use AI systems to suggest or generate draft replies based on review content, rating, business category, language, tone preferences, and product settings.",
         "You remain responsible for all replies you approve, edit, publish, or allow Replyo to publish on your behalf.",
+        "All replies published through Replyo must remain compliant with Google's prohibited and restricted content policies and any other applicable platform rules.",
         "You should review AI-generated content carefully, especially for sensitive, legal, medical, financial, or reputational matters.",
       ],
     ],

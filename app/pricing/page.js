@@ -7,6 +7,7 @@ import { useLanguage } from "../components/LanguageProvider";
 import {
   BILLING_STORAGE_KEY,
   defaultBilling,
+  PLAN_REPLY_LIMITS,
   writeStoredValue,
 } from "../lib/demoState";
 
@@ -394,6 +395,9 @@ export default function PricingPage() {
       nextBillingDate,
       selectedAt: new Date().toISOString(),
       locationLimit,
+      replyLimit: PLAN_REPLY_LIMITS[plan.planKey] || 0,
+      repliesUsedThisPeriod: 0,
+      usagePeriodKey: new Date().toISOString().slice(0, 7),
       paymentBrand: "Visa",
       cardLast4: "4242",
       cardExpiry: "08/28",

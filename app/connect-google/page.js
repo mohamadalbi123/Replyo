@@ -43,6 +43,13 @@ const connectCopy = {
       "Use the Google account that actually owns or manages the Business Profile. Once connected, Replyo can fetch the businesses available in that business account.",
     consentBox:
       "Your Replyo login can be personal. This separate step must be completed with the Google account that manages the Business Profile you want to connect.",
+    authorizationTitle: "Authorization confirmation",
+    authorizationText:
+      "Before continuing, confirm that you own this Business Profile or are authorized to manage it, and that Replyo is allowed to create replies and, if enabled by you, publish them on the business's behalf.",
+    authorizationCheck:
+      "I confirm that I am authorized to manage this Business Profile and authorize Replyo to handle review replies for it.",
+    googlePolicyNote:
+      "All replies must remain compliant with Google's prohibited and restricted content policies.",
     connectedGoogle:
       "Google Business account connected. Replyo can now try to load your Business Profiles.",
     loadBusinesses: "Load my Google businesses",
@@ -95,6 +102,13 @@ const connectCopy = {
       "Utilisez le compte Google qui possede ou gere vraiment la fiche Business. Une fois connecte, Replyo peut charger les businesses disponibles dans ce compte.",
     consentBox:
       "Votre connexion Replyo peut etre personnelle. Cette etape se fait separement avec le compte Google qui gere la fiche Business a connecter.",
+    authorizationTitle: "Confirmation d'autorisation",
+    authorizationText:
+      "Avant de continuer, confirmez que vous possedez ce profil Business ou que vous etes autorise a le gerer, et que Replyo est autorise a creer des reponses et, si vous l'activez, a les publier au nom de l'entreprise.",
+    authorizationCheck:
+      "Je confirme etre autorise a gerer ce profil Business et j'autorise Replyo a gerer les reponses aux avis pour celui-ci.",
+    googlePolicyNote:
+      "Toutes les reponses doivent rester conformes aux regles Google relatives aux contenus interdits et restreints.",
     connectedGoogle:
       "Compte Google Business connecte. Replyo peut maintenant essayer de charger vos profils Business.",
     loadBusinesses: "Charger mes businesses Google",
@@ -147,6 +161,13 @@ const connectCopy = {
       "Usa la cuenta de Google que realmente posee o gestiona el Business Profile. Una vez conectada, Replyo puede cargar los negocios disponibles en esa cuenta.",
     consentBox:
       "Tu acceso a Replyo puede ser personal. Este paso separado debe hacerse con la cuenta de Google que gestiona el Business Profile que quieres conectar.",
+    authorizationTitle: "Confirmacion de autorizacion",
+    authorizationText:
+      "Antes de continuar, confirma que eres propietario de este Business Profile o que estas autorizado para gestionarlo, y que Replyo puede crear respuestas y, si tu lo activas, publicarlas en nombre del negocio.",
+    authorizationCheck:
+      "Confirmo que estoy autorizado para gestionar este Business Profile y autorizo a Replyo a manejar las respuestas a resenas para el negocio.",
+    googlePolicyNote:
+      "Todas las respuestas deben seguir las politicas de Google sobre contenido prohibido y restringido.",
     connectedGoogle:
       "Cuenta de Google Business conectada. Replyo ya puede intentar cargar tus perfiles Business.",
     loadBusinesses: "Cargar mis negocios de Google",
@@ -199,6 +220,13 @@ const connectCopy = {
       "استخدم حساب Google الذي يملك او يدير فعليا ملف النشاط التجاري. بعد الربط، يستطيع Replyo جلب الانشطة المتاحة في ذلك الحساب.",
     consentBox:
       "يمكن ان يكون تسجيل دخولك الى Replyo شخصيا. اما هذه الخطوة المنفصلة فيجب تنفيذها باستخدام حساب Google الذي يدير ملف النشاط الذي تريد ربطه.",
+    authorizationTitle: "تأكيد التفويض",
+    authorizationText:
+      "قبل المتابعة، أكد أنك تملك ملف النشاط هذا أو أنك مفوض بإدارته، وأن Replyo مسموح له بإنشاء الردود ونشرها نيابة عن النشاط إذا قمت بتفعيل ذلك.",
+    authorizationCheck:
+      "أؤكد أنني مخول لإدارة ملف النشاط هذا وأفوض Replyo للتعامل مع الردود على التقييمات الخاصة به.",
+    googlePolicyNote:
+      "يجب أن تظل جميع الردود متوافقة مع سياسات Google الخاصة بالمحتوى المحظور والمقيّد.",
     connectedGoogle:
       "تم ربط حساب Google Business. يمكن لـ Replyo الآن محاولة تحميل ملفات Business الخاصة بك.",
     loadBusinesses: "تحميل أنشطتي من Google",
@@ -251,6 +279,13 @@ const connectCopy = {
       "Nutzen Sie das Google-Konto, das das Business Profile tatsaechlich besitzt oder verwaltet. Danach kann Replyo die verfuegbaren Unternehmen dieses Kontos laden.",
     consentBox:
       "Ihr Replyo-Login darf persoenlich sein. Dieser getrennte Schritt muss mit dem Google-Konto erfolgen, das das Business Profile verwaltet, das Sie verbinden moechten.",
+    authorizationTitle: "Autorisierungsbestaetigung",
+    authorizationText:
+      "Bevor Sie fortfahren, bestaetigen Sie bitte, dass Sie dieses Business Profile besitzen oder zu dessen Verwaltung berechtigt sind und dass Replyo Antworten erstellen und, falls von Ihnen aktiviert, im Namen des Unternehmens veroeffentlichen darf.",
+    authorizationCheck:
+      "Ich bestaetige, dass ich zur Verwaltung dieses Business Profile berechtigt bin und Replyo zur Bearbeitung von Bewertungsantworten dafuer autorisiere.",
+    googlePolicyNote:
+      "Alle Antworten muessen mit Googles Richtlinien fuer verbotene und eingeschraenkte Inhalte konform bleiben.",
     connectedGoogle:
       "Google-Business-Konto verbunden. Replyo kann jetzt versuchen, Ihre Business-Profile zu laden.",
     loadBusinesses: "Meine Google-Unternehmen laden",
@@ -293,6 +328,7 @@ function ConnectGoogleContent() {
   const [availableLocations, setAvailableLocations] = useState([]);
   const [isLoadingLocations, setIsLoadingLocations] = useState(false);
   const [locationsError, setLocationsError] = useState("");
+  const [hasAuthorization, setHasAuthorization] = useState(false);
 
   useEffect(() => {
     const storedConnection = {
@@ -484,6 +520,11 @@ function ConnectGoogleContent() {
       return false;
     }
 
+    if (!hasAuthorization) {
+      setLocationsError(copy.authorizationText);
+      return false;
+    }
+
     if (hasBusinessToken) {
       loadLocations();
       return true;
@@ -641,6 +682,47 @@ function ConnectGoogleContent() {
                     {copy.consentBox}
                   </div>
 
+                  <div
+                    style={{
+                      background: "rgba(255,255,255,0.03)",
+                      borderRadius: "18px",
+                      padding: "16px",
+                      color: "rgba(248,250,252,0.76)",
+                      lineHeight: 1.7,
+                      marginBottom: "18px",
+                      border: "1px solid rgba(255,255,255,0.08)",
+                    }}
+                  >
+                    <div style={{ color: "#ffffff", fontWeight: "700", marginBottom: "8px" }}>
+                      {copy.authorizationTitle}
+                    </div>
+                    <div style={{ marginBottom: "12px" }}>{copy.authorizationText}</div>
+                    <label
+                      style={{
+                        display: "flex",
+                        gap: "10px",
+                        alignItems: "flex-start",
+                        cursor: "pointer",
+                      }}
+                    >
+                      <input
+                        type="checkbox"
+                        checked={hasAuthorization}
+                        onChange={(event) => {
+                          setHasAuthorization(event.target.checked);
+                          if (event.target.checked) {
+                            setLocationsError("");
+                          }
+                        }}
+                        style={{ marginTop: "3px" }}
+                      />
+                      <span>{copy.authorizationCheck}</span>
+                    </label>
+                    <div style={{ marginTop: "10px", color: "rgba(248,250,252,0.56)", fontSize: "13px" }}>
+                      {copy.googlePolicyNote}
+                    </div>
+                  </div>
+
                   {hasBusinessToken ? (
                     <div
                       style={{
@@ -673,7 +755,11 @@ function ConnectGoogleContent() {
                         fontWeight: "600",
                         width: "100%",
                         opacity:
-                          billing.locationLimit === 1 && connection.isConnected ? 0.6 : 1,
+                          billing.locationLimit === 1 && connection.isConnected
+                            ? 0.6
+                            : hasAuthorization
+                              ? 1
+                              : 0.7,
                       }}
                     >
                       {isLoadingLocations ? copy.loadingBusinesses : copy.loadBusinesses}
@@ -691,6 +777,8 @@ function ConnectGoogleContent() {
                         borderRadius: "14px",
                         padding: "14px 18px",
                         fontWeight: "600",
+                        opacity: hasAuthorization ? 1 : 0.7,
+                        pointerEvents: hasAuthorization ? "auto" : "none",
                       }}
                     >
                       {copy.connectButton}

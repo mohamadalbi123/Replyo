@@ -3,6 +3,12 @@ export const SETTINGS_STORAGE_KEY = "replyo-settings";
 export const CONNECTION_STORAGE_KEY = "replyo-google-connection";
 export const BILLING_STORAGE_KEY = "replyo-billing";
 
+export const PLAN_REPLY_LIMITS = {
+  starter: 300,
+  growth: 1000,
+  scale: 3000,
+};
+
 export const demoLocations = [
   {
     id: "loc-1",
@@ -58,10 +64,57 @@ export const defaultBilling = {
   nextBillingDate: "",
   selectedAt: "",
   locationLimit: 0,
+  replyLimit: 0,
+  repliesUsedThisPeriod: 0,
+  usagePeriodKey: "",
   paymentBrand: "",
   cardLast4: "",
   cardExpiry: "",
 };
+
+export function getCurrentUsagePeriodKey(date = new Date()) {
+  const year = date.getUTCFullYear();
+  const month = `${date.getUTCMonth() + 1}`.padStart(2, "0");
+  return `${year}-${month}`;
+}
+
+export function inferReplyLimitFromBilling(billingState = defaultBilling) {
+  const rawPlanId = `${billingState.planId || ""}`.toLowerCase();
+  const rawPlanName = `${billingState.planName || ""}`.toLowerCase();
+  const rawAmount = `${billingState.amountLabel || ""}`.toLowerCase();
+
+  if (rawPlanId.includes("starter") || rawPlanName.includes("starter") || rawAmount.includes("$19")) {
+    return PLAN_REPLY_LIMITS.starter;
+  }
+
+  if (rawPlanId.includes("growth") || rawPlanName.includes("growth") || rawAmount.includes("$39")) {
+    return PLAN_REPLY_LIMITS.growth;
+  }
+
+  if (rawPlanId.includes("scale") || rawPlanName.includes("scale") || rawAmount.includes("$79")) {
+    return PLAN_REPLY_LIMITS.scale;
+  }
+
+  return 0;
+}
+
+export function normalizeBillingUsageState(billingState = defaultBilling) {
+  const nextBilling = {
+    ...defaultBilling,
+    ...billingState,
+  };
+  const currentPeriodKey = getCurrentUsagePeriodKey();
+  const replyLimit = nextBilling.replyLimit || inferReplyLimitFromBilling(nextBilling);
+  const usagePeriodKey = nextBilling.usagePeriodKey || currentPeriodKey;
+
+  return {
+    ...nextBilling,
+    replyLimit,
+    usagePeriodKey: currentPeriodKey,
+    repliesUsedThisPeriod:
+      usagePeriodKey === currentPeriodKey ? nextBilling.repliesUsedThisPeriod || 0 : 0,
+  };
+}
 
 export const defaultReviews = [
   {
