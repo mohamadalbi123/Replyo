@@ -610,12 +610,32 @@ function getToneSuggestions(language) {
 const sectionHeadingStyle = {
   display: "inline-block",
   fontSize: "24px",
-  color: "#172033",
+  color: "#ffffff",
   marginBottom: "12px",
   padding: "0 4px 2px",
   background:
-    "linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 58%, rgba(255,225,132,0.45) 58%, rgba(255,225,132,0.45) 100%)",
+    "linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 58%, rgba(251,188,5,0.28) 58%, rgba(251,188,5,0.28) 100%)",
   borderRadius: "4px",
+};
+
+const darkCardStyle = {
+  background: "rgba(255,255,255,0.025)",
+  borderRadius: "24px",
+  padding: "24px",
+  border: "1px solid rgba(255,255,255,0.08)",
+};
+
+const subtleDarkBlockStyle = {
+  background: "rgba(255,255,255,0.03)",
+  borderRadius: "16px",
+  padding: "14px 16px",
+  border: "1px solid rgba(255,255,255,0.08)",
+};
+
+const darkLabelStyle = {
+  color: "rgba(248,250,252,0.52)",
+  fontSize: "13px",
+  marginBottom: "6px",
 };
 
 function DashboardContent() {
@@ -811,7 +831,7 @@ function DashboardContent() {
   }
 
   if (status === "loading") {
-    return <main style={{ padding: "40px" }}>{copy.loading}</main>;
+    return <main style={{ padding: "40px", minHeight: "100vh", background: "#07090d", color: "#fff" }}>{copy.loading}</main>;
   }
 
   if (!session) {
@@ -824,8 +844,7 @@ function DashboardContent() {
           alignItems: "center",
           padding: "40px",
           fontFamily: "Arial, sans-serif",
-          background:
-            "radial-gradient(circle at top left, #fff4d8 0%, #f7f4ec 35%, #eef3ff 100%)",
+          background: "#07090d",
           direction: language === "ar" ? "rtl" : "ltr",
         }}
       >
@@ -833,17 +852,17 @@ function DashboardContent() {
           style={{
             width: "100%",
             maxWidth: "480px",
-            background: "#fff",
+            background: "rgba(255,255,255,0.025)",
             borderRadius: "24px",
             padding: "32px",
-            boxShadow: "0 16px 38px rgba(82,95,127,0.12)",
+            border: "1px solid rgba(255,255,255,0.08)",
             textAlign: "center",
           }}
         >
-          <h2 style={{ fontSize: "28px", color: "#172033", marginBottom: "12px" }}>
+          <h2 style={{ fontSize: "28px", color: "#ffffff", marginBottom: "12px" }}>
             {copy.loginTitle}
           </h2>
-          <p style={{ color: "#5b6473", lineHeight: 1.7, marginBottom: "20px" }}>
+          <p style={{ color: "rgba(248,250,252,0.64)", lineHeight: 1.7, marginBottom: "20px" }}>
             {copy.loginText}
           </p>
           <div style={{ display: "grid", gap: "12px" }}>
@@ -851,8 +870,8 @@ function DashboardContent() {
               href="/login"
               style={{
                 textDecoration: "none",
-                background: "#172033",
-                color: "#fff",
+                background: "#ffffff",
+                color: "#07090d",
                 borderRadius: "14px",
                 padding: "14px 16px",
                 fontWeight: "600",
@@ -864,8 +883,9 @@ function DashboardContent() {
               href="/signup"
               style={{
                 textDecoration: "none",
-                background: "#eff3fb",
-                color: "#172033",
+                background: "rgba(255,255,255,0.05)",
+                color: "#ffffff",
+                border: "1px solid rgba(255,255,255,0.08)",
                 borderRadius: "14px",
                 padding: "14px 16px",
                 fontWeight: "600",
@@ -883,8 +903,7 @@ function DashboardContent() {
     <main
       style={{
         minHeight: "100vh",
-        background:
-          "radial-gradient(circle at top left, #fff4d8 0%, #f7f4ec 35%, #eef3ff 100%)",
+        background: "#07090d",
         fontFamily: "Arial, sans-serif",
         padding: "40px 20px 80px",
         direction: language === "ar" ? "rtl" : "ltr",
@@ -899,17 +918,17 @@ function DashboardContent() {
             gap: "16px",
             flexWrap: "wrap",
           }}
-        >
-          <Link href="/" style={{ textDecoration: "none", color: "#444" }}>
+          >
+          <Link href="/" style={{ textDecoration: "none", color: "rgba(248,250,252,0.62)" }}>
             ← {copy.back}
           </Link>
 
           <button
             onClick={() => signOut()}
             style={{
-              background: "#111",
+              background: "rgba(255,255,255,0.05)",
               color: "#fff",
-              border: "none",
+              border: "1px solid rgba(255,255,255,0.08)",
               padding: "10px 16px",
               borderRadius: "10px",
               cursor: "pointer",
@@ -922,11 +941,11 @@ function DashboardContent() {
         <section
           style={{
             background: "#172033",
-            color: "#fff8ec",
+            color: "#ffffff",
             borderRadius: "28px",
             padding: "30px",
             marginBottom: "18px",
-            boxShadow: "0 20px 50px rgba(20,20,20,0.15)",
+            border: "1px solid rgba(255,255,255,0.08)",
           }}
         >
           <div
@@ -944,15 +963,20 @@ function DashboardContent() {
                   display: "inline-block",
                   padding: "8px 12px",
                   borderRadius: "999px",
-                  background: "rgba(255,255,255,0.12)",
-                  fontSize: "13px",
+                  background: "rgba(255,255,255,0.06)",
+                  border: "1px solid rgba(255,255,255,0.08)",
+                  fontSize: "12px",
                   marginBottom: "14px",
+                  color: "rgba(248,250,252,0.72)",
+                  fontWeight: "700",
+                  letterSpacing: "0.08em",
+                  textTransform: "uppercase",
                 }}
               >
                 {copy.badge}
               </div>
-              <h1 style={{ fontSize: "42px", marginBottom: "10px" }}>{copy.title}</h1>
-              <p style={{ color: "rgba(255,248,236,0.82)", lineHeight: 1.7, margin: 0 }}>
+              <h1 style={{ fontSize: "42px", marginBottom: "10px", letterSpacing: "-0.05em" }}>{copy.title}</h1>
+              <p style={{ color: "rgba(248,250,252,0.68)", lineHeight: 1.7, margin: 0 }}>
                 {copy.description}
               </p>
             </div>
@@ -1003,12 +1027,7 @@ function DashboardContent() {
           }}
         >
           <article
-            style={{
-              background: "#fff",
-              borderRadius: "24px",
-              padding: "24px",
-              boxShadow: "0 16px 38px rgba(82,95,127,0.12)",
-            }}
+            style={darkCardStyle}
           >
             <div
               style={{
@@ -1024,14 +1043,14 @@ function DashboardContent() {
                 <h2 style={sectionHeadingStyle}>
                   {copy.inboxTitle}
                 </h2>
-                <p style={{ color: "#5b6473", lineHeight: 1.7, margin: 0 }}>
+                <p style={{ color: "rgba(248,250,252,0.62)", lineHeight: 1.7, margin: 0 }}>
                   {copy.inboxText}
                 </p>
               </div>
               <div
                 style={{
-                  background: "#eef6ff",
-                  color: "#31598e",
+                  background: "rgba(66,133,244,0.12)",
+                  color: "#b8d3ff",
                   borderRadius: "999px",
                   padding: "8px 12px",
                   fontWeight: "700",
@@ -1056,10 +1075,10 @@ function DashboardContent() {
                   <div
                     key={review.id}
                     style={{
-                      background: "#f8fafc",
+                      background: "rgba(255,255,255,0.03)",
                       borderRadius: "18px",
                       padding: "16px",
-                      border: "1px solid #e7edf6",
+                      border: "1px solid rgba(255,255,255,0.08)",
                     }}
                   >
                     <div
@@ -1071,11 +1090,11 @@ function DashboardContent() {
                         marginBottom: "8px",
                       }}
                     >
-                      <strong style={{ color: "#172033" }}>{review.customerName}</strong>
+                      <strong style={{ color: "#ffffff" }}>{review.customerName}</strong>
                       <span
                         style={{
-                          background: "#eef6ff",
-                          color: "#31598e",
+                          background: "rgba(66,133,244,0.12)",
+                          color: "#b8d3ff",
                           borderRadius: "999px",
                           padding: "6px 10px",
                           fontSize: "12px",
@@ -1088,7 +1107,7 @@ function DashboardContent() {
                     </div>
                     <div
                       style={{
-                        color: "#6b7280",
+                        color: "rgba(248,250,252,0.56)",
                         fontSize: "13px",
                         marginBottom: "10px",
                         lineHeight: 1.6,
@@ -1112,7 +1131,7 @@ function DashboardContent() {
                       style={{
                         background: "#172033",
                         color: "#fff",
-                        border: "none",
+                        border: "1px solid rgba(255,255,255,0.08)",
                         borderRadius: "12px",
                         padding: "10px 12px",
                         cursor: "pointer",
@@ -1130,10 +1149,10 @@ function DashboardContent() {
             ) : (
               <div
                 style={{
-                  background: "#f8fafc",
+                  background: "rgba(255,255,255,0.03)",
                   borderRadius: "16px",
                   padding: "16px",
-                  color: "#5b6473",
+                  color: "rgba(248,250,252,0.62)",
                   lineHeight: 1.6,
                 }}
               >
@@ -1154,24 +1173,19 @@ function DashboardContent() {
         >
           <div style={{ display: "grid", gap: "18px" }}>
             <article
-              style={{
-                background: "#fff",
-                borderRadius: "24px",
-                padding: "24px",
-                boxShadow: "0 16px 38px rgba(82,95,127,0.12)",
-              }}
+              style={darkCardStyle}
             >
               <h2 style={sectionHeadingStyle}>
                 {copy.reviewTitle}
               </h2>
-              <p style={{ color: "#5b6473", lineHeight: 1.7, marginBottom: "18px" }}>
+              <p style={{ color: "rgba(248,250,252,0.62)", lineHeight: 1.7, marginBottom: "18px" }}>
                 {copy.reviewText}
               </p>
               <div style={{ display: "grid", gap: "12px", marginBottom: "16px" }}>
                 {[
-                  [copy.handled, handledCount, "#effbf3", "#1f7a45"],
-                  [copy.confirmation, readyCount, "#eef6ff", "#31598e"],
-                  [copy.posted, postedCount, "#f5f8ff", "#5a6b89"],
+                  [copy.handled, handledCount, "rgba(16,185,129,0.12)", "#9ce9c2"],
+                  [copy.confirmation, readyCount, "rgba(66,133,244,0.12)", "#b8d3ff"],
+                  [copy.posted, postedCount, "rgba(255,255,255,0.04)", "rgba(248,250,252,0.74)"],
                 ].map(([label, value, background, color]) => (
                   <div
                     key={label}
@@ -1185,24 +1199,19 @@ function DashboardContent() {
                     }}
                   >
                     <span style={{ color }}>{label}</span>
-                    <strong style={{ color: "#172033", fontSize: "22px" }}>{value}</strong>
+                    <strong style={{ color: "#ffffff", fontSize: "22px" }}>{value}</strong>
                   </div>
                 ))}
               </div>
             </article>
 
             <article
-              style={{
-                background: "#fff",
-                borderRadius: "24px",
-                padding: "24px",
-                boxShadow: "0 16px 38px rgba(82,95,127,0.12)",
-              }}
+              style={darkCardStyle}
             >
               <h2 style={sectionHeadingStyle}>
                 {copy.automationTitle}
               </h2>
-              <p style={{ color: "#5b6473", lineHeight: 1.7, marginBottom: "18px" }}>
+              <p style={{ color: "rgba(248,250,252,0.62)", lineHeight: 1.7, marginBottom: "18px" }}>
                 {copy.automationText}
               </p>
               <div style={{ display: "grid", gap: "16px" }}>
@@ -1213,21 +1222,21 @@ function DashboardContent() {
                     alignItems: "center",
                     justifyContent: "space-between",
                     gap: "16px",
-                    background: settings.replyMode === "auto" ? "#effbf3" : "#f8fafc",
+                    background: settings.replyMode === "auto" ? "rgba(16,185,129,0.1)" : "rgba(255,255,255,0.03)",
                     border:
                       settings.replyMode === "auto"
-                        ? "1px solid #b8e3c6"
-                        : "1px solid #e4e9f2",
+                        ? "1px solid rgba(16,185,129,0.22)"
+                        : "1px solid rgba(255,255,255,0.08)",
                     borderRadius: "18px",
                     padding: "16px 18px",
                     cursor: "pointer",
                   }}
                 >
                   <div>
-                    <div style={{ color: "#172033", fontWeight: "700", marginBottom: "6px" }}>
+                    <div style={{ color: "#ffffff", fontWeight: "700", marginBottom: "6px" }}>
                       {settings.replyMode === "auto" ? copy.autoReplyOn : copy.autoReplyOff}
                     </div>
-                    <div style={{ color: "#5b6473", lineHeight: 1.6 }}>
+                    <div style={{ color: "rgba(248,250,252,0.62)", lineHeight: 1.6 }}>
                       {settings.replyMode === "auto" ? copy.autoReplyOnText : copy.autoReplyOffText}
                     </div>
                   </div>
@@ -1271,8 +1280,8 @@ function DashboardContent() {
                 {settings.replyMode === "approval" ? (
                   <div
                     style={{
-                      background: "#f8fafc",
-                      border: "1px solid #e4e9f2",
+                      background: "rgba(255,255,255,0.03)",
+                      border: "1px solid rgba(255,255,255,0.08)",
                       borderRadius: "18px",
                       padding: "16px 18px",
                       display: "grid",
@@ -1284,7 +1293,7 @@ function DashboardContent() {
                         display: "flex",
                         alignItems: "center",
                         gap: "10px",
-                        color: "#172033",
+                        color: "#ffffff",
                         fontWeight: "700",
                       }}
                     >
@@ -1297,7 +1306,7 @@ function DashboardContent() {
                     </label>
                     {settings.alertsEnabled ? (
                       <div style={{ display: "grid", gap: "12px" }}>
-                        <div style={{ color: "#5b6473", lineHeight: 1.6 }}>
+                        <div style={{ color: "rgba(248,250,252,0.62)", lineHeight: 1.6 }}>
                           {copy.emailNotifyHelp}
                         </div>
                         <div
@@ -1310,7 +1319,7 @@ function DashboardContent() {
                         >
                           <label style={{ display: "grid", gap: "6px", flex: "1 1 260px" }}>
                             <span
-                              style={{ color: "#172033", fontSize: "14px", fontWeight: "600" }}
+                              style={{ color: "#ffffff", fontSize: "14px", fontWeight: "600" }}
                             >
                               {copy.emailNotifyLabel}
                             </span>
@@ -1326,9 +1335,10 @@ function DashboardContent() {
                                 width: "100%",
                                 padding: "12px 14px",
                                 borderRadius: "12px",
-                                border: "1px solid #d1d5db",
+                                border: "1px solid rgba(255,255,255,0.08)",
                                 fontSize: "15px",
-                                background: "#fff",
+                                background: "rgba(255,255,255,0.03)",
+                                color: "#ffffff",
                               }}
                             />
                           </label>
@@ -1338,7 +1348,7 @@ function DashboardContent() {
                             style={{
                               background: "#172033",
                               color: "#fff",
-                              border: "none",
+                              border: "1px solid rgba(255,255,255,0.08)",
                               borderRadius: "12px",
                               padding: "12px 16px",
                               fontWeight: "600",
@@ -1351,7 +1361,7 @@ function DashboardContent() {
                       </div>
                     ) : null}
                     {notificationSaved && settings.alertsEnabled ? (
-                      <div style={{ color: "#1f7a45", fontSize: "14px", fontWeight: "600" }}>
+                      <div style={{ color: "#9ce9c2", fontSize: "14px", fontWeight: "600" }}>
                         {copy.emailSaved}
                       </div>
                     ) : null}
@@ -1362,18 +1372,12 @@ function DashboardContent() {
           </div>
 
           <article
-            style={{
-              background: "#fff",
-              borderRadius: "24px",
-              padding: "24px",
-              boxShadow: "0 16px 38px rgba(82,95,127,0.12)",
-              height: "100%",
-            }}
+            style={{ ...darkCardStyle, height: "100%" }}
           >
             <h2 style={sectionHeadingStyle}>
               {copy.connectedTitle}
             </h2>
-            <p style={{ color: "#5b6473", lineHeight: 1.7, marginBottom: "18px" }}>
+            <p style={{ color: "rgba(248,250,252,0.62)", lineHeight: 1.7, marginBottom: "18px" }}>
               {copy.connectedText}
             </p>
             <div
@@ -1391,22 +1395,18 @@ function DashboardContent() {
               ].map(([label, value]) => (
                 <div
                   key={label}
-                  style={{ background: "#f8fafc", borderRadius: "16px", padding: "14px 16px" }}
+                  style={subtleDarkBlockStyle}
                 >
-                  <div style={{ color: "#6b7280", fontSize: "13px", marginBottom: "6px" }}>
+                  <div style={darkLabelStyle}>
                     {label}
                   </div>
-                  <div style={{ color: "#172033", fontWeight: "700" }}>{value}</div>
+                  <div style={{ color: "#ffffff", fontWeight: "700" }}>{value}</div>
                 </div>
               ))}
               <div
-                style={{
-                  background: "#f8fafc",
-                  borderRadius: "16px",
-                  padding: "14px 16px",
-                }}
+                style={subtleDarkBlockStyle}
               >
-                <div style={{ color: "#6b7280", fontSize: "13px", marginBottom: "6px" }}>
+                <div style={darkLabelStyle}>
                   {copy.tone}
                 </div>
                 <select
@@ -1416,9 +1416,9 @@ function DashboardContent() {
                     width: "100%",
                     padding: "12px 14px",
                     borderRadius: "12px",
-                    border: "1px solid #d1d5db",
-                    background: "#fff",
-                    color: "#172033",
+                    border: "1px solid rgba(255,255,255,0.08)",
+                    background: "rgba(255,255,255,0.03)",
+                    color: "#ffffff",
                     marginBottom: "10px",
                   }}
                 >
@@ -1432,8 +1432,8 @@ function DashboardContent() {
                   type="button"
                   onClick={saveTone}
                   style={{
-                    background: "#172033",
-                    color: "#fff",
+                    background: "#ffffff",
+                    color: "#07090d",
                     border: "none",
                     borderRadius: "12px",
                     padding: "10px 14px",
@@ -1445,7 +1445,7 @@ function DashboardContent() {
                   {copy.saveTone}
                 </button>
                 {toneSaved ? (
-                  <div style={{ marginTop: "10px", color: "#166b45", fontSize: "13px", fontWeight: "600" }}>
+                  <div style={{ marginTop: "10px", color: "#9ce9c2", fontSize: "13px", fontWeight: "600" }}>
                     {copy.toneSaved}
                   </div>
                 ) : null}
@@ -1456,8 +1456,8 @@ function DashboardContent() {
               style={{
                 display: "inline-block",
                 textDecoration: "none",
-                background: "#172033",
-                color: "#fff",
+                background: "#ffffff",
+                color: "#07090d",
                 borderRadius: "14px",
                 padding: "12px 16px",
                 fontWeight: "600",
@@ -1478,8 +1478,8 @@ function DashboardContent() {
               alignItems: "center",
               justifyContent: "center",
               padding: "24px 16px",
-              background: "rgba(15, 23, 42, 0.42)",
-              backdropFilter: "blur(4px)",
+                background: "rgba(15, 23, 42, 0.42)",
+                backdropFilter: "blur(4px)",
             }}
             onClick={closeApproval}
           >
@@ -1489,10 +1489,11 @@ function DashboardContent() {
                 maxWidth: "780px",
                 maxHeight: "min(88vh, 860px)",
                 overflowY: "auto",
-                background: "#ffffff",
+                background: "#0d1117",
                 borderRadius: "28px",
                 padding: "22px",
-                boxShadow: "0 24px 70px rgba(15,23,42,0.24)",
+                boxShadow: "0 24px 70px rgba(15,23,42,0.5)",
+                border: "1px solid rgba(255,255,255,0.08)",
               }}
               role="dialog"
               aria-modal="true"
@@ -1514,8 +1515,8 @@ function DashboardContent() {
                     style={{
                       display: "inline-block",
                       marginBottom: "10px",
-                      background: "#eef6ff",
-                      color: "#31598e",
+                      background: "rgba(66,133,244,0.12)",
+                      color: "#b8d3ff",
                       borderRadius: "999px",
                       padding: "7px 11px",
                       fontSize: "12px",
@@ -1526,11 +1527,11 @@ function DashboardContent() {
                   </div>
                   <h2
                     id="dashboard-approval-title"
-                    style={{ fontSize: "28px", color: "#172033", marginBottom: "8px" }}
+                    style={{ fontSize: "28px", color: "#ffffff", marginBottom: "8px" }}
                   >
                     {selectedApproval.customerName}
                   </h2>
-                  <div style={{ color: "#6b7280" }}>
+                  <div style={{ color: "rgba(248,250,252,0.52)" }}>
                     {selectedApproval.businessName} · {selectedApproval.rating}/5
                   </div>
                 </div>
@@ -1544,17 +1545,17 @@ function DashboardContent() {
                   marginBottom: "14px",
                 }}
               >
-                <div style={{ background: "#f8fafc", borderRadius: "18px", padding: "14px" }}>
-                  <div style={{ fontSize: "13px", color: "#6b7280", marginBottom: "8px" }}>
+                <div style={{ background: "rgba(255,255,255,0.03)", borderRadius: "18px", padding: "14px", border: "1px solid rgba(255,255,255,0.08)" }}>
+                  <div style={{ fontSize: "13px", color: "rgba(248,250,252,0.52)", marginBottom: "8px" }}>
                     {copy.customerReview}
                   </div>
-                  <div style={{ color: "#344054", lineHeight: 1.7 }}>
+                  <div style={{ color: "rgba(248,250,252,0.84)", lineHeight: 1.7 }}>
                     {selectedApproval.reviewText}
                   </div>
                 </div>
 
-                <div style={{ background: "#f9fbff", borderRadius: "18px", padding: "14px" }}>
-                  <div style={{ fontSize: "13px", color: "#6b7280", marginBottom: "8px" }}>
+                <div style={{ background: "rgba(255,255,255,0.03)", borderRadius: "18px", padding: "14px", border: "1px solid rgba(255,255,255,0.08)" }}>
+                  <div style={{ fontSize: "13px", color: "rgba(248,250,252,0.52)", marginBottom: "8px" }}>
                     {copy.draftReply}
                   </div>
                   <textarea
@@ -1564,12 +1565,12 @@ function DashboardContent() {
                     style={{
                       width: "100%",
                       minHeight: "220px",
-                      border: "1px solid #d1d5db",
+                      border: "1px solid rgba(255,255,255,0.08)",
                       borderRadius: "14px",
                       padding: "14px 16px",
                       resize: "vertical",
-                      color: "#172033",
-                      background: "#fff",
+                      color: "#ffffff",
+                      background: "rgba(255,255,255,0.03)",
                       lineHeight: 1.7,
                     }}
                   />
@@ -1589,9 +1590,9 @@ function DashboardContent() {
                   type="button"
                   onClick={closeApproval}
                   style={{
-                    background: "#eff3fb",
-                    color: "#172033",
-                    border: "1px solid #d7deed",
+                    background: "rgba(255,255,255,0.05)",
+                    color: "#ffffff",
+                    border: "1px solid rgba(255,255,255,0.08)",
                     borderRadius: "14px",
                     padding: "12px 16px",
                     cursor: "pointer",
@@ -1629,13 +1630,7 @@ function DashboardContent() {
           }}
         >
           <article
-            style={{
-              background: "#fff",
-              borderRadius: "24px",
-              padding: "24px",
-              boxShadow: "0 16px 38px rgba(82,95,127,0.12)",
-              height: "100%",
-            }}
+            style={{ ...darkCardStyle, height: "100%" }}
           >
             <h2 style={sectionHeadingStyle}>
               {copy.accountTitle}
@@ -1648,20 +1643,20 @@ function DashboardContent() {
               ].map(([label, value]) => (
                 <div
                   key={label}
-                  style={{ background: "#f8fafc", borderRadius: "16px", padding: "14px 16px" }}
+                  style={subtleDarkBlockStyle}
                 >
-                  <div style={{ color: "#6b7280", fontSize: "13px", marginBottom: "6px" }}>
+                  <div style={darkLabelStyle}>
                     {label}
                   </div>
-                  <div style={{ color: "#172033", fontWeight: "700" }}>{value}</div>
+                  <div style={{ color: "#ffffff", fontWeight: "700" }}>{value}</div>
                 </div>
               ))}
             </div>
             <div
               style={{
-                background: "#f8fafc",
+                background: "rgba(255,255,255,0.03)",
                 borderRadius: "18px",
-                border: "1px solid #e4e9f2",
+                border: "1px solid rgba(255,255,255,0.08)",
                 padding: "16px",
                 display: "grid",
                 gap: "12px",
@@ -1675,8 +1670,8 @@ function DashboardContent() {
                     setPasswordSaved(false);
                   }}
                   style={{
-                    background: "#172033",
-                    color: "#fff",
+                    background: "#ffffff",
+                    color: "#07090d",
                     border: "none",
                     borderRadius: "12px",
                     padding: "12px 16px",
@@ -1687,7 +1682,7 @@ function DashboardContent() {
                   {showPasswordForm ? copy.hidePasswordSection : copy.passwordSection}
                 </button>
                 {passwordSaved ? (
-                  <span style={{ color: "#1f7a45", fontSize: "14px", fontWeight: "600" }}>
+                  <span style={{ color: "#9ce9c2", fontSize: "14px", fontWeight: "600" }}>
                     {copy.passwordSaved}
                   </span>
                 ) : null}
@@ -1700,7 +1695,7 @@ function DashboardContent() {
                     ["confirmPassword", copy.confirmPassword],
                   ].map(([field, label]) => (
                     <label key={field} style={{ display: "grid", gap: "6px" }}>
-                      <span style={{ color: "#172033", fontSize: "14px", fontWeight: "600" }}>
+                      <span style={{ color: "#ffffff", fontSize: "14px", fontWeight: "600" }}>
                         {label}
                       </span>
                       <input
@@ -1712,9 +1707,10 @@ function DashboardContent() {
                           width: "100%",
                           padding: "12px 14px",
                           borderRadius: "12px",
-                          border: "1px solid #d1d5db",
+                          border: "1px solid rgba(255,255,255,0.08)",
                           fontSize: "15px",
-                          background: "#fff",
+                          background: "rgba(255,255,255,0.03)",
+                          color: "#ffffff",
                         }}
                       />
                     </label>
@@ -1724,8 +1720,8 @@ function DashboardContent() {
                       type="button"
                       onClick={savePassword}
                       style={{
-                        background: "#172033",
-                        color: "#fff",
+                        background: "#ffffff",
+                        color: "#07090d",
                         border: "none",
                         borderRadius: "12px",
                         padding: "12px 16px",
@@ -1752,18 +1748,12 @@ function DashboardContent() {
           }}
         >
           <article
-            style={{
-              background: "#fff",
-              borderRadius: "24px",
-              padding: "24px",
-              boxShadow: "0 16px 38px rgba(82,95,127,0.12)",
-              height: "100%",
-            }}
+            style={{ ...darkCardStyle, height: "100%" }}
           >
             <h2 style={sectionHeadingStyle}>
               {copy.billingTitle}
             </h2>
-            <p style={{ color: "#5b6473", lineHeight: 1.7, marginBottom: "18px" }}>
+            <p style={{ color: "rgba(248,250,252,0.62)", lineHeight: 1.7, marginBottom: "18px" }}>
               {copy.billingText}
             </p>
             <div
@@ -1784,12 +1774,12 @@ function DashboardContent() {
               ].map(([label, value]) => (
                 <div
                   key={label}
-                  style={{ background: "#f8fafc", borderRadius: "16px", padding: "14px 16px" }}
+                  style={subtleDarkBlockStyle}
                 >
-                  <div style={{ color: "#6b7280", fontSize: "13px", marginBottom: "6px" }}>
+                  <div style={darkLabelStyle}>
                     {label}
                   </div>
-                  <div style={{ color: "#172033", fontWeight: "700" }}>{value}</div>
+                  <div style={{ color: "#ffffff", fontWeight: "700" }}>{value}</div>
                 </div>
               ))}
             </div>
@@ -1798,8 +1788,8 @@ function DashboardContent() {
               style={{
                 display: "inline-block",
                 textDecoration: "none",
-                background: "#172033",
-                color: "#fff",
+                background: "#ffffff",
+                color: "#07090d",
                 borderRadius: "14px",
                 padding: "12px 16px",
                 fontWeight: "600",
@@ -1811,9 +1801,9 @@ function DashboardContent() {
               type="button"
               style={{
                 marginLeft: "12px",
-                background: "#eff3fb",
-                color: "#172033",
-                border: "1px solid #d9e3f2",
+                background: "rgba(255,255,255,0.05)",
+                color: "#ffffff",
+                border: "1px solid rgba(255,255,255,0.08)",
                 borderRadius: "14px",
                 padding: "12px 16px",
                 fontWeight: "600",
