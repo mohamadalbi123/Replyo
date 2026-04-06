@@ -940,7 +940,7 @@ function DashboardContent() {
 
         <section
           style={{
-            background: "#172033",
+            background: "#0d1117",
             color: "#ffffff",
             borderRadius: "28px",
             padding: "30px",
@@ -1049,8 +1049,8 @@ function DashboardContent() {
               </div>
               <div
                 style={{
-                  background: "rgba(66,133,244,0.12)",
-                  color: "#b8d3ff",
+                  background: "rgba(251,188,5,0.12)",
+                  color: "#f4d36a",
                   borderRadius: "999px",
                   padding: "8px 12px",
                   fontWeight: "700",
@@ -1093,8 +1093,8 @@ function DashboardContent() {
                       <strong style={{ color: "#ffffff" }}>{review.customerName}</strong>
                       <span
                         style={{
-                          background: "rgba(66,133,244,0.12)",
-                          color: "#b8d3ff",
+                          background: "rgba(255,255,255,0.06)",
+                          color: "rgba(248,250,252,0.8)",
                           borderRadius: "999px",
                           padding: "6px 10px",
                           fontSize: "12px",
@@ -1117,7 +1117,7 @@ function DashboardContent() {
                     </div>
                     <div
                       style={{
-                        color: "#5b6473",
+                        color: "rgba(248,250,252,0.56)",
                         lineHeight: 1.6,
                         marginBottom: "12px",
                         fontSize: "14px",
@@ -1129,7 +1129,7 @@ function DashboardContent() {
                       type="button"
                       onClick={() => openApproval(review)}
                       style={{
-                        background: "#172033",
+                        background: "#0d1117",
                         color: "#fff",
                         border: "1px solid rgba(255,255,255,0.08)",
                         borderRadius: "12px",
@@ -1183,8 +1183,8 @@ function DashboardContent() {
               </p>
               <div style={{ display: "grid", gap: "12px", marginBottom: "16px" }}>
                 {[
-                  [copy.handled, handledCount, "rgba(16,185,129,0.12)", "#9ce9c2"],
-                  [copy.confirmation, readyCount, "rgba(66,133,244,0.12)", "#b8d3ff"],
+                  [copy.handled, handledCount, "rgba(251,188,5,0.12)", "#f4d36a"],
+                  [copy.confirmation, readyCount, "rgba(255,255,255,0.06)", "rgba(248,250,252,0.82)"],
                   [copy.posted, postedCount, "rgba(255,255,255,0.04)", "rgba(248,250,252,0.74)"],
                 ].map(([label, value, background, color]) => (
                   <div
@@ -1222,10 +1222,10 @@ function DashboardContent() {
                     alignItems: "center",
                     justifyContent: "space-between",
                     gap: "16px",
-                    background: settings.replyMode === "auto" ? "rgba(16,185,129,0.1)" : "rgba(255,255,255,0.03)",
+                    background: settings.replyMode === "auto" ? "rgba(251,188,5,0.1)" : "rgba(255,255,255,0.03)",
                     border:
                       settings.replyMode === "auto"
-                        ? "1px solid rgba(16,185,129,0.22)"
+                        ? "1px solid rgba(251,188,5,0.22)"
                         : "1px solid rgba(255,255,255,0.08)",
                     borderRadius: "18px",
                     padding: "16px 18px",
@@ -1248,7 +1248,7 @@ function DashboardContent() {
                       width: "58px",
                       height: "32px",
                       borderRadius: "999px",
-                      background: settings.replyMode === "auto" ? "#1f7a45" : "#cbd5e1",
+                      background: settings.replyMode === "auto" ? "#FBBC05" : "rgba(255,255,255,0.22)",
                       transition: "all 160ms ease",
                     }}
                   >
@@ -1346,7 +1346,7 @@ function DashboardContent() {
                             type="button"
                             onClick={saveNotificationEmail}
                             style={{
-                              background: "#172033",
+                              background: "#0d1117",
                               color: "#fff",
                               border: "1px solid rgba(255,255,255,0.08)",
                               borderRadius: "12px",
@@ -1361,7 +1361,7 @@ function DashboardContent() {
                       </div>
                     ) : null}
                     {notificationSaved && settings.alertsEnabled ? (
-                      <div style={{ color: "#9ce9c2", fontSize: "14px", fontWeight: "600" }}>
+                      <div style={{ color: "#f4d36a", fontSize: "14px", fontWeight: "600" }}>
                         {copy.emailSaved}
                       </div>
                     ) : null}
@@ -1445,7 +1445,7 @@ function DashboardContent() {
                   {copy.saveTone}
                 </button>
                 {toneSaved ? (
-                  <div style={{ marginTop: "10px", color: "#9ce9c2", fontSize: "13px", fontWeight: "600" }}>
+                  <div style={{ marginTop: "10px", color: "#f4d36a", fontSize: "13px", fontWeight: "600" }}>
                     {copy.toneSaved}
                   </div>
                 ) : null}
@@ -1515,8 +1515,8 @@ function DashboardContent() {
                     style={{
                       display: "inline-block",
                       marginBottom: "10px",
-                      background: "rgba(66,133,244,0.12)",
-                      color: "#b8d3ff",
+                      background: "rgba(251,188,5,0.12)",
+                      color: "#f4d36a",
                       borderRadius: "999px",
                       padding: "7px 11px",
                       fontSize: "12px",
@@ -1604,7 +1604,7 @@ function DashboardContent() {
                   type="button"
                   onClick={() => handlePost(selectedApproval.id)}
                   style={{
-                    background: "#172033",
+                    background: "#0d1117",
                     color: "#fff",
                     border: "none",
                     borderRadius: "14px",
@@ -1682,7 +1682,7 @@ function DashboardContent() {
                   {showPasswordForm ? copy.hidePasswordSection : copy.passwordSection}
                 </button>
                 {passwordSaved ? (
-                  <span style={{ color: "#9ce9c2", fontSize: "14px", fontWeight: "600" }}>
+                  <span style={{ color: "#f4d36a", fontSize: "14px", fontWeight: "600" }}>
                     {copy.passwordSaved}
                   </span>
                 ) : null}
