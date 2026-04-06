@@ -355,12 +355,25 @@ function ConnectGoogleContent() {
   }, [router, status]);
 
   if (status === "loading") {
-    return <main style={{ padding: "40px" }}>{copy.loading}</main>;
+    return <main style={{ minHeight: "100vh", padding: "40px", background: "#07090d", color: "#f8fafc" }}>{copy.loading}</main>;
   }
 
   if (!session) {
-    return <main style={{ padding: "40px", fontFamily: "Arial, sans-serif" }}>{copy.redirecting}</main>;
+    return (
+      <main style={{ minHeight: "100vh", padding: "40px", fontFamily: "Arial, sans-serif", background: "#07090d", color: "#f8fafc" }}>
+        {copy.redirecting}
+      </main>
+    );
   }
+
+  const darkCard = {
+    background: "rgba(255,255,255,0.025)",
+    borderRadius: "24px",
+    padding: "24px",
+    border: "1px solid rgba(255,255,255,0.08)",
+    boxShadow: "0 24px 70px rgba(0,0,0,0.22)",
+    color: "#f8fafc",
+  };
 
   async function loadLocations() {
     setIsLoadingLocations(true);
@@ -482,8 +495,7 @@ function ConnectGoogleContent() {
     <main
       style={{
         minHeight: "100vh",
-        background:
-          "radial-gradient(circle at top left, #fff6df 0%, #f7f4ec 40%, #edf3ff 100%)",
+        background: "#07090d",
         padding: "48px 20px 80px",
         fontFamily: "Arial, sans-serif",
         direction: language === "ar" ? "rtl" : "ltr",
@@ -499,14 +511,14 @@ function ConnectGoogleContent() {
             marginBottom: "24px",
           }}
         >
-          <Link href="/dashboard" style={{ color: "#4b5563", textDecoration: "none" }}>
+          <Link href="/dashboard" style={{ color: "rgba(248,250,252,0.68)", textDecoration: "none" }}>
             ← {copy.back}
           </Link>
           <button
             onClick={() => signOut()}
             style={{
-              background: "#172033",
-              color: "#fff",
+              background: "#ffffff",
+              color: "#07090d",
               border: "none",
               borderRadius: "12px",
               padding: "10px 16px",
@@ -519,11 +531,12 @@ function ConnectGoogleContent() {
 
         <section
           style={{
-            background: "#172033",
-            color: "#fff8ec",
+            background: "rgba(255,255,255,0.025)",
+            color: "#ffffff",
             borderRadius: "28px",
             padding: "30px",
             marginBottom: "24px",
+            border: "1px solid rgba(255,255,255,0.08)",
           }}
         >
           <div
@@ -531,35 +544,29 @@ function ConnectGoogleContent() {
               display: "inline-block",
               padding: "8px 12px",
               borderRadius: "999px",
-              background: "rgba(255,255,255,0.12)",
+              background: "rgba(255,255,255,0.06)",
               fontSize: "13px",
               marginBottom: "14px",
+              color: "rgba(248,250,252,0.72)",
             }}
           >
             {copy.badge}
           </div>
-          <h1 style={{ fontSize: "42px", marginBottom: "10px" }}>{copy.title}</h1>
-          <p style={{ color: "rgba(255,248,236,0.8)", lineHeight: 1.7, margin: 0 }}>
+          <h1 style={{ fontSize: "42px", marginBottom: "10px", letterSpacing: "-0.05em" }}>{copy.title}</h1>
+          <p style={{ color: "rgba(248,250,252,0.64)", lineHeight: 1.7, margin: 0, maxWidth: "54ch" }}>
             {copy.description}
           </p>
         </section>
 
         {billing.status !== "active" ? (
-          <section
-            style={{
-              background: "#fff",
-              borderRadius: "24px",
-              padding: "24px",
-              boxShadow: "0 16px 38px rgba(82,95,127,0.12)",
-            }}
-          >
+          <section style={darkCard}>
             <div
               style={{
                 display: "inline-block",
                 padding: "8px 12px",
                 borderRadius: "999px",
-                background: "#fff6df",
-                color: "#8b5e00",
+                background: "rgba(251,188,5,0.12)",
+                color: "#f4d36a",
                 fontSize: "13px",
                 fontWeight: "700",
                 marginBottom: "14px",
@@ -567,10 +574,10 @@ function ConnectGoogleContent() {
             >
               {copy.billingBadge}
             </div>
-            <h2 style={{ fontSize: "30px", color: "#172033", marginBottom: "12px" }}>
+            <h2 style={{ fontSize: "30px", color: "#ffffff", marginBottom: "12px" }}>
               {copy.billingTitle}
             </h2>
-            <p style={{ color: "#5b6473", lineHeight: 1.7, marginBottom: "18px" }}>
+            <p style={{ color: "rgba(248,250,252,0.64)", lineHeight: 1.7, marginBottom: "18px", maxWidth: "52ch" }}>
               {copy.billingText}
             </p>
             <Link
@@ -578,8 +585,8 @@ function ConnectGoogleContent() {
               style={{
                 display: "inline-block",
                 textDecoration: "none",
-                background: "#172033",
-                color: "#fff",
+                background: "#ffffff",
+                color: "#07090d",
                 borderRadius: "14px",
                 padding: "14px 18px",
                 fontWeight: "600",
@@ -596,22 +603,16 @@ function ConnectGoogleContent() {
               gap: "20px",
             }}
           >
-            <section
-              style={{
-                background: "#fff",
-                borderRadius: "24px",
-                padding: "24px",
-                boxShadow: "0 16px 38px rgba(82,95,127,0.12)",
-              }}
-            >
+            <section style={darkCard}>
               <div
                 style={{
-                  background: "#f5f8ff",
+                  background: "rgba(255,255,255,0.03)",
                   borderRadius: "16px",
                   padding: "14px 16px",
-                  color: "#344054",
+                  color: "rgba(248,250,252,0.78)",
                   lineHeight: 1.7,
                   marginBottom: "18px",
+                  border: "1px solid rgba(255,255,255,0.08)",
                 }}
               >
                 <strong>{copy.planLimitTitle}:</strong> {copy.planLimitText}
@@ -619,21 +620,22 @@ function ConnectGoogleContent() {
 
               {!isSelectingLocation ? (
                 <>
-                  <h2 style={{ fontSize: "24px", color: "#172033", marginBottom: "12px" }}>
+                  <h2 style={{ fontSize: "24px", color: "#ffffff", marginBottom: "12px" }}>
                     {copy.step1}
                   </h2>
-                  <p style={{ color: "#5b6473", lineHeight: 1.7, marginBottom: "18px" }}>
+                  <p style={{ color: "rgba(248,250,252,0.64)", lineHeight: 1.7, marginBottom: "18px" }}>
                     {copy.step1Text}
                   </p>
 
                   <div
                     style={{
-                      background: "#f5f8ff",
+                      background: "rgba(255,255,255,0.03)",
                       borderRadius: "18px",
                       padding: "16px",
-                      color: "#344054",
+                      color: "rgba(248,250,252,0.76)",
                       lineHeight: 1.7,
                       marginBottom: "18px",
+                      border: "1px solid rgba(255,255,255,0.08)",
                     }}
                   >
                     {copy.consentBox}
@@ -642,8 +644,8 @@ function ConnectGoogleContent() {
                   {hasBusinessToken ? (
                     <div
                       style={{
-                        background: "#eefbf3",
-                        color: "#1f7a45",
+                        background: "rgba(251,188,5,0.12)",
+                        color: "#f4d36a",
                         borderRadius: "14px",
                         padding: "12px 14px",
                         marginBottom: "16px",
@@ -659,8 +661,8 @@ function ConnectGoogleContent() {
                       onClick={handleStartConnect}
                       disabled={billing.locationLimit === 1 && connection.isConnected}
                       style={{
-                        background: "#172033",
-                        color: "#fff",
+                        background: "#ffffff",
+                        color: "#07090d",
                         border: "none",
                         borderRadius: "14px",
                         padding: "14px 18px",
@@ -684,8 +686,8 @@ function ConnectGoogleContent() {
                         width: "100%",
                         textDecoration: "none",
                         textAlign: "center",
-                        background: "#172033",
-                        color: "#fff",
+                        background: "#ffffff",
+                        color: "#07090d",
                         borderRadius: "14px",
                         padding: "14px 18px",
                         fontWeight: "600",
@@ -699,11 +701,12 @@ function ConnectGoogleContent() {
                     <div
                       style={{
                         marginTop: "14px",
-                        background: "#fff4f2",
-                        color: "#9f1c00",
+                        background: "rgba(255,255,255,0.03)",
+                        color: "#f5b8b8",
                         borderRadius: "14px",
                         padding: "12px 14px",
                         lineHeight: 1.6,
+                        border: "1px solid rgba(255,255,255,0.08)",
                       }}
                     >
                       {locationsError}
@@ -714,8 +717,8 @@ function ConnectGoogleContent() {
                     <div
                       style={{
                         marginTop: "14px",
-                        background: "#fff6df",
-                        color: "#8b5e00",
+                        background: "rgba(251,188,5,0.12)",
+                        color: "#f4d36a",
                         borderRadius: "14px",
                         padding: "12px 14px",
                         lineHeight: 1.6,
@@ -727,10 +730,10 @@ function ConnectGoogleContent() {
                 </>
               ) : (
                 <>
-                  <h2 style={{ fontSize: "24px", color: "#172033", marginBottom: "12px" }}>
+                  <h2 style={{ fontSize: "24px", color: "#ffffff", marginBottom: "12px" }}>
                     {copy.step2}
                   </h2>
-                  <p style={{ color: "#5b6473", lineHeight: 1.7, marginBottom: "16px" }}>
+                  <p style={{ color: "rgba(248,250,252,0.64)", lineHeight: 1.7, marginBottom: "16px" }}>
                     {copy.step2Text}
                   </p>
 
@@ -746,10 +749,10 @@ function ConnectGoogleContent() {
                           borderRadius: "16px",
                           border:
                             selectedLocationId === location.id
-                              ? "1px solid #172033"
-                              : "1px solid #d7deed",
+                              ? "1px solid rgba(251,188,5,0.42)"
+                              : "1px solid rgba(255,255,255,0.08)",
                           background:
-                            selectedLocationId === location.id ? "#f5f8ff" : "#fff",
+                            selectedLocationId === location.id ? "rgba(255,255,255,0.05)" : "rgba(255,255,255,0.025)",
                           cursor: "pointer",
                         }}
                       >
@@ -760,13 +763,13 @@ function ConnectGoogleContent() {
                           onChange={() => setSelectedLocationId(location.id)}
                         />
                         <div>
-                          <div style={{ fontWeight: "700", color: "#172033" }}>
+                          <div style={{ fontWeight: "700", color: "#ffffff" }}>
                             {location.name}
                           </div>
-                          <div style={{ color: "#5b6473", marginTop: "4px" }}>
+                          <div style={{ color: "rgba(248,250,252,0.64)", marginTop: "4px" }}>
                             {location.type} • {location.accountName}
                           </div>
-                          <div style={{ color: "#7a8698", marginTop: "6px", fontSize: "13px" }}>
+                          <div style={{ color: "rgba(248,250,252,0.46)", marginTop: "6px", fontSize: "13px" }}>
                             {copy.category} {location.primaryCategory}
                           </div>
                         </div>
@@ -779,8 +782,8 @@ function ConnectGoogleContent() {
                       type="button"
                       onClick={handleConnect}
                       style={{
-                        background: "#172033",
-                        color: "#fff",
+                        background: "#ffffff",
+                        color: "#07090d",
                         border: "none",
                         borderRadius: "14px",
                         padding: "14px 16px",
@@ -794,9 +797,9 @@ function ConnectGoogleContent() {
                       type="button"
                       onClick={handleDisconnect}
                       style={{
-                        background: "#eff3fb",
-                        color: "#172033",
-                        border: "1px solid #d7deed",
+                        background: "rgba(255,255,255,0.04)",
+                        color: "#ffffff",
+                        border: "1px solid rgba(255,255,255,0.08)",
                         borderRadius: "14px",
                         padding: "14px 16px",
                         cursor: "pointer",
@@ -809,21 +812,14 @@ function ConnectGoogleContent() {
               )}
             </section>
 
-            <section
-              style={{
-                background: "#fff",
-                borderRadius: "24px",
-                padding: "24px",
-                boxShadow: "0 16px 38px rgba(82,95,127,0.12)",
-              }}
-            >
-              <h2 style={{ fontSize: "24px", color: "#172033", marginBottom: "12px" }}>
+            <section style={darkCard}>
+              <h2 style={{ fontSize: "24px", color: "#ffffff", marginBottom: "12px" }}>
                 {copy.statusTitle}
               </h2>
               <div
                 style={{
-                  background: connection.isConnected ? "#eefbf3" : "#fff6df",
-                  color: connection.isConnected ? "#1f7a45" : "#8b5e00",
+                  background: connection.isConnected ? "rgba(251,188,5,0.12)" : "rgba(255,255,255,0.04)",
+                  color: connection.isConnected ? "#f4d36a" : "rgba(248,250,252,0.72)",
                   borderRadius: "16px",
                   padding: "14px 16px",
                   marginBottom: "18px",
@@ -833,7 +829,7 @@ function ConnectGoogleContent() {
                 {connection.isConnected ? copy.businessConnected : copy.noBusiness}
               </div>
 
-              <p style={{ color: "#5b6473", lineHeight: 1.8 }}>
+              <p style={{ color: "rgba(248,250,252,0.68)", lineHeight: 1.8 }}>
                 <strong>{copy.provider}:</strong> {connection.provider}
                 <br />
                 <strong>{copy.location}:</strong>{" "}
@@ -857,11 +853,12 @@ function ConnectGoogleContent() {
               <div
                 style={{
                   marginTop: "18px",
-                  background: "#f5f8ff",
+                  background: "rgba(255,255,255,0.03)",
                   borderRadius: "16px",
                   padding: "14px 16px",
-                  color: "#344054",
+                  color: "rgba(248,250,252,0.76)",
                   lineHeight: 1.7,
+                  border: "1px solid rgba(255,255,255,0.08)",
                 }}
               >
                 {copy.helper}
@@ -872,8 +869,8 @@ function ConnectGoogleContent() {
                   href="/inbox"
                   style={{
                     textDecoration: "none",
-                    background: "#172033",
-                    color: "#fff",
+                    background: "#ffffff",
+                    color: "#07090d",
                     borderRadius: "14px",
                     padding: "13px 14px",
                     textAlign: "center",
@@ -886,12 +883,13 @@ function ConnectGoogleContent() {
                   href="/dashboard"
                   style={{
                     textDecoration: "none",
-                    background: "#eff3fb",
-                    color: "#172033",
+                    background: "rgba(255,255,255,0.04)",
+                    color: "#ffffff",
                     borderRadius: "14px",
                     padding: "13px 14px",
                     textAlign: "center",
                     fontWeight: "600",
+                    border: "1px solid rgba(255,255,255,0.08)",
                   }}
                 >
                   {copy.adjustMode}

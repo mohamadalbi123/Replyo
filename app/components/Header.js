@@ -35,9 +35,9 @@ export default function Header() {
         alignItems: "center",
         padding: isCompact ? "14px 16px" : "18px 28px",
         borderBottom: isAppArea
-          ? "1px solid rgba(23,32,51,0.08)"
+          ? "1px solid rgba(255,255,255,0.08)"
           : "1px solid rgba(255,255,255,0.08)",
-        background: isAppArea ? "rgba(255,255,255,0.82)" : "rgba(7,9,13,0.9)",
+        background: isAppArea ? "rgba(7,9,13,0.9)" : "rgba(7,9,13,0.9)",
         backdropFilter: "blur(14px)",
         position: "sticky",
         top: 0,
@@ -63,23 +63,23 @@ export default function Header() {
             width: "40px",
             height: "40px",
             borderRadius: "14px",
-            background: isAppArea ? "#172033" : "#ffffff",
+            background: "#ffffff",
             position: "relative",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             boxShadow: isAppArea
-              ? "0 12px 22px rgba(23,32,51,0.14)"
+              ? "0 12px 22px rgba(0,0,0,0.16)"
               : "0 12px 22px rgba(0,0,0,0.16)",
             flexShrink: 0,
             border: isAppArea
-              ? "1px solid rgba(255,255,255,0.08)"
+              ? "1px solid rgba(17,24,39,0.08)"
               : "1px solid rgba(17,24,39,0.08)",
           }}
         >
           <span
             style={{
-              color: isAppArea ? "#f8f3e7" : "#111111",
+              color: "#111111",
               fontSize: "21px",
               fontWeight: "800",
               letterSpacing: "-0.05em",
@@ -111,12 +111,12 @@ export default function Header() {
               fontSize: "23px",
               fontWeight: "800",
               letterSpacing: "-0.055em",
-              color: isAppArea ? "#111827" : "#ffffff",
+              color: "#ffffff",
             }}
           >
             Repl
-            <span style={{ color: isAppArea ? "#31598e" : "#ffffff" }}>y</span>
-            <span style={{ color: isAppArea ? "#d7a94b" : "#ffffff" }}>o</span>
+            <span style={{ color: "#ffffff" }}>y</span>
+            <span style={{ color: "#ffffff" }}>o</span>
           </span>
         </div>
       </Link>
@@ -136,7 +136,7 @@ export default function Header() {
       >
         <Link
           href="/"
-          style={{ textDecoration: "none", color: isAppArea ? "#111827" : "rgba(255,255,255,0.88)" }}
+          style={{ textDecoration: "none", color: "rgba(255,255,255,0.88)" }}
         >
           {t.header.home}
         </Link>
@@ -145,7 +145,7 @@ export default function Header() {
           href="/how-it-works"
           style={{
             textDecoration: "none",
-            color: isAppArea ? "#111827" : "rgba(255,255,255,0.88)",
+            color: "rgba(255,255,255,0.88)",
             whiteSpace: "nowrap",
           }}
         >
@@ -156,7 +156,7 @@ export default function Header() {
           href="/why-replyo"
           style={{
             textDecoration: "none",
-            color: isAppArea ? "#111827" : "rgba(255,255,255,0.88)",
+            color: "rgba(255,255,255,0.88)",
             whiteSpace: "nowrap",
           }}
         >
@@ -167,7 +167,7 @@ export default function Header() {
           href="/pricing"
           style={{
             textDecoration: "none",
-            color: isAppArea ? "#111827" : "rgba(255,255,255,0.88)",
+            color: "rgba(255,255,255,0.88)",
             whiteSpace: "nowrap",
           }}
         >
@@ -177,7 +177,7 @@ export default function Header() {
         {isAppArea ? (
           <Link
             href="/dashboard"
-            style={{ textDecoration: "none", color: "#111827", whiteSpace: "nowrap" }}
+            style={{ textDecoration: "none", color: "rgba(255,255,255,0.88)", whiteSpace: "nowrap" }}
           >
             {t.header.dashboard}
           </Link>
@@ -186,8 +186,8 @@ export default function Header() {
             href="/login"
             style={{
               textDecoration: "none",
-              color: isAppArea ? "#ffffff" : "#07090d",
-              background: isAppArea ? "#172033" : "#ffffff",
+              color: "#07090d",
+              background: "#ffffff",
               padding: isCompact ? "9px 14px" : "10px 16px",
               borderRadius: "12px",
               fontWeight: "600",

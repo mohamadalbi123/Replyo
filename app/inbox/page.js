@@ -346,8 +346,7 @@ function InboxContent() {
           alignItems: "center",
           padding: "40px",
           fontFamily: "Arial, sans-serif",
-          background:
-            "radial-gradient(circle at top left, #fff4d8 0%, #f7f4ec 35%, #eef3ff 100%)",
+          background: "#07090d",
           direction: language === "ar" ? "rtl" : "ltr",
         }}
       >
@@ -355,17 +354,18 @@ function InboxContent() {
           style={{
             width: "100%",
             maxWidth: "460px",
-            background: "#fff",
+            background: "rgba(255,255,255,0.025)",
             borderRadius: "24px",
             padding: "32px",
-            boxShadow: "0 16px 38px rgba(82,95,127,0.12)",
+            border: "1px solid rgba(255,255,255,0.08)",
+            boxShadow: "0 24px 70px rgba(0,0,0,0.22)",
             textAlign: "center",
           }}
         >
-          <h2 style={{ fontSize: "28px", color: "#172033", marginBottom: "12px" }}>
+          <h2 style={{ fontSize: "28px", color: "#ffffff", marginBottom: "12px" }}>
             {copy.loginTitle}
           </h2>
-          <p style={{ color: "#5b6473", lineHeight: 1.7, marginBottom: "20px" }}>
+          <p style={{ color: "rgba(248,250,252,0.64)", lineHeight: 1.7, marginBottom: "20px" }}>
             {copy.loginText}
           </p>
           <Link
@@ -373,8 +373,8 @@ function InboxContent() {
             style={{
               display: "inline-block",
               textDecoration: "none",
-              background: "#172033",
-              color: "#fff",
+              background: "#ffffff",
+              color: "#07090d",
               borderRadius: "14px",
               padding: "14px 18px",
               fontWeight: "600",
@@ -390,13 +390,20 @@ function InboxContent() {
   const pendingCount = reviews.filter((review) => review.status === "needs-reply").length;
   const readyCount = reviews.filter((review) => review.status === "ready").length;
   const postedCount = reviews.filter((review) => review.status === "posted").length;
+  const darkCard = {
+    background: "rgba(255,255,255,0.025)",
+    borderRadius: "24px",
+    padding: "24px",
+    border: "1px solid rgba(255,255,255,0.08)",
+    boxShadow: "0 24px 70px rgba(0,0,0,0.22)",
+    color: "#f8fafc",
+  };
 
   return (
     <main
       style={{
         minHeight: "100vh",
-        background:
-          "radial-gradient(circle at top left, #fff6df 0%, #f7f4ec 40%, #edf3ff 100%)",
+        background: "#07090d",
         padding: "48px 20px 80px",
         fontFamily: "Arial, sans-serif",
         direction: language === "ar" ? "rtl" : "ltr",
@@ -412,14 +419,14 @@ function InboxContent() {
             marginBottom: "24px",
           }}
         >
-          <Link href="/dashboard" style={{ color: "#4b5563", textDecoration: "none" }}>
+          <Link href="/dashboard" style={{ color: "rgba(248,250,252,0.68)", textDecoration: "none" }}>
             ← {copy.back}
           </Link>
           <button
             onClick={() => signOut()}
             style={{
-              background: "#172033",
-              color: "#fff",
+              background: "#ffffff",
+              color: "#07090d",
               border: "none",
               borderRadius: "12px",
               padding: "10px 16px",
@@ -432,11 +439,12 @@ function InboxContent() {
 
         <section
           style={{
-            background: "#172033",
-            color: "#fff8ec",
+            background: "rgba(255,255,255,0.025)",
+            color: "#ffffff",
             borderRadius: "28px",
             padding: "30px",
             marginBottom: "24px",
+            border: "1px solid rgba(255,255,255,0.08)",
           }}
         >
           <div
@@ -444,15 +452,16 @@ function InboxContent() {
               display: "inline-block",
               padding: "8px 12px",
               borderRadius: "999px",
-              background: "rgba(255,255,255,0.12)",
+              background: "rgba(255,255,255,0.06)",
               fontSize: "13px",
               marginBottom: "14px",
+              color: "rgba(248,250,252,0.72)",
             }}
           >
             {copy.badge}
           </div>
-          <h1 style={{ fontSize: "42px", marginBottom: "10px" }}>{copy.title}</h1>
-          <p style={{ color: "rgba(255,248,236,0.8)", lineHeight: 1.7, margin: 0 }}>
+          <h1 style={{ fontSize: "42px", marginBottom: "10px", letterSpacing: "-0.05em" }}>{copy.title}</h1>
+          <p style={{ color: "rgba(248,250,252,0.64)", lineHeight: 1.7, margin: 0, maxWidth: "54ch" }}>
             {copy.description}
           </p>
         </section>
@@ -472,19 +481,11 @@ function InboxContent() {
             [copy.ready, readyCount],
             [copy.posted, postedCount],
           ].map(([label, value]) => (
-            <div
-              key={label}
-              style={{
-                background: "#fff",
-                borderRadius: "22px",
-                padding: "20px",
-                boxShadow: "0 14px 40px rgba(82,95,127,0.12)",
-              }}
-            >
-              <div style={{ fontSize: "13px", color: "#6b7280", marginBottom: "8px" }}>
+            <div key={label} style={{ ...darkCard, padding: "20px" }}>
+              <div style={{ fontSize: "13px", color: "rgba(248,250,252,0.52)", marginBottom: "8px" }}>
                 {label}
               </div>
-              <div style={{ fontSize: "28px", fontWeight: "700", color: "#172033" }}>
+              <div style={{ fontSize: "28px", fontWeight: "700", color: "#ffffff" }}>
                 {value}
               </div>
             </div>
@@ -492,18 +493,11 @@ function InboxContent() {
         </section>
 
         {!connection.isConnected ? (
-          <section
-            style={{
-              background: "#fff",
-              borderRadius: "24px",
-              padding: "24px",
-              boxShadow: "0 14px 40px rgba(82,95,127,0.12)",
-            }}
-          >
-            <h2 style={{ fontSize: "24px", color: "#172033", marginBottom: "10px" }}>
+          <section style={darkCard}>
+            <h2 style={{ fontSize: "24px", color: "#ffffff", marginBottom: "10px" }}>
               {copy.noBusinessTitle}
             </h2>
-            <p style={{ color: "#5b6473", lineHeight: 1.7, marginBottom: "16px" }}>
+            <p style={{ color: "rgba(248,250,252,0.64)", lineHeight: 1.7, marginBottom: "16px", maxWidth: "52ch" }}>
               {copy.noBusinessText}
             </p>
             <Link
@@ -511,8 +505,8 @@ function InboxContent() {
               style={{
                 display: "inline-block",
                 textDecoration: "none",
-                background: "#172033",
-                color: "#fff",
+                background: "#ffffff",
+                color: "#07090d",
                 borderRadius: "14px",
                 padding: "13px 16px",
                 fontWeight: "600",
@@ -524,15 +518,7 @@ function InboxContent() {
         ) : (
           <div style={{ display: "grid", gap: "18px" }}>
             {reviews.map((review) => (
-              <article
-                key={review.id}
-                style={{
-                  background: "#fff",
-                  borderRadius: "24px",
-                  padding: "22px",
-                  boxShadow: "0 14px 40px rgba(82,95,127,0.12)",
-                }}
-              >
+              <article key={review.id} style={{ ...darkCard, padding: "22px" }}>
                 <div
                   style={{
                     display: "flex",
@@ -543,10 +529,10 @@ function InboxContent() {
                   }}
                 >
                   <div>
-                    <div style={{ fontSize: "13px", color: "#6b7280", marginBottom: "6px" }}>
+                    <div style={{ fontSize: "13px", color: "rgba(248,250,252,0.52)", marginBottom: "6px" }}>
                       {review.businessName}
                     </div>
-                    <h2 style={{ fontSize: "24px", color: "#172033", margin: 0 }}>
+                    <h2 style={{ fontSize: "24px", color: "#ffffff", margin: 0 }}>
                       {review.customerName}
                     </h2>
                     <div
@@ -559,8 +545,8 @@ function InboxContent() {
                     >
                       <span
                         style={{
-                          background: "#f5f8ff",
-                          color: "#31598e",
+                          background: "rgba(255,255,255,0.04)",
+                          color: "rgba(248,250,252,0.82)",
                           borderRadius: "999px",
                           padding: "6px 10px",
                           fontSize: "12px",
@@ -571,8 +557,8 @@ function InboxContent() {
                       </span>
                       <span
                         style={{
-                          background: "#f5f8ff",
-                          color: "#31598e",
+                          background: "rgba(255,255,255,0.04)",
+                          color: "rgba(248,250,252,0.82)",
                           borderRadius: "999px",
                           padding: "6px 10px",
                           fontSize: "12px",
@@ -586,8 +572,8 @@ function InboxContent() {
                       {review.detectedSentiment ? (
                         <span
                           style={{
-                            background: "#fff6df",
-                            color: "#8b5e00",
+                            background: "rgba(251,188,5,0.12)",
+                            color: "#f4d36a",
                             borderRadius: "999px",
                             padding: "6px 10px",
                             fontSize: "12px",
@@ -605,20 +591,20 @@ function InboxContent() {
                       borderRadius: "999px",
                       background:
                         review.status === "posted"
-                          ? "#eefbf3"
+                          ? "rgba(251,188,5,0.12)"
                           : review.status === "ready"
-                            ? "#eef6ff"
+                            ? "rgba(255,255,255,0.08)"
                             : review.status === "error"
-                              ? "#fff4f2"
-                              : "#fff6df",
+                              ? "rgba(255,255,255,0.04)"
+                              : "rgba(255,255,255,0.04)",
                       color:
                         review.status === "posted"
-                          ? "#1f7a45"
+                          ? "#f4d36a"
                           : review.status === "ready"
-                            ? "#31598e"
+                            ? "#ffffff"
                             : review.status === "error"
-                              ? "#9f1c00"
-                              : "#8b5e00",
+                              ? "#f5b8b8"
+                              : "rgba(248,250,252,0.72)",
                       fontSize: "13px",
                       fontWeight: "600",
                       height: "fit-content",
@@ -636,17 +622,17 @@ function InboxContent() {
                     marginBottom: "16px",
                   }}
                 >
-                  <div style={{ background: "#f8fafc", borderRadius: "18px", padding: "16px" }}>
-                    <div style={{ fontSize: "13px", color: "#6b7280", marginBottom: "8px" }}>
+                  <div style={{ background: "rgba(255,255,255,0.03)", borderRadius: "18px", padding: "16px", border: "1px solid rgba(255,255,255,0.08)" }}>
+                    <div style={{ fontSize: "13px", color: "rgba(248,250,252,0.52)", marginBottom: "8px" }}>
                       {copy.review}
                     </div>
-                    <div style={{ color: "#344054", lineHeight: 1.7 }}>{review.reviewText}</div>
+                    <div style={{ color: "rgba(248,250,252,0.82)", lineHeight: 1.7 }}>{review.reviewText}</div>
                   </div>
-                  <div style={{ background: "#f9fbff", borderRadius: "18px", padding: "16px" }}>
-                    <div style={{ fontSize: "13px", color: "#6b7280", marginBottom: "8px" }}>
+                  <div style={{ background: "rgba(255,255,255,0.03)", borderRadius: "18px", padding: "16px", border: "1px solid rgba(255,255,255,0.08)" }}>
+                    <div style={{ fontSize: "13px", color: "rgba(248,250,252,0.52)", marginBottom: "8px" }}>
                       {copy.draft}
                     </div>
-                    <div style={{ color: "#344054", lineHeight: 1.7 }}>
+                    <div style={{ color: "rgba(248,250,252,0.82)", lineHeight: 1.7 }}>
                       {review.replyText || copy.noDraft}
                     </div>
                   </div>
@@ -664,8 +650,8 @@ function InboxContent() {
                     <span
                       key={topic}
                       style={{
-                        background: "#eef6ff",
-                        color: "#31598e",
+                        background: "rgba(255,255,255,0.04)",
+                        color: "rgba(248,250,252,0.82)",
                         borderRadius: "999px",
                         padding: "8px 10px",
                         fontSize: "12px",
@@ -677,8 +663,8 @@ function InboxContent() {
                   ))}
                   <span
                     style={{
-                      background: "#effbf3",
-                      color: "#1f7a45",
+                      background: "rgba(251,188,5,0.12)",
+                      color: "#f4d36a",
                       borderRadius: "999px",
                       padding: "8px 10px",
                       fontSize: "12px",
@@ -695,8 +681,8 @@ function InboxContent() {
                     onClick={() => handleGenerate(review.id)}
                     disabled={activeReviewId === review.id}
                     style={{
-                      background: "#172033",
-                      color: "#fff",
+                      background: "#ffffff",
+                      color: "#07090d",
                       border: "none",
                       borderRadius: "14px",
                       padding: "12px 14px",
@@ -711,9 +697,9 @@ function InboxContent() {
                       type="button"
                       onClick={() => handlePost(review.id)}
                       style={{
-                        background: "#eefbf3",
-                        color: "#1f7a45",
-                        border: "1px solid #b8e3c6",
+                        background: "rgba(251,188,5,0.12)",
+                        color: "#f4d36a",
+                        border: "1px solid rgba(251,188,5,0.28)",
                         borderRadius: "14px",
                         padding: "12px 14px",
                         cursor: "pointer",
@@ -726,10 +712,11 @@ function InboxContent() {
                     href="/dashboard"
                     style={{
                       textDecoration: "none",
-                      background: "#eff3fb",
-                      color: "#172033",
+                      background: "rgba(255,255,255,0.04)",
+                      color: "#ffffff",
                       borderRadius: "14px",
                       padding: "12px 14px",
+                      border: "1px solid rgba(255,255,255,0.08)",
                     }}
                   >
                     {copy.changeMode}
